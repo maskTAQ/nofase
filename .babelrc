@@ -1,0 +1,16 @@
+{
+  "presets": [
+    "react-native"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "src": "./src"
+        }
+      }
+    ],
+    ["transform-decorators-legacy"]
+  ]
+}
