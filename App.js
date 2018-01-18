@@ -23,11 +23,12 @@ const instructions = Platform.select({
 import Login from 'src/pages/login/index';
 import BindUser from 'src/pages/bind';
 import Register from 'src/pages/register';
+import Recharge from 'src/pages/recharge';
 export default class App extends Component{
   render() {
     return (
       <View style={styles.container}>
-      <Register />
+      <Recharge />
       </View>
     );
   }
