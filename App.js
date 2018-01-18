@@ -5,46 +5,38 @@
  */
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Provider, connect } from "react-redux";
+import { addNavigationHelpers } from "react-navigation";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu 1',
-});
+import Navigation from "src/Navigation";
+import store from 'src/store';
 
-
-import Login from 'src/pages/login/index';
-import BindUser from 'src/pages/bind';
-import Register from 'src/pages/register';
-export default class App extends Component{
+class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-      <Register />
-      </View>
+      <Navigation
+        navigation={addNavigationHelpers({
+          dispatch: this.props.dispatch,
+          state: this.props.nav
+        })}
+      />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const mapStateToProps = (state) => {
+  return ({
+    nav: state.nav
+  })
+};
+
+const AppWithNavigationState = connect(mapStateToProps)(App);
+export default class Root extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    );
+  }
+}
