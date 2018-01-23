@@ -9,24 +9,27 @@ const selectedImg = require("./img/selected.png");
 const unSelectImg = require("./img/unSelect.png");
 
 const renderLabel = (label, style) => {
-  if (typeof label === "string") {
+  if (typeof label !== "object") {
     return <Text style={[styles.label, style]}>{label}</Text>;
   } else {
     return label;
   }
 };
 
-const CheckBox = (
-  { data, selected, onChangeValue = () => {} },
+const CheckBox = ({
+  data,
+  selected,
+  onChangeValue = () => {},
   ItemSeparatorComponent,
   labelStyle,
-  iconStyle
-) => (
-  <View styles={styles.container}>
+  iconStyle,
+  style
+}) => (
+  <View style={[styles.container, style]}>
     {data.map((item, i) => {
       const { label, value } = item;
       const isActive = value === selected;
-      return [
+      return (
         <TouchableOpacity
           onPress={() => {
             onChangeValue(value);
@@ -43,9 +46,8 @@ const CheckBox = (
             source={isActive ? selectedImg : unSelectImg}
             style={[styles.icon, iconStyle]}
           />
-        </TouchableOpacity>,
-        i < data.length - 1 && i % 2 === 0 ? <ItemSeparatorComponent /> : null
-      ];
+        </TouchableOpacity>
+      );
     })}
   </View>
 );
@@ -54,7 +56,9 @@ CheckBox.propTypes = {
   selected: PropTypes.number.isRequired,
   onChangeValue: PropTypes.func,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  iconStyle: PropTypes.object,
+  iconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  labelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   ItemSeparatorComponent: PropTypes.element
 };
 
