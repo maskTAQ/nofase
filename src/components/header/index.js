@@ -1,10 +1,15 @@
 import React, { Component } from "react";
-import { View, StatusBar } from "react-native";
+import { View, Text, StatusBar, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
+import { Icon } from "src/components";
 import styles from "./style";
 
-const Left = () => <View />;
+const Left = onPress => (
+  <TouchableOpacity onPress={onPress}>
+    <Icon size={20} source={require("./img/return.png")} />
+  </TouchableOpacity>
+);
 const Right = () => <View />;
 export default class Header extends Component {
   static defaultProps = {
@@ -15,7 +20,7 @@ export default class Header extends Component {
     LeftComponent: PropTypes.element,
     RightComponent: PropTypes.element,
     style: PropTypes.object,
-    title: PropTypes.string
+    title: PropTypes.string.isRequired
   };
   state = {};
   render() {
@@ -32,9 +37,19 @@ export default class Header extends Component {
           barStyle={barStyle.barStyle}
         />
         <View style={styles.navigationContainer}>
-          <LeftComponent />
-          {title}
-          <RightComponent />
+          <View style={styles.item}>
+            <LeftComponent
+              onPress={() => {
+                console.log("返回上个路由");
+              }}
+            />
+          </View>
+          <View style={styles.title}>
+            <Text style={styles.titleText}>{title}</Text>
+          </View>
+          <View style={styles.item}>
+            <RightComponent />
+          </View>
         </View>
       </View>
     );

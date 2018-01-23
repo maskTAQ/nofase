@@ -15,16 +15,18 @@ const renderLabel = (label, style) => {
     return label;
   }
 };
+
 const CheckBox = (
   { data, selected, onChangeValue = () => {} },
+  ItemSeparatorComponent,
   labelStyle,
   iconStyle
 ) => (
   <View styles={styles.container}>
-    {data.map(item => {
+    {data.map((item, i) => {
       const { label, value } = item;
       const isActive = value === selected;
-      return (
+      return [
         <TouchableOpacity
           onPress={() => {
             onChangeValue(value);
@@ -41,8 +43,9 @@ const CheckBox = (
             source={isActive ? selectedImg : unSelectImg}
             style={[styles.icon, iconStyle]}
           />
-        </TouchableOpacity>
-      );
+        </TouchableOpacity>,
+        i < data.length - 1 && i % 2 === 0 ? <ItemSeparatorComponent /> : null
+      ];
     })}
   </View>
 );
@@ -51,5 +54,8 @@ CheckBox.propTypes = {
   selected: PropTypes.number.isRequired,
   onChangeValue: PropTypes.func,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  iconStyle: PropTypes.object
+  iconStyle: PropTypes.object,
+  ItemSeparatorComponent: PropTypes.element
 };
+
+export default CheckBox;
