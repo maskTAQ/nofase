@@ -32,6 +32,10 @@ export default {
     justifyContent: "flex-end",
     alignItems: "center"
   },
+  itemBorder: {
+    height: 1,
+    backgroundColor: "#1a98e0"
+  },
   inputLabel: {
     fontSize: 16,
     color: "#039DEB",

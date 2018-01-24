@@ -24,33 +24,42 @@ const CheckBox = ({
   labelStyle,
   iconStyle,
   style
-}) => (
-  <View style={[styles.container, style]}>
-    {data.map((item, i) => {
-      const { label, value } = item;
-      const isActive = value === selected;
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            onChangeValue(value);
-          }}
-          style={[
-            styles.itemContainer,
-            isActive ? styles.itemContainerActive : null
-          ]}
-          key={value}
-        >
-          {renderLabel(label, labelStyle)}
-          <Icon
-            size={20}
-            source={isActive ? selectedImg : unSelectImg}
-            style={[styles.icon, iconStyle]}
-          />
-        </TouchableOpacity>
-      );
-    })}
-  </View>
-);
+}) => {
+  const dataCount = data.length - 1;
+  for (let i = 0; i < dataCount; i++) {
+    data.splice(i + (i + 1), 0, "border");
+  }
+  return (
+    <View style={[styles.container, style]}>
+      {data.map((item, i) => {
+        const { label, value } = item;
+        const isActive = value === selected;
+        if (item === "border") {
+          return <View key={`border-${i}`}>{ItemSeparatorComponent}</View>;
+        }
+        return (
+          <TouchableOpacity
+            onPress={() => {
+              onChangeValue(value);
+            }}
+            style={[
+              styles.itemContainer,
+              isActive ? styles.itemContainerActive : null
+            ]}
+            key={value}
+          >
+            {renderLabel(label, labelStyle)}
+            <Icon
+              size={20}
+              source={isActive ? selectedImg : unSelectImg}
+              style={[styles.icon, iconStyle]}
+            />
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+};
 CheckBox.propTypes = {
   data: PropTypes.array.isRequired,
   selected: PropTypes.number.isRequired,

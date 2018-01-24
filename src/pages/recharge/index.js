@@ -7,7 +7,7 @@ import { Input, Icon, CheckBox } from "src/components";
 export default class Recharge extends Component {
   static defaultProps = {
     balance: -45.5,
-    payStatus: "success" //['not','success','error']
+    payStatus: "not" //['not','success','error']
   };
   static propTypes = {
     balance: PropTypes.number,
@@ -27,6 +27,9 @@ export default class Recharge extends Component {
         </View>
       </View>
     );
+  }
+  renderBorder() {
+    return <View style={styles.itemBorder} />;
   }
   renderNot() {
     const { payWay, recharge } = this.state;
@@ -72,6 +75,7 @@ export default class Recharge extends Component {
           data={payWayMap}
           selected={payWay}
           onChangeValue={v => this.setState({ payWay: v })}
+          ItemSeparatorComponent={this.renderBorder()}
           style={styles.checkbox}
         />
       </View>
