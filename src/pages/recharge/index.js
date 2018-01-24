@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import PropTypes from "prop-types";
 
-import styles from "../recharge/style";
-import { Input, Icon, CheckBox } from "src/components";
+import styles from "./style";
+import { Input, Icon, CheckBox, Page } from "src/components";
 export default class Recharge extends Component {
   static defaultProps = {
     balance: -45.5,
@@ -81,22 +81,53 @@ export default class Recharge extends Component {
       </View>
     );
   }
-  renderSuccess() {
-    return <Text>renderSuccess</Text>;
+
+  renderCommon(source, title) {
+    const data = [
+      {
+        label: "订单号：",
+        value: "123456"
+      },
+      {
+        label: "订单金额：",
+        value: "1234"
+      }
+    ];
+    return (
+      <View style={styles.container}>
+        <View style={styles.wrapper}>
+          <Icon size={50} source={source} />
+          <View style={styles.notTitlewrapper}>
+            <Text style={styles.checklabel}>{title}</Text>
+          </View>
+          {data.map(item => {
+            const { label, value } = item;
+            return (
+              <View style={styles.itemWrapper} key={value}>
+                <Text style={styles.itemLabel}>{label}</Text>
+                <Text style={styles.itemValue}>{value}</Text>
+              </View>
+            );
+          })}
+        </View>
+        <View />
+        <View />
+      </View>
+    );
   }
-  renderError() {
-    return <Text>renderError</Text>;
-  }
-  render() {
+  renderConent() {
     const { payStatus } = this.props;
     switch (payStatus) {
       case "not":
         return this.renderNot();
       case "success":
-        return this.renderSuccess();
+        return this.renderCommon(require("./img/success.png"), "支付成功");
       case "error":
       default:
-        return this.renderError();
+        return this.renderCommon(require("./img/error.png"), "支付失败");
     }
+  }
+  render() {
+    return <Page title="充值">{this.renderConent()}</Page>;
   }
 }

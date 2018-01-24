@@ -68,5 +68,30 @@ export default {
   },
   itemSubtitle: {
     color: "#999999"
+  },
+  //充值成功
+  wrapper: {
+    marginTop: 6,
+    paddingTop: 30,
+    alignItems: "center",
+    backgroundColor: "#fff"
+  },
+  notTitlewrapper: {
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  itemWrapper: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  itemLabel: {
+    color: "#333333",
+    lineHeight: 35
+  },
+  itemValue: {
+    color: "#333333",
+    lineHeight: 35
   }
 };

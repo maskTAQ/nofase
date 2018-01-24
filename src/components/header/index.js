@@ -22,7 +22,8 @@ const renderTitle = (title, style) => {
 };
 export default class Header extends Component {
   static defaultProps = {
-    RightComponent: <View />
+    RightComponent: <View />,
+    onLeftPress() {}
   };
   static propTypes = {
     LeftComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),

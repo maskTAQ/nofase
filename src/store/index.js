@@ -7,7 +7,7 @@ const initialState = AppNavigator.router.getStateForAction(
 const navReducer = (state = initialState, action) => {
   const nextState = AppNavigator.router.getStateForAction(state);
   return AppNavigator.router.getStateForAction(
-    AppNavigator.router.getActionForPathAndParams("Home")
+    AppNavigator.router.getActionForPathAndParams("Recharge")
   );
   // Simply return the original `state` if `nextState` is null or undefined.
   return nextState || state; // eslint-disable-line
