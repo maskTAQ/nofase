@@ -13,7 +13,6 @@ const Left = ({ onPress }) => (
 Left.propTypes = {
   onPress: PropTypes.func
 };
-const Right = () => <View />;
 const renderTitle = (title, style) => {
   if (typeof label !== "object") {
     return <Text style={styles.titleText}>{title}</Text>;
@@ -23,8 +22,7 @@ const renderTitle = (title, style) => {
 };
 export default class Header extends Component {
   static defaultProps = {
-    LeftComponent: Left,
-    RightComponent: Right
+    RightComponent: <View />
   };
   static propTypes = {
     LeftComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
@@ -55,13 +53,9 @@ export default class Header extends Component {
           barStyle={barStyle.barStyle}
         />
         <View style={styles.navigationContainer}>
-          <View style={styles.item}>
-            <LeftComponent onPress={onLeftPress} />
-          </View>
+          <View style={styles.item}>{LeftComponent || Left(onLeftPress)}</View>
           <View style={styles.title}>{renderTitle(title)}</View>
-          <View style={styles.item}>
-            <RightComponent />
-          </View>
+          <View style={styles.item}>{RightComponent}</View>
         </View>
       </View>
     );
