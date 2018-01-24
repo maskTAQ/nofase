@@ -1,6 +1,6 @@
 import { StackNavigator } from "react-navigation";
 
-import { Login, BindUser, Register, Recharge } from "src/pages";
+import { Login, BindUser, Register, Recharge, Card } from "src/pages";
 
 export const RouteConfigs = {
   Login: {
@@ -14,6 +14,9 @@ export const RouteConfigs = {
   },
   Recharge: {
     screen: Recharge
+  },
+  Card: {
+    screen: Card
   }
 };
 

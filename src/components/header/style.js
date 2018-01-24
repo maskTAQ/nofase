@@ -1,7 +1,7 @@
 export default {
   container: {
     height: 64,
-    backgroundColor: "red"
+    backgroundColor: "#1b9de6"
   },
   navigationContainer: {
     marginTop: 20,
@@ -20,6 +20,7 @@ export default {
   },
   titleText: {
     fontSize: 16,
-    color: "red"
+    fontWeight: "bold",
+    color: "#fff"
   }
 };
