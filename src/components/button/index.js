@@ -18,10 +18,10 @@ const Button = ({ children, style, onPress, textStyle }) => {
 };
 
 Button.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.any,
   onPress: PropTypes.func,
-  textStyle: PropTypes.object
+  textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
 export default Button;

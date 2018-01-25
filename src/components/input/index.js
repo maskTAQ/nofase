@@ -8,10 +8,10 @@ const MyTextInput = props => {
       clearButtonMode="while-editing"
       autoCapitalize={"none"}
       autoCorrect={false}
-      placeholderTextColor={"#ccc"}
+      placeholderTextColor={"#999"}
       underlineColorAndroid="transparent"
       {...props}
-      style={[{margin:0,padding:0}, props.style]}
+      style={[{ margin: 0, padding: 0 }, props.style]}
     />
   );
 };
