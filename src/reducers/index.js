@@ -3,12 +3,13 @@ import AppNavigator from "src/Navigation";
 import { NavigationActions } from "react-navigation";
 
 const navReducer = (state, action) => {
+  console.log(state, action, 3232);
   let nextState;
   const { type } = action;
   switch (type) {
     case "Login":
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.back(),
+        NavigationActions.navigate({ routeName: "Home" }),
         state
       );
       break;
@@ -26,7 +27,7 @@ const navReducer = (state, action) => {
   return nextState || state; // eslint-disable-line
 };
 
-function auth(state, action) {
+function auth(state = {}, action) {
   const { type } = action;
   switch (type) {
     case "Login":

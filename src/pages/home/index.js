@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
-//import styles from './style';
+import styles from "./style";
 import { Page, Button, Icon, ToggleButton } from "src/components";
+//import style from "../recharge/style";
 
 export default class Home extends Component {
   state = {
-    pattern: "map" //['map','list']
+    pattern: "list", //['map','list']
+    tabActiveIndex: 0
   };
   togglePattern(pattern) {
     this.setState({
@@ -29,7 +31,7 @@ export default class Home extends Component {
         RightComponent={
           <Button
             onPress={() => {
-              //this.togglePattern("list");
+              this.togglePattern("list");
             }}
           >
             <Icon size={20} source={require("./img/search.png")} />
@@ -39,6 +41,35 @@ export default class Home extends Component {
         <Text>12</Text>
         <ToggleButton />
       </Page>
+    );
+  }
+  renderHeader() {
+    const { tabActiveIndex } = this.state;
+    const tabMap = ["按店铺搜索", "按课程搜索"];
+    return (
+      <View style={styles.header}>
+        <View style={styles.tabContainer}>
+          {tabMap.map((tab, i) => (
+            <Button
+              onPress={() => {
+                this.changeTab(i);
+              }}
+              style={[
+                styles.tab,
+                tabActiveIndex === i ? styles.tabActive : null
+              ]}
+              Text={[
+                styles.tabLabel,
+                tabActiveIndex === i ? styles.tabLabelActive : null
+              ]}
+              key={tab}
+            >
+              {tab}
+            </Button>
+          ))}
+          <View style={styles.search} />
+        </View>
+      </View>
     );
   }
   renderList() {
@@ -54,7 +85,10 @@ export default class Home extends Component {
             <Icon size={20} source={require("./img/map.png")} />
           </Button>
         }
-      />
+        RightComponent={<Text style={{ color: "#fff" }}>罗湖区</Text>}
+      >
+        {this.renderHeader()}
+      </Page>
     );
   }
   render() {

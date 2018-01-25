@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
 
 const AppWithNavigationState = connect(mapStateToProps)(App);
 
+console.log(createStore(AppReducer, initStore),initStore,12)
 export default class Root extends Component {
   store = createStore(AppReducer, initStore);
   render() {

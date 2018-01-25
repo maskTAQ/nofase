@@ -1,6 +1,6 @@
 import AppNavigator from "src/Navigation";
 
-const initialNav = Navigator.router.getStateForAction(
+const initialNav = AppNavigator.router.getStateForAction(
   AppNavigator.router.getActionForPathAndParams("Home")
 );
 
