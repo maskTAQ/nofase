@@ -4,3 +4,4 @@ export { default as BindUser } from "./bind";
 export { default as Recharge } from "./recharge";
 export { default as Card } from "./card";
 export { default as Home } from "./home";
+export { default as TranSaction } from "./transaction";
