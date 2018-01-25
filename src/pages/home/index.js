@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-//import { View, Text, Image } from "react-native";
+import { Text } from "react-native";
 
 //import styles from './style';
-import { Page, Button, Icon } from "src/components";
+import { Page, Button, Icon, ToggleButton } from "src/components";
 
 export default class Home extends Component {
   state = {
@@ -29,13 +29,16 @@ export default class Home extends Component {
         RightComponent={
           <Button
             onPress={() => {
-              this.togglePattern("list");
+              //this.togglePattern("list");
             }}
           >
             <Icon size={20} source={require("./img/search.png")} />
           </Button>
         }
-      />
+      >
+        <Text>12</Text>
+        <ToggleButton />
+      </Page>
     );
   }
   renderList() {
