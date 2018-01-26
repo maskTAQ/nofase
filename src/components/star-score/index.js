@@ -23,13 +23,13 @@ export default class StarScore extends Component {
   renderChildren(i) {
     const { currentScore } = this.props;
     if (i < currentScore) {
-      return <Icon size={14} source={require("全")} />;
+      return <Icon size={14} source={require("./img/full.png")} />;
     }
     if (Math.ceil(i) === Math.floor(currentScore) + 1 && !/^-?\d+$/.test(i)) {
-      return <Icon size={14} source={require("半全")} />;
+      return <Icon size={14} source={require("./img/full.png")} />;
     }
 
-    return <Icon size={14} source={require("none")} />;
+    return <Icon size={14} source={require("./img/empty.png")} />;
   }
   renderBody() {
     const { totalScore, operable } = this.props;

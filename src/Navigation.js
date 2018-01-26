@@ -10,6 +10,7 @@ import {
   TranSaction
 } from "src/pages";
 
+import { TimeSlideChoose } from "src/components";
 export const RouteConfigs = {
   Login: {
     screen: Login
@@ -31,6 +32,9 @@ export const RouteConfigs = {
   },
   TranSaction: {
     screen: TranSaction
+  },
+  TimeSlideChoose: {
+    screen: TimeSlideChoose
   }
 };
 
