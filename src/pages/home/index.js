@@ -2,12 +2,49 @@ import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
 
 import styles from "./style";
-import { Page, Button, Icon, ToggleButton, Input } from "src/components";
+import {
+  Page,
+  Button,
+  Icon,
+  ToggleButton,
+  Input,
+  StarScore,
+  TimeSlideChoose,
+  CheckBox
+} from "src/components";
 
+const Height = () => <View style={{ height: 10 }} />;
 export default class Home extends Component {
   state = {
     pattern: "list", //['map','list']
-    tabActiveIndex: 0
+    tabActiveIndex: 1,
+    chooseTabActiveIndex: NaN,
+    chooseTypeValue: 0,
+    cityValue: 0,
+    distanceValue: 0
+  };
+  store = {
+    chooseType: [
+      { label: "离我最近", value: 0 },
+      { label: "价格最低", value: 1 },
+      { label: "人气最高", value: 2 },
+      { label: "评分最高", value: 3 },
+      { label: "可容纳最多", value: 4 }
+    ],
+    city: [
+      { label: "附近", value: 0 },
+      { label: "福田", value: 1 },
+      { label: "罗湖", value: 2 },
+      { label: "南山", value: 3 },
+      { label: "宝安", value: 4 }
+    ],
+    distance: [
+      { label: "1km", value: 0 },
+      { label: "3km", value: 1 },
+      { label: "5km", value: 2 },
+      { label: "10km", value: 3 },
+      { label: "全城", value: 4 }
+    ]
   };
   togglePattern(pattern) {
     this.setState({
@@ -38,12 +75,174 @@ export default class Home extends Component {
         }
       >
         <Text>12</Text>
+
         <ToggleButton />
       </Page>
     );
   }
   changeTab(tabActiveIndex) {
     this.setState({ tabActiveIndex });
+  }
+  renderChooseModal() {
+    const {
+      chooseTabActiveIndex,
+      tabActiveIndex,
+      chooseTypeValue,
+      cityValue,
+      distanceValue
+    } = this.state;
+    const { chooseType, city, distance } = this.store;
+
+    if (isNaN(chooseTabActiveIndex)) {
+      return null;
+    }
+    const { header, chooseWrapper } = styles;
+    const TimeSlideChooseHeight = 44;
+    const modalLocationTop = [
+      header.height + chooseWrapper.height,
+      header.height + chooseWrapper.height + TimeSlideChooseHeight
+    ];
+
+    switch (String(chooseTabActiveIndex)) {
+      case "0":
+        return (
+          <View
+            style={[
+              styles.chooseModal,
+              { top: modalLocationTop[tabActiveIndex], flexDirection: "row" }
+            ]}
+          >
+            <View
+              style={{ flex: 1, borderRightWidth: 1, borderRightColor: "#ccc" }}
+            >
+              <CheckBox
+                data={city}
+                selected={cityValue}
+                itemStyle={styles.checkboxItem}
+                itemActiveStyle={styles.checkboxActiveItem}
+                labelStyle={styles.checkboxItemLabel}
+                selectedComponent={
+                  <Icon
+                    size={20}
+                    source={require("./img/selected.png")}
+                    style={styles.checkboxItemIcon}
+                  />
+                }
+                onChangeValue={v => {
+                  this.setState({ cityValue: v });
+                }}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <CheckBox
+                data={distance}
+                selected={distanceValue}
+                itemStyle={styles.checkboxItem}
+                itemActiveStyle={styles.checkboxActiveItem}
+                labelStyle={styles.checkboxItemLabel}
+                selectedComponent={
+                  <Icon
+                    size={20}
+                    source={require("./img/selected.png")}
+                    style={styles.checkboxItemIcon}
+                  />
+                }
+                onChangeValue={v => {
+                  this.setState({ distanceValue: v });
+                }}
+              />
+            </View>
+          </View>
+        );
+      case "1":
+      default:
+        return (
+          <View
+            style={[
+              styles.chooseModal,
+              { top: modalLocationTop[tabActiveIndex] }
+            ]}
+          >
+            <CheckBox
+              data={chooseType}
+              selected={chooseTypeValue}
+              itemStyle={styles.checkboxItem}
+              itemActiveStyle={styles.checkboxActiveItem}
+              labelStyle={styles.checkboxItemLabel}
+              selectedComponent={
+                <Icon
+                  size={20}
+                  source={require("./img/selected.png")}
+                  style={styles.checkboxItemIcon}
+                />
+              }
+              onChangeValue={v => {
+                this.setState({ chooseTypeValue: v });
+              }}
+            />
+          </View>
+        );
+    }
+  }
+  renderChoose() {
+    const { chooseTabActiveIndex } = this.state;
+    const changeChooseTabActiveIndex = i => {
+      if (i === chooseTabActiveIndex) {
+        return this.setState({
+          chooseTabActiveIndex: NaN
+        });
+      }
+      return this.setState({
+        chooseTabActiveIndex: i
+      });
+    };
+    const buttonMap = [
+      {
+        label: "附近",
+        onPress: changeChooseTabActiveIndex
+      },
+      "border",
+      {
+        label: "离我最近",
+        onPress: changeChooseTabActiveIndex
+      }
+    ];
+    const iconSource = require("./img/arrow_bottom.png");
+    return (
+      <View style={styles.chooseWrapper}>
+        {buttonMap.map((item, i) => {
+          if (item === "border") {
+            return <View style={styles.chooseItemBorder} key="border" />;
+          }
+          const { label, onPress } = item;
+          i = i ? 1 : 0;
+          const isActive = chooseTabActiveIndex === i;
+          return (
+            <Button
+              onPress={() => {
+                onPress(i);
+              }}
+              key={label}
+              style={[
+                styles.chooseItemButton,
+                isActive
+                  ? { borderBottomWidth: 1, borderColor: "#2fc2d9" }
+                  : null
+              ]}
+            >
+              <Text style={styles.chooseItemText}>{label}</Text>
+              <Icon
+                size={10}
+                source={iconSource}
+                iconStyle={{
+                  transform: [{ rotate: isActive ? "90deg" : "270deg" }]
+                }}
+              />
+            </Button>
+          );
+        })}
+      </View>
+    );
   }
   renderHeader() {
     const { tabActiveIndex } = this.state;
@@ -88,20 +287,41 @@ export default class Home extends Component {
     );
   }
   renderItem(row) {
-    const { icon, name, distance, lession, addr, evaluate } = row;
+    const { icon, name, distance, lession, addr, evaluate, price } = row;
     return (
       <View style={styles.item}>
         <View style={styles.itemTop}>
-          <Icon size={62} source={icon} />
+          <Icon size={82} source={icon} />
           <View style={styles.itemDetail}>
             <Text style={styles.itemName}>{name}</Text>
-            <Text style={styles.itemDistance}>{distance}</Text>
-            <Text style={styles.itemAddr} numberOfLines={2}>
-              {addr}
-              {lession}
-              {evaluate}
-            </Text>
+            <View style={styles.itemDetailCenter}>
+              <Text style={styles.itemDistance}>距离：{distance}</Text>
+              <Button style={styles.lessionButton}>
+                <Text style={styles.lessionText}>课程：{lession}</Text>
+                <Icon size={20} source={require("./img/right.png")} />
+              </Button>
+            </View>
+            <View style={styles.itemDetailBottom}>
+              <Text style={styles.itemAddr} numberOfLines={2}>
+                {addr}
+              </Text>
+              <Button style={styles.navgationButton}>
+                <Icon size={16} source={require("./img/natvgation.png")} />
+                <Text style={styles.navgationText}>导航</Text>
+              </Button>
+            </View>
           </View>
+        </View>
+        <View style={styles.itemBottom}>
+          <Text style={styles.evaluateLabel}>评价:</Text>
+          <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+            <StarScore operable={false} currentScore={evaluate} />
+            <Text style={styles.evaluateValue}>{evaluate}</Text>
+          </View>
+          <Text style={styles.price}>{price}元/小时</Text>
+        </View>
+        <View style={styles.tagWrapper}>
+          <Text style={styles.tagText}>20人</Text>
         </View>
       </View>
     );
@@ -114,7 +334,44 @@ export default class Home extends Component {
         distance: "234m",
         lession: "瑜伽健身",
         addr: "深南大道与前海教会处振业星海商业广场3101A",
-        evaluate: 4.3
+        evaluate: 4.3,
+        price: 15
+      },
+      {
+        icon: require("./img/u42.png"),
+        name: "优思健身工作室(前海店1)",
+        distance: "234m",
+        lession: "瑜伽健身",
+        addr: "深南大道与前海教会处振业星海商业广场3101A",
+        evaluate: 4.3,
+        price: 15
+      },
+      {
+        icon: require("./img/u42.png"),
+        name: "优思健身工作室(前海店2)",
+        distance: "234m",
+        lession: "瑜伽健身",
+        addr: "深南大道与前海教会处振业星海商业广场3101A",
+        evaluate: 4.3,
+        price: 15
+      },
+      {
+        icon: require("./img/u42.png"),
+        name: "优思健身工作室(前海店3)",
+        distance: "234m",
+        lession: "瑜伽健身",
+        addr: "深南大道与前海教会处振业星海商业广场3101A",
+        evaluate: 4.3,
+        price: 15
+      },
+      {
+        icon: require("./img/u42.png"),
+        name: "优思健身工作室(前海店4)",
+        distance: "234m",
+        lession: "瑜伽健身",
+        addr: "深南大道与前海教会处振业星海商业广场3101A",
+        evaluate: 4.3,
+        price: 15
       }
     ];
     return (
@@ -122,13 +379,16 @@ export default class Home extends Component {
         <FlatList
           data={data}
           ListEmptyComponent={<Text>暂时没有数据哦</Text>}
+          ItemSeparatorComponent={Height}
           renderItem={({ item }) => this.renderItem(item)}
           keyExtractor={item => item.name}
         />
+        <ToggleButton />
       </View>
     );
   }
   renderListPattern() {
+    const { tabActiveIndex } = this.state;
     return (
       <Page
         title="列表模式"
@@ -142,10 +402,18 @@ export default class Home extends Component {
             <Input />
           </Button>
         }
-        RightComponent={<Text style={{ color: "#fff" }}>罗湖区</Text>}
+        RightComponent={
+          <Button style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={{ color: "#fff" }}>罗湖区</Text>
+            <Icon size={20} source={require("./img/u305.png")} />
+          </Button>
+        }
       >
         {this.renderHeader()}
+        {tabActiveIndex ? <TimeSlideChoose /> : null}
+        {this.renderChoose()}
         {this.renderList()}
+        {this.renderChooseModal()}
       </Page>
     );
   }

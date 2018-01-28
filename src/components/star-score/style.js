@@ -1,3 +1,7 @@
 export default {
-  container: { flexDirection: "row", height: 20, marginBottom: 6 }
+  container: {
+    flexDirection: "row",
+    justifyContent: "center",
+    height: "100%"
+  }
 };
