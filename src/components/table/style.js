@@ -1,8 +1,7 @@
-import { bmLine, bmBG, bmTextNormal } from "hx/colors";
+const bmTextNormal = "#ccc";
 export default {
   container: {
-    flex: 1,
-    backgroundColor: bmBG
+    flex: 1
   },
   headerContainer: {
     height: 35,
@@ -35,9 +34,7 @@ export default {
     color: bmTextNormal
   },
   border: {
-    height: 1,
-    borderTopWidth: 0.5,
-    borderColor: bmLine
+    height: 1
   },
   noData: {
     justifyContent: "center",

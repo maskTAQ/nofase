@@ -7,7 +7,8 @@ import {
   Recharge,
   Home,
   Card,
-  TranSaction
+  TranSaction,
+  StoreDetail
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -35,6 +36,9 @@ export const RouteConfigs = {
   },
   TimeSlideChoose: {
     screen: TimeSlideChoose
+  },
+  StoreDetail: {
+    screen: StoreDetail
   }
 };
 

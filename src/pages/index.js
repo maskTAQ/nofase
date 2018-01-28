@@ -6,3 +6,4 @@ export { default as Card } from "./card";
 export { default as Home } from "./home";
 export { default as wallet } from "./wallet";
 export { default as TranSaction } from "./transaction";
+export { default as StoreDetail } from "./store-detail";
