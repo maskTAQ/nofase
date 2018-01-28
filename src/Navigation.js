@@ -7,7 +7,8 @@ import {
   Recharge,
   Home,
   Card,
-  TranSaction
+  TranSaction,
+  Wallet
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -22,7 +23,7 @@ export const RouteConfigs = {
     screen: BindUser
   },
   Recharge: {
-    screen: Recharge
+    screen: Recharge //充值
   },
   Card: {
     screen: Card
@@ -31,10 +32,13 @@ export const RouteConfigs = {
     screen: Home
   },
   TranSaction: {
-    screen: TranSaction
+    screen: TranSaction //交易
   },
   TimeSlideChoose: {
     screen: TimeSlideChoose
+  },
+  Wallet: {
+    screen: Wallet //我的钱包
   }
 };
 
