@@ -1,7 +1,7 @@
 import AppNavigator from "src/Navigation";
 
 const initialNav = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams("TimeSlideChoose")
+  AppNavigator.router.getActionForPathAndParams("TranSaction")
 );
 
 export default {
