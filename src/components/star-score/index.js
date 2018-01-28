@@ -17,7 +17,8 @@ export default class StarScore extends Component {
     totalScore: PropTypes.number,
     currentScore: PropTypes.number,
     operable: PropTypes.bool,
-    onChangeScore: PropTypes.func
+    onChangeScore: PropTypes.func,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {};
   renderChildren(i) {
@@ -59,6 +60,7 @@ export default class StarScore extends Component {
     return images;
   }
   render() {
-    return <View style={styles.container}>{this.renderBody()}</View>;
+    const { style } = this.props;
+    return <View style={[styles.container, style]}>{this.renderBody()}</View>;
   }
 }

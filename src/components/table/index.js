@@ -24,8 +24,8 @@ export default class Table extends Component {
         }, 3000);
       });
     },
-    isPullLoadMore: true,
-    isRefresh: true,
+    isPullLoadMore: false,
+    isRefresh: false,
     onItemPress() {}
   };
   static propTypes = {
@@ -59,6 +59,7 @@ export default class Table extends Component {
       .getData(pageIndex)
       .then(res => {
         if (res.length) {
+          console.log(res);
           this.setState({
             hasData: true,
             loading: false,
@@ -242,7 +243,7 @@ export default class Table extends Component {
             refreshing={refreshing}
             keyExtractor={(row, i) => i}
             renderItem={({ item }) => this.renderBodyRow(item)}
-            ItemSeparatorComponent={this.renderBorder}
+            //ItemSeparatorComponent={this.renderBorder}
             ListEmptyComponent={({ item }) => (
               <View style={styles.noData}>
                 <Text style={styles.noDataText}>

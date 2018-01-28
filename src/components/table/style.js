@@ -1,33 +1,44 @@
-const bmTextNormal = "#ccc";
+const bmTextNormal = "#000";
 export default {
   container: {
-    flex: 1
+    backgroundColor: "#fff",
+    margin: 6,
+    borderTopWidth: 1.5,
+    borderColor: "#1a97df"
   },
   headerContainer: {
     height: 35,
     flexDirection: "row",
-    backgroundColor: "#262a35"
+    borderLeftWidth: 1.5,
+    borderBottomWidth: 1.5,
+    borderColor: "#1a97df"
   },
   th: {
     flex: 1,
     justifyContent: "center",
-    paddingLeft: 4
+    paddingLeft: 4,
+    borderRightWidth: 1.5,
+    borderColor: "#1a97df"
   },
   thText: {
     fontSize: 14,
-    color: "#848484"
+    fontWeight: "bold",
+    color: "#1a97df"
   },
-  tbody: {
-    flex: 1
-  },
+  tbody: {},
   row: {
     height: 50,
-    flexDirection: "row"
+    flexDirection: "row",
+    borderBottomWidth: 1.5,
+    borderLeftWidth: 1.5,
+    borderColor: "#1a97df"
   },
   td: {
     flex: 1,
     justifyContent: "center",
-    paddingLeft: 4
+    paddingLeft: 4,
+    borderRightWidth: 1.5,
+    borderColor: "#1a97df"
   },
   tdText: {
     fontSize: 14,
