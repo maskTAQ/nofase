@@ -1,10 +1,11 @@
 export default {
   container: {
-    marginTop: 40,
-    backgroundColor: "#000"
+    backgroundColor: "#1b9ce4",
+    padding: 10,
+    paddingTop: 0
   },
   sliderWrapper: {
-    height: 32,
+    height: 22,
     justifyContent: "center",
     position: "relative"
   },
@@ -17,9 +18,9 @@ export default {
     position: "absolute",
     top: 0,
     left: 10,
-    width: 30,
-    height: 30,
-    borderRadius: 30,
+    width: 20,
+    height: 20,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: "#fff",
     backgroundColor: "#2fc2d9",
@@ -27,7 +28,9 @@ export default {
   },
   bar: {
     position: "absolute",
-    height: 4,
+    height: 8,
+    borderWidth: 1,
+    borderColor: "#fff",
     zIndex: 1,
     backgroundColor: "#2fc2d9"
   },
@@ -36,8 +39,8 @@ export default {
   },
   labelItem: {
     flex: 1,
-    fontSzie: 14,
+    fontSize: 12,
     color: "#fff",
-    fontWeigth: "bold"
+    fontWeight: "bold"
   }
 };

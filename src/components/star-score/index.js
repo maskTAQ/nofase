@@ -9,30 +9,33 @@ import styles from "./style";
 export default class StarScore extends Component {
   static defaultProps = {
     totalScore: 5,
-    operable: true
+    currentScore: 2.3,
+    operable: true,
+    onChangeScore() {}
   };
   static propTypes = {
     totalScore: PropTypes.number,
     currentScore: PropTypes.number,
-    operable: PropTypes.bool
+    operable: PropTypes.bool,
+    onChangeScore: PropTypes.func
   };
-  state = {
-    totalScore: 5, // 总分值
-    currentScore: 3 // 分值
-  };
+  state = {};
   renderChildren(i) {
     const { currentScore } = this.props;
-    if (i < currentScore) {
+    if (i <= currentScore) {
       return <Icon size={14} source={require("./img/full.png")} />;
     }
-    if (Math.ceil(i) === Math.floor(currentScore) + 1 && !/^-?\d+$/.test(i)) {
-      return <Icon size={14} source={require("./img/full.png")} />;
+    if (
+      i === Math.floor(currentScore) + 1 &&
+      currentScore.toString().indexOf(".") > -1
+    ) {
+      return <Icon size={14} source={require("./img/half.png")} />;
     }
 
     return <Icon size={14} source={require("./img/empty.png")} />;
   }
   renderBody() {
-    const { totalScore, operable } = this.props;
+    const { totalScore, operable, onChangeScore } = this.props;
     const images = [];
     for (let i = 1; i <= totalScore; i++) {
       const commonProps = {
@@ -44,7 +47,7 @@ export default class StarScore extends Component {
         operable ? (
           <Button
             onPress={() => {
-              this.onChangeScore(i);
+              onChangeScore(i);
             }}
             {...commonProps}
           />

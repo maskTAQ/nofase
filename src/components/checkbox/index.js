@@ -23,7 +23,11 @@ const CheckBox = ({
   ItemSeparatorComponent,
   labelStyle,
   iconStyle,
-  style
+  itemStyle,
+  style,
+  itemActiveStyle,
+  selectedComponent,
+  unSelectComponent
 }) => {
   const dataCount = data.length - 1;
   for (let i = 0; i < dataCount; i++) {
@@ -44,16 +48,27 @@ const CheckBox = ({
             }}
             style={[
               styles.itemContainer,
-              isActive ? styles.itemContainerActive : null
+              isActive ? styles.itemContainerActive : null,
+
+              itemStyle,
+              isActive ? itemActiveStyle : null
             ]}
             key={value}
           >
             {renderLabel(label, labelStyle)}
-            <Icon
-              size={20}
-              source={isActive ? selectedImg : unSelectImg}
-              style={[styles.icon, iconStyle]}
-            />
+            {selectedComponent ? (
+              isActive ? (
+                selectedComponent
+              ) : (
+                unSelectComponent
+              )
+            ) : (
+              <Icon
+                size={20}
+                source={isActive ? selectedImg : unSelectImg}
+                style={[styles.icon, iconStyle]}
+              />
+            )}
           </TouchableOpacity>
         );
       })}
@@ -68,7 +83,11 @@ CheckBox.propTypes = {
   iconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   labelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  ItemSeparatorComponent: PropTypes.element
+  itemStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  itemActiveStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  ItemSeparatorComponent: PropTypes.element,
+  selectedComponent: PropTypes.element,
+  unSelectComponent: PropTypes.element
 };
 
 export default CheckBox;

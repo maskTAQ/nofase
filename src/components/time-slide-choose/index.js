@@ -11,7 +11,7 @@ class Dragable {
       {
         PanResponder,
         currentControlButton: "", //['start','end']
-        screen: { height, width },
+        screen: { height, width: width },
         listenner: {
           barChange() {},
           nodeChange() {}
@@ -19,6 +19,7 @@ class Dragable {
       },
       config
     );
+    console.log(width, styles.container.padding);
   }
   button = {
     start: null,
@@ -48,21 +49,18 @@ class Dragable {
     if (this.button.start && this.button.end) {
       barChange({
         left: button.start.left + width / 2,
-        right: screen.width - button.end.left - width / 2
+        right: screen.width - button.end.left - width * 2
       });
     }
   }
   isCanMove(left) {
     const { screen, buttonStyle, button, currentControlButton } = this;
-    if (
-      currentControlButton === "start" &&
-      left > button.end.left - buttonStyle.width
-    ) {
+    if (currentControlButton === "start" && left > button.end.left) {
       return false;
     }
     if (
       currentControlButton === "end" &&
-      button.start.left > left - buttonStyle.width
+      button.start.left + buttonStyle.width > left
     ) {
       return false;
     }
@@ -99,12 +97,12 @@ class Dragable {
 
         if (this.isCanMove(moveX)) {
           button[currentControlButton].setNativeProps({
-            style: { left: moveX }
+            style: { left: moveX - width }
           });
-          button[currentControlButton].left = moveX;
+          button[currentControlButton].left = moveX - width;
           barChange({
             left: button.start.left + width / 2,
-            right: screen.width - button.end.left - width / 2
+            right: screen.width - button.end.left - width * 2
           });
         }
       },
