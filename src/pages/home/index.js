@@ -10,13 +10,14 @@ import {
   Input,
   StarScore,
   TimeSlideChoose,
-  CheckBox
+  CheckBox,
+  Map
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
 export default class Home extends Component {
   state = {
-    pattern: "list", //['map','list']
+    pattern: "map", //['map','list']
     tabActiveIndex: 1,
     chooseTabActiveIndex: NaN,
     chooseTypeValue: 0,
@@ -74,8 +75,7 @@ export default class Home extends Component {
           </Button>
         }
       >
-        <Text>12</Text>
-
+        <Map />
         <ToggleButton />
       </Page>
     );

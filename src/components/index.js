@@ -8,3 +8,4 @@ export { default as ToggleButton } from "./toggle-button";
 export { default as StarScore } from "./star-score";
 export { default as TimeSlideChoose } from "./time-slide-choose";
 export { default as Table } from "./table";
+export { default as Map } from "./map";
