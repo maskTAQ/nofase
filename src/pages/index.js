@@ -7,3 +7,4 @@ export { default as Home } from "./home";
 export { default as Wallet } from "./wallet";
 export { default as TranSaction } from "./transaction";
 export { default as StoreDetail } from "./store-detail";
+export { default as Pay } from "./pay";

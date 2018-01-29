@@ -4,6 +4,10 @@ import { NavigationActions } from "react-navigation";
 import AppNavigator from "src/Navigation";
 import actionMap from "src/action";
 
+// const initialNav = AppNavigator.router.getStateForAction(
+//   AppNavigator.router.getActionForPathAndParams("Pay")
+// );
+
 const navReducer = (state, action) => {
   const { type } = action;
 
@@ -32,7 +36,7 @@ const navReducer = (state, action) => {
       );
     }
     default:
-      return state;
+      return state || {};
   }
 };
 

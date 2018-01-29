@@ -9,7 +9,8 @@ import {
   Card,
   TranSaction,
   StoreDetail,
-  Wallet
+  Wallet,
+  Pay
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -43,6 +44,9 @@ export const RouteConfigs = {
   },
   Wallet: {
     screen: Wallet //我的钱包
+  },
+  Pay: {
+    screen: Pay
   }
 };
 
