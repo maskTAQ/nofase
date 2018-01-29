@@ -38,7 +38,9 @@ export default {
     bottom: 0
   },
   bjImg: {
-    width: "100%"
+    width: "100%",
+    height: "100%",
+    flex: 1
   },
   list: {
     flex: 1,
