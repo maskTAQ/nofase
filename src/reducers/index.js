@@ -1,31 +1,39 @@
 import { combineReducers } from "redux";
-import AppNavigator from "src/Navigation";
 import { NavigationActions } from "react-navigation";
 
+import AppNavigator from "src/Navigation";
+import actionMap from "src/action";
+
 const navReducer = (state, action) => {
-  console.log(state, action, 3232);
-  let nextState;
   const { type } = action;
+
   switch (type) {
-    case "Login":
-      nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: "Home" }),
-        state
-      );
+    case actionMap.NAVIGATE_GO: {
+      const { payload: { routeName: nextRouteName, params } } = action;
 
-      break;
-    case "Logout":
-      nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: "Login" }),
+      //解决路由栈中存在相同路由 依旧push的问题
+      const { routes } = state;
+      for (let i = 0; i < routes.length; i++) {
+        const { routeName } = routes[i];
+        if (routeName === nextRouteName) {
+          const { key: nextRouteKey } = routes[i + 1];
+          routes[i].params = params; // 带上路由的参数
+          return AppNavigator.router.getStateForAction(
+            NavigationActions.back({
+              key: nextRouteKey //从指定的key的路由返回到上一级
+            }),
+            state //传入路由栈
+          );
+        }
+      }
+      return AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: nextRouteName }),
         state
       );
-      break;
+    }
     default:
-      nextState = AppNavigator.router.getStateForAction(action, state);
-      break;
+      return state;
   }
-
-  return nextState || state; // eslint-disable-line
 };
 
 function auth(state = {}, action) {

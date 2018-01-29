@@ -1,9 +1,16 @@
+const NAVIGATE_GO = "NAVIGATE_GO";
 const action = {
-  login: {
-    type: "login"
+  navigate: {
+    go({ routeName, params = {} }) {
+      return {
+        type: NAVIGATE_GO,
+        payload: {
+          routeName,
+          params
+        }
+      };
+    }
   },
-  logout: {
-    type: "logout"
-  }
+  NAVIGATE_GO
 };
 export default action;

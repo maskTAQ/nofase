@@ -3,6 +3,8 @@ import { View, Text, FlatList, Image } from "react-native";
 import PropTypes from "prop-types";
 import { Page, Button } from "src/components";
 import styles from "./style";
+import action from "src/action";
+
 export default class Transacion extends Component {
   static propTypes = {
     navigation: PropTypes.object
@@ -10,7 +12,7 @@ export default class Transacion extends Component {
   state = {};
 
   changeSrc(src) {
-    this.props.navigation.dispatch({ type: src });
+    this.props.navigation.dispatch(action.go(src));
   }
   renderItem(row) {
     const { type, src } = row;

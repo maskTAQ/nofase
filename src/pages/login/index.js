@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import styles from "./style";
 import { Input, Button } from "src/components";
+import action from "src/action";
+
 export default class Login extends Component {
   static propTypes = {
     navigation: PropTypes.object
@@ -18,7 +20,7 @@ export default class Login extends Component {
     });
   }
   login = () => {
-    this.props.navigation.dispatch({ type: "Login" });
+    this.props.navigation.dispatch(action.go("Home"));
   };
   render() {
     const { username, password } = this.state;
