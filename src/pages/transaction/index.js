@@ -59,8 +59,8 @@ export default class Transacion extends Component {
       <View style={{ backgroundColor: "#0399e7" }}>
         <Image source={require("./img/u3.png")} style={styles.bjImg} />
         <Page title="交易管理">
-          <Text>123</Text>
-          <Text>当前余额</Text>
+          <Text style={styles.Balance}>123</Text>
+          <Text style={styles.titBalance}>当前余额</Text>
           <View style={styles.container}>
             <View style={styles.tabContainer}>
               {tabMap.map(tab => {
