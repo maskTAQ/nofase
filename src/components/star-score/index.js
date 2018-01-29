@@ -11,29 +11,31 @@ export default class StarScore extends Component {
     totalScore: 5,
     currentScore: 2.3,
     operable: true,
+    iconSize: 14,
     onChangeScore() {}
   };
   static propTypes = {
     totalScore: PropTypes.number,
     currentScore: PropTypes.number,
+    iconSize: PropTypes.number,
     operable: PropTypes.bool,
     onChangeScore: PropTypes.func,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {};
   renderChildren(i) {
-    const { currentScore } = this.props;
+    const { currentScore, iconSize } = this.props;
     if (i <= currentScore) {
-      return <Icon size={14} source={require("./img/full.png")} />;
+      return <Icon size={iconSize} source={require("./img/full.png")} />;
     }
     if (
       i === Math.floor(currentScore) + 1 &&
       currentScore.toString().indexOf(".") > -1
     ) {
-      return <Icon size={14} source={require("./img/half.png")} />;
+      return <Icon size={iconSize} source={require("./img/half.png")} />;
     }
 
-    return <Icon size={14} source={require("./img/empty.png")} />;
+    return <Icon size={iconSize} source={require("./img/empty.png")} />;
   }
   renderBody() {
     const { totalScore, operable, onChangeScore } = this.props;
