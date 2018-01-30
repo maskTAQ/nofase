@@ -10,7 +10,8 @@ import {
   TranSaction,
   StoreDetail,
   Wallet,
-  Pay
+  Pay,
+  User
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -47,6 +48,9 @@ export const RouteConfigs = {
   },
   Pay: {
     screen: Pay
+  },
+  User: {
+    screen: User
   }
 };
 
