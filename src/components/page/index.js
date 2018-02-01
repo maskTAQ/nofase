@@ -33,7 +33,12 @@ export default class Page extends Component {
       <View style={{ flex: 1 }}>
         <Header
           onLeftPress={() => {
-            onPress() || dispatch(action.navigate.back());
+            console.log(dispatch);
+            if (onPress) {
+              onPress();
+            } else {
+              dispatch(action.navigate.back());
+            }
           }}
           title={title}
           LeftComponent={LeftComponent}

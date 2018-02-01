@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, Switch } from "react-native";
+import { View, Text, Image, Switch, ScrollView } from "react-native";
 import PropTypes from "prop-types";
 
 import { Button, Icon } from "src/components";
@@ -70,20 +70,47 @@ export default class User extends Component {
     );
   }
   renderList() {
-    const data = ["健身记录", "我的钱包", "优惠卡包", "消息提示"];
+    const data = [
+      {
+        label: "健身记录",
+        onPress: () => {
+          this.props.navigation.dispatch(
+            action.navigate.go({ routeName: "Home" })
+          );
+        }
+      },
+      {
+        label: "我的钱包",
+        onPress: () => {
+          this.props.navigation.dispatch(
+            action.navigate.go({ routeName: "TranSaction" })
+          );
+        }
+      },
+      {
+        label: "优惠卡包",
+        onPress: () => {}
+      },
+      {
+        label: "消息提示",
+        onPress: () => {}
+      }
+    ];
 
     return (
       <View style={styles.list}>
-        {data.map(item => {
-          const hasSwitch = item === "消息提示";
+        {data.map((item, i) => {
+          const { label, onPress } = item;
+          const hasSwitch = i === 3;
           return (
-            <View
+            <Button
+              onPress={onPress}
               style={[styles.item, hasSwitch ? styles.switchItem : null]}
-              key={item}
+              key={label}
             >
-              <Text style={styles.itemLabel}>{item}</Text>
+              <Text style={styles.itemLabel}>{label}</Text>
               {hasSwitch ? <Switch /> : null}
-            </View>
+            </Button>
           );
         })}
       </View>
@@ -114,21 +141,23 @@ export default class User extends Component {
     return (
       <View style={styles.container}>
         {this.renderHeader()}
-        <View style={styles.content}>
-          {this.renderList()}
-          {this.renderAccount()}
-          <View style={styles.accountContianer}>
-            <View style={styles.accountItem}>
-              <Text style={styles.accountItemText}>客户反馈</Text>
+        <ScrollView style={{ flex: 1 }}>
+          <View style={styles.content}>
+            {this.renderList()}
+            {this.renderAccount()}
+            <View style={styles.accountContianer}>
+              <View style={styles.accountItem}>
+                <Text style={styles.accountItemText}>客户反馈</Text>
+              </View>
+              <View style={styles.accountItem}>
+                <Text style={styles.accountItemText}>邀请好友</Text>
+              </View>
             </View>
-            <View style={styles.accountItem}>
-              <Text style={styles.accountItemText}>邀请好友</Text>
-            </View>
+            <Button style={styles.button} textStyle={styles.buttonText}>
+              退出登录
+            </Button>
           </View>
-          <Button style={styles.button} textStyle={styles.buttonText}>
-            退出登录
-          </Button>
-        </View>
+        </ScrollView>
       </View>
     );
   }

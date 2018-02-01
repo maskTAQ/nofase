@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Icon } from "src/components";
 import styles from "./style";
 
-const Left = ({ onPress }) => (
+const Left = onPress => (
   <TouchableOpacity onPress={onPress}>
     <Icon size={20} source={require("./img/return.png")} />
   </TouchableOpacity>

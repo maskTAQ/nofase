@@ -83,7 +83,6 @@ export default class Login extends Component {
           </Button>
           <View style={styles.register}>
             <Button onPress={this.register} textStyle={styles.registerText}>
-              {" "}
               注册账号
             </Button>
           </View>
