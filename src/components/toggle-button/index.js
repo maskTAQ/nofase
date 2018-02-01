@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { View, Image } from "react-native";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import styles from "./style";
 import { Button, Icon } from "src/components";
+import action from "src/action";
 
+@connect()
 export default class ToggleButton extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func
+  };
   state = {
     status: "unfold" //['unfold','packUp']
   };
@@ -12,6 +19,9 @@ export default class ToggleButton extends Component {
     this.setState({
       status: this.state.status === "unfold" ? "packUp" : "unfold"
     });
+  };
+  user = () => {
+    this.props.dispatch(action.navigate.go({ routeName: "User" }));
   };
   render() {
     const arrow = {
@@ -39,7 +49,7 @@ export default class ToggleButton extends Component {
             />
           </Button>
           <View style={styles.buttonGroup}>
-            <Button>
+            <Button onPress={this.user}>
               <Icon size={36} source={require("./img/user.png")} />
             </Button>
             <Button>

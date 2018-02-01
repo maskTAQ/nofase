@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { Button, Icon } from "src/components";
 import styles from "./style";
+import action from "src/action";
+
 export default class User extends Component {
   static defaultProps = {
     username: "上都牧人",
@@ -13,9 +15,14 @@ export default class User extends Component {
   static propTypes = {
     username: PropTypes.string,
     userId: PropTypes.string,
-    userLevel: PropTypes.string
+    userLevel: PropTypes.string,
+    navigation: PropTypes.object
   };
   state = {};
+  back = () => {
+    console.log(this.props);
+    this.props.navigation.dispatch(action.navigate.back());
+  };
   renderHeader() {
     const { username, userId, userLevel } = this.props;
     const portraitSource = require("./img/u128.png"),
@@ -31,7 +38,7 @@ export default class User extends Component {
         />
         <View style={styles.headerWrapper}>
           <View style={styles.closeWrapper}>
-            <Button>
+            <Button onPress={this.back}>
               <Icon size={24} source={closeSource} />
             </Button>
           </View>

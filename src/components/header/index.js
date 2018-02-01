@@ -40,10 +40,10 @@ export default class Header extends Component {
       LeftComponent,
       RightComponent,
       title,
-      style
+      style = {}
     } = this.props;
     const barStyle = {
-      backgroundColor: "transparent",
+      backgroundColor: style.backgroundColor || styles.backgroundColor,
       barStyle: "light-content"
     };
     return (

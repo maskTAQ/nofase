@@ -10,7 +10,6 @@ import actionMap from "src/action";
 
 const navReducer = (state, action) => {
   const { type } = action;
-
   switch (type) {
     case actionMap.NAVIGATE_GO: {
       const { payload: { routeName: nextRouteName, params } } = action;
@@ -32,6 +31,12 @@ const navReducer = (state, action) => {
       }
       return AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: nextRouteName }),
+        state
+      );
+    }
+    case actionMap.NAVIGATE_BACK: {
+      return AppNavigator.router.getStateForAction(
+        NavigationActions.back(),
         state
       );
     }
