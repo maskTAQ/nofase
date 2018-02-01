@@ -56,12 +56,18 @@ export default class Transacion extends Component {
       ["当前押金", "60.00", 1]
     ];
     return (
-      <View style={{ backgroundColor: "#0399e7" }}>
-        <Image source={require("./img/u3.png")} style={styles.bjImg} />
-        <Page title="交易管理">
-          <Text>123</Text>
-          <Text>当前余额</Text>
-          <View style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.bgContainer}>
+          <Image source={require("./img/u3.png")} style={styles.bjimgs} />
+        </View>
+        <Page
+          title="交易管理"
+          headerStyle={{ backgroundColor: "#fff" }}
+          titleStyle={{ color: "#000" }}
+        >
+          <Text style={styles.Balance}>123</Text>
+          <Text style={styles.titBalance}>(余额)</Text>
+          <View style={styles.containers}>
             <View style={styles.tabContainer}>
               {tabMap.map(tab => {
                 if (tab === "border") {

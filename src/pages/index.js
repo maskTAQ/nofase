@@ -8,4 +8,5 @@ export { default as Wallet } from "./wallet";
 export { default as TranSaction } from "./transaction";
 export { default as StoreDetail } from "./store-detail";
 export { default as Pay } from "./pay";
+export { default as Fitnessrecord } from "./Fitnessrecord";
 export { default as User } from "./user";

@@ -11,6 +11,7 @@ import {
   StoreDetail,
   Wallet,
   Pay,
+  Fitnessrecord,
   User
 } from "src/pages";
 
@@ -49,6 +50,9 @@ export const RouteConfigs = {
   Pay: {
     screen: Pay
   },
+  Fitnessrecord: {
+    screen: Fitnessrecord
+  }, //健身记录
   User: {
     screen: User
   }
