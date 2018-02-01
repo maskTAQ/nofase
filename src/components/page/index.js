@@ -16,12 +16,14 @@ export default class Page extends Component {
       .isRequired,
     onPress: PropTypes.func,
     children: PropTypes.any,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {};
   render() {
     const {
       title,
+      titleStyle,
       LeftComponent,
       RightComponent,
       children,
@@ -41,6 +43,7 @@ export default class Page extends Component {
             }
           }}
           title={title}
+          titleStyle={titleStyle}
           LeftComponent={LeftComponent}
           RightComponent={RightComponent}
           style={headerStyle}

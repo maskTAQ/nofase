@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StatusBar, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
+import action from "src/action";
 import { Icon } from "src/components";
 import styles from "./style";
 
@@ -20,6 +22,7 @@ const renderTitle = (title, style) => {
     return title;
   }
 };
+@connect()
 export default class Header extends Component {
   static defaultProps = {
     RightComponent: <View />,
@@ -32,20 +35,23 @@ export default class Header extends Component {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     onLeftPress: PropTypes.func,
-    titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    dispatch: PropTypes.func
   };
   state = {};
   render() {
     const {
-      onLeftPress,
+      //onLeftPress,
       LeftComponent,
       RightComponent,
       title,
-      style,
-      titleStyle
+      style = {},
+      titleStyle,
+      dispatch
     } = this.props;
     const barStyle = {
-      backgroundColor: style.backgroundColor || styles.backgroundColor,
+      backgroundColor:
+        style.backgroundColor || styles.container.backgroundColor,
       barStyle: "light-content"
     };
     return (
@@ -56,7 +62,12 @@ export default class Header extends Component {
           barStyle={barStyle.barStyle}
         />
         <View style={styles.navigationContainer}>
-          <View style={styles.item}>{LeftComponent || Left(onLeftPress)}</View>
+          <View style={styles.item}>
+            {LeftComponent ||
+              Left(function() {
+                dispatch(action.navigate.back());
+              })}
+          </View>
           <View style={styles.title}>{renderTitle(title, titleStyle)}</View>
           <View style={styles.item}>{RightComponent}</View>
         </View>

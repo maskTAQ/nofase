@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
+import PropTypes from "prop-types";
 
+import action from "src/action";
 import styles from "./style";
 import {
   Page,
@@ -16,6 +18,9 @@ import {
 
 const Height = () => <View style={{ height: 10 }} />;
 export default class Home extends Component {
+  static propTypes = {
+    navigation: PropTypes.object
+  };
   state = {
     pattern: "map", //['map','list']
     tabActiveIndex: 1,
@@ -52,6 +57,11 @@ export default class Home extends Component {
       pattern
     });
   }
+  goStoreDetail = () => {
+    this.props.navigation.dispatch(
+      action.navigate.go({ routeName: "StoreDetail" })
+    );
+  };
   renderMapPattern() {
     return (
       <Page
@@ -296,7 +306,7 @@ export default class Home extends Component {
             <Text style={styles.itemName}>{name}</Text>
             <View style={styles.itemDetailCenter}>
               <Text style={styles.itemDistance}>距离：{distance}</Text>
-              <Button style={styles.lessionButton}>
+              <Button style={styles.lessionButton} onPress={this.goStoreDetail}>
                 <Text style={styles.lessionText}>课程：{lession}</Text>
                 <Icon size={20} source={require("./img/right.png")} />
               </Button>

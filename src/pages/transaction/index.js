@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, FlatList, Image } from "react-native";
 import PropTypes from "prop-types";
-import { Page, Button } from "src/components";
+
+import { Page, Button, Icon } from "src/components";
 import styles from "./style";
 import action from "src/action";
 
@@ -10,14 +11,13 @@ export default class Transacion extends Component {
     navigation: PropTypes.object
   };
   state = {};
-
-  changeSrc(src) {
-    this.props.navigation.dispatch(action.go(src));
-  }
+  back = () => {
+    this.props.navigation.dispatch(action.navigate.back());
+  };
   renderItem(row) {
-    const { type, src } = row;
+    const { type, onPress } = row;
     return (
-      <Button onPress={() => this.changeSrc(src)}>
+      <Button onPress={onPress}>
         <View style={styles.item}>
           <Text style={{ color: "#0399e7", fontSize: 15 }}>{type}</Text>
         </View>
@@ -28,15 +28,25 @@ export default class Transacion extends Component {
     const data = [
       {
         type: "充值",
-        src: "Recharge"
+        onPress: () => {
+          this.props.navigation.dispatch(
+            action.navigate.go({ routeName: "Recharge" })
+          );
+        }
       },
       {
         type: "退押金/提现 (秒到)",
-        src: ""
+        onPress: () => {
+          //this.props.navigation.dispatch(action.go('Recharge'));
+        }
       },
       {
         type: " 钱包明细",
-        src: "Wallet"
+        onPress: () => {
+          this.props.navigation.dispatch(
+            action.navigate.go({ routeName: "Wallet" })
+          );
+        }
       }
     ];
     return (
@@ -62,8 +72,13 @@ export default class Transacion extends Component {
         </View>
         <Page
           title="交易管理"
+          LeftComponent={
+            <Button onPress={this.back}>
+              <Icon size={20} source={require("./img/u326.png")} />
+            </Button>
+          }
           headerStyle={{ backgroundColor: "#fff" }}
-          titleStyle={{ color: "#000" }}
+          titleStyle={{ color: "#1ba0ea" }}
         >
           <Text style={styles.Balance}>123</Text>
           <Text style={styles.titBalance}>(余额)</Text>
