@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import styles from "./style";
 import { Input, Button } from "src/components";
 import action from "src/action";
 
+@connect()
 export default class Login extends Component {
   static propTypes = {
     navigation: PropTypes.object
@@ -20,7 +22,12 @@ export default class Login extends Component {
     });
   }
   login = () => {
-    this.props.navigation.dispatch(action.go("Home"));
+    this.props.navigation.dispatch(action.navigate.go({ routeName: "Home" }));
+  };
+  register = () => {
+    this.props.navigation.dispatch(
+      action.navigate.go({ routeName: "Register" })
+    );
   };
   render() {
     const { username, password } = this.state;
@@ -75,7 +82,10 @@ export default class Login extends Component {
             立即登录
           </Button>
           <View style={styles.register}>
-            <Button textStyle={styles.registerText}> 注册账号</Button>
+            <Button onPress={this.register} textStyle={styles.registerText}>
+              {" "}
+              注册账号
+            </Button>
           </View>
         </View>
         <Image
