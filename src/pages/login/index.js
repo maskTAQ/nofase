@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import styles from "./style";
-import { Input, Button } from "src/components";
+import { Input, Button, ShareModal } from "src/components";
 import action from "src/action";
 
 @connect()
@@ -101,6 +101,19 @@ export default class Login extends Component {
             />
           </Button>
         </View>
+        <ShareModal
+          isVisible={true}
+          username="上都牧人"
+          time="01:48:08"
+          sum={32.0}
+          discount={8}
+          storeName="海里恩健身俱乐部"
+          onlinePeople={20}
+          addr="深南大道与前海教会处振业星海商业广场31"
+          close={() => {}}
+        >
+          <Text>12</Text>
+        </ShareModal>
       </View>
     );
   }
