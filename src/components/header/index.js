@@ -15,7 +15,7 @@ Left.propTypes = {
 };
 const renderTitle = (title, style) => {
   if (typeof label !== "object") {
-    return <Text style={styles.titleText}>{title}</Text>;
+    return <Text style={[styles.titleText, style]}>{title}</Text>;
   } else {
     return title;
   }
@@ -31,7 +31,8 @@ export default class Header extends Component {
     style: PropTypes.object,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
-    onLeftPress: PropTypes.func
+    onLeftPress: PropTypes.func,
+    titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {};
   render() {
@@ -40,7 +41,8 @@ export default class Header extends Component {
       LeftComponent,
       RightComponent,
       title,
-      style
+      style,
+      titleStyle
     } = this.props;
     const barStyle = {
       backgroundColor: "transparent",
@@ -55,7 +57,7 @@ export default class Header extends Component {
         />
         <View style={styles.navigationContainer}>
           <View style={styles.item}>{LeftComponent || Left(onLeftPress)}</View>
-          <View style={styles.title}>{renderTitle(title)}</View>
+          <View style={styles.title}>{renderTitle(title, titleStyle)}</View>
           <View style={styles.item}>{RightComponent}</View>
         </View>
       </View>

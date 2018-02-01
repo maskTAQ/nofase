@@ -1,6 +1,30 @@
 export default {
   container: {
-    flex: 1
+    flex: 1,
+    position: "relative",
+    backgroundColor: "transparent"
+  },
+  containers: {
+    flex: 1,
+    position: "relative",
+    backgroundColor: "transparent",
+    marginTop: 50
+  },
+  bgContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgb(3,159,238)"
+  },
+  content: {
+    position: "absolute",
+    zIndex: 1,
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%"
   },
   tabContainer: {
     flexDirection: "row",
@@ -13,13 +37,24 @@ export default {
     paddingRight: 40,
     borderRadius: 10
   },
+  titBalance: {
+    textAlign: "center",
+    fontSize: 18,
+    color: "#0399e7"
+  },
+  Balance: {
+    textAlign: "center",
+    width: "100%",
+    lineHeight: 35,
+    fontSize: 20,
+    color: "#0399e7"
+  },
   tabItem: {
     position: "relative",
     flex: 1,
     height: "100%",
     justifyContent: "center",
-    alignItems: "center",
-    color: "#0399e7"
+    alignItems: "center"
   },
   Itemmoney: {
     color: "#0399e7",
@@ -58,11 +93,8 @@ export default {
     flexDirection: "row",
     justifyContent: "space-between"
   },
-
-  itemSum: {
-    fontWeight: "700",
-    fontStyle: "normal",
-    fontSize: 14,
-    color: "#0397E3"
+  bjimgs: {
+    width: "100%",
+    transform: [{ rotate: "180deg" }]
   }
 };

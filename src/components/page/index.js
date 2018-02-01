@@ -10,7 +10,8 @@ const Page = ({
   RightComponent,
   children,
   headerStyle,
-  onPress
+  onPress,
+  titleStyle
 }) => {
   return (
     <View style={{ flex: 1 }}>
@@ -20,6 +21,7 @@ const Page = ({
         LeftComponent={LeftComponent}
         RightComponent={RightComponent}
         style={headerStyle}
+        titleStyle={titleStyle}
       />
       <View style={{ flex: 1 }}>{children}</View>
     </View>
@@ -31,6 +33,7 @@ Page.propTypes = {
   headerStyle: PropTypes.object,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   onPress: PropTypes.func,
-  children: PropTypes.any
+  children: PropTypes.any,
+  titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 export default Page;
