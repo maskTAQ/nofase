@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, Image, FlatList } from "react-native";
 import PropTypes from "prop-types";
 
-import { Button, Icon } from "src/components";
+import { Button, Icon, Page } from "src/components";
 import styles from "./style";
 export default class Fitnessrecord extends Component {
   static propTypes = {
@@ -64,17 +64,19 @@ export default class Fitnessrecord extends Component {
   }
   render() {
     return (
-      <View style={styles.contianer}>
-        <View>
-          <Image
-            source={require("./img/banner.png")}
-            style={styles.banner}
-            resizeMode="stretch"
-          />
+      <Page title="健身记录">
+        <View style={styles.contianer}>
+          <View>
+            <Image
+              source={require("./img/banner.png")}
+              style={styles.banner}
+              resizeMode="stretch"
+            />
+          </View>
+          {this.renderList()}
+          <View />
         </View>
-        {this.renderList()}
-        <View />
-      </View>
+      </Page>
     );
   }
 }

@@ -2,10 +2,92 @@ import React, { Component } from "react";
 import { View, Text, Image, Switch, ScrollView } from "react-native";
 import PropTypes from "prop-types";
 
-import { Button, Icon } from "src/components";
+import { Button, Icon, Alert, Input } from "src/components";
 import styles from "./style";
 import action from "src/action";
 
+class ModifMobile extends Component {
+  static propTypes = {
+    isVisible: PropTypes.bool
+  };
+  state = {
+    mobile: "",
+    code: ""
+  };
+  changeValue(value, type) {
+    this.setState({
+      [type]: value
+    });
+  }
+  render() {
+    const { isVisible } = this.props;
+    const { mobile, code } = this.state;
+    return (
+      <Alert isVisible={isVisible}>
+        <View style={styles.modalContianer}>
+          <View style={styles.modalItemWrapper}>
+            <Icon size={24} source={require("./img/u16.png")} />
+            <Input
+              value={mobile}
+              onChangeText={v => {
+                this.changeValue(v, "mobile");
+              }}
+              style={styles.modalItemInput}
+              placeholder="旧手机号码"
+              placeholderTextColor={styles.modalItemInput.color}
+            />
+          </View>
+          <View style={[styles.modalItemWrapper, { marginTop: 10 }]}>
+            <Icon size={24} source={require("./img/u36.png")} />
+            <Input
+              value={code}
+              onChangeText={v => {
+                this.changeValue(v, "code");
+              }}
+              style={styles.modalItemInput}
+              placeholder="验证码"
+              placeholderTextColor={styles.modalItemInput.color}
+            />
+            <Button style={styles.codeButotn} textStyle={styles.codeButotnText}>
+              验证码
+            </Button>
+          </View>
+          <Button style={styles.sumbit} textStyle={styles.sumbitText}>
+            完成
+          </Button>
+        </View>
+      </Alert>
+    );
+  }
+}
+class ModifPortrait extends Component {
+  static propTypes = {
+    isVisible: PropTypes.bool,
+    userId: PropTypes.string,
+    userLevel: PropTypes.string,
+    navigation: PropTypes.object
+  };
+  state = {
+    mobile: "",
+    code: ""
+  };
+  changeValue(value, type) {
+    this.setState({
+      [type]: value
+    });
+  }
+  render() {
+    const { isVisible } = this.props;
+    //const { mobile, code } = this.state;
+    return (
+      <Alert isVisible={isVisible} location="bottom">
+        <View style={styles.modalContianer}>
+          <Text>12</Text>
+        </View>
+      </Alert>
+    );
+  }
+}
 export default class User extends Component {
   static defaultProps = {
     username: "上都牧人",
@@ -18,7 +100,9 @@ export default class User extends Component {
     userLevel: PropTypes.string,
     navigation: PropTypes.object
   };
-  state = {};
+  state = {
+    modifMobileVisible: true
+  };
   back = () => {
     console.log(this.props);
     this.props.navigation.dispatch(action.navigate.back());
@@ -75,7 +159,7 @@ export default class User extends Component {
         label: "健身记录",
         onPress: () => {
           this.props.navigation.dispatch(
-            action.navigate.go({ routeName: "Home" })
+            action.navigate.go({ routeName: "Fitnessrecord" })
           );
         }
       },
@@ -138,6 +222,7 @@ export default class User extends Component {
     );
   }
   render() {
+    const { modifMobileVisible } = this.state;
     return (
       <View style={styles.container}>
         {this.renderHeader()}
@@ -158,6 +243,8 @@ export default class User extends Component {
             </Button>
           </View>
         </ScrollView>
+        <ModifMobile isVisible={false} />
+        <ModifPortrait isVisible={modifMobileVisible} />
       </View>
     );
   }

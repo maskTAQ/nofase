@@ -6,6 +6,7 @@ export default {
     backgroundColor: "#a7daf7",
     paddingLeft: "8%",
     paddingRight: "8%",
+    paddingTop: 20,
     zIndex: -6
   },
 

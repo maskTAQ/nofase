@@ -143,5 +143,56 @@ export default {
   border: {
     height: 1,
     backgroundColor: "#a2d8f5"
+  },
+
+  //modal
+  modalContianer: {
+    width: "100%",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+
+    borderColor: "#157ffb",
+    backgroundColor: "#fff"
+  },
+  modalItemWrapper: {
+    height: 36,
+    alignItems: "center",
+
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderColor: "#1681fb"
+  },
+  modalItemInput: {
+    flex: 1,
+    height: "100%",
+    paddingLeft: 15,
+    color: "#1b9cfe"
+  },
+  codeButotn: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#1b9cfe"
+  },
+  codeButotnText: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#fff"
+  },
+  sumbit: {
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+    borderRadius: 8,
+    backgroundColor: "#1a9af7"
+  },
+  sumbitText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#fff"
   }
 };

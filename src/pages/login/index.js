@@ -102,7 +102,7 @@ export default class Login extends Component {
           </Button>
         </View>
         <ShareModal
-          isVisible={true}
+          isVisible={false}
           username="上都牧人"
           time="01:48:08"
           sum={32.0}
