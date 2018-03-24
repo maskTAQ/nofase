@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
 import PropTypes from "prop-types";
 
+import api from "src/api";
+//import { Tip } from "src/common";
 import action from "src/action";
 import styles from "./style";
+
+const Geolocation = require("Geolocation");
 import {
   Page,
   Button,
@@ -22,20 +26,21 @@ export default class Home extends Component {
     navigation: PropTypes.object
   };
   state = {
-    pattern: "map", //['map','list']
-    tabActiveIndex: 1,
+    pattern: "list", //['map','list']
+    tabActiveIndex: 0,
     chooseTabActiveIndex: NaN,
-    chooseTypeValue: 0,
+    chooseTypeValue: 1,
     cityValue: 0,
     distanceValue: 0
   };
+  componentWillMount() {}
   store = {
     chooseType: [
-      { label: "离我最近", value: 0 },
-      { label: "价格最低", value: 1 },
-      { label: "人气最高", value: 2 },
-      { label: "评分最高", value: 3 },
-      { label: "可容纳最多", value: 4 }
+      { label: "离我最近", value: 1 },
+      { label: "价格最低", value: 2 },
+      { label: "人气最高", value: 3 },
+      { label: "评分最高", value: 4 },
+      { label: "可容纳最多", value: 5 }
     ],
     city: [
       { label: "附近", value: 0 },
@@ -52,10 +57,50 @@ export default class Home extends Component {
       { label: "全城", value: 4 }
     ]
   };
-  togglePattern(pattern) {
-    this.setState({
-      pattern
+  search = async () => {
+    const location = await this.getCurrentPosition();
+    const { cityValue, distanceValue } = this.state;
+    const { city } = this.store;
+    api
+      .getStoreListByList({
+        UserArea: city[cityValue].label,
+        Range: distanceValue,
+        PageIndex: 1,
+        PageNum: 20,
+        ...location
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+  getCurrentPosition() {
+    return new Promise((resolve, reject) => {
+      Geolocation.getCurrentPosition(
+        location => {
+          resolve({
+            userLng: location.coords.longitude,
+            userLat: location.coords.latitude
+          });
+        },
+        error => {
+          resolve({
+            userLng: "",
+            userLat: ""
+          });
+        }
+      );
     });
+  }
+  togglePattern(nextPattern) {
+    const { pattern } = this.state;
+    if (pattern !== nextPattern) {
+      this.setState({
+        pattern: nextPattern
+      });
+    }
   }
   goStoreDetail = () => {
     this.props.navigation.dispatch(
@@ -90,8 +135,11 @@ export default class Home extends Component {
       </Page>
     );
   }
-  changeTab(tabActiveIndex) {
-    this.setState({ tabActiveIndex });
+  changeTab(NextTabActiveIndex) {
+    const { tabActiveIndex } = this.state;
+    if (NextTabActiveIndex !== tabActiveIndex) {
+      this.setState({ tabActiveIndex: NextTabActiveIndex });
+    }
   }
   renderChooseModal() {
     const {
@@ -139,13 +187,29 @@ export default class Home extends Component {
                   />
                 }
                 onChangeValue={v => {
+                  if (v !== 0) {
+                    this.setState({
+                      distanceValue: "全城"
+                    });
+                  } else {
+                    this.setState({
+                      distanceValue: 0
+                    });
+                  }
                   this.setState({ cityValue: v });
                 }}
               />
             </View>
             <View style={{ flex: 1 }}>
+              {/*
+              在除附近外 都默认为全城
+            */}
               <CheckBox
-                data={distance}
+                data={
+                  cityValue === 0
+                    ? distance
+                    : [{ label: "全城", value: "全城" }]
+                }
                 selected={distanceValue}
                 itemStyle={styles.checkboxItem}
                 itemActiveStyle={styles.checkboxActiveItem}
@@ -158,6 +222,7 @@ export default class Home extends Component {
                   />
                 }
                 onChangeValue={v => {
+                  console.log(v, "[]");
                   this.setState({ distanceValue: v });
                 }}
               />
@@ -289,7 +354,11 @@ export default class Home extends Component {
             />
             <Input style={styles.searchInput} placeholder="输入店铺/街道名称" />
           </View>
-          <Button style={styles.search} textStyle={styles.searchLabel}>
+          <Button
+            onPress={this.search}
+            style={styles.search}
+            textStyle={styles.searchLabel}
+          >
             搜索
           </Button>
         </View>
