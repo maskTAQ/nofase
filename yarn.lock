@@ -1799,6 +1799,10 @@ event-target-shim@^1.0.5:
   version "1.1.1"
   resolved "http://npm.hengxifintech.com/event-target-shim/-/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"
 
+events@^2.0.0:
+  version "2.0.0"
+  resolved "http://npm.hengxifintech.com/events/-/events-2.0.0.tgz#cbbb56bf3ab1ac18d71c43bb32c86255062769f2"
+
 exec-sh@^0.2.0:
   version "0.2.1"
   resolved "http://npm.hengxifintech.com/exec-sh/-/exec-sh-0.2.1.tgz#163b98a6e89e6b65b47c2a28d215bc1f63989c38"
@@ -4390,6 +4394,10 @@ realpath-native@^1.0.0:
   resolved "http://npm.hengxifintech.com/realpath-native/-/realpath-native-1.0.0.tgz#7885721a83b43bd5327609f0ddecb2482305fdf0"
   dependencies:
     util.promisify "^1.0.0"
+
+redux-thunk@^2.2.0:
+  version "2.2.0"
+  resolved "http://npm.hengxifintech.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.7.2:
   version "3.7.2"

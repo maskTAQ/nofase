@@ -16,7 +16,7 @@ const styles = {
     paddingBottom: 20
   }
 };
-const Alert = ({ close, isVisible, children, location = "middle" }) => {
+const Alert = ({ close, isVisible, children, style, location = "middle" }) => {
   switch (location) {
     case "top":
       location = "flex-start";
@@ -38,7 +38,7 @@ const Alert = ({ close, isVisible, children, location = "middle" }) => {
       visible={isVisible}
     >
       <TouchableWithoutFeedback onPress={close}>
-        <View style={[styles.contianer, { justifyContent: location }]}>
+        <View style={[styles.contianer, style, { justifyContent: location }]}>
           {children}
         </View>
       </TouchableWithoutFeedback>
@@ -49,6 +49,7 @@ Alert.propTypes = {
   close: PropTypes.func,
   isVisible: PropTypes.bool,
   children: PropTypes.any,
-  location: PropTypes.string
+  location: PropTypes.string,
+  style: PropTypes.object
 };
 export default Alert;

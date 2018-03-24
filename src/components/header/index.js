@@ -29,14 +29,19 @@ export default class Header extends Component {
     onLeftPress() {}
   };
   static propTypes = {
-    LeftComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    LeftComponent: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      null
+    ]),
     RightComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    titleComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     style: PropTypes.object,
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-      .isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     onLeftPress: PropTypes.func,
     titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    barStyle: PropTypes.string
   };
   state = {};
   render() {
@@ -44,22 +49,24 @@ export default class Header extends Component {
       //onLeftPress,
       LeftComponent,
       RightComponent,
+      titleComponent,
       title,
       style = {},
       titleStyle,
-      dispatch
+      dispatch,
+      barStyle = "light-content"
     } = this.props;
-    const barStyle = {
+    const barStyleObj = {
       backgroundColor:
         style.backgroundColor || styles.container.backgroundColor,
-      barStyle: "light-content"
+      barStyle: barStyle
     };
     return (
       <View style={[styles.container, style]}>
         <StatusBar
-          backgroundColor={barStyle.backgroundColor}
+          backgroundColor={barStyleObj.backgroundColor}
           translucent={true}
-          barStyle={barStyle.barStyle}
+          barStyle={barStyleObj.barStyle}
         />
         <View style={styles.navigationContainer}>
           <View style={styles.item}>
@@ -68,7 +75,9 @@ export default class Header extends Component {
                 dispatch(action.navigate.back());
               })}
           </View>
-          <View style={styles.title}>{renderTitle(title, titleStyle)}</View>
+          <View style={styles.title}>
+            {titleComponent || renderTitle(title, titleStyle)}
+          </View>
           <View style={styles.item}>{RightComponent}</View>
         </View>
       </View>

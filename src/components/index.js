@@ -11,3 +11,8 @@ export { default as Table } from "./table";
 export { default as Map } from "./map";
 export { default as Alert } from "./alert";
 export { default as ShareModal } from "./share-modal";
+export { default as Tip } from "./tip";
+export { default as Tabbar } from "./tabbar";
+export { default as Picker } from "./picker";
+export { default as CodeButton } from "./code-button";
+//export { default as WebView } from "./webview";

@@ -17,7 +17,8 @@ export default class Page extends Component {
     onPress: PropTypes.func,
     children: PropTypes.any,
     dispatch: PropTypes.func,
-    titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    barStyle: PropTypes.string
   };
   state = {};
   render() {
@@ -29,7 +30,8 @@ export default class Page extends Component {
       children,
       headerStyle,
       dispatch,
-      onPress
+      onPress,
+      barStyle
     } = this.props;
     return (
       <View style={{ flex: 1 }}>
@@ -47,6 +49,7 @@ export default class Page extends Component {
           LeftComponent={LeftComponent}
           RightComponent={RightComponent}
           style={headerStyle}
+          barStyle={barStyle}
         />
         <View style={{ flex: 1 }}>{children}</View>
       </View>
