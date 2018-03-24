@@ -200,6 +200,9 @@ export default class User extends Component {
     console.log(this.props);
     this.props.navigation.dispatch(action.navigate.back());
   };
+  go = routeName => {
+    this.props.navigation.dispatch(action.navigate.go({ routeName }));
+  };
   renderHeader() {
     const { username, UserId, userLevel } = this.props;
     const portraitSource = require("./img/u128.png"),
@@ -266,7 +269,11 @@ export default class User extends Component {
       },
       {
         label: "优惠卡包",
-        onPress: () => {}
+        onPress: () => {
+          this.props.navigation.dispatch(
+            action.navigate.go({ routeName: "Card" })
+          );
+        }
       },
       {
         label: "消息提示",
@@ -333,9 +340,13 @@ export default class User extends Component {
             {this.renderList()}
             {this.renderAccount()}
             <View style={styles.accountContianer}>
-              <View style={styles.accountItem}>
-                <Text style={styles.accountItemText}>客户反馈</Text>
-              </View>
+              <Button
+                onPress={() => this.go("Feedback")}
+                style={styles.accountItem}
+                textStyle={styles.accountItemText}
+              >
+                客户反馈
+              </Button>
               <View style={styles.accountItem}>
                 <Text style={styles.accountItemText}>邀请好友</Text>
               </View>

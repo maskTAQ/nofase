@@ -10,3 +10,4 @@ export { default as StoreDetail } from "./store-detail";
 export { default as Pay } from "./pay";
 export { default as Fitnessrecord } from "./Fitnessrecord";
 export { default as User } from "./user";
+export { default as Feedback } from "./feedback";

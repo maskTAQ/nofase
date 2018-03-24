@@ -12,7 +12,8 @@ import {
   Wallet,
   Pay,
   Fitnessrecord,
-  User
+  User,
+  Feedback
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -55,6 +56,9 @@ export const RouteConfigs = {
   }, //健身记录
   User: {
     screen: User
+  },
+  Feedback: {
+    screen: Feedback
   }
 };
 
