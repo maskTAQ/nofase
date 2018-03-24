@@ -27,11 +27,12 @@ export default class Home extends Component {
   };
   state = {
     pattern: "list", //['map','list']
-    tabActiveIndex: 0,
+    tabActiveIndex: 1,
     chooseTabActiveIndex: NaN,
     chooseTypeValue: 1,
     cityValue: 0,
-    distanceValue: 0
+    distanceValue: 0,
+    StoreName: ""
   };
   componentWillMount() {}
   store = {
@@ -50,25 +51,37 @@ export default class Home extends Component {
       { label: "宝安", value: 4 }
     ],
     distance: [
-      { label: "1km", value: 0 },
-      { label: "3km", value: 1 },
-      { label: "5km", value: 2 },
-      { label: "10km", value: 3 },
-      { label: "全城", value: 4 }
+      { label: "1km", value: 1 },
+      { label: "3km", value: 3 },
+      { label: "5km", value: 5 },
+      { label: "10km", value: 10 },
+      { label: "全城", value: 0 }
     ]
   };
   search = async () => {
     const location = await this.getCurrentPosition();
-    const { cityValue, distanceValue } = this.state;
-    const { city } = this.store;
-    api
-      .getStoreListByList({
-        UserArea: city[cityValue].label,
+    const {
+      distanceValue,
+      tabActiveIndex,
+      chooseTypeValue,
+      StoreName
+    } = this.state;
+    const params = {};
+    if (tabActiveIndex === 0) {
+      Object.assign(params, {
+        SeachType: 1, //按店铺搜索
+        SeachValue: StoreName,
+        UserArea: "",
         Range: distanceValue,
         PageIndex: 1,
         PageNum: 20,
+        StoreOrder: chooseTypeValue,
         ...location
-      })
+      });
+    }
+    console.log(params);
+    api
+      .getStoreList(params)
       .then(res => {
         console.log(res);
       })
@@ -320,7 +333,7 @@ export default class Home extends Component {
     );
   }
   renderHeader() {
-    const { tabActiveIndex } = this.state;
+    const { tabActiveIndex, StoreName } = this.state;
     const tabMap = ["按店铺搜索", "按课程搜索"];
     return (
       <View style={styles.header}>
@@ -352,7 +365,12 @@ export default class Home extends Component {
               source={require("./img/search_list.png")}
               style={styles.searchInputIcon}
             />
-            <Input style={styles.searchInput} placeholder="输入店铺/街道名称" />
+            <Input
+              value={StoreName}
+              onChangeText={v => this.setState({ StoreName: v })}
+              style={styles.searchInput}
+              placeholder="输入店铺/街道名称"
+            />
           </View>
           <Button
             onPress={this.search}

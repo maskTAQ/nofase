@@ -54,17 +54,13 @@ class Dragable {
     }
   }
   isCanMove(left) {
-    const { screen, buttonStyle, button, currentControlButton } = this;
-    if (currentControlButton === "start" && left > button.end.left) {
-      return false;
-    }
-    if (
-      currentControlButton === "end" &&
-      button.start.left + buttonStyle.width > left
-    ) {
-      return false;
-    }
-    return left > 0 && left < screen.width - buttonStyle.width;
+    const { screen, buttonStyle } = this;
+    const pathwayMargin = 10;
+    //将拖动幅度限制在轨道内
+    return (
+      left > pathwayMargin + buttonStyle.width / 2 &&
+      left < screen.width - pathwayMargin - buttonStyle.width / 2
+    );
   }
   calculateNodeIndex() {
     const { screen, buttonStyle, button } = this;
