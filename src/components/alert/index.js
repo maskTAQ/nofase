@@ -39,7 +39,7 @@ const Alert = ({ close, isVisible, children, style, location = "middle" }) => {
     >
       <TouchableWithoutFeedback onPress={close}>
         <View style={[styles.contianer, style, { justifyContent: location }]}>
-          {children}
+          <TouchableWithoutFeedback>{children}</TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
     </Modal>

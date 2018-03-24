@@ -30,6 +30,7 @@ class App extends Component {
       if (!e && m) {
         api.rememberLogin({ Tel: m })
           .then(res => {
+            console.log(res)
             this.props.dispatch(
               action.login(res)
             );

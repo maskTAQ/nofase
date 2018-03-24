@@ -29,7 +29,7 @@ export default class ToggleButton extends Component {
       packUp: "270deg"
     };
     const bottom = {
-      unfold: 0,
+      unfold: -12,
       packUp: -80
     };
     const { status } = this.state;
