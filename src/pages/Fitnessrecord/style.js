@@ -1,11 +1,10 @@
 export default {
   contianer: {
     flex: 1,
-    height: "100%",
-    width: "100%",
+
     backgroundColor: "#a7daf7",
-    paddingLeft: "8%",
-    paddingRight: "8%",
+    paddingLeft: 15,
+    paddingRight: 15,
     paddingTop: 20,
     zIndex: -6
   },
@@ -16,20 +15,19 @@ export default {
     zIndex: 999,
     marginBottom: 15
   },
-  container: {
-    justifyContent: "space-between",
+  item: {
+    height: 80,
+    paddingLeft: 10,
+    paddingRight: 10,
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingTop: 5,
-    paddingLeft: 5,
-    paddingRight: 5,
-    paddingBottom: 5,
     borderRadius: 5
   },
-  item: {
-    width: "80%"
-  },
+  itemLeft: {},
+  itemTime: { color: "#333", fontSize: 14, lineHeight: 30 },
+  itemDetail: { color: "#333", fontSize: 14, lineHeight: 30 },
   rightimg: {
     flexDirection: "row",
     width: 50,

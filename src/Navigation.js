@@ -14,7 +14,8 @@ import {
   Fitnessrecord,
   User,
   Feedback,
-  DiscountsCard
+  DiscountsCard,
+  Activity
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -63,6 +64,9 @@ export const RouteConfigs = {
   },
   DiscountsCard: {
     screen: DiscountsCard
+  },
+  Activity: {
+    screen: Activity
   }
 };
 

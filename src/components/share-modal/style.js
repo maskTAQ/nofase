@@ -1,12 +1,10 @@
 export default {
   layer: {
     flex: 1,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
-    borderColor: "red"
+    backgroundColor: "rgba(0,0,0,0.4)"
   },
   container: {
     width: "100%",

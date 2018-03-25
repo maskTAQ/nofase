@@ -19,7 +19,15 @@ export default {
     return post("/User/GetStoreListBySeach", params);
   },
   //获取用户信息
-  GetUserInfo() {
+  getUserInfo() {
     return post("/User/GetUserInfo");
+  },
+  //设置用户信息
+  setUserInfo(params) {
+    return post("/User/EditUserInfo", params);
+  },
+  //验证 验证码
+  verifyCode(Tel, ExCode) {
+    return post("/User/ExTelCode", { Tel, ExCode });
   }
 };

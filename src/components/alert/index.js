@@ -3,19 +3,9 @@ import { Modal, TouchableWithoutFeedback, View } from "react-native";
 import PropTypes from "prop-types";
 
 //import { } from "src/components";
-//import styles from "./style"
+import styles from "./style";
 //import action from "src/action"
-const styles = {
-  contianer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 10,
-    paddingBottom: 20
-  }
-};
+
 const Alert = ({ close, isVisible, children, style, location = "middle" }) => {
   switch (location) {
     case "top":
@@ -38,7 +28,7 @@ const Alert = ({ close, isVisible, children, style, location = "middle" }) => {
       visible={isVisible}
     >
       <TouchableWithoutFeedback onPress={close}>
-        <View style={[styles.contianer, style, { justifyContent: location }]}>
+        <View style={[styles.container, style, { justifyContent: location }]}>
           <TouchableWithoutFeedback>{children}</TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>

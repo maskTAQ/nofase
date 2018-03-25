@@ -40,6 +40,10 @@ export default {
   closeWrapper: {
     alignItems: "flex-end"
   },
+  editIconButton: {
+    marginLeft: 4,
+    justifyContent: "center"
+  },
   headerContentRight: {
     flex: 1
   },
@@ -72,9 +76,10 @@ export default {
   },
   lvLabel: {
     position: "absolute",
-    top: 11,
+    top: 13,
     left: 22,
     fontSize: 12,
+    fontWeight: "bold",
     color: "#fff"
   },
   list: {
@@ -194,5 +199,62 @@ export default {
     fontSize: 14,
     fontWeight: "bold",
     color: "#fff"
+  },
+
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#1b9cf0"
+  },
+  modalSubTitle: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#ccc",
+    textAlign: "center"
+  },
+  modalInputWrapper: {
+    height: 60,
+    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 15
+  },
+  modalInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#1b9cf0",
+    borderRadius: 6,
+    color: "#333",
+    paddingLeft: 10
+  },
+  modalButtonGroupWrapper: {
+    height: 76,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 20
+  },
+  modalButtonGroup: {
+    flexDirection: "row",
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#1b9cf0",
+    borderRadius: 12,
+    overflow: "hidden"
+  },
+  modalCancelButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  modalCompleteButton: {
+    flex: 3,
+    backgroundColor: "#1b9cf0",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  modalButtonText: {
+    fontSize: 16,
+    fontWeight: "bold"
   }
 };

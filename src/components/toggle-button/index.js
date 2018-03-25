@@ -55,7 +55,7 @@ export default class ToggleButton extends Component {
             <Button onPress={() => this.go("Pay")}>
               <Icon size={60} source={require("./img/code.png")} />
             </Button>
-            <Button>
+            <Button onPress={() => this.go("Activity")}>
               <Icon size={36} source={require("./img/run.png")} />
             </Button>
           </View>
