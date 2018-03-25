@@ -13,7 +13,8 @@ import {
   Pay,
   Fitnessrecord,
   User,
-  Feedback
+  Feedback,
+  Activity
 } from "src/pages";
 
 import { TimeSlideChoose } from "src/components";
@@ -59,6 +60,9 @@ export const RouteConfigs = {
   },
   Feedback: {
     screen: Feedback
+  },
+  Activity: {
+    screen: Activity
   }
 };
 
