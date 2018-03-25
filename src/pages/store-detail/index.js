@@ -1,69 +1,142 @@
 import React, { Component } from "react";
-import { View, Image, Text, ScrollView } from "react-native";
-//import PropTypes from "prop-types";
+import { View, Image, Text, ScrollView, Linking } from "react-native";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import styles from "./style";
 import { Table, Header, Button, Icon, StarScore } from "src/components";
+import api from "src/api";
+import action from "src/action";
+import { Tip } from "src/common";
+
+@connect()
 export default class StoreDetail extends Component {
-  state = {};
+  static propTypes = {
+    navigation: PropTypes.object
+  };
+  state = {
+    StoreName: "-",
+    Address: "-",
+    PeopleNum: "-",
+    Charge: "-",
+    StoreTel: "0",
+
+    Bath: 0,
+    Storage: 0,
+    Aerobic: 0,
+    IsAerobic: 0,
+    Power: 0,
+    IsPower: 0,
+    HealthCare: 0,
+    IsHealthCare: 0,
+
+    BusinessWeeks: "0,0",
+    BusinessTimes: "",
+
+    timetable: []
+  };
+  componentWillMount() {
+    Tip.loading();
+    Promise.all([
+      this.getStoreInfo(),
+      this.getDeviceInfo(),
+      this.getCurriculum()
+    ]).then(res => {
+      res.forEach(item => {
+        this.setState({ ...item });
+      });
+      Tip.dismiss();
+    });
+  }
   store = {
     tableColumns: [
-      { title: "时间", dataIndex: "a", style: { flex: 2 } },
-      { title: "周一", dataIndex: "b" },
-      { title: "周二", dataIndex: "c" },
-      { title: "周三", dataIndex: "d" },
-      { title: "周四", dataIndex: "e" },
-      { title: "周五", dataIndex: "f" },
-      { title: "周六", dataIndex: "i" },
-      { title: "周日", dataIndex: "j" }
-    ],
-    data: [
       {
-        a: "15:00-18:00",
-        b: "自助训练",
-        c: "民族舞",
-        d: "自助训练",
-        e: "民族舞",
-        f: "自助训练",
-        i: "民族舞",
-        j: "自助训练"
+        title: "时间",
+        dataIndex: "STime",
+        render: (row, value, fiedIndex, index) => {
+          const { STime, ETime } = row;
+          let label = "";
+
+          switch (true) {
+            case !!STime && !!ETime:
+              label = STime + "-" + ETime;
+              break;
+            case !!STime:
+              label = STime + "-" + "?";
+              break;
+            case !!ETime:
+              label = "?" + "-" + ETime;
+              break;
+            default:
+              label = "?-?";
+              break;
+          }
+          return (
+            <Text style={{ fontSize: 12, color: "#1a97df" }}>{label}</Text>
+          );
+        }
       },
-      {
-        a: "15:00-18:00",
-        b: "自助训练",
-        c: "民族舞",
-        d: "自助训练",
-        e: "民族舞",
-        f: "自助训练",
-        i: "民族舞",
-        j: "自助训练"
-      },
-      {
-        a: "15:00-18:00",
-        b: "自助训练",
-        c: "民族舞",
-        d: "自助训练",
-        e: "民族舞",
-        f: "自助训练",
-        i: "民族舞",
-        j: "自助训练"
-      },
-      {
-        a: "15:00-18:00",
-        b: "自助训练",
-        c: "民族舞",
-        d: "自助训练",
-        e: "民族舞",
-        f: "自助训练",
-        i: "民族舞",
-        j: "自助训练"
-      }
+      { title: "周一", dataIndex: "Week0" },
+      { title: "周二", dataIndex: "Week1" },
+      { title: "周三", dataIndex: "Week2" },
+      { title: "周四", dataIndex: "Week3" },
+      { title: "周五", dataIndex: "Week4" },
+      { title: "周六", dataIndex: "Week5" },
+      { title: "周日", dataIndex: "Week6" }
     ]
   };
+
+  getStoreInfo() {
+    const defaultStoreId = 1;
+    return api
+      .getStoreInfo({
+        StoreId: defaultStoreId,
+        AdminId: 2
+      })
+      .then(res => {
+        console.log(res);
+        return res;
+      })
+      .catch(e => {
+        console.log(e);
+        return {};
+      });
+  }
+  getDeviceInfo() {
+    const defaultStoreId = 1;
+    return api
+      .getStoreEquip({
+        StoreId: defaultStoreId,
+        AdminId: 2
+      })
+      .then(res => {
+        return res;
+      })
+      .catch(e => {
+        console.log(e);
+        return {};
+      });
+  }
+  getCurriculum() {
+    const defaultStoreId = 1;
+    return api
+      .getCurriculum({
+        StoreId: defaultStoreId
+      })
+      .then(res => {
+        console.log(res);
+        return { timetable: res };
+      })
+      .catch(e => {
+        console.log(e);
+        return {};
+      });
+  }
   getTableData = () => {
     return Promise.resolve(this.store.data);
   };
   renderHeader() {
+    const { StoreName, Address, PeopleNum, Charge } = this.state;
     return (
       <View style={styles.header}>
         <Image source={require("./img/u0.png")} style={styles.headerBg} />
@@ -74,7 +147,7 @@ export default class StoreDetail extends Component {
                 <Text
                   style={{ fontSize: 20, color: "#fff", fontWeight: "bold" }}
                 >
-                  优思健身工作室（前海店）
+                  {StoreName}
                 </Text>
                 <Text
                   style={{
@@ -84,7 +157,7 @@ export default class StoreDetail extends Component {
                     fontWeight: "bold"
                   }}
                 >
-                  深圳市龙岗区南湾街道龙岗大厦北栋22楼
+                  {Address}
                 </Text>
               </View>
               <View style={{ justifyContent: "center" }}>
@@ -121,7 +194,7 @@ export default class StoreDetail extends Component {
             />
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
-                可容纳线上20人位
+                可容纳线上{PeopleNum}人位
               </Text>
               <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
                 当前剩余5人位
@@ -138,7 +211,7 @@ export default class StoreDetail extends Component {
               }}
             >
               <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>
-                15元 / 小时
+                {Charge}元 / 小时
               </Text>
             </View>
           </View>
@@ -180,7 +253,23 @@ export default class StoreDetail extends Component {
     );
   }
   renderProps() {
-    const data = ["淋浴", "储物", "有氧器", "力量器", "康体设备"];
+    const {
+      Bath,
+      Storage,
+      IsAerobic,
+      Aerobic,
+      IsPower,
+      Power,
+      IsHealthCare,
+      HealthCare
+    } = this.state;
+    const data = [
+      { label: "淋浴", hasKey: Bath },
+      { label: "储物", hasKey: Storage },
+      { label: "有氧器", hasKey: IsAerobic, valueKey: Aerobic },
+      { label: "力量器", hasKey: IsPower, valueKey: Power },
+      { label: "康体设备", hasKey: IsHealthCare, valueKey: HealthCare }
+    ];
     return (
       <View
         style={{
@@ -194,21 +283,32 @@ export default class StoreDetail extends Component {
           borderBottomColor: "#e4e4e4"
         }}
       >
-        {data.map(item => {
+        {data.map(({ label, hasKey, valueKey }) => {
           return (
             <View
-              style={{
-                paddingLeft: 4,
-                paddingRight: 4,
-                height: 24,
-                justifyContent: "center",
-                borderWidth: 1,
-                borderColor: "#a1a1a1",
-                borderRadius: 4
-              }}
-              key={item}
+              style={[
+                {
+                  paddingLeft: 4,
+                  paddingRight: 4,
+                  height: 24,
+                  justifyContent: "center",
+                  borderWidth: 1,
+                  borderColor: "#a1a1a1",
+                  borderRadius: 4
+                },
+                hasKey && { borderColor: "#1a97df" }
+              ]}
+              key={label}
             >
-              <Text style={{ fontSize: 14, color: "#a1a1a1" }}>{item}</Text>
+              <Text
+                style={[
+                  { fontSize: 14, color: "#a1a1a1" },
+                  hasKey && { color: "#1a97df" }
+                ]}
+              >
+                {label}
+                {valueKey}
+              </Text>
             </View>
           );
         })}
@@ -217,6 +317,19 @@ export default class StoreDetail extends Component {
   }
   render() {
     const { tableColumns } = this.store;
+    const { BusinessTimes, BusinessWeeks, Charge, StoreTel } = this.state;
+    const weeks = [
+      "星期日",
+      "星期一",
+      "星期二",
+      "星期三",
+      "星期四",
+      "星期五",
+      "星期六"
+    ];
+    const startWeek = weeks[BusinessWeeks[0]];
+    const endWeek = weeks[BusinessWeeks[BusinessWeeks.length - 1]];
+    const { timetable } = this.state;
     return (
       <View style={styles.container}>
         <Header
@@ -249,7 +362,9 @@ export default class StoreDetail extends Component {
               >
                 营业时间：
               </Text>
-              <Text style={{ color: "#a1a1a1" }}>周一至周日 09:00 — 22:30</Text>
+              <Text style={{ color: "#a1a1a1" }}>
+                {startWeek}至{endWeek} {BusinessTimes}
+              </Text>
             </View>
             <View style={{ padding: 6 }}>
               <Text
@@ -268,7 +383,7 @@ export default class StoreDetail extends Component {
               </Text>
             </View>
           </View>
-          <Table columns={tableColumns} getData={this.getTableData} />
+          <Table columns={tableColumns} dataSource={timetable} />
         </ScrollView>
 
         <View
@@ -280,7 +395,12 @@ export default class StoreDetail extends Component {
             alignItems: "center"
           }}
         >
-          <Button style={{ paddingLeft: 6, alignItems: "center" }}>
+          <Button
+            onPress={() => {
+              Linking.openURL(`tel:${StoreTel}`);
+            }}
+            style={{ paddingLeft: 6, alignItems: "center" }}
+          >
             <Icon size={16} source={require("./img/u204.png")} />
             <Text
               style={{ fontSize: 14, color: "#1a97df", fontWeight: "bold" }}
@@ -296,10 +416,17 @@ export default class StoreDetail extends Component {
               paddingLeft: 15,
               paddingRight: 15
             }}
+            onPress={() => {
+              this.props.navigation.dispatch(
+                action.navigate.go({ routeName: "Pay" })
+              );
+            }}
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>
               <Text style={{ fontSize: 16 }}>开始健身</Text>
-              <Text style={{ fontSize: 12, marginLeft: 4 }}>15元/小时</Text>
+              <Text style={{ fontSize: 12, marginLeft: 4 }}>
+                {Charge}元/小时
+              </Text>
             </Text>
           </Button>
         </View>

@@ -29,5 +29,21 @@ export default {
   //验证 验证码
   verifyCode(Tel, ExCode) {
     return post("/User/ExTelCode", { Tel, ExCode });
+  },
+  //获取店铺信息
+  getStoreInfo({ Need, StoreId, AdminId }) {
+    return post(
+      "/Store/GetStoreInfoByNeed",
+      { Need, StoreId, AdminId },
+      { loading: false }
+    );
+  },
+  //读取课程表
+  getCurriculum({ StoreId }) {
+    return post("/Store/GetCurriculumList", { StoreId }, { loading: false });
+  },
+  //获取设备信息
+  getStoreEquip(params) {
+    return post("/Store/GetStoreEqui", params, { loading: false });
   }
 };

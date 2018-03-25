@@ -18,7 +18,7 @@ export default class Pay extends Component {
     startTime: PropTypes.string,
     endTime: PropTypes.string,
     step: PropTypes.number,
-    navigation: PropTypes.func
+    navigation: PropTypes.object
   };
   state = {
     currentScore: 1
