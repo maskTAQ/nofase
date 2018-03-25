@@ -110,7 +110,11 @@ class Loading extends React.Component {
       statusComponent = (
         <Icon
           size={30}
-          type={this.state.tipSuccess ? "tip-success" : "tip-fail"}
+          source={
+            this.state.tipSuccess
+              ? require("./img/success.png")
+              : require("./img/error.png")
+          }
         />
       );
     }
