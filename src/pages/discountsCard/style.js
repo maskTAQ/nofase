@@ -33,7 +33,8 @@ export default {
     backgroundColor: "#fff",
     marginTop: -10,
     height: 60,
-
+    borderWidth: 1,
+    borderColor: "#1dabfc",
     marginLeft: 10,
     marginRight: 10,
     paddingLeft: 40,
@@ -135,6 +136,12 @@ export default {
     justifyContent: "center"
   },
   huize: {
+    height: 26,
+    paddingLeft: 10,
+    paddingRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 4,
     borderWidth: 1,
     borderColor: "#fff"
   }

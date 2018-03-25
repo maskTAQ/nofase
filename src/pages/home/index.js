@@ -496,7 +496,6 @@ export default class Home extends Component {
             }}
           >
             <Icon size={20} source={require("./img/map.png")} />
-            <Input />
           </Button>
         }
         RightComponent={

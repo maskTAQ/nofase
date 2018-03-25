@@ -82,7 +82,7 @@ export default class Transacion extends Component {
           </View>
 
           <View style={styles.containers}>
-            <View style={styles.tabContainer}>
+            <View style={[styles.tabContainer]}>
               {tabMap.map(tab => {
                 if (tab === "border") {
                   return <View style={styles.tabItemBorder} key="border" />;

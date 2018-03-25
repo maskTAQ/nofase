@@ -396,7 +396,7 @@ export default class User extends Component {
         label: "优惠卡包",
         onPress: () => {
           this.props.navigation.dispatch(
-            action.navigate.go({ routeName: "Card" })
+            action.navigate.go({ routeName: "DiscountsCard" })
           );
         }
       },

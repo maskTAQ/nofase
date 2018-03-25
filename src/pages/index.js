@@ -12,3 +12,4 @@ export { default as Fitnessrecord } from "./Fitnessrecord";
 export { default as User } from "./user";
 export { default as Feedback } from "./feedback";
 export { default as Activity } from "./activity";
+export { default as DiscountsCard } from "./discountsCard";

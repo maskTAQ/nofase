@@ -3,7 +3,11 @@ import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 
 import { Page, Button, Icon, StarScore } from "src/components";
+import action from "src/action";
+import { connect } from "react-redux";
 import styles from "./style";
+
+@connect()
 export default class Pay extends Component {
   static defaultProps = {
     startTime: "08:27",
@@ -13,7 +17,8 @@ export default class Pay extends Component {
   static propTypes = {
     startTime: PropTypes.string,
     endTime: PropTypes.string,
-    step: PropTypes.number
+    step: PropTypes.number,
+    navigation: PropTypes.func
   };
   state = {
     currentScore: 1
@@ -152,7 +157,14 @@ export default class Pay extends Component {
       <Page
         title="扫码计时"
         RightComponent={
-          <Button textStyle={{ color: "#fff", fontWeight: "bold" }}>
+          <Button
+            onPress={() => {
+              this.props.navigation.dispatch(
+                action.navigate.go({ routeName: "Fitnessrecord" })
+              );
+            }}
+            textStyle={{ color: "#fff", fontSize: 14, fontWeight: "bold" }}
+          >
             记录
           </Button>
         }
