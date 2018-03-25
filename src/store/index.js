@@ -14,16 +14,22 @@ const initStore = {
     isLogin: false,
     AdminId: "",
     AdminLevel: ""
+  },
+  userInfo: {
+    hasData: false
   }
 };
 
 const asyncDispetch = store => next => action => {
   const { type, api, promise } = action;
   if (promise) {
-    next({ type, status: "loading" });
+    next({ type, payload: { hasData: "loading" } });
     return api()
       .then(res => {
-        store.dispatch({ type, status: "success", payload: res });
+        store.dispatch({
+          type,
+          payload: Object.assign({ hasData: true, ...res })
+        });
         return Promise.resolve(res);
       })
       .catch(e => {
