@@ -17,5 +17,9 @@ export default {
   // 获取商家列表(列表模式)
   getStoreList(params) {
     return post("/User/GetStoreListBySeach", params);
+  },
+  //获取用户信息
+  GetUserInfo() {
+    return post("/User/GetUserInfo");
   }
 };
