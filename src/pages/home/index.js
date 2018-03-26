@@ -27,14 +27,23 @@ export default class Home extends Component {
   };
   state = {
     pattern: "list", //['map','list']
-    tabActiveIndex: 1,
+    tabActiveIndex: 0,
     chooseTabActiveIndex: NaN,
     chooseTypeValue: 1,
     cityValue: 0,
     distanceValue: 0,
-    StoreName: ""
+    StoreName: "",
+
+    dataSource: [],
+
+    startDay: 0,
+    endDay: 4,
+
+    refreshing: true
   };
-  componentWillMount() {}
+  componentWillMount() {
+    this.search(true);
+  }
   store = {
     chooseType: [
       { label: "离我最近", value: 1 },
@@ -56,9 +65,17 @@ export default class Home extends Component {
       { label: "5km", value: 5 },
       { label: "10km", value: 10 },
       { label: "全城", value: 0 }
-    ]
+    ],
+    daysInfo: {
+      startDay: 0,
+      endDay: 5
+    }
   };
-  search = async () => {
+  onRefresh = () => {
+    this.search(false);
+  };
+  search = async (loading = false) => {
+    this.setState({ refreshing: true });
     const location = await this.getCurrentPosition();
     const {
       distanceValue,
@@ -78,15 +95,33 @@ export default class Home extends Component {
         StoreOrder: chooseTypeValue,
         ...location
       });
+    } else {
+      const { startDay, endDay } = this.store.daysInfo;
+      Object.assign(params, {
+        SeachType: 2, //按课程搜索
+        SeachValue: StoreName,
+        SDay: startDay,
+        EDay: endDay,
+        UserArea: "",
+        Range: distanceValue,
+        PageIndex: 1,
+        PageNum: 20,
+        StoreOrder: chooseTypeValue,
+        ...location
+      });
     }
-    console.log(params);
+    console.log(params, "参数");
     api
-      .getStoreList(params)
+      .getStoreList(params, { loading })
       .then(res => {
-        console.log(res);
+        this.setState({
+          dataSource: res
+        });
+        this.setState({ refreshing: false });
       })
       .catch(e => {
         console.log(e);
+        this.setState({ refreshing: false });
       });
   };
   getCurrentPosition() {
@@ -373,7 +408,7 @@ export default class Home extends Component {
             />
           </View>
           <Button
-            onPress={this.search}
+            onPress={() => this.search()}
             style={styles.search}
             textStyle={styles.searchLabel}
           >
@@ -384,23 +419,35 @@ export default class Home extends Component {
     );
   }
   renderItem(row) {
-    const { icon, name, distance, lession, addr, evaluate, price } = row;
+    const icon = require("./img/u42.png");
+    const {
+      StoreName,
+      Distance,
+      NowCurriculum,
+      Address,
+      evaluate = 4.3,
+      Charge
+    } = row;
     return (
       <View style={styles.item}>
         <View style={styles.itemTop}>
           <Icon size={82} source={icon} />
           <View style={styles.itemDetail}>
-            <Text style={styles.itemName}>{name}</Text>
+            <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
             <View style={styles.itemDetailCenter}>
-              <Text style={styles.itemDistance}>距离：{distance}</Text>
+              <Text style={styles.itemDistance}>
+                距离：{Distance.toFixed(0)}
+              </Text>
               <Button style={styles.lessionButton} onPress={this.goStoreDetail}>
-                <Text style={styles.lessionText}>课程：{lession}</Text>
+                <Text style={styles.lessionText}>
+                  课程：{NowCurriculum || "暂无课程"}
+                </Text>
                 <Icon size={20} source={require("./img/right.png")} />
               </Button>
             </View>
             <View style={styles.itemDetailBottom}>
               <Text style={styles.itemAddr} numberOfLines={2}>
-                {addr}
+                {Address || "暂无地址"}
               </Text>
               <Button style={styles.navgationButton}>
                 <Icon size={16} source={require("./img/natvgation.png")} />
@@ -415,7 +462,7 @@ export default class Home extends Component {
             <StarScore operable={false} currentScore={evaluate} />
             <Text style={styles.evaluateValue}>{evaluate}</Text>
           </View>
-          <Text style={styles.price}>{price}元/小时</Text>
+          <Text style={styles.price}>{Charge || "0"}元/小时</Text>
         </View>
         <View style={styles.tagWrapper}>
           <Text style={styles.tagText}>20人</Text>
@@ -424,61 +471,17 @@ export default class Home extends Component {
     );
   }
   renderList() {
-    const data = [
-      {
-        icon: require("./img/u42.png"),
-        name: "优思健身工作室(前海店)",
-        distance: "234m",
-        lession: "瑜伽健身",
-        addr: "深南大道与前海教会处振业星海商业广场3101A",
-        evaluate: 4.3,
-        price: 15
-      },
-      {
-        icon: require("./img/u42.png"),
-        name: "优思健身工作室(前海店1)",
-        distance: "234m",
-        lession: "瑜伽健身",
-        addr: "深南大道与前海教会处振业星海商业广场3101A",
-        evaluate: 4.3,
-        price: 15
-      },
-      {
-        icon: require("./img/u42.png"),
-        name: "优思健身工作室(前海店2)",
-        distance: "234m",
-        lession: "瑜伽健身",
-        addr: "深南大道与前海教会处振业星海商业广场3101A",
-        evaluate: 4.3,
-        price: 15
-      },
-      {
-        icon: require("./img/u42.png"),
-        name: "优思健身工作室(前海店3)",
-        distance: "234m",
-        lession: "瑜伽健身",
-        addr: "深南大道与前海教会处振业星海商业广场3101A",
-        evaluate: 4.3,
-        price: 15
-      },
-      {
-        icon: require("./img/u42.png"),
-        name: "优思健身工作室(前海店4)",
-        distance: "234m",
-        lession: "瑜伽健身",
-        addr: "深南大道与前海教会处振业星海商业广场3101A",
-        evaluate: 4.3,
-        price: 15
-      }
-    ];
+    const { dataSource, refreshing } = this.state;
     return (
       <View style={styles.list}>
         <FlatList
-          data={data}
+          data={dataSource}
+          onRefresh={this.onRefresh}
+          refreshing={refreshing}
           ListEmptyComponent={<Text>暂时没有数据哦</Text>}
           ItemSeparatorComponent={Height}
           renderItem={({ item }) => this.renderItem(item)}
-          keyExtractor={item => item.name}
+          keyExtractor={item => item.Id}
         />
         <ToggleButton />
       </View>
@@ -486,6 +489,7 @@ export default class Home extends Component {
   }
   renderListPattern() {
     const { tabActiveIndex } = this.state;
+    const { startDay, endDay } = this.store.daysInfo;
     return (
       <Page
         title="列表模式"
@@ -506,7 +510,18 @@ export default class Home extends Component {
         }
       >
         {this.renderHeader()}
-        {tabActiveIndex ? <TimeSlideChoose /> : null}
+        {!!tabActiveIndex && (
+          <TimeSlideChoose
+            startIndex={startDay}
+            endIndex={endDay}
+            onDayChange={({ startIndex, endIndex }) => {
+              Object.assign(this.store.daysInfo, {
+                startDay: startIndex,
+                endDay: endIndex
+              });
+            }}
+          />
+        )}
         {this.renderChoose()}
         {this.renderList()}
         {this.renderChooseModal()}

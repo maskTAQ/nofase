@@ -15,8 +15,9 @@ export default {
     return post("/User/GetExCode", { Tel }, { loading: false });
   },
   // 获取商家列表(列表模式)
-  getStoreList(params) {
-    return post("/User/GetStoreListBySeach", params);
+  getStoreList(params, { loading }) {
+    console.log(loading);
+    return post("/User/GetStoreListBySeach", params, { loading });
   },
   //获取用户信息
   getUserInfo() {
