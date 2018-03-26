@@ -32,6 +32,7 @@ export default {
     borderWidth: 1,
     borderColor: "#fff",
     zIndex: 1,
+    borderRadius: 8,
     backgroundColor: "#2fc2d9"
   },
   label: {

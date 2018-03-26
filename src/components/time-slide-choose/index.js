@@ -53,8 +53,18 @@ class Dragable {
     }
   }
   isCanMove(left) {
-    const { screen, buttonStyle } = this;
+    const { screen, buttonStyle, button, currentControlButton } = this;
     const pathwayMargin = 10;
+
+    if (currentControlButton === "start" && left > button.end.left) {
+      return false;
+    }
+    if (
+      currentControlButton === "end" &&
+      button.start.left > left - buttonStyle.width * 2
+    ) {
+      return false;
+    }
     //将拖动幅度限制在轨道内
     return (
       left > pathwayMargin + buttonStyle.width / 2 &&
