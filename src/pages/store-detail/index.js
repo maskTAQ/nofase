@@ -37,16 +37,21 @@ export default class StoreDetail extends Component {
   };
   componentWillMount() {
     Tip.loading();
+    const { Id } = this.props.navigation.state.params;
     Promise.all([
-      this.getStoreInfo(),
-      this.getDeviceInfo(),
-      this.getCurriculum()
-    ]).then(res => {
-      res.forEach(item => {
-        this.setState({ ...item });
+      this.getStoreInfo(Id),
+      this.getDeviceInfo(Id),
+      this.getCurriculum(Id)
+    ])
+      .then(res => {
+        res.forEach((item, i) => {
+          this.setState({ ...item });
+        });
+        Tip.dismiss();
+      })
+      .catch(e => {
+        console.log(e, "53");
       });
-      Tip.dismiss();
-    });
   }
   store = {
     tableColumns: [
@@ -86,15 +91,13 @@ export default class StoreDetail extends Component {
     ]
   };
 
-  getStoreInfo() {
-    const defaultStoreId = 1;
+  getStoreInfo(Id) {
     return api
       .getStoreInfo({
-        StoreId: defaultStoreId,
+        StoreId: Id,
         AdminId: 2
       })
       .then(res => {
-        console.log(res);
         return res;
       })
       .catch(e => {
@@ -102,11 +105,10 @@ export default class StoreDetail extends Component {
         return {};
       });
   }
-  getDeviceInfo() {
-    const defaultStoreId = 1;
+  getDeviceInfo(Id) {
     return api
       .getStoreEquip({
-        StoreId: defaultStoreId,
+        StoreId: Id,
         AdminId: 2
       })
       .then(res => {
@@ -117,14 +119,12 @@ export default class StoreDetail extends Component {
         return {};
       });
   }
-  getCurriculum() {
-    const defaultStoreId = 1;
+  getCurriculum(Id) {
     return api
       .getCurriculum({
-        StoreId: defaultStoreId
+        StoreId: Id
       })
       .then(res => {
-        console.log(res);
         return { timetable: res };
       })
       .catch(e => {
@@ -316,6 +316,7 @@ export default class StoreDetail extends Component {
     );
   }
   render() {
+    const { storeNum, currentIndex } = this.props.navigation.state.params;
     const { tableColumns } = this.store;
     const { BusinessTimes, BusinessWeeks, Charge, StoreTel } = this.state;
     const weeks = [
@@ -327,14 +328,16 @@ export default class StoreDetail extends Component {
       "星期五",
       "星期六"
     ];
-    const startWeek = weeks[BusinessWeeks[0]];
-    const endWeek = weeks[BusinessWeeks[BusinessWeeks.length - 1]];
+    const startWeek = BusinessWeeks ? weeks[BusinessWeeks[0]] : "暂无";
+    const endWeek = BusinessWeeks
+      ? weeks[BusinessWeeks[BusinessWeeks.length - 1]]
+      : "暂无";
     const { timetable } = this.state;
     return (
       <View style={styles.container}>
         <Header
           style={styles.statusBar}
-          title="1/31"
+          title={`${currentIndex + 1}/${storeNum}`}
           RightComponent={
             <Button>
               <Icon size={22} source={require("./img/u141.png")} />

@@ -150,9 +150,13 @@ export default class Home extends Component {
       });
     }
   }
-  goStoreDetail = () => {
+  goStoreDetail = (Id, i) => {
+    const { dataSource } = this.state;
     this.props.navigation.dispatch(
-      action.navigate.go({ routeName: "StoreDetail" })
+      action.navigate.go({
+        routeName: "StoreDetail",
+        params: { Id, storeNum: dataSource.length, currentIndex: i }
+      })
     );
   };
   renderMapPattern() {
@@ -418,7 +422,7 @@ export default class Home extends Component {
       </View>
     );
   }
-  renderItem(row) {
+  renderItem(row, i) {
     const icon = require("./img/u42.png");
     const {
       StoreName,
@@ -426,7 +430,8 @@ export default class Home extends Component {
       NowCurriculum,
       Address,
       evaluate = 4.3,
-      Charge
+      Charge,
+      Id
     } = row;
     return (
       <View style={styles.item}>
@@ -438,7 +443,10 @@ export default class Home extends Component {
               <Text style={styles.itemDistance}>
                 距离：{Distance.toFixed(0)}
               </Text>
-              <Button style={styles.lessionButton} onPress={this.goStoreDetail}>
+              <Button
+                style={styles.lessionButton}
+                onPress={() => this.goStoreDetail(Id, i)}
+              >
                 <Text style={styles.lessionText}>
                   课程：{NowCurriculum || "暂无课程"}
                 </Text>
@@ -480,7 +488,7 @@ export default class Home extends Component {
           refreshing={refreshing}
           ListEmptyComponent={<Text>暂时没有数据哦</Text>}
           ItemSeparatorComponent={Height}
-          renderItem={({ item }) => this.renderItem(item)}
+          renderItem={({ item, index }) => this.renderItem(item, index)}
           keyExtractor={item => item.Id}
         />
         <ToggleButton />
