@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { View, Text, FlatList, Image } from "react-native";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
 import action from "src/action";
 
+@connect(state => {
+  const { userInfo: { Money } } = state;
+  return { Money };
+})
 export default class Transacion extends Component {
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    Money: PropTypes.number
   };
   state = {};
   back = () => {
@@ -60,6 +66,7 @@ export default class Transacion extends Component {
     );
   }
   render() {
+    const { Money = "-" } = this.props;
     const tabMap = [
       ["今日消费", "25.5", 0],
       "border",
@@ -80,7 +87,7 @@ export default class Transacion extends Component {
           headerStyle={{ backgroundColor: "#fff" }}
           titleStyle={{ color: "#1ba0ea" }}
         >
-          <Text style={styles.Balance}>123</Text>
+          <Text style={styles.Balance}>{Money}</Text>
           <Text style={styles.titBalance}>(余额)</Text>
           <View style={styles.containers}>
             <View style={styles.tabContainer}>

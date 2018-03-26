@@ -1,13 +1,52 @@
 import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
+
+import api from "src/api";
 import { Page, Icon, Button } from "src/components";
 import styles from "./style";
 export default class Transacion extends Component {
   state = {
-    tabActiveIndex: 0
+    tabActiveIndex: 0,
+
+    data: {
+      consume: {
+        status: "init",
+        data: []
+      },
+      recharge: {
+        status: "init",
+        data: []
+      }
+    }
   };
+  componentWillMount() {
+    const { tabActiveIndex } = this.state;
+    this.changeTab(tabActiveIndex);
+  }
   changeTab(tabActiveIndex) {
+    const { consume, recharge } = this.state.data;
     this.setState({ tabActiveIndex });
+    if (tabActiveIndex === 0 && ["init", "error"].includes(consume.status)) {
+      api
+        .getUserOrderList({
+          PageIndex: 1,
+          PageNum: 20
+        })
+        .then(res => {
+          console.log(res);
+        });
+    }
+    if (tabActiveIndex === 1 && ["init", "error"].includes(recharge.status)) {
+      // api.getUserOrderList({
+      //   PageIndex:1,
+      //   PageNum:20
+      // })
+      // .then(res=>{
+      //   console.log(res)
+      // })
+      console.log("获取充值记录");
+    }
+    //getUserOrderList
   }
   renderItem(row) {
     const { type, time, sum } = row;

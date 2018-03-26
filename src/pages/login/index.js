@@ -52,7 +52,7 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <StatusBar
-          backgroundColor="#2629dd"
+          backgroundColor="#1a98e0"
           translucent={true}
           barStyle="light-content"
         />

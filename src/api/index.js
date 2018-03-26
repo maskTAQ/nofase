@@ -46,5 +46,9 @@ export default {
   //获取设备信息
   getStoreEquip(params) {
     return post("/Store/GetStoreEqui", params, { loading: false });
+  },
+  //获取用户消费信心
+  getUserOrderList(params) {
+    return post("/User/GetUserOrderList", params);
   }
 };
