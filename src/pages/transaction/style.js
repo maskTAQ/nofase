@@ -26,17 +26,7 @@ export default {
     width: "100%",
     height: "100%"
   },
-  tabContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    height: 60,
-    marginLeft: 10,
-    marginRight: 10,
-    paddingLeft: 40,
-    paddingRight: 40,
-    borderRadius: 10
-  },
+
   titBalance: {
     textAlign: "center",
     fontSize: 18,
@@ -49,14 +39,21 @@ export default {
     fontSize: 20,
     color: "#0399e7"
   },
-  tabItem: {
-    position: "relative",
-    flex: 1,
-    height: "100%",
-    justifyContent: "center",
+  consume: {
+    height: 60,
+    backgroundColor: "#fff",
+    margin: 10,
+    padding: 40,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center"
   },
-  Itemmoney: {
+  consumeLabel: {
+    color: "#0399e7",
+    fontSize: 20
+  },
+  consumeValue: {
     color: "#0399e7",
     fontSize: 20
   },

@@ -59,7 +59,12 @@ export default class Home extends Component {
       { label: "福田", value: 1 },
       { label: "罗湖", value: 2 },
       { label: "南山", value: 3 },
-      { label: "宝安", value: 4 }
+      { label: "宝安", value: 4 },
+      { label: "龙岗", value: 5 },
+      { label: "龙岗新区", value: 6 },
+      { label: "盐田", value: 7 },
+      { label: "南澳大鹏新区", value: 8 },
+      { label: "坪山新区", value: 9 }
     ],
     distance: [
       { label: "1km", value: 1 },
@@ -112,7 +117,6 @@ export default class Home extends Component {
         ...location
       });
     }
-    console.log(params, "参数");
     api
       .getStoreList(params, { loading })
       .then(res => {
@@ -276,7 +280,6 @@ export default class Home extends Component {
                   />
                 }
                 onChangeValue={v => {
-                  console.log(v, "[]");
                   this.setState({ distanceValue: v });
                 }}
               />
@@ -556,7 +559,7 @@ export default class Home extends Component {
                 distanceValue: 0
               });
             }
-            this.setState({ cityValue: v });
+            this.setState({ cityValue: v, isPickerVisible: false });
           }}
           onRequestClose={() => {
             this.setState({

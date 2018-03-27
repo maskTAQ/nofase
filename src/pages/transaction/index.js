@@ -8,13 +8,15 @@ import styles from "./style";
 import action from "src/action";
 
 @connect(state => {
-  const { userInfo: { Money } } = state;
-  return { Money };
+  console.log(state);
+  const { userInfo: { Money, PayMoney } } = state;
+  return { Money, PayMoney };
 })
 export default class Transacion extends Component {
   static propTypes = {
     navigation: PropTypes.object,
-    Money: PropTypes.number
+    Money: PropTypes.number,
+    PayMoney: PropTypes.number
   };
   state = {};
   back = () => {
@@ -66,12 +68,8 @@ export default class Transacion extends Component {
     );
   }
   render() {
-    const { Money = "-" } = this.props;
-    const tabMap = [
-      ["今日消费", "25.5", 0],
-      "border",
-      ["当前押金", "60.00", 1]
-    ];
+    const { Money = "-", PayMoney = "-" } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.bgContainer}>
@@ -90,20 +88,9 @@ export default class Transacion extends Component {
           <Text style={styles.Balance}>{Money}</Text>
           <Text style={styles.titBalance}>(余额)</Text>
           <View style={styles.containers}>
-            <View style={styles.tabContainer}>
-              {tabMap.map(tab => {
-                if (tab === "border") {
-                  return <View style={styles.tabItemBorder} key="border" />;
-                }
-                const [label, money] = tab;
-                return (
-                  <View style={styles.tabItem} key={label}>
-                    <Text style={styles.Itemmoney}>{money}</Text>
-
-                    <Text style={{ color: "#0399e7" }}>{label}</Text>
-                  </View>
-                );
-              })}
+            <View style={styles.consume}>
+              <Text style={styles.consumeLabel}>今日消费</Text>
+              <Text style={styles.consumeValue}>{PayMoney}元</Text>
             </View>
             {this.renderList()}
           </View>

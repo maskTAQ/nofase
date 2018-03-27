@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { WebView, Alert } from "react-native";
+import { WebView } from "react-native";
 
 // const html = `
 // <!doctype html>
@@ -104,7 +104,9 @@ export default class Map extends Component {
   state = {};
   render() {
     //发送消息给 html
-    //this.webview.postMessage('1333')
+    // setTimeout(()=>{
+    //   this.webview.postMessage('1333')
+    // },10000)
 
     /* eslint-disable */
     const patchPostMessageFunction = function() {
@@ -128,28 +130,13 @@ export default class Map extends Component {
       "(" + String(patchPostMessageFunction) + ")();";
     return (
       <WebView
-        source={{ uri: "http://127.0.0.1:5500/index.html" }}
+        source={{
+          uri: "http://101.200.196.202:8888/html/html/html/map/index.html"
+        }}
         ref={w => (this.webview = w)}
         style={{ flex: 1 }}
         injectedJavaScript={patchPostMessageJsCode}
         onMessage={e => {
-          Alert.alert(
-            "Alert Title",
-            e.nativeEvent.data,
-            [
-              {
-                text: "Ask me later",
-                onPress: () => console.log("Ask me later pressed")
-              },
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel"
-              },
-              { text: "OK", onPress: () => console.log("OK Pressed") }
-            ],
-            { cancelable: false }
-          );
           console.log(e.nativeEvent.data, "这是html发送过来的消息");
         }}
       />
