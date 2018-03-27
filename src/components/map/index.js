@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { WebView } from "react-native";
+import { WebView, Alert } from "react-native";
 
 // const html = `
 // <!doctype html>
@@ -133,6 +133,23 @@ export default class Map extends Component {
         style={{ flex: 1 }}
         injectedJavaScript={patchPostMessageJsCode}
         onMessage={e => {
+          Alert.alert(
+            "Alert Title",
+            e.nativeEvent.data,
+            [
+              {
+                text: "Ask me later",
+                onPress: () => console.log("Ask me later pressed")
+              },
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ],
+            { cancelable: false }
+          );
           console.log(e.nativeEvent.data, "这是html发送过来的消息");
         }}
       />
