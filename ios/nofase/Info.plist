@@ -52,5 +52,11 @@
 			</dict>
 		</dict>
 	</dict>
+  <!-- 允许访问资源 -->
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>
 </dict>
 </plist>

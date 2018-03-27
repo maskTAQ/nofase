@@ -18,6 +18,8 @@ import {
   Activity
 } from "src/pages";
 
+import { Map } from "src/components";
+
 import { TimeSlideChoose } from "src/components";
 export const RouteConfigs = {
   Login: {
@@ -67,6 +69,9 @@ export const RouteConfigs = {
   },
   Activity: {
     screen: Activity
+  },
+  Map: {
+    screen: Map
   }
 };
 

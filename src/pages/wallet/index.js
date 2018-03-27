@@ -24,8 +24,12 @@ export default class Transacion extends Component {
     this.changeTab(tabActiveIndex);
   }
   changeTab(tabActiveIndex) {
-    const { consume, recharge } = this.state.data;
     this.setState({ tabActiveIndex });
+    this.getData(tabActiveIndex);
+    //getUserOrderList
+  }
+  getData(tabActiveIndex) {
+    const { consume, recharge } = this.state.data;
     if (tabActiveIndex === 0 && ["init", "error"].includes(consume.status)) {
       api
         .getUserOrderList({
@@ -46,7 +50,6 @@ export default class Transacion extends Component {
       // })
       console.log("获取充值记录");
     }
-    //getUserOrderList
   }
   renderItem(row) {
     const { type, time, sum } = row;

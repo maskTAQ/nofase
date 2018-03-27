@@ -17,7 +17,8 @@ import {
   StarScore,
   TimeSlideChoose,
   CheckBox,
-  Map
+  Map,
+  Picker
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
@@ -35,6 +36,7 @@ export default class Home extends Component {
     StoreName: "",
 
     dataSource: [],
+    isPickerVisible: false,
 
     startDay: 0,
     endDay: 4,
@@ -496,7 +498,8 @@ export default class Home extends Component {
     );
   }
   renderListPattern() {
-    const { tabActiveIndex } = this.state;
+    const { tabActiveIndex, cityValue, isPickerVisible } = this.state;
+    const { city } = this.store;
     const { startDay, endDay } = this.store.daysInfo;
     return (
       <Page
@@ -511,8 +514,15 @@ export default class Home extends Component {
           </Button>
         }
         RightComponent={
-          <Button style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ color: "#fff" }}>罗湖区</Text>
+          <Button
+            onPress={() => {
+              this.setState({
+                isPickerVisible: !isPickerVisible
+              });
+            }}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
+            <Text style={{ color: "#fff" }}>{city[cityValue].label}</Text>
             <Icon size={20} source={require("./img/u305.png")} />
           </Button>
         }
@@ -533,6 +543,27 @@ export default class Home extends Component {
         {this.renderChoose()}
         {this.renderList()}
         {this.renderChooseModal()}
+        <Picker
+          visible={isPickerVisible}
+          data={city}
+          onValueSelect={v => {
+            if (v !== 0) {
+              this.setState({
+                distanceValue: "全城"
+              });
+            } else {
+              this.setState({
+                distanceValue: 0
+              });
+            }
+            this.setState({ cityValue: v });
+          }}
+          onRequestClose={() => {
+            this.setState({
+              isPickerVisible: false
+            });
+          }}
+        />
       </Page>
     );
   }
