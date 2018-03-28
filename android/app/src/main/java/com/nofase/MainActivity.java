@@ -12,4 +12,23 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "nofase";
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ShareModule.initActivity(this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 解决内存泄漏问题
+        UMShareAPI.get(this).release();
+    }
 }
