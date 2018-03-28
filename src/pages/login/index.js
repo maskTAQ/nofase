@@ -8,7 +8,7 @@ import { Input, Button, ShareModal, CodeButton } from "src/components";
 import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
-
+import { login } from "src/common/share";
 @connect()
 export default class Login extends Component {
   static propTypes = {
@@ -46,6 +46,16 @@ export default class Login extends Component {
     this.props.navigation.dispatch(
       action.navigate.go({ routeName: "Register" })
     );
+  };
+  wxLogin = () => {
+    login("WECHAT")
+      .then(res => {
+        Tip.success(res);
+      })
+      .catch(e => {
+        console.log(e);
+        Tip.fail(e);
+      });
   };
   render() {
     const { phone, code } = this.state;
@@ -121,7 +131,7 @@ export default class Login extends Component {
         />
         <View style={styles.relevancechar}>
           <Text style={styles.relevanceText}>关联登录</Text>
-          <Button textStyle={styles.registerText}>
+          <Button onPress={this.wxLogin} textStyle={styles.registerText}>
             <Image
               source={require("src/images/login/wechat.png")}
               style={styles.charImg}
