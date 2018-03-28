@@ -48,6 +48,7 @@ export default class Login extends Component {
     );
   };
   wxLogin = () => {
+    console.log(11);
     login("WECHAT")
       .then(res => {
         Tip.success(res);

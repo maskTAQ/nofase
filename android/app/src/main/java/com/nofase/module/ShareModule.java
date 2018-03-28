@@ -10,8 +10,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.d3o.R;
-import com.d3o.sharemodule.utils.BitMapUtil;
+// import com.d3o.R;
+// import com.d3o.sharemodule.utils.BitMapUtil;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -60,45 +60,45 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
     /**
      * 分享手机本地图片
      */
-    @ReactMethod
-    public void shareImg(String imgPath, final int platform, final Callback resultCallback) {
+    // @ReactMethod
+    // public void shareImg(String imgPath, final int platform, final Callback resultCallback) {
 
-        final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
-        if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
-            Bitmap img = BitmapFactory.decodeFile(BitMapUtil.getImageAbsolutePath(mActivity, Uri.parse(imgPath)));
-            final UMImage image = new UMImage(mActivity, BitMapUtil.ImageCompress(img));
-            runOnMainThread(new Runnable() {
-                @Override
-                public void run() {
-                    new ShareAction(mActivity)
-                    .setPlatform(sharePlatform)
-                    .withMedia(image)
-                    .setCallback(new UMShareListener() {
-                        @Override
-                        public void onStart(SHARE_MEDIA share_media) {
-                            //分享开始的回调
-                        }
+    //     final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
+    //     if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
+    //         Bitmap img = BitmapFactory.decodeFile(BitMapUtil.getImageAbsolutePath(mActivity, Uri.parse(imgPath)));
+    //         final UMImage image = new UMImage(mActivity, BitMapUtil.ImageCompress(img));
+    //         runOnMainThread(new Runnable() {
+    //             @Override
+    //             public void run() {
+    //                 new ShareAction(mActivity)
+    //                 .setPlatform(sharePlatform)
+    //                 .withMedia(image)
+    //                 .setCallback(new UMShareListener() {
+    //                     @Override
+    //                     public void onStart(SHARE_MEDIA share_media) {
+    //                         //分享开始的回调
+    //                     }
 
-                        @Override
-                        public void onResult(SHARE_MEDIA share_media) {
-                            resultCallback.invoke("分享成功");
-                        }
+    //                     @Override
+    //                     public void onResult(SHARE_MEDIA share_media) {
+    //                         resultCallback.invoke("分享成功");
+    //                     }
 
-                        @Override
-                        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                            resultCallback.invoke("分享失败：" + throwable.getMessage());
-                        }
+    //                     @Override
+    //                     public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+    //                         resultCallback.invoke("分享失败：" + throwable.getMessage());
+    //                     }
 
-                        @Override
-                        public void onCancel(SHARE_MEDIA share_media) {
-                            resultCallback.invoke("取消分享");
-                        }
-                    })
-                    .share();
-                }
-            });
-        }
-    }
+    //                     @Override
+    //                     public void onCancel(SHARE_MEDIA share_media) {
+    //                         resultCallback.invoke("取消分享");
+    //                     }
+    //                 })
+    //                 .share();
+    //             }
+    //         });
+    //     }
+    // }
 
     /**
      * 分享drawable图片

@@ -45,18 +45,18 @@ export default class Home extends Component {
   };
   componentWillMount() {
     console.log(NativeModules.sharemodule);
-    NativeModules.sharemodule.share(
-      "标题",
-      "内容",
-      "http://baidu.com",
-      "http://dev.umeng.com/images/tab2_1.png",
-      0,
-      message => {
-        console.log(message);
-        // message:分享成功、分享失败、取消分享
-        // ToastAndroid.show(message,ToastAndroid.SHORT);
-      }
-    );
+    // NativeModules.sharemodule.share(
+    //   "标题",
+    //   "内容",
+    //   "http://baidu.com",
+    //   "http://dev.umeng.com/images/tab2_1.png",
+    //   0,
+    //   message => {
+    //     console.log(message);
+    //     // message:分享成功、分享失败、取消分享
+    //     // ToastAndroid.show(message,ToastAndroid.SHORT);
+    //   }
+    // );
     this.search(true);
   }
   store = {

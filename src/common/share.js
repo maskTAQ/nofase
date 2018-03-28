@@ -24,6 +24,7 @@ const share = ({ title, content, url, imgSrc, platform }) => {
       imgSrc,
       SharePlatform[platform],
       message => {
+        console.log(message);
         if (message === "分享成功") {
           resolve(message);
         } else {
