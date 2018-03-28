@@ -254,7 +254,7 @@ export default class Home extends Component {
                       distanceValue: 0
                     });
                   }
-                  this.setState({ cityValue: v });
+                  this.setState({ cityValue: v, chooseTabActiveIndex: NaN });
                 }}
               />
             </View>
@@ -309,7 +309,10 @@ export default class Home extends Component {
                 />
               }
               onChangeValue={v => {
-                this.setState({ chooseTypeValue: v });
+                this.setState({
+                  chooseTypeValue: v,
+                  chooseTabActiveIndex: NaN
+                });
               }}
             />
           </View>
@@ -317,7 +320,9 @@ export default class Home extends Component {
     }
   }
   renderChoose() {
-    const { chooseTabActiveIndex } = this.state;
+    const { chooseTabActiveIndex, cityValue, chooseTypeValue } = this.state;
+    const { city, chooseType } = this.store;
+
     const changeChooseTabActiveIndex = i => {
       if (i === chooseTabActiveIndex) {
         return this.setState({
@@ -330,12 +335,12 @@ export default class Home extends Component {
     };
     const buttonMap = [
       {
-        label: "附近",
+        label: city[cityValue].label,
         onPress: changeChooseTabActiveIndex
       },
       "border",
       {
-        label: "离我最近",
+        label: chooseType[chooseTypeValue].label,
         onPress: changeChooseTabActiveIndex
       }
     ];
