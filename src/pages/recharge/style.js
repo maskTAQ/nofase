@@ -93,5 +93,13 @@ export default {
   itemValue: {
     color: "#333333",
     lineHeight: 35
+  },
+  rechargeButton: {
+    marginTop: 15,
+    height: 40,
+    borderRadius: 6,
+    backgroundColor: "#1b9de6",
+    justifyContent: "center",
+    alignItems: "center"
   }
 };

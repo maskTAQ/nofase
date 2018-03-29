@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, NativeModules } from "react-native";
+import { Text, View, FlatList } from "react-native";
 import PropTypes from "prop-types";
 
 import api from "src/api";
@@ -44,20 +44,7 @@ export default class Home extends Component {
     refreshing: true
   };
   componentWillMount() {
-    console.log(NativeModules.sharemodule);
-    // NativeModules.sharemodule.share(
-    //   "标题",
-    //   "内容",
-    //   "http://baidu.com",
-    //   "http://dev.umeng.com/images/tab2_1.png",
-    //   0,
-    //   message => {
-    //     console.log(message);
-    //     // message:分享成功、分享失败、取消分享
-    //     // ToastAndroid.show(message,ToastAndroid.SHORT);
-    //   }
-    // );
-    this.search(true);
+    this.search();
   }
   store = {
     chooseType: [
@@ -92,9 +79,9 @@ export default class Home extends Component {
     }
   };
   onRefresh = () => {
-    this.search(false);
+    this.search();
   };
-  search = async (loading = false) => {
+  search = async () => {
     this.setState({ refreshing: true });
     const location = await this.getCurrentPosition();
     const {
@@ -131,7 +118,7 @@ export default class Home extends Component {
       });
     }
     api
-      .getStoreList(params, { loading })
+      .getStoreList(params)
       .then(res => {
         this.setState({
           dataSource: res

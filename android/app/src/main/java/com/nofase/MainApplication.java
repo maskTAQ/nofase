@@ -9,6 +9,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import com.nofase.module.SharePackage;
+import com.nofase.alipay.AlipayPackage;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -28,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new SharePackage()
+          new SharePackage(),
+          new AlipayPackage()
       );
     }
 

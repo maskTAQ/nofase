@@ -9,15 +9,15 @@ import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
 import { login } from "src/common/share";
-import { Alipay } from "src/common/pay";
+
 @connect()
 export default class Login extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
   state = {
-    phone: "13696526122",
-    code: "13"
+    phone: "",
+    code: ""
   };
   handleValueChange(type, value) {
     this.setState({
@@ -60,7 +60,6 @@ export default class Login extends Component {
       });
   };
   render() {
-    console.log(Alipay());
     const { phone, code } = this.state;
     return (
       <View style={styles.container}>

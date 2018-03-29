@@ -3,7 +3,8 @@ import { View, Text } from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
-import { Input, Icon, CheckBox, Page } from "src/components";
+import { Input, Icon, CheckBox, Page, Button } from "src/components";
+import { Alipay } from "src/common/pay";
 export default class Recharge extends Component {
   static defaultProps = {
     balance: -45.5,
@@ -60,7 +61,12 @@ export default class Recharge extends Component {
             <Input
               style={styles.input}
               value={String(recharge)}
-              onChangeText={v => this.setState({ recharge: v })}
+              onChangeText={v => {
+                this.setState({ recharge: v });
+                if (v === 1) {
+                  Alipay();
+                }
+              }}
             />
             <View style={styles.inputLabelWrapper}>
               <Text style={styles.inputLabel}>元</Text>
@@ -78,6 +84,14 @@ export default class Recharge extends Component {
           ItemSeparatorComponent={this.renderBorder()}
           style={styles.checkbox}
         />
+        <Button
+          onPress={() => {
+            Alipay();
+          }}
+          style={styles.rechargeButton}
+        >
+          充值
+        </Button>
       </View>
     );
   }

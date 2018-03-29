@@ -12,7 +12,7 @@ export default class Pay extends Component {
   static defaultProps = {
     startTime: "08:27",
     endTime: "10:21",
-    step: 2 //0 未开始 1开始 2结束
+    step: 0 //0 未开始 1开始 2结束
   };
   static propTypes = {
     startTime: PropTypes.string,
