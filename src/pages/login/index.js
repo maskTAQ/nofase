@@ -9,6 +9,7 @@ import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
 import { login } from "src/common/share";
+import { Alipay } from "src/common/pay";
 @connect()
 export default class Login extends Component {
   static propTypes = {
@@ -59,6 +60,7 @@ export default class Login extends Component {
       });
   };
   render() {
+    console.log(Alipay());
     const { phone, code } = this.state;
     return (
       <View style={styles.container}>
