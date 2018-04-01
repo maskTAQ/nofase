@@ -28,19 +28,19 @@ class App extends Component {
     //监听dispatch事件 由onDispatch统一发送action
     AsyncStorage.getItem('mobile', (e, m) => {
       if (!e && m) {
-        api.rememberLogin({ Tel: m })
-          .then(res => {
-            console.log(res)
-            this.props.dispatch(
-              action.login(res)
-            );
-            this.props.dispatch(
-              action.navigate.go({ routeName: "Home" })
-            );
-          })
-          .catch(e => {
+        // api.rememberLogin({ Tel: m })
+        //   .then(res => {
+        //     console.log(res)
+        //     this.props.dispatch(
+        //       action.login(res)
+        //     );
+        //     this.props.dispatch(
+        //       action.navigate.go({ routeName: "Home" })
+        //     );
+        //   })
+        //   .catch(e => {
 
-          })
+        //   })
       }
     })
   }

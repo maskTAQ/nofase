@@ -97,8 +97,16 @@ export default class Pay extends Component {
               ["Per hour", "每一小时"],
               ["Cost", "￥:10.00元"]
             ])}
+
             <View style={styles.QR}>
-              <Image source={require("./img/u12.png")} style={styles.QRImg} />
+              <Icon
+                source={{
+                  uri: `http://qr.liantu.com/api.php?text=${JSON.stringify({
+                    UserId: 1
+                  })}`
+                }}
+                size={300}
+              />
             </View>
           </View>
         );
