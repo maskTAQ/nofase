@@ -15,7 +15,9 @@ const ShareModal = ({
   onlinePeople,
   addr,
   isVisible,
-  hasShareButton = true
+  hasShareButton = true,
+  money,
+  share
 }) => {
   return (
     <Alert isVisible={isVisible} close={close}>
@@ -47,7 +49,7 @@ const ShareModal = ({
               <View style={styles.centerBorder} />
               <View style={styles.centerItem}>
                 <View style={styles.centerItemValueWrapper}>
-                  <Text style={styles.centerItemValue}>{time}</Text>
+                  <Text style={styles.centerItemValue}>{money}</Text>
                   <Text style={styles.Discount}>折扣{discount}元</Text>
                 </View>
                 <Text style={styles.centerItemLabel}>消费金额</Text>
@@ -72,7 +74,11 @@ const ShareModal = ({
           </View>
         </View>
         {hasShareButton ? (
-          <Button style={styles.share} textStyle={styles.shareText}>
+          <Button
+            onPress={share}
+            style={styles.share}
+            textStyle={styles.shareText}
+          >
             能量分享
           </Button>
         ) : null}
@@ -91,6 +97,8 @@ ShareModal.propTypes = {
   onlinePeople: PropTypes.number,
   addr: PropTypes.string,
   hasShareButton: PropTypes.bool,
-  isVisible: PropTypes.bool
+  isVisible: PropTypes.bool,
+  money: PropTypes.number,
+  share: PropTypes.func
 };
 export default ShareModal;

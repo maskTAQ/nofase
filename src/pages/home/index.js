@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import api from "src/api";
-//import { Tip } from "src/common";
+import { WebSocket, Tip } from "src/common";
 import action from "src/action";
 import styles from "./style";
 
@@ -22,9 +23,15 @@ import {
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
+
+@connect(state => {
+  const { auth: { UserId } } = state;
+  return { UserId };
+})
 export default class Home extends Component {
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    UserId: PropTypes.number
   };
   state = {
     pattern: "list", //['map','list']
@@ -45,6 +52,7 @@ export default class Home extends Component {
   };
   componentWillMount() {
     this.search();
+    this.linkSocket();
   }
   store = {
     chooseType: [
@@ -77,6 +85,18 @@ export default class Home extends Component {
       startDay: 0,
       endDay: 5
     }
+  };
+  linkSocket = () => {
+    const { UserId } = this.props;
+    WebSocket.result(UserId)
+      .then(res => {
+        // this.props.navigation.dispatch(
+        //   action.navigate.go({ routeName: "Pay" })
+        // );
+      })
+      .catch(e => {
+        Tip.fail("连接商家失败");
+      });
   };
   onRefresh = () => {
     this.search();

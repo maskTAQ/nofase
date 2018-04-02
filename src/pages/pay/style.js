@@ -2,10 +2,13 @@ const mainColor = "#1a9bfc";
 export default {
   container: {
     flex: 1,
-
-    padding: 30,
-    paddingBottom: 50,
+    position: "relative",
     backgroundColor: "#1b9de6"
+  },
+  box: {
+    flex: 1,
+    padding: 30,
+    paddingBottom: 50
   },
   content: {
     flex: 1,
@@ -42,9 +45,22 @@ export default {
     fontSize: 18,
     color: mainColor
   },
+  storeInfo: {
+    height: 40,
+    paddingLeft: 40,
+    paddingRight: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  storeName: {
+    fontSize: 16,
+    color: mainColor
+  },
   timeCount: {
-    marginTop: 10,
-    marginBottom: 10,
+    height: 36,
+    lineHeight: 36,
+    justifyContent: "center",
     paddingLeft: 20,
     fontSize: 14,
     fontWeight: "bold",
@@ -131,5 +147,24 @@ export default {
   },
   itemBorderIcon: {
     width: "100%"
+  },
+  shareBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    width: "100%",
+    height: 70,
+    backgroundColor: "#fff"
+  },
+  shareBarItem: {
+    flex: 1,
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  shareBarItemLabel: {
+    fontSize: 14,
+    color: mainColor
   }
 };

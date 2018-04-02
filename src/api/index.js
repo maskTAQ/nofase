@@ -49,5 +49,13 @@ export default {
   //获取用户消费信心
   getUserOrderList(params) {
     return post("/User/GetUserOrderList", params);
+  },
+  //完成订单
+  completeOrder({ OrderId, CardId, Score }) {
+    return post("/User/SettlementOrder", { OrderId, CardId, Score });
+  },
+  //获取用户订单状态
+  getOrderStatus() {
+    return post("/User/GetUserOrderFlag");
   }
 };

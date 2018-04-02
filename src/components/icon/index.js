@@ -14,7 +14,7 @@ const Icon = ({ size, source, style = {}, iconStyle = {} }) => {
 };
 Icon.propTypes = {
   size: PropTypes.number,
-  source: PropTypes.number,
+  source: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   iconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
