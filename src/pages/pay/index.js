@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 
-import { Page, Button, Icon, StarScore } from "src/components";
+import { Page, Button, Icon, StarScore, ShareModal } from "src/components";
 import action from "src/action";
 import { connect } from "react-redux";
 import styles from "./style";
@@ -12,7 +12,7 @@ export default class Pay extends Component {
   static defaultProps = {
     startTime: "08:27",
     endTime: "10:21",
-    step: 0 //0 未开始 1开始 2结束
+    step: 1 //0 未开始 1开始 2结束
   };
   static propTypes = {
     startTime: PropTypes.string,
@@ -45,7 +45,7 @@ export default class Pay extends Component {
           <View style={styles.headerItemWrapper}>
             <View style={styles.headerItem}>
               <Text style={styles.headerItemLabel}>结束时间</Text>
-              <Text style={styles.headerItemValue}>{data[step][0]}</Text>
+              <Text style={styles.headerItemValue}>{data[step][1]}</Text>
             </View>
           </View>
         </View>
@@ -74,6 +74,32 @@ export default class Pay extends Component {
             <View style={styles.tItemValueWrapper}>
               <Text style={styles.tItemValue}>{data[1][1]}</Text>
             </View>
+          </View>
+        </View>
+        <View style={styles.itemBorder}>
+          <Image
+            source={require("./img/u14_line.png")}
+            style={styles.itemBorderIcon}
+          />
+        </View>
+      </View>
+    );
+  }
+  renderDiscountsChunk(data) {
+    return (
+      <View style={styles.tWrapper}>
+        <View style={styles.t}>
+          <View style={styles.tItem}>
+            <Text style={styles.tItemLabel}>{data[0][0]}</Text>
+            <View style={styles.tItemValueWrapper}>
+              <Text style={styles.tItemValue}>{data[0][1]}</Text>
+            </View>
+          </View>
+          <View style={[styles.tItem, { alignItems: "flex-end" }]}>
+            <Text style={styles.tItemLabel}>{data[1][0]}</Text>
+            <Button style={styles.tItemValueWrapper}>
+              <Text style={styles.tItemValue}>{data[1][1]}</Text>
+            </Button>
           </View>
         </View>
         <View style={styles.itemBorder}>
@@ -118,12 +144,19 @@ export default class Pay extends Component {
               ["Per hour", "每一小时"],
               ["Cost", "￥:10.00元"]
             ])}
-            {this.renderCommon([
+            {this.renderDiscountsChunk([
               ["Discount", "优惠选择"],
               ["Choice", "单次抵现1.2元"]
             ])}
             <View style={styles.QR}>
-              <Image source={require("./img/u12.png")} style={styles.QRImg} />
+              <Icon
+                source={{
+                  uri: `http://qr.liantu.com/api.php?text=${JSON.stringify({
+                    UserId: 1
+                  })}`
+                }}
+                size={200}
+              />
             </View>
           </View>
         );
@@ -181,6 +214,23 @@ export default class Pay extends Component {
           {this.renderContent()}
           <View style={styles.chunk} />
         </View>
+        <ShareModal
+          isVisible={false}
+          username="上都牧人"
+          time="01:48:08"
+          sum={32.0}
+          discount={8}
+          storeName="海里恩健身俱乐部"
+          onlinePeople={20}
+          addr="深南大道与前海教会处振业星海商业广场31"
+          close={() => {
+            this.setState({
+              isShareModalVisible: false
+            });
+          }}
+        >
+          <Text>12</Text>
+        </ShareModal>
       </Page>
     );
   }
