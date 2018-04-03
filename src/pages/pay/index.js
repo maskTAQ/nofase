@@ -53,28 +53,30 @@ export default class Pay extends Component {
     tickts: "",
     OrderId: "",
     isShareModalVisible: false,
-    isShareBarVisible: false
+    isShareBarVisible: false,
+    //优惠列表
+    discountList: []
   };
   componentWillMount() {
-    api.getOrderStatus().then(res => {
-      console.log(res);
+    this.getPrevOrder().then(() => {
+      const { hasData } = this.props.userInfo;
+      if (!hasData) {
+        this.props
+          .dispatch({
+            type: "userInfo",
+            api: () => {
+              return api.getUserInfo();
+            },
+            promise: true
+          })
+          .catch(e => {
+            Tip.loading("获取用户信息失败");
+          });
+      }
+      this.getDiscountList();
     });
-    const { hasData } = this.props.userInfo;
-    if (!hasData) {
-      this.props
-        .dispatch({
-          type: "userInfo",
-          api: () => {
-            return api.getUserInfo();
-          },
-          promise: true
-        })
-        .catch(e => {
-          Tip.loading("获取用户信息失败");
-        });
-    }
+
     WebSocket.addEventListenter(data => {
-      console.log(data);
       const { Money } = data;
       let { TimeStamp, ETimeStamp, STimeStamp } = data;
       TimeStamp = TimeStamp * 1000;
@@ -103,6 +105,44 @@ export default class Pay extends Component {
   }
   componentWillUnmount() {
     clearInterval(this.ticktTimer);
+  }
+  getPrevOrder() {
+    return api
+      .getOrderStatus()
+      .then(data => {
+        const TimeStamp = data.TimeStamp * 1000;
+        this.tickts(false, TimeStamp);
+        this.setState({
+          ...data,
+          STimeStamp: TimeStamp,
+          SDate: moment(TimeStamp).format("HH:mm"),
+          EDate: "",
+          ETimeStamp: ""
+        });
+        return Promise.resolve();
+      })
+      .catch(e => {
+        return Promise.resolve();
+      });
+  }
+  getDiscountList() {
+    api
+      .getDiscountList()
+      .then(res => {
+        const discountList = res.filter(({ isUse }) => isUse).map(item => {
+          const { CardName, Id } = item;
+          return {
+            value: Id,
+            label: CardName
+          };
+        });
+        this.setState({
+          discountList
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
   ticktTimer = NaN;
   tickts = (isEnd, STimeStamp) => {
@@ -427,7 +467,7 @@ export default class Pay extends Component {
       StoreName,
       StoreAddress,
       NowInPeople,
-      CardList
+      discountList
     } = this.state;
     const { NickName } = this.props.userInfo;
     return (
@@ -454,18 +494,24 @@ export default class Pay extends Component {
           {this.renderShareBar()}
         </View>
         <Picker
-          data={Object(
+          data={Object.assign(
             [
               {
                 value: NaN,
                 label: "暂无优惠"
               }
             ],
-            CardList
+            discountList
           )}
           visible={isPickerVisible}
           onRequestClose={() => {
             this.setState({
+              isPickerVisible: false
+            });
+          }}
+          onValueSelect={(v, item) => {
+            this.setState({
+              discountLabel: item.label,
               isPickerVisible: false
             });
           }}

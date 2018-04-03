@@ -56,6 +56,10 @@ export default {
   },
   //获取用户订单状态
   getOrderStatus() {
-    return post("/User/GetUserOrderFlag");
+    return post("/User/GetUsingOrder");
+  },
+  //获取优惠列表
+  getDiscountList() {
+    return post("/User/GetUserCardList");
   }
 };
