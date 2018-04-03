@@ -1,32 +1,47 @@
 import React, { Component } from "react";
-import { View, Text, Image, FlatList } from "react-native";
+import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
+import moment from "moment";
 
-import { Button, Icon, Page, ShareModal } from "src/components";
+import { Tip, share } from "src/common";
+import api from "src/api";
+import action from "src/action";
+import { Button, Icon, Page, ShareModal, DataView } from "src/components";
 import styles from "./style";
 
 export default class Fitnessrecord extends Component {
   static propTypes = {
-    demo: PropTypes.any
+    navigation: PropTypes.object
   };
   state = {
-    isShareModalVisible: false
+    isShareModalVisible: false,
+    //当前选中的订单
+    currentOrder: {},
+    isShareBarVisible: false
   };
+
+  getUserOrderList(PageIndex) {
+    return api.getUserOrderList({ PageIndex, PageNum: 20 });
+  }
   renderItem(row) {
-    const { type, price, time } = row;
+    const { StoreName, Amont = 0, SDate } = row;
+    const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
     return (
       <Button
         onPress={() => {
           this.setState({
-            isShareModalVisible: true
+            isShareModalVisible: true,
+            currentOrder: row
           });
         }}
         style={styles.item}
       >
         <View style={styles.itemLeft}>
-          <Text style={styles.itemTime}>{time}</Text>
+          <Text style={styles.itemTime}>
+            {moment(new Date(timestamp)).format("YYYY/MM/DD HH:mm")}
+          </Text>
           <Text style={styles.itemDetail}>
-            {type} | {" " + price}
+            {StoreName} | {" " + Amont}
           </Text>
         </View>
         <View style={styles.itemRight}>
@@ -40,69 +55,134 @@ export default class Fitnessrecord extends Component {
     );
   }
   renderList() {
-    const data = [
-      {
-        type: "1江南健身房（车公庙店）",
-        time: "2017-9-10 23:25",
-        price: "12.00元"
-      },
-      {
-        type: "2江南健身房（车公庙店）",
-        time: "2017-9-10 23:25",
-        price: "12.00元"
-      },
-      {
-        type: "3江南健身房（车公庙店）",
-        time: "2017-9-10 23:25",
-        price: "12.00元"
-      },
-      {
-        type: "4江南健身房（车公庙店）",
-        time: "2017-9-10 23:25",
-        price: "12.00元"
-      }
-    ];
     return (
-      <FlatList
+      <DataView
         style={styles.list}
+        getData={this.getUserOrderList}
+        ListEmptyComponent={<Text>暂时没有数据哦</Text>}
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-        keyExtractor={(item, index) => index}
-        data={data}
         renderItem={({ item }) => this.renderItem(item)}
       />
     );
   }
+  renderShareBar() {
+    const { isShareBarVisible } = this.state;
+    const data = [
+      {
+        icon: require("./img/u227.png"),
+        label: "微信",
+        platform: "WECHAT",
+        onPress: () => {}
+      },
+      {
+        icon: require("./img/u231.png"),
+        label: "朋友圈",
+        platform: "WECHATMOMENT",
+        onPress: () => {}
+      },
+      {
+        icon: require("./img/u229.png"),
+        label: "QQ",
+        platform: "QQ",
+        onPress: () => {}
+      },
+      {
+        icon: require("./img/u233.png"),
+        label: "QQ空间",
+        platform: "QQZONE",
+        onPress: () => {}
+      },
+      {
+        icon: require("./img/u235.png"),
+        label: "新浪微博",
+        platform: "SINA",
+        onPress: () => {}
+      }
+    ];
+    if (!isShareBarVisible) {
+      return null;
+    }
+    return (
+      <View style={styles.shareBar}>
+        {data.map(({ icon, label, platform }) => {
+          return (
+            <Button
+              onPress={() => {
+                share({
+                  title: "title",
+                  content: "xx",
+                  url: "https://www.baidu.com/img/bd_logo1.png",
+                  imgSrc: "https://www.baidu.com/img/bd_logo1.png",
+                  platform
+                })
+                  .then(res => {
+                    this.setState({ isShareBarVisible: false });
+                  })
+                  .catch(e => {
+                    Tip.fail(e);
+                    this.setState({ isShareBarVisible: false }, () => {
+                      this.props.navigation.dispatch(action.navigate.back());
+                    });
+                  });
+              }}
+              style={styles.shareBarItem}
+              key={label}
+            >
+              <Icon size={40} source={icon} />
+              <Text style={styles.shareBarItemLabel}>{label}</Text>
+            </Button>
+          );
+        })}
+      </View>
+    );
+  }
   render() {
-    const { isShareModalVisible } = this.state;
+    const { isShareModalVisible, currentOrder } = this.state;
+    const {
+      UserName,
+      StoreName,
+      TimeLong,
+      Amont,
+      StoreAddr = "-"
+    } = currentOrder;
     return (
       <Page title="健身记录">
         <View style={styles.contianer}>
-          <View>
-            <Image
-              source={require("./img/banner.png")}
-              style={styles.banner}
-              resizeMode="stretch"
-            />
+          <View style={styles.box}>
+            <View>
+              <Image
+                source={require("./img/banner.png")}
+                style={styles.banner}
+                resizeMode="stretch"
+              />
+            </View>
+            {this.renderList()}
+            {this.renderShareBar()}
+            <View />
+            <ShareModal
+              isVisible={isShareModalVisible}
+              username={UserName}
+              time={String(TimeLong)}
+              money={Amont}
+              discount={0}
+              storeName={StoreName}
+              onlinePeople={0}
+              addr={StoreAddr}
+              close={() => {
+                this.setState({
+                  isShareModalVisible: false
+                });
+              }}
+              share={() => {
+                this.setState({
+                  isShareModalVisible: false,
+                  isShareBarVisible: true
+                });
+              }}
+            >
+              <Text>12</Text>
+            </ShareModal>
           </View>
-          {this.renderList()}
-          <View />
-          <ShareModal
-            isVisible={isShareModalVisible}
-            username="上都牧人"
-            time="01:48:08"
-            sum={32.0}
-            discount={8}
-            storeName="海里恩健身俱乐部"
-            onlinePeople={20}
-            addr="深南大道与前海教会处振业星海商业广场31"
-            close={() => {
-              this.setState({
-                isShareModalVisible: false
-              });
-            }}
-          >
-            <Text>12</Text>
-          </ShareModal>
         </View>
       </Page>
     );

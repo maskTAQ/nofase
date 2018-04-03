@@ -46,9 +46,9 @@ export default {
   getStoreEquip(params) {
     return post("/Store/GetStoreEqui", params, { loading: false });
   },
-  //获取用户消费信心
+  //获取用户消费记录
   getUserOrderList(params) {
-    return post("/User/GetUserOrderList", params);
+    return post("/User/GetUserOrderList", params, { loading: false });
   },
   //完成订单
   completeOrder({ OrderId, CardId, Score }) {

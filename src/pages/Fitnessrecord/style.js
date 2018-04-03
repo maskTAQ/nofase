@@ -1,12 +1,14 @@
 export default {
   contianer: {
     flex: 1,
-
-    backgroundColor: "#a7daf7",
+    position: "relative",
+    backgroundColor: "#a7daf7"
+  },
+  box: {
+    flex: 1,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 20,
-    zIndex: -6
+    paddingTop: 20
   },
 
   banner: {
@@ -32,5 +34,25 @@ export default {
     flexDirection: "row",
     width: 50,
     justifyContent: "flex-end"
+  },
+
+  shareBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    width: "100%",
+    height: 70,
+    backgroundColor: "#fff"
+  },
+  shareBarItem: {
+    flex: 1,
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  shareBarItemLabel: {
+    fontSize: 14,
+    color: "#1a9bfc"
   }
 };

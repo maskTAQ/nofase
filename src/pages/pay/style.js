@@ -165,6 +165,6 @@ export default {
   },
   shareBarItemLabel: {
     fontSize: 14,
-    color: mainColor
+    color: "#1a9bfc"
   }
 };
