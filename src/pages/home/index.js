@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, FlatList } from "react-native";
+import { Text, View } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import api from "src/api";
 import { WebSocket, Tip } from "src/common";
+import { DataView } from "src/components";
 import action from "src/action";
 import styles from "./style";
 
@@ -42,16 +43,12 @@ export default class Home extends Component {
     distanceValue: 0,
     StoreName: "",
 
-    dataSource: [],
     isPickerVisible: false,
 
     startDay: 0,
-    endDay: 4,
-
-    refreshing: true
+    endDay: 4
   };
   componentWillMount() {
-    this.search();
     this.linkSocket();
   }
   store = {
@@ -98,11 +95,7 @@ export default class Home extends Component {
         Tip.fail("连接商家失败");
       });
   };
-  onRefresh = () => {
-    this.search();
-  };
-  search = async () => {
-    this.setState({ refreshing: true });
+  search = async PageIndex => {
     const location = await this.getCurrentPosition();
     const {
       distanceValue,
@@ -117,7 +110,7 @@ export default class Home extends Component {
         SeachValue: StoreName,
         UserArea: "",
         Range: distanceValue,
-        PageIndex: 1,
+        PageIndex,
         PageNum: 20,
         StoreOrder: chooseTypeValue,
         ...location
@@ -137,18 +130,9 @@ export default class Home extends Component {
         ...location
       });
     }
-    api
-      .getStoreList(params)
-      .then(res => {
-        this.setState({
-          dataSource: res
-        });
-        this.setState({ refreshing: false });
-      })
-      .catch(e => {
-        console.log(e);
-        this.setState({ refreshing: false });
-      });
+    return api.getStoreList(params).then(res => {
+      return res;
+    });
   };
   getCurrentPosition() {
     return new Promise((resolve, reject) => {
@@ -177,7 +161,7 @@ export default class Home extends Component {
     }
   }
   goStoreDetail = (Id, i) => {
-    const { dataSource } = this.state;
+    const { dataSource } = this.storeListRef.state;
     this.props.navigation.dispatch(
       action.navigate.go({
         routeName: "StoreDetail",
@@ -442,7 +426,9 @@ export default class Home extends Component {
             />
           </View>
           <Button
-            onPress={() => this.search()}
+            onPress={() => {
+              this.storeListRef.triggerRefresh();
+            }}
             style={styles.search}
             textStyle={styles.searchLabel}
           >
@@ -509,17 +495,14 @@ export default class Home extends Component {
     );
   }
   renderList() {
-    const { dataSource, refreshing } = this.state;
     return (
       <View style={styles.list}>
-        <FlatList
-          data={dataSource}
-          onRefresh={this.onRefresh}
-          refreshing={refreshing}
+        <DataView
+          ref={e => (this.storeListRef = e)}
+          getData={this.search}
           ListEmptyComponent={<Text>暂时没有数据哦</Text>}
           ItemSeparatorComponent={Height}
           renderItem={({ item, index }) => this.renderItem(item, index)}
-          keyExtractor={item => item.Id}
         />
         <ToggleButton />
       </View>
