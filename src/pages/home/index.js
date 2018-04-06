@@ -258,6 +258,7 @@ export default class Home extends Component {
                       distanceValue: 0
                     });
                   }
+
                   this.setState({ cityValue: v, chooseTabActiveIndex: NaN });
                 }}
               />
@@ -284,7 +285,10 @@ export default class Home extends Component {
                   />
                 }
                 onChangeValue={v => {
-                  this.setState({ distanceValue: v });
+                  this.setState({
+                    distanceValue: v,
+                    chooseTabActiveIndex: NaN
+                  });
                 }}
               />
             </View>
@@ -344,7 +348,7 @@ export default class Home extends Component {
       },
       "border",
       {
-        label: chooseType[chooseTypeValue].label,
+        label: chooseType[chooseTypeValue - 1].label,
         onPress: changeChooseTabActiveIndex
       }
     ];
@@ -451,7 +455,10 @@ export default class Home extends Component {
     } = row;
     return (
       <View style={styles.item}>
-        <View style={styles.itemTop}>
+        <Button
+          onPress={() => this.goStoreDetail(Id, i)}
+          style={styles.itemTop}
+        >
           <Icon size={82} source={icon} />
           <View style={styles.itemDetail}>
             <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
@@ -459,10 +466,7 @@ export default class Home extends Component {
               <Text style={styles.itemDistance}>
                 距离：{Distance.toFixed(0)}
               </Text>
-              <Button
-                style={styles.lessionButton}
-                onPress={() => this.goStoreDetail(Id, i)}
-              >
+              <Button style={styles.lessionButton}>
                 <Text style={styles.lessionText}>
                   课程：{NowCurriculum || "暂无课程"}
                 </Text>
@@ -479,7 +483,7 @@ export default class Home extends Component {
               </Button>
             </View>
           </View>
-        </View>
+        </Button>
         <View style={styles.itemBottom}>
           <Text style={styles.evaluateLabel}>评价:</Text>
           <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>

@@ -50,6 +50,7 @@ export default class StoreDetail extends Component {
         Tip.dismiss();
       })
       .catch(e => {
+        Tip.dismiss();
         console.log(e, "53");
       });
   }
@@ -112,7 +113,7 @@ export default class StoreDetail extends Component {
         AdminId: 2
       })
       .then(res => {
-        return res;
+        return res || {};
       })
       .catch(e => {
         console.log(e);
@@ -220,7 +221,7 @@ export default class StoreDetail extends Component {
     );
   }
   renderStarScore() {
-    const people = [1, 1, 1, 1, 1, 1, 1];
+    //const people = [1, 1, 1, 1, 1, 1, 1];
     return (
       <View
         style={{
@@ -241,14 +242,14 @@ export default class StoreDetail extends Component {
           currentScore={4.3}
           style={{ flex: 1, paddingLeft: 6 }}
         />
-        {people.map((item, i) => (
+        {/* people.map((item, i) => (
           <Icon
             size={20}
             source={require("./img/u171.png")}
             key={i}
             style={{ marginLeft: 4 }}
           />
-        ))}
+        )) */}
       </View>
     );
   }
@@ -318,7 +319,13 @@ export default class StoreDetail extends Component {
   render() {
     const { storeNum, currentIndex } = this.props.navigation.state.params;
     const { tableColumns } = this.store;
-    const { BusinessTimes, BusinessWeeks, Charge, StoreTel } = this.state;
+    const {
+      BusinessTimes,
+      BusinessWeeks,
+      Charge,
+      CsTel,
+      StoreRemarks
+    } = this.state;
     const weeks = [
       "星期日",
       "星期一",
@@ -380,10 +387,7 @@ export default class StoreDetail extends Component {
               >
                 商家留言：
               </Text>
-              <Text style={{ lineHeight: 20 }}>
-                {" "}
-                自幼曾攻经史，长成亦有权谋。恰如猛虎卧荒丘，潜伏爪牙忍受不幸刺文双颊，那堪配在江州。他年若得报冤仇，血染浔阳江口自幼曾攻经史，长成亦
-              </Text>
+              <Text style={{ lineHeight: 20 }}> {StoreRemarks}</Text>
             </View>
           </View>
           <Table columns={tableColumns} dataSource={timetable} />
@@ -400,7 +404,7 @@ export default class StoreDetail extends Component {
         >
           <Button
             onPress={() => {
-              Linking.openURL(`tel:${StoreTel}`);
+              Linking.openURL(`tel:${CsTel}`);
             }}
             style={{ paddingLeft: 6, alignItems: "center" }}
           >

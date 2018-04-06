@@ -21,7 +21,7 @@
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-//jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"jsbundle"];
+  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"index.ios" withExtension:@"bundle"];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"nofase"
@@ -36,7 +36,7 @@
   [self.window makeKeyAndVisible];
   
   /* 打开调试日志 */
-  [[UMSocialManager defaultManager] openLog:YES];
+  //[[UMSocialManager defaultManager] openLog:YES];
   
   /* 设置友盟appkey */
   [[UMSocialManager defaultManager] setUmSocialAppkey:@"5a73dea9b27b0a7f8f00018b"];
