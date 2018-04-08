@@ -169,6 +169,15 @@ export default class Home extends Component {
       })
     );
   };
+  navgation = data => {
+    const { Lat, Lng } = data;
+    this.props.navigation.dispatch(
+      action.navigate.go({
+        routeName: "Navigation",
+        params: { Lat, Lng }
+      })
+    );
+  };
   renderMapPattern() {
     return (
       <Page
@@ -478,7 +487,10 @@ export default class Home extends Component {
               <Text style={styles.itemAddr} numberOfLines={2}>
                 {Address || "暂无地址"}
               </Text>
-              <Button style={styles.navgationButton}>
+              <Button
+                onPress={() => this.navgation(row)}
+                style={styles.navgationButton}
+              >
                 <Icon size={16} source={require("./img/natvgation.png")} />
                 <Text style={styles.navgationText}>导航</Text>
               </Button>

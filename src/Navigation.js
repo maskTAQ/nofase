@@ -17,7 +17,8 @@ import {
   DiscountsCard,
   Activity,
   FeedbackProblem,
-  UpPortrait
+  UpPortrait,
+  Navigation
 } from "src/pages";
 
 import { Map } from "src/components";
@@ -80,6 +81,9 @@ export const RouteConfigs = {
   },
   UpPortrait: {
     screen: UpPortrait
+  },
+  Navigation: {
+    screen: Navigation
   }
 };
 
