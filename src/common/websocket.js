@@ -1,10 +1,9 @@
+import { wss } from "src/config";
 let fn = () => {};
 
 const result = UserId => {
   return new Promise((resolve, reject) => {
-    const ws = new WebSocket(
-      "ws://101.200.196.202:8888/SendMessageHandler.ashx"
-    );
+    const ws = new WebSocket(wss);
     ws.onopen = () => {
       console.log(UserId);
       ws.send(String(UserId)); // 注册服务
