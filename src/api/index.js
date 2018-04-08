@@ -1,9 +1,16 @@
 import { post } from "./base";
+import Axios from "axios";
 
 export default {
+  token() {
+    return Axios.request({
+      url: "http://47.104.131.96:8000/",
+      method: "get",
+      timeout: 60000
+    });
+  },
   login({ Tel, ExCode }) {
-    //http://101.200.196.202:8888/Admin/
-    return post("/User/UserLoginTest", { Tel, ExCode });
+    return post("/User/UserLogin", { Tel, ExCode });
   },
   rememberLogin({ Tel }) {
     return post("/User/UserLoginTest", { Tel });
@@ -50,6 +57,10 @@ export default {
   getUserOrderList(params) {
     return post("/User/GetUserOrderList", params, { loading: false });
   },
+  //获取充值记录 http://101.200.196.202:8888/User/GetRechargeList
+  getRechargeList(params) {
+    return post("/User/GetRechargeList", params, { loading: false });
+  },
   //完成订单
   completeOrder({ OrderId, CardId, Score }) {
     return post("/User/SettlementOrder", { OrderId, CardId, Score });
@@ -61,5 +72,9 @@ export default {
   //获取优惠列表
   getDiscountList() {
     return post("/User/GetUserCardList");
+  },
+  //获取充值记录 http://101.200.196.202:8888/User/GetRechargeList
+  getGetRechargeList(params) {
+    return post("/User/GetRechargeList", params, { loading: false });
   }
 };

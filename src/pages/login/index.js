@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import styles from "./style";
-import { Input, Button, ShareModal, CodeButton } from "src/components";
+import { Input, Button, CodeButton } from "src/components";
 import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
-import { login } from "src/common/share";
+//import { login } from "src/common/share";
 
 @connect()
 export default class Login extends Component {
@@ -49,15 +49,14 @@ export default class Login extends Component {
     );
   };
   wxLogin = () => {
-    console.log(11);
-    login("WECHAT")
-      .then(res => {
-        Tip.success(res);
-      })
-      .catch(e => {
-        console.log(e);
-        Tip.fail(e);
-      });
+    // login("WECHAT")
+    //   .then(res => {
+    //     Tip.success(res);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //     Tip.fail(e);
+    //   });
   };
   render() {
     const { phone, code } = this.state;
@@ -126,7 +125,8 @@ export default class Login extends Component {
             </Button>
           </View>
         </View>
-        <Image
+        {/*
+          <Image
           source={require("src/images/login/bg.png")}
           style={styles.bg}
           resizeMode="stretch"
@@ -140,19 +140,7 @@ export default class Login extends Component {
             />
           </Button>
         </View>
-        <ShareModal
-          isVisible={false}
-          username="上都牧人"
-          time="01:48:08"
-          sum={32.0}
-          discount={8}
-          storeName="海里恩健身俱乐部"
-          onlinePeople={20}
-          addr="深南大道与前海教会处振业星海商业广场31"
-          close={() => {}}
-        >
-          <Text>12</Text>
-        </ShareModal>
+        */}
       </View>
     );
   }

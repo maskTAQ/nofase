@@ -131,7 +131,7 @@ export default class Map extends Component {
     return (
       <WebView
         source={{
-          uri: "http://101.200.196.202:8888/html/html/html/map/index.html"
+          uri: "https://vmslq.cn/webview/map/index.html"
         }}
         ref={w => (this.webview = w)}
         style={{ flex: 1 }}

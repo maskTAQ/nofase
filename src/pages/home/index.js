@@ -446,10 +446,11 @@ export default class Home extends Component {
     const icon = require("./img/u42.png");
     const {
       StoreName,
+      NowPeopleNum,
       Distance,
+      StoreScore,
       NowCurriculum,
       Address,
-      evaluate = 4.3,
       Charge,
       Id
     } = row;
@@ -487,13 +488,13 @@ export default class Home extends Component {
         <View style={styles.itemBottom}>
           <Text style={styles.evaluateLabel}>评价:</Text>
           <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-            <StarScore operable={false} currentScore={evaluate} />
-            <Text style={styles.evaluateValue}>{evaluate}</Text>
+            <StarScore operable={false} currentScore={StoreScore} />
+            <Text style={styles.evaluateValue}>{StoreScore}</Text>
           </View>
           <Text style={styles.price}>{Charge || "0"}元/小时</Text>
         </View>
         <View style={styles.tagWrapper}>
-          <Text style={styles.tagText}>20人</Text>
+          <Text style={styles.tagText}>{NowPeopleNum}人</Text>
         </View>
       </View>
     );

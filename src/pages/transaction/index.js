@@ -42,12 +42,12 @@ export default class Transacion extends Component {
           );
         }
       },
-      {
-        type: "退押金/提现 (秒到)",
-        onPress: () => {
-          //this.props.navigation.dispatch(action.go('Recharge'));
-        }
-      },
+      // {
+      //   type: "退押金/提现 (秒到)",
+      //   onPress: () => {
+      //     //this.props.navigation.dispatch(action.go('Recharge'));
+      //   }
+      // },
       {
         type: " 钱包明细",
         onPress: () => {

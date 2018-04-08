@@ -20,6 +20,7 @@ export default {
   header: {
     position: "relative"
   },
+  portraitWrapper: {},
   headerBg: {
     position: "absolute",
     top: 0,

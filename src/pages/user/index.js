@@ -288,12 +288,54 @@ export default class User extends Component {
     isModifUserNameVisible: false,
     verifySetp: 0
   };
-  componentWillMount() {
+  componentWillMount = async () => {
     const { hasData } = this.props.userInfo;
     if (!["loading", true].includes(hasData)) {
       this.getUserInfo();
     }
-  }
+    const isRemind = await this.getRemind();
+    this.setState({
+      isRemind
+    });
+  };
+  getRemind = async () => {
+    const asyncGetRemind = () => {
+      return new Promise((resolve, reject) => {
+        AsyncStorage.getItem("isRemind", (e, result) => {
+          if (e) {
+            resolve(false);
+          } else {
+            if (result && result === "1") {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
+          }
+        });
+      });
+    };
+
+    const result = await asyncGetRemind();
+
+    return result;
+  };
+  setRemind = () => {
+    const { isRemind } = this.state;
+    Tip.loading();
+    AsyncStorage.setItem("isRemind", !isRemind ? "1" : "0", (e, result) => {
+      if (e) {
+        Tip.fail("设置失败");
+      } else {
+        setTimeout(() => {
+          this.setState({
+            isRemind: !isRemind
+          });
+          Tip.dismiss();
+        }, 1500);
+      }
+    });
+  };
+
   getUserInfo() {
     return this.props
       .dispatch({
@@ -341,7 +383,16 @@ export default class User extends Component {
             </Button>
           </View>
           <View style={styles.headerContent}>
-            <Icon size={60} source={portraitSource} />
+            <Button
+              style={styles.portraitWrapper}
+              onPress={() => {
+                this.props.navigation.dispatch(
+                  action.navigate.go({ routeName: "UpPortrait" })
+                );
+              }}
+            >
+              <Icon size={60} source={portraitSource} />
+            </Button>
             <View style={styles.headerContentRight}>
               <View style={styles.usernameWrapper}>
                 <Text style={styles.username}>{NickName}</Text>
@@ -418,7 +469,12 @@ export default class User extends Component {
               key={label}
             >
               <Text style={styles.itemLabel}>{label}</Text>
-              {hasSwitch ? <Switch /> : null}
+              {hasSwitch ? (
+                <Switch
+                  value={this.state.isRemind}
+                  onValueChange={this.setRemind}
+                />
+              ) : null}
             </Button>
           );
         })}
@@ -448,6 +504,7 @@ export default class User extends Component {
             </Button>
           </View>
         </View>
+        {/*
         <View style={[styles.accountItem, { paddingLeft: 10 }]}>
           <Text style={styles.accountItemText}>微信绑定</Text>
           <View style={styles.accountItemRight}>
@@ -455,6 +512,7 @@ export default class User extends Component {
             <Button textStyle={styles.itemButtonText}>绑定</Button>
           </View>
         </View>
+      */}
       </View>
     );
   }
@@ -482,7 +540,9 @@ export default class User extends Component {
               </Button>
               <Button
                 onPress={() => {
-                  Clipboard.setString(`nofase用户:${NickName}邀你注册哦`);
+                  Clipboard.setString(
+                    `nofase用户:${NickName}邀你注册哦,地址:https://vmslq.cn`
+                  );
                   Tip.success("邀请信息已复制到剪切板去邀请吧");
                 }}
                 style={styles.accountItem}

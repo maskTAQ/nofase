@@ -13,3 +13,5 @@ export { default as User } from "./user";
 export { default as Feedback } from "./feedback";
 export { default as Activity } from "./activity";
 export { default as DiscountsCard } from "./discountsCard";
+export { default as FeedbackProblem } from "./feedback-problem";
+export { default as UpPortrait } from "./up-portrait";

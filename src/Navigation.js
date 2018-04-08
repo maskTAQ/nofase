@@ -15,7 +15,9 @@ import {
   User,
   Feedback,
   DiscountsCard,
-  Activity
+  Activity,
+  FeedbackProblem,
+  UpPortrait
 } from "src/pages";
 
 import { Map } from "src/components";
@@ -50,7 +52,7 @@ export const RouteConfigs = {
     screen: StoreDetail
   },
   Wallet: {
-    screen: Wallet //我的钱包
+    screen: Wallet //交易明细
   },
   Pay: {
     screen: Pay
@@ -72,6 +74,12 @@ export const RouteConfigs = {
   },
   Map: {
     screen: Map
+  },
+  FeedbackProblem: {
+    screen: FeedbackProblem
+  },
+  UpPortrait: {
+    screen: UpPortrait
   }
 };
 

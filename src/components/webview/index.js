@@ -12,9 +12,7 @@ export default class Wv extends Component {
     title: PropTypes.string
   };
   state = {};
-  onNavigationStateChange(event) {
-    console.log(222);
-  }
+  onNavigationStateChange(event) {}
   onMessage(event) {
     console.log(event, 1);
   }

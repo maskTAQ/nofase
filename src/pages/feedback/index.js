@@ -5,7 +5,8 @@ import {
   FlatList,
   Modal,
   TouchableWithoutFeedback,
-  Linking
+  Linking,
+  ScrollView
 } from "react-native";
 import action from "src/action";
 import PropTypes from "prop-types";
@@ -129,55 +130,57 @@ export default class Feedback extends Component {
     const { isQAModalVisible, activeQA } = this.state;
     return (
       <Page title="客户反馈">
-        <View style={styles.container}>
-          <QAModal
-            QA={activeQA}
-            isVisible={isQAModalVisible}
-            onRequestClose={this.closeModal}
-          />
-          {this.renderHeader()}
-          {this.renderList()}
-          <Button
-            onPress={this.feedback}
-            style={styles.feedback}
-            textStyle={styles.feedbackText}
-          >
-            我要反馈
-          </Button>
-          <View style={styles.contact}>
-            <View style={styles.contactItem}>
-              <View style={styles.contactItemLabel}>
-                <Text style={styles.contactItemLabelText}>总站客服:</Text>
+        <ScrollView>
+          <View style={styles.container}>
+            <QAModal
+              QA={activeQA}
+              isVisible={isQAModalVisible}
+              onRequestClose={this.closeModal}
+            />
+            {this.renderHeader()}
+            {this.renderList()}
+            <Button
+              onPress={this.feedback}
+              style={styles.feedback}
+              textStyle={styles.feedbackText}
+            >
+              我要反馈
+            </Button>
+            <View style={styles.contact}>
+              <View style={styles.contactItem}>
+                <View style={styles.contactItemLabel}>
+                  <Text style={styles.contactItemLabelText}>总站客服:</Text>
+                </View>
+                <Button
+                  onPress={() => {
+                    this.call("4008650152");
+                  }}
+                  style={styles.call}
+                >
+                  <Text style={styles.callText}>4008-650-152</Text>
+                  <Icon size={20} source={require("./img/u204.png")} />
+                </Button>
               </View>
-              <Button
-                onPress={() => {
-                  this.call("4008650152");
-                }}
-                style={styles.call}
-              >
-                <Text style={styles.callText}>4008-650-152</Text>
-                <Icon size={20} source={require("./img/u204.png")} />
-              </Button>
-            </View>
-            <View style={styles.contactItem}>
-              <View style={styles.contactItemLabel}>
-                <Text style={styles.contactItemLabelText}>
-                  广东省-深圳市-罗湖区
-                </Text>
-                <Text style={styles.contactItemLabelText}>分站客服:</Text>
+              <View style={styles.contactItem}>
+                <View style={styles.contactItemLabel}>
+                  <Text style={styles.contactItemLabelText}>
+                    广东省-深圳市-罗湖区
+                  </Text>
+                  <Text style={styles.contactItemLabelText}>分站客服:</Text>
+                </View>
+                <Button
+                  onPress={() => {
+                    this.call("150489218870");
+                  }}
+                  style={styles.call}
+                >
+                  <Text style={styles.callText}>150489218870</Text>
+                  <Icon size={20} source={require("./img/u204.png")} />
+                </Button>
               </View>
-              <Button
-                onPress={() => {
-                  this.call("150489218870");
-                }}
-                style={styles.call}
-              >
-                <Text style={styles.callText}>150489218870</Text>
-                <Icon size={20} source={require("./img/u204.png")} />
-              </Button>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </Page>
     );
   }

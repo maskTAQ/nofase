@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
+import { Tip } from "src/common";
 import { Input, Icon, CheckBox, Page, Button } from "src/components";
 import { Alipay } from "src/common/pay";
 export default class Recharge extends Component {
@@ -17,6 +18,14 @@ export default class Recharge extends Component {
   state = {
     payWay: 0,
     recharge: ""
+  };
+  recharge = () => {
+    const { payWay } = this.state;
+    if (payWay === 0) {
+      Tip.fail("暂不支持微信充值");
+    } else {
+      Alipay();
+    }
   };
   renderLabel(source, title, subtitle) {
     return (
@@ -84,12 +93,7 @@ export default class Recharge extends Component {
           ItemSeparatorComponent={this.renderBorder()}
           style={styles.checkbox}
         />
-        <Button
-          onPress={() => {
-            Alipay();
-          }}
-          style={styles.rechargeButton}
-        >
+        <Button onPress={this.recharge} style={styles.rechargeButton}>
           充值
         </Button>
       </View>

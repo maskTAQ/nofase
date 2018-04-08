@@ -15,8 +15,8 @@ export default class Register extends Component {
     navigation: PropTypes.object
   };
   state = {
-    NickName: "hello",
-    Tel: "13696526122",
+    NickName: "",
+    Tel: "",
     ExCode: ""
   };
   handleValueChange(type, value) {

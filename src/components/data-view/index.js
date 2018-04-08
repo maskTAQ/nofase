@@ -35,7 +35,8 @@ export default class DataView extends Component {
     isPullupRefresh: PropTypes.bool,
     ItemSeparatorComponent: PropTypes.func,
     renderItem: PropTypes.func,
-    pulldownLoadMoreInterval: PropTypes.number
+    pulldownLoadMoreInterval: PropTypes.number,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {
     dataSource: [],
@@ -207,6 +208,9 @@ export default class DataView extends Component {
       case refreshing && dataSource.length === 0:
         footerContent = null;
         break;
+      case dataSource.length === 0:
+        footerContent = null;
+        break;
       default:
         footerContent = <Text style={styles.text}>下拉加载更多</Text>;
     }
@@ -228,7 +232,7 @@ export default class DataView extends Component {
       <View style={styles.container}>
         <FlatList
           data={dataSource}
-          style={{ flex: 1 }}
+          style={[{ flex: 1 }, this.props.style]}
           onRefresh={this.onRefresh}
           refreshing={refreshing}
           keyExtractor={(row, i) => i}
