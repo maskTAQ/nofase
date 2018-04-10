@@ -137,6 +137,8 @@ export default class Map extends Component {
         style={{ flex: 1 }}
         injectedJavaScript={patchPostMessageJsCode}
         onMessage={e => {
+          const storeInfo = JSON.parse(e.nativeEvent.data);
+          this.props.onStoreTap(storeInfo.Id);
           console.log(e.nativeEvent.data, "这是html发送过来的消息");
         }}
       />

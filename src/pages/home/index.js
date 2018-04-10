@@ -161,11 +161,19 @@ export default class Home extends Component {
     }
   }
   goStoreDetail = (Id, i) => {
-    const { dataSource } = this.storeListRef.state;
+    let dataSource = null;
+    if (this.storeListRef) {
+      dataSource = this.storeListRef.state;
+    }
+
     this.props.navigation.dispatch(
       action.navigate.go({
         routeName: "StoreDetail",
-        params: { Id, storeNum: dataSource.length, currentIndex: i }
+        params: {
+          Id,
+          storeNum: dataSource ? dataSource.length : 1,
+          currentIndex: i
+        }
       })
     );
   };
@@ -178,7 +186,7 @@ export default class Home extends Component {
       })
     );
   };
-  renderMapPattern() {
+  renderMapPattern = () => {
     return (
       <Page
         title="地图模式"
@@ -201,11 +209,15 @@ export default class Home extends Component {
           </Button>
         }
       >
-        <Map />
+        <Map
+          onStoreTap={id => {
+            this.goStoreDetail(id, 0);
+          }}
+        />
         <ToggleButton />
       </Page>
     );
-  }
+  };
   changeTab(NextTabActiveIndex) {
     const { tabActiveIndex } = this.state;
     if (NextTabActiveIndex !== tabActiveIndex) {
