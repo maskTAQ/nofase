@@ -37,7 +37,6 @@ export default class Page extends Component {
       <View style={{ flex: 1 }}>
         <Header
           onLeftPress={() => {
-            console.log(dispatch);
             if (onPress) {
               onPress();
             } else {

@@ -21,9 +21,10 @@ export default class Navigation extends Component {
     return (
       <WebView
         title="导航"
-        url={`https://vmslq.cn/webview/navigation?params=?params=${JSON.stringify(
-          { Lat, Lng }
-        )}&timestamp=${Date.now}`}
+        url={`https://vmslq.cn/webview/navigation?params=${JSON.stringify({
+          Lat,
+          Lng
+        })}&timestamp=${Date.now}`}
         ref={w => (this.webview = w)}
       />
     );

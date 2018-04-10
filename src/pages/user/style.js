@@ -20,7 +20,10 @@ export default {
   header: {
     position: "relative"
   },
-  portraitWrapper: {},
+  portraitWrapper: {
+    borderRadius: 60,
+    overflow: "hidden"
+  },
   headerBg: {
     position: "absolute",
     top: 0,

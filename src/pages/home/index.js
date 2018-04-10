@@ -488,12 +488,12 @@ export default class Home extends Component {
               <Text style={styles.itemDistance}>
                 距离：{Distance.toFixed(0)}
               </Text>
-              <Button style={styles.lessionButton}>
+              <View style={styles.lessionButton}>
                 <Text style={styles.lessionText}>
                   课程：{NowCurriculum || "暂无课程"}
                 </Text>
                 <Icon size={20} source={require("./img/right.png")} />
-              </Button>
+              </View>
             </View>
             <View style={styles.itemDetailBottom}>
               <Text style={styles.itemAddr} numberOfLines={2}>

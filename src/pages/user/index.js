@@ -345,9 +345,7 @@ export default class User extends Component {
         },
         promise: true
       })
-      .then(data => {
-        console.log(data, 999);
-      })
+      .then(data => {})
       .catch(e => {
         Tip.loading("获取用户信息失败");
         console.log("e:reject", e);
@@ -364,7 +362,12 @@ export default class User extends Component {
     this.props.navigation.dispatch(action.navigate.go({ routeName: "Login" }));
   };
   renderHeader() {
-    const { NickName = "-", UserCode = "-", Level = "-" } = this.props.userInfo;
+    const {
+      NickName = "-",
+      UserCode = "-",
+      Level = "-",
+      Photo
+    } = this.props.userInfo;
     const portraitSource = require("./img/u128.png"),
       closeSource = require("./img/u78.png"),
       lvSource = require("./img/u137.png"),
@@ -391,7 +394,10 @@ export default class User extends Component {
                 );
               }}
             >
-              <Icon size={60} source={portraitSource} />
+              <Icon
+                size={60}
+                source={Photo ? { uri: Photo } : portraitSource}
+              />
             </Button>
             <View style={styles.headerContentRight}>
               <View style={styles.usernameWrapper}>
