@@ -9,6 +9,14 @@ export default {
       timeout: 60000
     });
   },
+  //获取二维码地址
+  getQrCodeUrl(UserId) {
+    return Axios.request({
+      url: `https://vmslq.cn/User/GetQRImgUrl?userId=${UserId}`,
+      method: "get",
+      timeout: 6000
+    });
+  },
   login({ Tel, ExCode }) {
     return post("/User/UserLogin", { Tel, ExCode });
   },

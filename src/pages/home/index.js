@@ -163,7 +163,7 @@ export default class Home extends Component {
   goStoreDetail = (Id, i) => {
     let dataSource = null;
     if (this.storeListRef) {
-      dataSource = this.storeListRef.state;
+      dataSource = this.storeListRef.state.dataSource;
     }
 
     this.props.navigation.dispatch(

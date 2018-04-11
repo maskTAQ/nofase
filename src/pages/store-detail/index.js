@@ -350,6 +350,9 @@ export default class StoreDetail extends Component {
               <Icon size={22} source={require("./img/u141.png")} />
             </Button>
           }
+          onLeftPress={() => {
+            this.props.navigation.dispatch(action.navigate.back());
+          }}
         />
         {this.renderHeader()}
         <ScrollView>

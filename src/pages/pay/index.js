@@ -5,7 +5,9 @@ import {
   Image,
   ScrollView,
   Dimensions,
-  Linking
+  Linking,
+  Alert,
+  ActivityIndicator
 } from "react-native";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -26,8 +28,8 @@ import styles from "./style";
 
 const { width } = Dimensions.get("window");
 @connect(state => {
-  const { userInfo } = state;
-  return { userInfo };
+  const { userInfo, auth: { UserId } } = state;
+  return { userInfo, UserId };
 })
 export default class Pay extends Component {
   static defaultProps = {};
@@ -37,7 +39,8 @@ export default class Pay extends Component {
     OrderType: PropTypes.number,
     navigation: PropTypes.object,
     dispatch: PropTypes.func,
-    userInfo: PropTypes.object
+    userInfo: PropTypes.object,
+    UserId: PropTypes.number
   };
   state = {
     currentScore: 5,
@@ -55,9 +58,16 @@ export default class Pay extends Component {
     isShareModalVisible: false,
     isShareBarVisible: false,
     //优惠列表
-    discountList: []
+    discountList: [],
+    //
+    Qr: {
+      status: "loading",
+      src: ""
+    }
   };
   componentWillMount() {
+    //this.verifyMoney(20)
+    this.getQrCodeUrl();
     this.getPrevOrder().then(() => {
       const { hasData } = this.props.userInfo;
       if (!hasData) {
@@ -77,39 +87,150 @@ export default class Pay extends Component {
     });
 
     WebSocket.addEventListenter(data => {
-      const { Money } = data;
+      const { Type } = data;
       let { TimeStamp, ETimeStamp, STimeStamp } = data;
       TimeStamp = TimeStamp * 1000;
       ETimeStamp = ETimeStamp * 1000;
       STimeStamp = STimeStamp * 1000;
-      if (typeof Money === "number") {
-        this.tickts(true, STimeStamp);
-        this.setState({
-          ...data,
-          ETimeStamp,
-          EDate: moment(ETimeStamp).format("HH:mm"),
-          STimeStamp,
-          SDate: moment(STimeStamp).format("HH:mm")
-        });
-      } else {
-        this.tickts(false, TimeStamp);
-        this.setState({
-          ...data,
-          STimeStamp: TimeStamp,
-          SDate: moment(TimeStamp).format("HH:mm"),
-          EDate: "",
-          ETimeStamp: ""
-        });
+      switch (Type) {
+        //开始订单
+        case 1:
+          this.tickts(false, TimeStamp);
+          this.setState({
+            ...data,
+            STimeStamp: TimeStamp,
+            SDate: moment(TimeStamp).format("HH:mm"),
+            EDate: "",
+            ETimeStamp: ""
+          });
+          return;
+        case 2:
+          Alert.alert(
+            "余额不足",
+            `当前余额不足,不能享受服务,请先充值`,
+            [
+              {
+                text: "充值",
+                onPress: () =>
+                  this.props.navigation.dispatch(
+                    action.navigate.go({ routeName: "Recharge" })
+                  )
+              },
+              {
+                text: "取消",
+                onPress: () =>
+                  this.props.navigation.dispatch(action.navigate.back())
+              }
+            ],
+            { cancelable: false }
+          );
+          return;
+        case 3:
+          this.tickts(true, STimeStamp);
+          this.setState({
+            ...data,
+            ETimeStamp,
+            EDate: moment(ETimeStamp).format("HH:mm"),
+            STimeStamp,
+            SDate: moment(STimeStamp).format("HH:mm")
+          });
+          return;
+        case 4:
+          Alert.alert(
+            "余额不足",
+            `当前余额不足,不能结束,请先充值`,
+            [
+              {
+                text: "充值",
+                onPress: () =>
+                  this.props.navigation.dispatch(
+                    action.navigate.go({ routeName: "Recharge" })
+                  )
+              }
+            ],
+            { cancelable: false }
+          );
+          return;
       }
+      return;
+      // const { Money } = data;
+      // let { TimeStamp, ETimeStamp, STimeStamp } = data;
+      // TimeStamp = TimeStamp * 1000;
+      // ETimeStamp = ETimeStamp * 1000;
+      // STimeStamp = STimeStamp * 1000;
+      // if (typeof Money === "number") {
+      //   this.tickts(true, STimeStamp);
+      //   this.setState({
+      //     ...data,
+      //     ETimeStamp,
+      //     EDate: moment(ETimeStamp).format("HH:mm"),
+      //     STimeStamp,
+      //     SDate: moment(STimeStamp).format("HH:mm")
+      //   });
+      // } else {
+      //   this.tickts(false, TimeStamp);
+      //   this.setState({
+      //     ...data,
+      //     STimeStamp: TimeStamp,
+      //     SDate: moment(TimeStamp).format("HH:mm"),
+      //     EDate: "",
+      //     ETimeStamp: ""
+      //   });
+      // }
     });
   }
   componentWillUnmount() {
     clearInterval(this.ticktTimer);
   }
+  getQrCodeUrl() {
+    this.setState({
+      Qr: {
+        status: "loading",
+        src: ""
+      }
+    });
+    api
+      .getQrCodeUrl(this.props.UserId)
+      .then(res => {
+        this.setState({
+          Qr: {
+            status: "success",
+            src: res.data
+          }
+        });
+      })
+      .catch(e => {
+        this.setState({
+          Qr: {
+            status: "error",
+            src: ""
+          }
+        });
+      });
+  }
+  verifyMoney(Money) {
+    if (Money < 30) {
+      Alert.alert(
+        "余额不足",
+        `当前余额:${Money},不足`,
+        [
+          {
+            text: "充值",
+            onPress: () =>
+              this.props.navigation.dispatch(
+                action.navigate.go({ routeName: "Recharge" })
+              )
+          }
+        ],
+        { cancelable: false }
+      );
+    }
+  }
   getPrevOrder() {
     return api
       .getOrderStatus()
       .then(data => {
+        console.log(data);
         const TimeStamp = data.TimeStamp * 1000;
         this.tickts(false, TimeStamp);
         this.setState({
@@ -296,6 +417,38 @@ export default class Pay extends Component {
       </View>
     );
   }
+  renderQr() {
+    const { status, src } = this.state.Qr;
+    switch (status) {
+      case "loading":
+        return (
+          <View style={styles.QR}>
+            <ActivityIndicator color="#333" size="large" />
+          </View>
+        );
+      case "success":
+        return (
+          <View style={styles.QR}>
+            <Icon
+              source={{
+                uri: src
+              }}
+              size={width - 50 * 2}
+            />
+          </View>
+        );
+      case "error":
+        return (
+          <View style={styles.QR}>
+            <Button onPress={this.getQrCodeUrl} style={{}}>
+              二维码加载失败！点我重新加载
+            </Button>
+          </View>
+        );
+      default:
+        return null;
+    }
+  }
   renderContent() {
     const {
       OrderType,
@@ -309,16 +462,7 @@ export default class Pay extends Component {
         return (
           <ScrollView style={styles.content}>
             {this.renderHeader()}
-            <View style={styles.QR}>
-              <Icon
-                source={{
-                  uri: `http://qr.liantu.com/api.php?text=${JSON.stringify({
-                    UserId: 1
-                  })}`
-                }}
-                size={width - 30 * 2}
-              />
-            </View>
+            {this.renderQr()}
           </ScrollView>
         );
       case "1":
@@ -334,16 +478,7 @@ export default class Pay extends Component {
               ["Discount", "优惠选择"],
               ["Choice", discountLabel]
             ])}
-            <View style={styles.QR}>
-              <Icon
-                source={{
-                  uri: `http://qr.liantu.com/api.php?text=${JSON.stringify({
-                    UserId: 1
-                  })}`
-                }}
-                size={width - 30 * 2}
-              />
-            </View>
+            {this.renderQr()}
           </ScrollView>
         );
       default:
