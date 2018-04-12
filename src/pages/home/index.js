@@ -38,7 +38,7 @@ export default class Home extends Component {
     pattern: "list", //['map','list']
     tabActiveIndex: 0,
     chooseTabActiveIndex: NaN,
-    chooseTypeValue: 1,
+    chooseTypeValue: 0,
     cityValue: 0,
     distanceValue: 0,
     StoreName: "",
@@ -53,6 +53,7 @@ export default class Home extends Component {
   }
   store = {
     chooseType: [
+      { label: "默认", value: 0 },
       { label: "离我最近", value: 1 },
       { label: "价格最低", value: 2 },
       { label: "人气最高", value: 3 },
@@ -338,6 +339,24 @@ export default class Home extends Component {
                 />
               }
               onChangeValue={v => {
+                this.storeListRef.state.dataSource = this.storeListRef.state.dataSource.sort(
+                  (prev, next) => {
+                    switch (v) {
+                      case 1:
+                        return prev.Distance - next.Distance;
+                      case 2:
+                        return prev.Charge - next.Charge;
+                      case 3:
+                        return next.NowPeopleNum - prev.NowPeopleNum;
+                      case 4:
+                        return next.StoreScore - prev.StoreScore;
+                      case 5:
+                        return next.PeopleNum - prev.PeopleNum;
+                      default:
+                        return 0;
+                    }
+                  }
+                );
                 this.setState({
                   chooseTypeValue: v,
                   chooseTabActiveIndex: NaN
@@ -369,7 +388,7 @@ export default class Home extends Component {
       },
       "border",
       {
-        label: chooseType[chooseTypeValue - 1].label,
+        label: chooseType[chooseTypeValue].label,
         onPress: changeChooseTabActiveIndex
       }
     ];
@@ -475,6 +494,7 @@ export default class Home extends Component {
       Charge,
       Id
     } = row;
+    console.log(row);
     return (
       <View style={styles.item}>
         <Button
