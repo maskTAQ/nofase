@@ -10,9 +10,9 @@ export default {
     });
   },
   //获取二维码地址
-  getQrCodeUrl(UserId) {
+  getQrCodeUrl(UserId, CardId) {
     return Axios.request({
-      url: `https://vmslq.cn/User/GetQRImgUrl?userId=${UserId}`,
+      url: `https://vmslq.cn/User/GetQRImgUrl?userId=${UserId}&CardId=${CardId}`,
       method: "get",
       timeout: 6000
     });

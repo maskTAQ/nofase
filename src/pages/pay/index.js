@@ -64,7 +64,9 @@ export default class Pay extends Component {
     Qr: {
       status: "loading",
       src: ""
-    }
+    },
+    //优惠卡id
+    CardId: ""
   };
   componentWillMount() {
     //this.verifyMoney(20)
@@ -197,7 +199,7 @@ export default class Pay extends Component {
       }
     });
     api
-      .getQrCodeUrl(this.props.UserId)
+      .getQrCodeUrl(this.props.UserId, this.state.CardId)
       .then(res => {
         this.setState({
           Qr: {
@@ -670,6 +672,7 @@ export default class Pay extends Component {
           onValueSelect={(v, item) => {
             this.setState({
               discountLabel: item.label,
+              CardId: item.value,
               isPickerVisible: false
             });
           }}
