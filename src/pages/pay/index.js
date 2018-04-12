@@ -277,7 +277,13 @@ export default class Pay extends Component {
   }
   ticktTimer = NaN;
   tickts = (isEnd, STimeStamp) => {
-    const pad = s => String(s).padStart("2", "0");
+    const pad = s => {
+      if (String(s).length === 1) {
+        return "0" + s;
+      } else {
+        return s;
+      }
+    };
     const m = () => {
       const t = (Date.now() - STimeStamp) / 1000;
       const d = Math.floor(t / (24 * 3600));
