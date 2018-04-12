@@ -172,11 +172,10 @@ export default class DataView extends Component {
     const now = Date.now();
 
     if (now - this.prevCalledPulldownLoadMoreTimes > pulldownLoadMoreInterval) {
-      console.log(y, height, contentHeight);
       //在y轴偏移度加上高度等于内容的高度并且y轴偏移值为正值时
       //？在android下并不会像ios有默认的缓动区域 所以并不能产生 在y轴偏移度加上高度大于内容的高度 的情况
       //>= 大于适用于ios ===适用于android
-      if (y + height >= contentHeight && y > 0) {
+      if (y + height >= contentHeight - 5 && y >= 0) {
         this.prevCalledPulldownLoadMoreTimes = now;
         this.pulldownLoadMore();
       }
