@@ -130,7 +130,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>请求您的位置以获取周围店铺</string>
 	<key>UILaunchImageFile~iphone</key>
 	<string>LaunchImage</string>
 	<key>UIRequiredDeviceCapabilities</key>

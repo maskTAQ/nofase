@@ -28,7 +28,7 @@ class App extends Component {
     //监听dispatch事件 由onDispatch统一发送action
     AsyncStorage.getItem('mobile', (e, m) => {
       if (!e && m) {
-        
+
         api.rememberLogin({ Tel: m })
           .then(res => {
             this.props.dispatch(
@@ -44,16 +44,16 @@ class App extends Component {
       }
     })
 
-    // api.token()
-    //   .then(res => {
-
-    //     if (res.data !== 'token') {
-    //       Platform.OS === "android" && BackHandler.exitApp();
-    //     }
-    //   })
-    //   .catch(e=>{
-    //     console.log(e)
-    //   })
+    api.token()
+      .then(res => {
+        console.log(res)
+        if (res.data !== 'token') {
+          Platform.OS === "android" && BackHandler.exitApp();
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
   componentDidMount() {
     if (Platform.OS === "android") {

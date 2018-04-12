@@ -59,7 +59,8 @@ const ShareModal = ({
               <Icon size={50} source={require("./img/u209.png")} />
               <View style={styles.storeInfoWrapper}>
                 <Text style={styles.storeName}>{storeName}</Text>
-                <View style={styles.storeInfoCenter}>
+                {/**
+                   * <View style={styles.storeInfoCenter}>
                   <Text style={styles.onlinePeople}>
                     在线人数：{onlinePeople}人
                   </Text>
@@ -68,6 +69,7 @@ const ShareModal = ({
                     <Icon size={14} source={require("./img/u79.png")} />
                   </Button>
                 </View>
+                   */}
                 <Text style={styles.storeAddr}>{addr}</Text>
               </View>
             </View>

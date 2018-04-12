@@ -7,7 +7,8 @@ import {
   Dimensions,
   Linking,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableWithoutFeedback
 } from "react-native";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -88,6 +89,12 @@ export default class Pay extends Component {
 
     WebSocket.addEventListenter(data => {
       const { Type } = data;
+      if (Type === 3 && this.state.Type !== 3) {
+        console.log(this.state);
+        this.setState({
+          isShareModalVisible: true
+        });
+      }
       let { TimeStamp, ETimeStamp, STimeStamp } = data;
       TimeStamp = TimeStamp * 1000;
       ETimeStamp = ETimeStamp * 1000;
@@ -250,6 +257,7 @@ export default class Pay extends Component {
     api
       .getDiscountList()
       .then(res => {
+        console.log(res, "discount");
         const discountList = res.filter(({ isUse }) => isUse).map(item => {
           const { CardName, Id } = item;
           return {
@@ -294,9 +302,10 @@ export default class Pay extends Component {
     api
       .completeOrder({ OrderId, Score: currentScore })
       .then(res => {
-        this.setState({
-          isShareModalVisible: true
-        });
+        Tip.fail("评价成功");
+        setTimeout(() => {
+          this.props.dispatch(action.navigate.back());
+        }, 1500);
       })
       .catch(e => {
         Tip.fail("评价失败");
@@ -462,6 +471,7 @@ export default class Pay extends Component {
         return (
           <ScrollView style={styles.content}>
             {this.renderHeader()}
+            <View style={{ height: 20 }} />
             {this.renderQr()}
           </ScrollView>
         );
@@ -484,39 +494,51 @@ export default class Pay extends Component {
       default:
         return (
           <ScrollView style={styles.content}>
-            {this.renderHeader()}
-            {this.renderCommon([
-              ["Per hour", "每一小时"],
-              ["Cost", `￥:${Charge}元`]
-            ])}
-            {this.renderCommon([
-              ["Charge", "收费"],
-              ["Price", `￥:${Money}元`]
-            ])}
-            {this.renderCommon([["Discount", "优惠"], ["Price", "￥:0元"]])}
-            <View style={styles.starScore}>
-              <Text style={styles.starScoreTitle}>Score 评分</Text>
-              <View style={styles.starScoreBox}>
-                <StarScore
-                  currentScore={currentScore}
-                  onChangeScore={currentScore => {
-                    this.setState({ currentScore });
-                  }}
-                  iconSize={20}
-                />
-                <Button
-                  onPress={this.submit}
-                  style={styles.submit}
-                  textStyle={styles.submitText}
-                >
-                  提交
-                </Button>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                this.setState({
+                  isShareBarVisible: false
+                });
+              }}
+            >
+              <View>
+                {this.renderHeader()}
+                {this.renderCommon([
+                  ["Per hour", "每一小时"],
+                  ["Cost", `￥:${Charge}元`]
+                ])}
+                {this.renderCommon([
+                  ["Charge", "收费"],
+                  ["Price", `￥:${Money}元`]
+                ])}
+                {this.renderCommon([["Discount", "优惠"], ["Price", "￥:0元"]])}
+                <View style={styles.starScore}>
+                  <Text style={styles.starScoreTitle}>Score 评分</Text>
+                  <View style={styles.starScoreBox}>
+                    <StarScore
+                      currentScore={currentScore}
+                      onChangeScore={currentScore => {
+                        this.setState({ currentScore });
+                      }}
+                      iconSize={20}
+                    />
+                    <Button
+                      onPress={this.submit}
+                      style={styles.submit}
+                      textStyle={styles.submitText}
+                    >
+                      提交
+                    </Button>
+                  </View>
+                  <Text style={styles.starScoreEvaluate}>
+                    {["", "很差", "差", "一般", "良好", "棒棒哒"][currentScore]}
+                  </Text>
+                  <View style={{ alignItems: "flex-end" }}>
+                    <Text style={styles.starScoreExpend}>支出:{Money}元</Text>
+                  </View>
+                </View>
               </View>
-              <Text style={styles.starScoreEvaluate}>棒棒的</Text>
-              <View style={{ alignItems: "flex-end" }}>
-                <Text style={styles.starScoreExpend}>支出:{Money}元</Text>
-              </View>
-            </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
         );
     }
@@ -628,6 +650,7 @@ export default class Pay extends Component {
           </View>
           {this.renderShareBar()}
         </View>
+
         <Picker
           data={Object.assign(
             [
@@ -661,14 +684,9 @@ export default class Pay extends Component {
           onlinePeople={NowInPeople}
           addr={StoreAddress}
           close={() => {
-            this.setState(
-              {
-                isShareModalVisible: false
-              },
-              () => {
-                this.props.navigation.dispatch(action.navigate.back());
-              }
-            );
+            this.setState({
+              isShareModalVisible: false
+            });
           }}
           share={() => {
             this.setState({
