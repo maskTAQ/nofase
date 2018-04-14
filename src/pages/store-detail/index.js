@@ -28,6 +28,7 @@ export default class StoreDetail extends Component {
     PeopleNum: "-",
     Charge: "-",
     StoreTel: "0",
+    StoreImg: "",
 
     Bath: 0,
     Storage: 0,
@@ -178,13 +179,31 @@ export default class StoreDetail extends Component {
       Charge,
       StoreImg,
       NowPeopleNum,
-      isLoadingStoreImg
+      isLoadingStoreImg,
+      StoreImgList = []
     } = this.state;
     return (
-      <View style={styles.header}>
+      <Button
+        onPress={() => {
+          if (StoreImgList.length === 0) {
+            Tip.fail("图库中暂无图片");
+          } else {
+            this.props.navigation.dispatch(
+              action.navigate.go({
+                routeName: "StoreImg",
+                params: {
+                  StoreImgList
+                }
+              })
+            );
+          }
+        }}
+        style={styles.header}
+      >
         {StoreImg ? (
           <Image
             onLoad={() => {
+              console.log("load");
               this.setState({
                 isLoadingStoreImg: false
               });
@@ -196,16 +215,16 @@ export default class StoreDetail extends Component {
               });
               Tip.fail("商铺图片加载失败");
             }}
-            source={{
-              uri:
-                "https://vmslq.cn/File/d87d9d6c-0138-47b0-9780-7faf6f78abf1.png"
-            }}
+            source={{ uri: StoreImg }}
             style={styles.headerBg}
           />
         ) : (
           <Image source={require("./img/u0.png")} style={styles.headerBg} />
         )}
-        {isLoadingStoreImg && <ActivityIndicator size="large" color="#000" />}
+
+        {isLoadingStoreImg && StoreImg ? (
+          <ActivityIndicator size="large" color="#000" />
+        ) : null}
         <View style={styles.storeIntro}>
           <View style={styles.introTitleWrapper}>
             <View style={styles.introTitleBox}>
@@ -282,7 +301,7 @@ export default class StoreDetail extends Component {
             </View>
           </View>
         </View>
-      </View>
+      </Button>
     );
   }
   renderStarScore() {
@@ -409,27 +428,7 @@ export default class StoreDetail extends Component {
       <View style={styles.container}>
         <Header
           style={styles.statusBar}
-          titleComponent={
-            <Button
-              onPress={() => {
-                if (StoreImgList.length === 0) {
-                  Tip.fail("图库中暂无图片");
-                } else {
-                  this.props.navigation.dispatch(
-                    action.navigate.go({
-                      routeName: "StoreImg",
-                      params: {
-                        StoreImgList
-                      }
-                    })
-                  );
-                }
-              }}
-              textStyle={{ color: "#fff" }}
-            >{`${StoreImgList.length === 0 ? 0 : 1}/${
-              StoreImgList.length
-            }`}</Button>
-          }
+          title={`${StoreImgList.length === 0 ? 0 : 1}/${StoreImgList.length}`}
           RightComponent={
             <Button>
               <Icon size={22} source={require("./img/u141.png")} />

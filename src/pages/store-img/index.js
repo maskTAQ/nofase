@@ -9,15 +9,32 @@ export default class StoreImg extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
-  renderItem(item) {
+  state = {
+    StoreImgList: []
+  };
+  componentWillMount() {
+    const { StoreImgList } = this.props.navigation.state.params;
+    //this.queueRender(StoreImgList)
+    this.setState({
+      StoreImgList: StoreImgList
+    });
+  }
+  queueRender(StoreImgList) {
+    this.setState({
+      StoreImgList: [StoreImgList.pop()]
+    });
+  }
+  renderItem({ item }) {
+    console.log(item.ImgUrl);
     return (
       <View style={styles.imgBox}>
-        <LoadingImage style={styles.img} source={{ uri: item.ImgUrl }} />
+        <LoadingImage style={styles.imgBox} source={{ uri: item.ImgUrl }} />
       </View>
     );
   }
   render() {
-    const { StoreImgList } = this.props.navigation.state.params;
+    const { StoreImgList } = this.state;
+    console.log(StoreImgList);
     return (
       <Page title="店铺图库">
         <View style={styles.container}>

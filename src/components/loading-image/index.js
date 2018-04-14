@@ -17,6 +17,7 @@ export default class LoadingImage extends Component {
   renderImageIcon() {
     const { style, source } = this.props;
     const { pending, status } = this.state;
+    console.log(style, source, "asdad");
     return (
       <View style={[styles.imageIconBox, style]}>
         {pending && (
