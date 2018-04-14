@@ -50,12 +50,12 @@ export default class Pay extends Component {
     EDate: "",
     ETimeStamp: "",
     OrderType: 0, //0 未开始 1开始 2结束
-    discountValue: NaN,
+    //优惠卡id
+    CardId: 0,
     discountLabel: "暂无优惠",
     isPickerVisible: false,
     //计时
     tickts: "",
-    OrderId: "",
     isShareModalVisible: false,
     isShareBarVisible: false,
     //优惠列表
@@ -64,12 +64,9 @@ export default class Pay extends Component {
     Qr: {
       status: "loading",
       src: ""
-    },
-    //优惠卡id
-    CardId: ""
+    }
   };
   componentWillMount() {
-    //this.verifyMoney(20)
     this.getQrCodeUrl();
     this.getPrevOrder().then(() => {
       const { hasData } = this.props.userInfo;
@@ -201,6 +198,7 @@ export default class Pay extends Component {
     api
       .getQrCodeUrl(this.props.UserId, this.state.CardId)
       .then(res => {
+        console.log(res);
         this.setState({
           Qr: {
             status: "success",
@@ -209,6 +207,7 @@ export default class Pay extends Component {
         });
       })
       .catch(e => {
+        console.log(e);
         this.setState({
           Qr: {
             status: "error",
@@ -216,24 +215,6 @@ export default class Pay extends Component {
           }
         });
       });
-  }
-  verifyMoney(Money) {
-    if (Money < 30) {
-      Alert.alert(
-        "余额不足",
-        `当前余额:${Money},不足`,
-        [
-          {
-            text: "充值",
-            onPress: () =>
-              this.props.navigation.dispatch(
-                action.navigate.go({ routeName: "Recharge" })
-              )
-          }
-        ],
-        { cancelable: false }
-      );
-    }
   }
   getPrevOrder() {
     return api
@@ -259,7 +240,6 @@ export default class Pay extends Component {
     api
       .getDiscountList()
       .then(res => {
-        console.log(res, "discount");
         const discountList = res.filter(({ isUse }) => isUse).map(item => {
           const { CardName, Id } = item;
           return {
@@ -479,7 +459,10 @@ export default class Pay extends Component {
         return (
           <ScrollView style={styles.content}>
             {this.renderHeader()}
-            <View style={{ height: 20 }} />
+            {this.renderDiscountsChunk([
+              ["Discount", "优惠选择"],
+              ["Choice", discountLabel]
+            ])}
             {this.renderQr()}
           </ScrollView>
         );
@@ -492,7 +475,7 @@ export default class Pay extends Component {
               ["Per hour", "每一小时"],
               ["Cost", `￥:${Charge}元`]
             ])}
-            {this.renderDiscountsChunk([
+            {this.renderCommon([
               ["Discount", "优惠选择"],
               ["Choice", discountLabel]
             ])}
@@ -632,7 +615,9 @@ export default class Pay extends Component {
       StoreName,
       StoreAddress,
       NowInPeople,
-      discountList
+      discountList,
+      discountLabel,
+      CardId
     } = this.state;
     const { NickName } = this.props.userInfo;
     return (
@@ -663,8 +648,8 @@ export default class Pay extends Component {
           data={Object.assign(
             [
               {
-                value: NaN,
-                label: "暂无优惠"
+                value: CardId,
+                label: discountLabel
               }
             ],
             discountList
@@ -676,11 +661,17 @@ export default class Pay extends Component {
             });
           }}
           onValueSelect={(v, item) => {
-            this.setState({
-              discountLabel: item.label,
-              CardId: item.value,
-              isPickerVisible: false
-            });
+            console.log(item);
+            this.setState(
+              {
+                discountLabel: item.label,
+                CardId: item.value,
+                isPickerVisible: false
+              },
+              () => {
+                this.getQrCodeUrl();
+              }
+            );
           }}
         />
         <ShareModal

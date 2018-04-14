@@ -483,7 +483,6 @@ export default class Home extends Component {
     );
   }
   renderItem(row, i) {
-    const icon = require("./img/u42.png");
     const {
       StoreName,
       NowPeopleNum,
@@ -492,9 +491,12 @@ export default class Home extends Component {
       NowCurriculum,
       Address,
       Charge,
-      Id
+      Id,
+      StoreImg
     } = row;
-    console.log(row);
+    const icon = StoreImg.includes("https")
+      ? { uri: StoreImg }
+      : require("./img/u42.png");
     return (
       <View style={styles.item}>
         <Button
