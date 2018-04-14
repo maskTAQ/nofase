@@ -61,7 +61,7 @@ export default class Home extends Component {
       { label: "可容纳最多", value: 5 }
     ],
     city: [
-      { label: "附近", value: 0 },
+      { label: "全部", value: 0 },
       { label: "福田", value: 1 },
       { label: "罗湖", value: 2 },
       { label: "南山", value: 3 },
@@ -110,7 +110,7 @@ export default class Home extends Component {
       Object.assign(params, {
         SeachType: 1, //按店铺搜索
         SeachValue: StoreName,
-        UserArea: this.store.city[cityValue].label,
+        UserArea: cityValue === 0 ? "" : this.store.city[cityValue].label,
         Range: distanceValue,
         PageIndex,
         PageNum: 20,
