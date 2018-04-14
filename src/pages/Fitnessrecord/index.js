@@ -24,6 +24,7 @@ export default class Fitnessrecord extends Component {
     return api.getUserOrderList({ PageIndex, PageNum: 20 });
   }
   renderItem(row) {
+    console.log(row);
     const { StoreName, Amont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
     return (
@@ -143,7 +144,8 @@ export default class Fitnessrecord extends Component {
       StoreName,
       TimeLong,
       Amont,
-      StoreAddr = "-"
+      StoreAddr = "暂无地址信息",
+      SaleAmont
     } = currentOrder;
     return (
       <Page title="健身记录">
@@ -164,7 +166,7 @@ export default class Fitnessrecord extends Component {
               username={UserName}
               time={String(TimeLong)}
               money={Amont}
-              discount={0}
+              discount={Amont - SaleAmont}
               storeName={StoreName}
               onlinePeople={0}
               addr={StoreAddr}

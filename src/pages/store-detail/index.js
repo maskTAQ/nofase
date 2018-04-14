@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Image, Text, ScrollView, Linking } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  ScrollView,
+  Linking,
+  ActivityIndicator
+} from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -15,6 +22,7 @@ export default class StoreDetail extends Component {
     navigation: PropTypes.object
   };
   state = {
+    isLoadingStoreImg: true,
     StoreName: "-",
     Address: "-",
     PeopleNum: "-",
@@ -40,6 +48,8 @@ export default class StoreDetail extends Component {
     const { Id } = this.props.navigation.state.params;
     Promise.all([
       this.getStoreInfo(Id),
+      this.getStoreImg(Id),
+      this.getStoreNowPeople(Id),
       this.getDeviceInfo(Id),
       this.getCurriculum(Id)
     ])
@@ -51,7 +61,6 @@ export default class StoreDetail extends Component {
       })
       .catch(e => {
         Tip.dismiss();
-        console.log(e, "53");
       });
   }
   store = {
@@ -106,6 +115,31 @@ export default class StoreDetail extends Component {
         return {};
       });
   }
+  getStoreNowPeople(id) {
+    return api
+      .getStoreNowPeople(id)
+      .then(res => {
+        return { NowPeopleNum: res.nowPeopleNum };
+      })
+      .catch(e => {
+        return { NowPeopleNum: 0 };
+      });
+  }
+  getStoreImg(id) {
+    return api
+      .getStoreImg(id)
+      .then(res => {
+        return {
+          StoreImg: res[0] ? res[0].ImgUrl : "",
+          StoreImgList: res
+        };
+      })
+      .catch(e => {
+        return {
+          StoreImg: ""
+        };
+      });
+  }
   getDeviceInfo(Id) {
     return api
       .getStoreEquip({
@@ -137,10 +171,41 @@ export default class StoreDetail extends Component {
     return Promise.resolve(this.store.data);
   };
   renderHeader() {
-    const { StoreName, Address, PeopleNum, Charge } = this.state;
+    const {
+      StoreName,
+      Address,
+      PeopleNum,
+      Charge,
+      StoreImg,
+      NowPeopleNum,
+      isLoadingStoreImg
+    } = this.state;
     return (
       <View style={styles.header}>
-        <Image source={require("./img/u0.png")} style={styles.headerBg} />
+        {StoreImg ? (
+          <Image
+            onLoad={() => {
+              this.setState({
+                isLoadingStoreImg: false
+              });
+            }}
+            onError={() => {
+              this.setState({
+                isLoadingStoreImg: false,
+                StoreImg: ""
+              });
+              Tip.fail("商铺图片加载失败");
+            }}
+            source={{
+              uri:
+                "https://vmslq.cn/File/d87d9d6c-0138-47b0-9780-7faf6f78abf1.png"
+            }}
+            style={styles.headerBg}
+          />
+        ) : (
+          <Image source={require("./img/u0.png")} style={styles.headerBg} />
+        )}
+        {isLoadingStoreImg && <ActivityIndicator size="large" color="#000" />}
         <View style={styles.storeIntro}>
           <View style={styles.introTitleWrapper}>
             <View style={styles.introTitleBox}>
@@ -170,7 +235,7 @@ export default class StoreDetail extends Component {
                 <Text
                   style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
                 >
-                  每20分钟
+                  每一小时
                 </Text>
                 <Text
                   style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
@@ -198,7 +263,7 @@ export default class StoreDetail extends Component {
                 可容纳线上{PeopleNum}人位
               </Text>
               <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
-                当前剩余5人位
+                当前剩余{PeopleNum - NowPeopleNum}人位
               </Text>
             </View>
             <View
@@ -317,14 +382,14 @@ export default class StoreDetail extends Component {
     );
   }
   render() {
-    const { storeNum, currentIndex } = this.props.navigation.state.params;
     const { tableColumns } = this.store;
     const {
       BusinessTimes,
       BusinessWeeks,
       Charge,
       CsTel,
-      StoreRemarks
+      StoreRemarks,
+      StoreImgList = []
     } = this.state;
     const weeks = [
       "星期日",
@@ -344,7 +409,27 @@ export default class StoreDetail extends Component {
       <View style={styles.container}>
         <Header
           style={styles.statusBar}
-          title={`${currentIndex + 1}/${storeNum}`}
+          titleComponent={
+            <Button
+              onPress={() => {
+                if (StoreImgList.length === 0) {
+                  Tip.fail("图库中暂无图片");
+                } else {
+                  this.props.navigation.dispatch(
+                    action.navigate.go({
+                      routeName: "StoreImg",
+                      params: {
+                        StoreImgList
+                      }
+                    })
+                  );
+                }
+              }}
+              textStyle={{ color: "#fff" }}
+            >{`${StoreImgList.length === 0 ? 0 : 1}/${
+              StoreImgList.length
+            }`}</Button>
+          }
           RightComponent={
             <Button>
               <Icon size={22} source={require("./img/u141.png")} />

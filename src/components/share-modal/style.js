@@ -84,6 +84,7 @@ export default {
     paddingLeft: 15
   },
   storeName: {
+    flex: 1,
     fontSize: 14,
     color: "#333"
   },
@@ -98,6 +99,7 @@ export default {
     color: "#333"
   },
   storeAddr: {
+    flex: 1,
     fontSize: 12,
     color: "#333"
   },

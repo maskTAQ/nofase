@@ -53,6 +53,14 @@ export default {
       { loading: false }
     );
   },
+  //获取店铺在线数
+  getStoreNowPeople(StoreId) {
+    return post("/Store/GetStoreNowPeople", { StoreId });
+  },
+  //获取商铺图片 http://101.200.196.202:8888/Store/GetStoreImgs
+  getStoreImg(StoreId) {
+    return post("/Store/GetStoreImgs", { StoreId });
+  },
   //读取课程表
   getCurriculum({ StoreId }) {
     return post("/Store/GetCurriculumList", { StoreId }, { loading: false });

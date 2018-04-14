@@ -16,3 +16,4 @@ export { default as DiscountsCard } from "./discountsCard";
 export { default as FeedbackProblem } from "./feedback-problem";
 export { default as UpPortrait } from "./up-portrait";
 export { default as Navigation } from "./navigation";
+export { default as StoreImg } from "./store-img";

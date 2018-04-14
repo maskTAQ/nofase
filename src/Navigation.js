@@ -18,7 +18,8 @@ import {
   Activity,
   FeedbackProblem,
   UpPortrait,
-  Navigation
+  Navigation,
+  StoreImg
 } from "src/pages";
 
 import { Map } from "src/components";
@@ -84,6 +85,9 @@ export const RouteConfigs = {
   },
   Navigation: {
     screen: Navigation
+  },
+  StoreImg: {
+    screen: StoreImg
   }
 };
 

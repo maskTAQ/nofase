@@ -17,3 +17,4 @@ export { default as Picker } from "./picker";
 export { default as CodeButton } from "./code-button";
 export { default as DataView } from "./data-view";
 export { default as WebView } from "./webview";
+export { default as LoadingImage } from "./loading-image";

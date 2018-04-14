@@ -140,6 +140,14 @@ export default class Pay extends Component {
             STimeStamp,
             SDate: moment(STimeStamp).format("HH:mm")
           });
+          //更新用户余额
+          this.props.dispatch({
+            type: "userInfo",
+            api: () => {
+              return api.getUserInfo();
+            },
+            promise: true
+          });
           return;
         case 4:
           Alert.alert(
@@ -464,6 +472,7 @@ export default class Pay extends Component {
               ["Choice", discountLabel]
             ])}
             {this.renderQr()}
+            <View style={{ height: 15 }} />
           </ScrollView>
         );
       case "1":
@@ -480,6 +489,7 @@ export default class Pay extends Component {
               ["Choice", discountLabel]
             ])}
             {this.renderQr()}
+            <View style={{ height: 15 }} />
           </ScrollView>
         );
       default:
@@ -577,7 +587,6 @@ export default class Pay extends Component {
           return (
             <Button
               onPress={() => {
-                console.log(share);
                 share({
                   title: "title",
                   content: "xx",
@@ -617,7 +626,8 @@ export default class Pay extends Component {
       NowInPeople,
       discountList,
       discountLabel,
-      CardId
+      CardId,
+      SaleAmont
     } = this.state;
     const { NickName } = this.props.userInfo;
     return (
@@ -661,7 +671,6 @@ export default class Pay extends Component {
             });
           }}
           onValueSelect={(v, item) => {
-            console.log(item);
             this.setState(
               {
                 discountLabel: item.label,
@@ -679,7 +688,7 @@ export default class Pay extends Component {
           username={NickName}
           time={tickts}
           money={Money}
-          discount={0}
+          discount={Money - SaleAmont}
           storeName={StoreName}
           onlinePeople={NowInPeople}
           addr={StoreAddress}

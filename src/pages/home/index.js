@@ -19,8 +19,7 @@ import {
   StarScore,
   TimeSlideChoose,
   CheckBox,
-  Map,
-  Picker
+  Map
 } from "src/components";
 const Geolocation = require("Geolocation");
 const Height = () => <View style={{ height: 10 }} />;
@@ -42,8 +41,6 @@ export default class Home extends Component {
     cityValue: 0,
     distanceValue: 0,
     StoreName: "",
-
-    isPickerVisible: false,
 
     startDay: 0,
     endDay: 4
@@ -134,7 +131,6 @@ export default class Home extends Component {
     }
 
     return api.getStoreList(params).then(res => {
-      console.log(res);
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
           case 1:
@@ -179,7 +175,7 @@ export default class Home extends Component {
       });
     }
   }
-  goStoreDetail = (Id, i) => {
+  goStoreDetail = Id => {
     let dataSource = null;
     if (this.storeListRef) {
       dataSource = this.storeListRef.state.dataSource;
@@ -190,8 +186,7 @@ export default class Home extends Component {
         routeName: "StoreDetail",
         params: {
           Id,
-          storeNum: dataSource ? dataSource.length : 1,
-          currentIndex: i
+          storeNum: dataSource ? dataSource.length : 1
         }
       })
     );
@@ -230,7 +225,7 @@ export default class Home extends Component {
       >
         <Map
           onStoreTap={id => {
-            this.goStoreDetail(id, 0);
+            this.goStoreDetail(id);
           }}
         />
         <ToggleButton />
@@ -496,17 +491,16 @@ export default class Home extends Component {
       Address,
       Charge,
       Id,
-      StoreImg
+      StoreImg,
+      PeopleNum
     } = row;
     const icon = StoreImg.includes("https")
       ? { uri: StoreImg }
-      : require("./img/u42.png");
+      : require("./img/logo.png");
+
     return (
       <View style={styles.item}>
-        <Button
-          onPress={() => this.goStoreDetail(Id, i)}
-          style={styles.itemTop}
-        >
+        <Button onPress={() => this.goStoreDetail(Id)} style={styles.itemTop}>
           <Icon size={82} source={icon} />
           <View style={styles.itemDetail}>
             <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
@@ -544,7 +538,9 @@ export default class Home extends Component {
           <Text style={styles.price}>{Charge || "0"}元/小时</Text>
         </View>
         <View style={styles.tagWrapper}>
-          <Text style={styles.tagText}>{NowPeopleNum}人</Text>
+          <Text style={styles.tagText}>
+            {Number(PeopleNum) - NowPeopleNum}人
+          </Text>
         </View>
       </View>
     );
@@ -564,8 +560,7 @@ export default class Home extends Component {
     );
   }
   renderListPattern() {
-    const { tabActiveIndex, cityValue, isPickerVisible } = this.state;
-    const { city } = this.store;
+    const { tabActiveIndex } = this.state;
     const { startDay, endDay } = this.store.daysInfo;
     return (
       <Page
@@ -579,19 +574,14 @@ export default class Home extends Component {
             <Icon size={20} source={require("./img/map.png")} />
           </Button>
         }
-        RightComponent={
-          <Button
-            onPress={() => {
-              this.setState({
-                isPickerVisible: !isPickerVisible
-              });
-            }}
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
-            <Text style={{ color: "#fff" }}>{city[cityValue].label}</Text>
-            <Icon size={20} source={require("./img/u305.png")} />
-          </Button>
-        }
+        // RightComponent={
+        //   <Button
+        //     style={{ flexDirection: "row", alignItems: "center" }}
+        //   >
+        //     <Text style={{ color: "#fff" }}>{city[cityValue].label}</Text>
+        //     <Icon size={20} source={require("./img/u305.png")} />
+        //   </Button>
+        // }
       >
         {this.renderHeader()}
         {!!tabActiveIndex && (
@@ -609,27 +599,6 @@ export default class Home extends Component {
         {this.renderChoose()}
         {this.renderList()}
         {this.renderChooseModal()}
-        <Picker
-          visible={isPickerVisible}
-          data={city}
-          onValueSelect={v => {
-            if (v !== 0) {
-              this.setState({
-                distanceValue: "全城"
-              });
-            } else {
-              this.setState({
-                distanceValue: 0
-              });
-            }
-            this.setState({ cityValue: v, isPickerVisible: false });
-          }}
-          onRequestClose={() => {
-            this.setState({
-              isPickerVisible: false
-            });
-          }}
-        />
       </Page>
     );
   }

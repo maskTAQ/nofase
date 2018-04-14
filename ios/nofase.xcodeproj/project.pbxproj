@@ -34,7 +34,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* nofaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nofaseTests.m */; };
-		5C09C8E520819853005C20E8 /* index.ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C09C8E420819853005C20E8 /* index.ios.bundle */; };
+		5C09C94D2081A5B4005C20E8 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C09C94C2081A5B4005C20E8 /* index.ios.jsbundle */; };
 		5C3E1B96206BE97E0066A573 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B95206BE97E0066A573 /* SystemConfiguration.framework */; };
 		5C3E1B98206BE98D0066A573 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B97206BE98D0066A573 /* CoreGraphics.framework */; };
 		5C3E1B9A206BE9980066A573 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B99206BE9980066A573 /* CoreTelephony.framework */; };
@@ -373,7 +373,7 @@
 		2D02E47B1E0B4A5D006451C7 /* nofase-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nofase-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* nofase-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nofase-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C09C8E420819853005C20E8 /* index.ios.bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.bundle; path = ../bundle/index.ios.bundle; sourceTree = "<group>"; };
+		5C09C94C2081A5B4005C20E8 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5C3E1B95206BE97E0066A573 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5C3E1B97206BE98D0066A573 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5C3E1B99206BE9980066A573 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -587,7 +587,7 @@
 		13B07FAE1A68108700A75B9A /* nofase */ = {
 			isa = PBXGroup;
 			children = (
-				5C09C8E420819853005C20E8 /* index.ios.bundle */,
+				5C09C94C2081A5B4005C20E8 /* index.ios.jsbundle */,
 				5CB3FA3820777E780067136B /* assets */,
 				5CB4B857206D230F00245B9A /* Alipay */,
 				5CF5565C206BEC6800BC2461 /* sharemodule.m */,
@@ -1290,11 +1290,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CB4B862206D259600245B9A /* AlipaySDK.bundle in Resources */,
-				5C09C8E520819853005C20E8 /* index.ios.bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				5CB3FA3920777E780067136B /* assets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				5CF5564B206BEB9300BC2461 /* UMSocialSDKResources.bundle in Resources */,
+				5C09C94D2081A5B4005C20E8 /* index.ios.jsbundle in Resources */,
 				5CF5564E206BEB9300BC2461 /* UMSocialSDKPromptResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
