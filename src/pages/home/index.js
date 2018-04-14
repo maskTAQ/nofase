@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 
 import api from "src/api";
 import { WebSocket, Tip } from "src/common";
-import { DataView } from "src/components";
+
 import action from "src/action";
 import styles from "./style";
 
-const Geolocation = require("Geolocation");
 import {
+  DataView,
   Page,
   Button,
   Icon,
@@ -22,7 +22,7 @@ import {
   Map,
   Picker
 } from "src/components";
-
+const Geolocation = require("Geolocation");
 const Height = () => <View style={{ height: 10 }} />;
 
 @connect(state => {
@@ -132,7 +132,9 @@ export default class Home extends Component {
         ...location
       });
     }
+
     return api.getStoreList(params).then(res => {
+      console.log(res);
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
           case 1:
@@ -287,17 +289,16 @@ export default class Home extends Component {
                   />
                 }
                 onChangeValue={v => {
-                  if (v !== 0) {
-                    this.setState({
-                      distanceValue: "全城"
-                    });
-                  } else {
-                    this.setState({
-                      distanceValue: 0
-                    });
-                  }
-
-                  this.setState({ cityValue: v, chooseTabActiveIndex: NaN });
+                  this.setState(
+                    {
+                      distanceValue: v !== 0 ? "全城" : 0,
+                      cityValue: v,
+                      chooseTabActiveIndex: NaN
+                    },
+                    () => {
+                      this.storeListRef.triggerRefresh();
+                    }
+                  );
                 }}
               />
             </View>
@@ -355,10 +356,15 @@ export default class Home extends Component {
                 />
               }
               onChangeValue={v => {
-                this.setState({
-                  chooseTypeValue: v,
-                  chooseTabActiveIndex: NaN
-                });
+                this.setState(
+                  {
+                    chooseTypeValue: v,
+                    chooseTabActiveIndex: NaN
+                  },
+                  () => {
+                    this.storeListRef.triggerRefresh();
+                  }
+                );
               }}
             />
           </View>

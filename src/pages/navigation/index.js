@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { View, WebView } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { WebView } from "src/components";
+import { Page } from "src/components";
 
 @connect(state => {
   const { auth: { UserId } } = state;
@@ -19,14 +20,20 @@ export default class Navigation extends Component {
   render() {
     const { Lat, Lng } = this.props.navigation.state.params;
     return (
-      <WebView
-        title="导航"
-        url={`https://vmslq.cn/webview/navigation?params=${JSON.stringify({
-          Lat,
-          Lng
-        })}&timestamp=${Date.now}`}
-        ref={w => (this.webview = w)}
-      />
+      <Page title="导航">
+        <View style={{ flex: 1 }}>
+          <WebView
+            source={{
+              uri: `https://vmslq.cn/webview/navigation?params=${JSON.stringify(
+                {
+                  Lat,
+                  Lng
+                }
+              )}&timestamp=${Date.now}`
+            }}
+          />
+        </View>
+      </Page>
     );
   }
 }
