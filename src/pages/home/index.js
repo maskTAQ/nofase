@@ -102,14 +102,15 @@ export default class Home extends Component {
       distanceValue,
       tabActiveIndex,
       chooseTypeValue,
-      StoreName
+      StoreName,
+      cityValue
     } = this.state;
     const params = {};
     if (tabActiveIndex === 0) {
       Object.assign(params, {
         SeachType: 1, //按店铺搜索
         SeachValue: StoreName,
-        UserArea: "",
+        UserArea: this.store.city[cityValue].label,
         Range: distanceValue,
         PageIndex,
         PageNum: 20,
@@ -132,7 +133,22 @@ export default class Home extends Component {
       });
     }
     return api.getStoreList(params).then(res => {
-      return res;
+      return res.sort((prev, next) => {
+        switch (this.state.chooseTypeValue) {
+          case 1:
+            return prev.Distance - next.Distance;
+          case 2:
+            return prev.Charge - next.Charge;
+          case 3:
+            return next.NowPeopleNum - prev.NowPeopleNum;
+          case 4:
+            return next.StoreScore - prev.StoreScore;
+          case 5:
+            return next.PeopleNum - prev.PeopleNum;
+          default:
+            return 0;
+        }
+      });
     });
   };
   getCurrentPosition() {
@@ -339,24 +355,6 @@ export default class Home extends Component {
                 />
               }
               onChangeValue={v => {
-                this.storeListRef.state.dataSource = this.storeListRef.state.dataSource.sort(
-                  (prev, next) => {
-                    switch (v) {
-                      case 1:
-                        return prev.Distance - next.Distance;
-                      case 2:
-                        return prev.Charge - next.Charge;
-                      case 3:
-                        return next.NowPeopleNum - prev.NowPeopleNum;
-                      case 4:
-                        return next.StoreScore - prev.StoreScore;
-                      case 5:
-                        return next.PeopleNum - prev.PeopleNum;
-                      default:
-                        return 0;
-                    }
-                  }
-                );
                 this.setState({
                   chooseTypeValue: v,
                   chooseTabActiveIndex: NaN
