@@ -49,6 +49,7 @@ const post = (
   { loading = true, handleCatch = true } = {}
 ) => {
   loading && Tip.loading();
+  console.log(loading && url);
   return new Promise((resolve, reject) => {
     requestWrapper(url, params)
       .then(res => {

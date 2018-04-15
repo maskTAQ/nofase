@@ -1,14 +1,16 @@
 export default {
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: 10
+    //paddingBottom: 10
   },
   imgBox: {
     width: "100%",
     height: 160,
-    paddingTop: 10,
     paddingBottom: 10
   },
   img: {
-    flex: 1
+    width: "100%",
+    height: 150
   }
 };

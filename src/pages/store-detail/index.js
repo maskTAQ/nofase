@@ -5,7 +5,8 @@ import {
   Text,
   ScrollView,
   Linking,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableWithoutFeedback
 } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -183,7 +184,7 @@ export default class StoreDetail extends Component {
       StoreImgList = []
     } = this.state;
     return (
-      <Button
+      <TouchableWithoutFeedback
         onPress={() => {
           if (StoreImgList.length === 0) {
             Tip.fail("图库中暂无图片");
@@ -198,110 +199,117 @@ export default class StoreDetail extends Component {
             );
           }
         }}
-        style={styles.header}
       >
-        {StoreImg ? (
-          <Image
-            onLoad={() => {
-              console.log("load");
-              this.setState({
-                isLoadingStoreImg: false
-              });
-            }}
-            onError={() => {
-              this.setState({
-                isLoadingStoreImg: false,
-                StoreImg: ""
-              });
-              Tip.fail("商铺图片加载失败");
-            }}
-            source={{ uri: StoreImg }}
-            style={styles.headerBg}
-          />
-        ) : (
-          <Image source={require("./img/u0.png")} style={styles.headerBg} />
-        )}
-
-        {isLoadingStoreImg && StoreImg ? (
-          <ActivityIndicator size="large" color="#000" />
-        ) : null}
-        <View style={styles.storeIntro}>
-          <View style={styles.introTitleWrapper}>
-            <View style={styles.introTitleBox}>
-              <View style={{ flex: 1 }}>
-                <Text
-                  style={{ fontSize: 20, color: "#fff", fontWeight: "bold" }}
-                >
-                  {StoreName}
-                </Text>
-                <Text
-                  style={{
-                    marginTop: 4,
-                    fontSize: 14,
-                    color: "#fff",
-                    fontWeight: "bold"
-                  }}
-                >
-                  {Address}
-                </Text>
-              </View>
-              <View style={{ justifyContent: "center" }}>
-                <Icon
-                  size={20}
-                  source={require("./img/u101.png")}
-                  style={{ alignItems: "center" }}
-                />
-                <Text
-                  style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
-                >
-                  每一小时
-                </Text>
-                <Text
-                  style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
-                >
-                  计费一次
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              padding: 6,
-              backgroundColor: "#666",
-              alignContent: "center"
-            }}
-          >
-            <Icon
-              size={26}
-              source={require("./img/u177.png")}
-              style={{ paddingLeft: 10, paddingRight: 10 }}
+        <View style={styles.header}>
+          {StoreImg ? (
+            <Image
+              onLoad={() => {
+                console.log("load");
+                this.setState({
+                  isLoadingStoreImg: false
+                });
+              }}
+              onError={() => {
+                this.setState({
+                  isLoadingStoreImg: false,
+                  StoreImg: ""
+                });
+                Tip.fail("商铺图片加载失败");
+              }}
+              source={{ uri: StoreImg }}
+              style={styles.headerBg}
             />
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
-                可容纳线上{PeopleNum}人位
-              </Text>
-              <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
-                当前剩余{PeopleNum - NowPeopleNum}人位
-              </Text>
+          ) : (
+            <Image source={require("./img/u0.png")} style={styles.headerBg} />
+          )}
+
+          {isLoadingStoreImg && StoreImg ? (
+            <ActivityIndicator size="large" color="#000" />
+          ) : null}
+          <View style={styles.storeIntro}>
+            <View style={styles.introTitleWrapper}>
+              <View style={styles.introTitleBox}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{ fontSize: 20, color: "#fff", fontWeight: "bold" }}
+                  >
+                    {StoreName}
+                  </Text>
+                  <Text
+                    style={{
+                      marginTop: 4,
+                      fontSize: 14,
+                      color: "#fff",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    {Address}
+                  </Text>
+                </View>
+                <View style={{ justifyContent: "center" }}>
+                  <Icon
+                    size={20}
+                    source={require("./img/u101.png")}
+                    style={{ alignItems: "center" }}
+                  />
+                  <Text
+                    style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
+                  >
+                    每一小时
+                  </Text>
+                  <Text
+                    style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
+                  >
+                    计费一次
+                  </Text>
+                </View>
+              </View>
             </View>
             <View
               style={{
-                paddingLeft: 20,
-                paddingRight: 20,
-                height: 30,
-                justifyContent: "center",
-                backgroundColor: "#1a97df",
-                borderRadius: 4
+                flexDirection: "row",
+                padding: 6,
+                backgroundColor: "#666",
+                alignContent: "center"
               }}
             >
-              <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>
-                {Charge}元 / 小时
-              </Text>
+              <Icon
+                size={26}
+                source={require("./img/u177.png")}
+                style={{ paddingLeft: 10, paddingRight: 10 }}
+              />
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
+                >
+                  可容纳线上{PeopleNum}人位
+                </Text>
+                <Text
+                  style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
+                >
+                  当前剩余{PeopleNum - NowPeopleNum}人位
+                </Text>
+              </View>
+              <View
+                style={{
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  height: 30,
+                  justifyContent: "center",
+                  backgroundColor: "#1a97df",
+                  borderRadius: 4
+                }}
+              >
+                <Text
+                  style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}
+                >
+                  {Charge}元 / 小时
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </Button>
+      </TouchableWithoutFeedback>
     );
   }
   renderStarScore() {

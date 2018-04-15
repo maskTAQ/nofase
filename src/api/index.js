@@ -55,11 +55,11 @@ export default {
   },
   //获取店铺在线数
   getStoreNowPeople(StoreId) {
-    return post("/Store/GetStoreNowPeople", { StoreId });
+    return post("/Store/GetStoreNowPeople", { StoreId }, { loading: false });
   },
   //获取商铺图片 http://101.200.196.202:8888/Store/GetStoreImgs
   getStoreImg(StoreId) {
-    return post("/Store/GetStoreImgs", { StoreId });
+    return post("/Store/GetStoreImgs", { StoreId }, { loading: false });
   },
   //读取课程表
   getCurriculum({ StoreId }) {

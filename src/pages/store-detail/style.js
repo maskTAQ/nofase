@@ -8,7 +8,7 @@ export default {
     position: "absolute",
     zIndex: 1,
     width: "100%",
-    backgroundColor: "rgba(0,0,0,0.4)"
+    backgroundColor: "transparent"
   },
   header: {
     position: "relative",
