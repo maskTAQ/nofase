@@ -42,7 +42,7 @@ export default class Fitnessrecord extends Component {
             {moment(new Date(timestamp)).format("YYYY/MM/DD HH:mm")}
           </Text>
           <Text style={styles.itemDetail}>
-            {StoreName} | {" " + Amont}
+            {StoreName} | {" " + Amont}元
           </Text>
         </View>
         <View style={styles.itemRight}>

@@ -6,6 +6,12 @@ import styles from "./style";
 import { Tip } from "src/common";
 import { Input, Icon, CheckBox, Page, Button } from "src/components";
 import { Alipay } from "src/common/pay";
+import { connect } from "react-redux";
+
+@connect(state => {
+  const { userInfo } = state;
+  return { userInfo };
+})
 export default class Recharge extends Component {
   static defaultProps = {
     balance: -45.5,
@@ -13,7 +19,8 @@ export default class Recharge extends Component {
   };
   static propTypes = {
     balance: PropTypes.number,
-    payStatus: PropTypes.string
+    payStatus: PropTypes.string,
+    userInfo: PropTypes.object
   };
   state = {
     payWay: 0,
@@ -43,7 +50,7 @@ export default class Recharge extends Component {
   }
   renderNot() {
     const { payWay, recharge } = this.state;
-    const { balance } = this.props;
+    const { Money } = this.props.userInfo;
     const payWayMap = [
       {
         label: this.renderLabel(
@@ -82,7 +89,7 @@ export default class Recharge extends Component {
             </View>
           </View>
           <View style={styles.balanceWrapper}>
-            <Text style={{ color: "#1e89e4" }}>当前余额：{balance}</Text>
+            <Text style={{ color: "#1e89e4" }}>当前余额：{Money}</Text>
           </View>
           <Text style={styles.checklabel}>选择支付方式：</Text>
         </View>
@@ -146,6 +153,7 @@ export default class Recharge extends Component {
     }
   }
   render() {
+    console.log(this.props);
     return <Page title="充值">{this.renderConent()}</Page>;
   }
 }

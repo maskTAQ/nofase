@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Text, View, Alert } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -83,7 +83,19 @@ export default class Home extends Component {
   };
   linkSocket = () => {
     const { UserId } = this.props;
-    WebSocket.result(UserId)
+    WebSocket.uniqueLoginWebsocket(UserId, () => {
+      Alert.alert("提示", "账号在其他地方登陆", [
+        {
+          text: "退出",
+          onPress: () => {
+            this.props.navigation.dispatch(
+              action.navigate.go({ routeName: "Login" })
+            );
+          }
+        }
+      ]);
+    }).catch(e => {});
+    WebSocket.QRWebsocket(UserId)
       .then(res => {
         // this.props.navigation.dispatch(
         //   action.navigate.go({ routeName: "Pay" })

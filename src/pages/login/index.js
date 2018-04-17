@@ -40,6 +40,11 @@ export default class Login extends Component {
         );
       })
       .catch(e => {
+        if (e === "用户未注册") {
+          this.props.navigation.dispatch(
+            action.navigate.go({ routeName: "Register" })
+          );
+        }
         Tip.fail(e);
       });
   };
