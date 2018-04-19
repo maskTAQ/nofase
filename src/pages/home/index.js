@@ -563,7 +563,6 @@ export default class Home extends Component {
         <DataView
           ref={e => (this.storeListRef = e)}
           getData={this.search}
-          ListEmptyComponent={<Text>暂时没有数据哦</Text>}
           ItemSeparatorComponent={Height}
           renderItem={({ item, index }) => this.renderItem(item, index)}
         />

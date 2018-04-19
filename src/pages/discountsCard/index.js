@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 
-import { Page, Button, Icon } from "src/components";
+import { Page, Button, Icon, DataView } from "src/components";
 import styles from "./style";
+import api from "src/api";
 import action from "src/action";
 
 export default class Transacion extends Component {
@@ -14,47 +15,40 @@ export default class Transacion extends Component {
   back = () => {
     this.props.navigation.dispatch(action.navigate.back());
   };
+  getDiscountList = PageSize => {
+    return api.getDiscountList({ PageSize, PageNum: 20 });
+  };
   renderItem(row) {
-    const { type, onPress, time } = row;
+    const { CardName, EDateTime } = row;
     return (
-      <Button onPress={onPress}>
-        <View style={styles.item}>
-          <Image source={require("./img/u35.png")} style={styles.jeimgs} />
-          <View style={styles.texts}>
-            <Text style={{ color: "#000", fontSize: 16 }}>{type}</Text>
-            <Text style={{ color: "#333", fontSize: 13 }}>有效期:{time}</Text>
-          </View>
+      <View style={styles.item}>
+        <Image source={require("./img/u35.png")} style={styles.jeimgs} />
+        <View style={styles.texts}>
+          <Text style={{ color: "#000", fontSize: 16 }}>{CardName}</Text>
+          <Text style={{ color: "#333", fontSize: 13 }}>
+            有效期:{EDateTime}
+          </Text>
         </View>
-      </Button>
+      </View>
     );
   }
   renderList() {
-    const data = [
-      {
-        type: "单次八折卡",
-        time: "2016-69-56"
-      },
-      {
-        type: "单次八折卡",
-        time: "2016-69-56"
-      },
-      {
-        type: " 单次八折卡",
-        time: "2016-69-56"
-      }
-    ];
     return (
-      <FlatList
+      <DataView
         style={styles.list}
+        ref={e => (this.discountList = e)}
+        ListEmptyComponent={<Text>没有优惠券哦~</Text>}
+        getData={this.getDiscountList}
         ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-        keyExtractor={(item, index) => index}
-        data={data}
         renderItem={({ item }) => this.renderItem(item)}
       />
     );
   }
   render() {
-    const tabMap = [["打折卡", "3", 0], "border", ["抵现卷", "12.6", 1]];
+    const cardNum = this.discountList
+      ? this.discountList.state.dataSource.length
+      : 0;
+    const tabMap = [["打折卡", cardNum, 0], "border", ["抵现卷", cardNum, 1]];
     return (
       <View style={styles.container}>
         <View style={styles.bgContainer}>

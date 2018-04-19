@@ -23,6 +23,21 @@ export default class Fitnessrecord extends Component {
   getUserOrderList(PageIndex) {
     return api.getUserOrderList({ PageIndex, PageNum: 20 });
   }
+  getTimeByMinutes(minutes) {
+    const pad = s => {
+      if (String(s).length === 1) {
+        return "0" + s;
+      } else {
+        return s;
+      }
+    };
+    const t = minutes * 60 / 1000;
+    const d = Math.floor(t / (24 * 3600));
+    const h = Math.floor((t - 24 * 3600 * d) / 3600);
+    const m = Math.floor((t - 24 * 3600 * d - h * 3600) / 60);
+    //const s = Math.floor(t - 24 * 3600 * d - h * 3600 - m * 60);
+    return `${pad(h)}:${pad(m)}`;
+  }
   renderItem(row) {
     console.log(row);
     const { StoreName, Amont = 0, SDate } = row;
@@ -138,14 +153,16 @@ export default class Fitnessrecord extends Component {
     );
   }
   render() {
-    const { isShareModalVisible, currentOrder } = this.state;
+    const { isShareModalVisible, currentOrder, StoreImg } = this.state;
     const {
-      UserName,
+      NickName,
       StoreName,
       TimeLong,
       Amont,
-      StoreAddr = "暂无地址信息",
-      SaleAmont
+      StoreAddress = "暂无地址信息",
+      SaleAmont,
+      UserPhoto,
+      Level
     } = currentOrder;
     return (
       <Page title="健身记录">
@@ -163,13 +180,20 @@ export default class Fitnessrecord extends Component {
             <View />
             <ShareModal
               isVisible={isShareModalVisible}
-              username={UserName}
-              time={String(TimeLong)}
+              username={NickName}
+              portrait={
+                UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")
+              }
+              storeImg={
+                StoreImg ? { uri: StoreImg } : require("./img/logo.png")
+              }
+              level={Level}
+              time={this.getTimeByMinutes(TimeLong)}
               money={Amont}
               discount={Amont - SaleAmont}
               storeName={StoreName}
               onlinePeople={0}
-              addr={StoreAddr}
+              addr={StoreAddress}
               close={() => {
                 this.setState({
                   isShareModalVisible: false

@@ -92,5 +92,9 @@ export default {
   //获取充值记录 http://101.200.196.202:8888/User/GetRechargeList
   getGetRechargeList(params) {
     return post("/User/GetRechargeList", params, { loading: false });
+  },
+  //获取店铺 评论头像 /User/GetScoreUserList
+  getScoreUserPortrait(StoreId) {
+    return post("/User/GetRechargeList", { StoreId }, { loading: false });
   }
 };

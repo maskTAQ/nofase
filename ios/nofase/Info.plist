@@ -29,7 +29,7 @@
 			<string>wx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxdc1e388c3822c80b</string>
+				<string>wxa0f45f747e934b0b</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,7 +39,7 @@
 			<string>tencent</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent100424468</string>
+				<string>tencent1105821097</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,7 +49,7 @@
 			<string>QQ</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ05fc5b14</string>
+				<string>QQ41e97da9</string>
 			</array>
 		</dict>
 		<dict>

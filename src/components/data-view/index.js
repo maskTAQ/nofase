@@ -36,6 +36,7 @@ export default class DataView extends Component {
     ItemSeparatorComponent: PropTypes.func,
     renderItem: PropTypes.func,
     pulldownLoadMoreInterval: PropTypes.number,
+    ListEmptyComponent: PropTypes.any,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {
@@ -222,7 +223,8 @@ export default class DataView extends Component {
       ItemSeparatorComponent,
       renderItem,
       isPulldownLoadMore,
-      isPullupRefresh
+      isPullupRefresh,
+      ListEmptyComponent
     } = this.props;
     const hint = [];
     isPulldownLoadMore && hint.push("下拉");
@@ -237,27 +239,30 @@ export default class DataView extends Component {
           keyExtractor={(row, i) => i}
           renderItem={renderItem}
           ItemSeparatorComponent={ItemSeparatorComponent}
-          ListEmptyComponent={({ item }) => {
-            if (refreshing) {
-              return (
-                <View style={styles.ListEmptyComponent}>
-                  <Text style={styles.ListEmptyComponentText}>
-                    获取数据中...
-                  </Text>
-                </View>
-              );
-            } else {
-              return (
-                <View style={styles.ListEmptyComponent}>
-                  <Text style={styles.ListEmptyComponentText}>
-                    没有数据哦{hint.length
-                      ? `尝试${hint.join("或者")}试试吧~`
-                      : "!"}
-                  </Text>
-                </View>
-              );
-            }
-          }}
+          ListEmptyComponent={
+            ListEmptyComponent ||
+            (({ item }) => {
+              if (refreshing) {
+                return (
+                  <View style={styles.ListEmptyComponent}>
+                    <Text style={styles.ListEmptyComponentText}>
+                      获取数据中...
+                    </Text>
+                  </View>
+                );
+              } else {
+                return (
+                  <View style={styles.ListEmptyComponent}>
+                    <Text style={styles.ListEmptyComponentText}>
+                      没有数据哦{hint.length
+                        ? `尝试${hint.join("或者")}试试吧~`
+                        : "!"}
+                    </Text>
+                  </View>
+                );
+              }
+            })
+          }
           ListFooterComponent={this.renderFooter()}
           onScrollBeginDrag={this.compatibilityPullDown}
           scrollEventThrottle={100}

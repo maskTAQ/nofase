@@ -17,7 +17,10 @@ const ShareModal = ({
   isVisible,
   hasShareButton = true,
   money,
-  share
+  share,
+  portrait,
+  storeImg,
+  level
 }) => {
   return (
     <Alert isVisible={isVisible} close={close}>
@@ -34,8 +37,19 @@ const ShareModal = ({
             <View style={styles.headerWrapper}>
               <View style={{ width: styles.closeWrapper.width }} />
               <View style={styles.userInfoWrapper}>
-                <Icon size={60} source={portraitSource} />
-                <Text style={styles.username}>{username}</Text>
+                <View
+                  style={{
+                    width: 60,
+                    height: 60,
+                    borderRadius: 60,
+                    overflow: "hidden"
+                  }}
+                >
+                  <Icon size={60} source={portrait} />
+                </View>
+                <Text style={styles.username}>
+                  {username} LV:{level}
+                </Text>
               </View>
               <Button onPress={close} style={styles.closeWrapper}>
                 <Icon size={22} source={require("./img/u221.png")} />
@@ -56,7 +70,7 @@ const ShareModal = ({
               </View>
             </View>
             <View style={styles.storeInfo}>
-              <Icon size={50} source={require("./img/u209.png")} />
+              <Icon size={50} source={storeImg} />
               <View style={styles.storeInfoWrapper}>
                 <Text style={styles.storeName}>{storeName}</Text>
                 {/**
@@ -101,6 +115,9 @@ ShareModal.propTypes = {
   hasShareButton: PropTypes.bool,
   isVisible: PropTypes.bool,
   money: PropTypes.number,
-  share: PropTypes.func
+  share: PropTypes.func,
+  portrait: PropTypes.any,
+  storeImg: PropTypes.any,
+  level: PropTypes.any
 };
 export default ShareModal;

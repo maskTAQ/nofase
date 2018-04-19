@@ -627,7 +627,10 @@ export default class Pay extends Component {
       discountList,
       discountLabel,
       CardId,
-      SaleAmont
+      SaleAmont,
+      UserPhoto,
+      StoreImg,
+      Level
     } = this.state;
     const { NickName } = this.props.userInfo;
     return (
@@ -685,7 +688,10 @@ export default class Pay extends Component {
         />
         <ShareModal
           isVisible={isShareModalVisible}
+          portrait={UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")}
+          storeImg={StoreImg ? { uri: StoreImg } : require("./img/logo.png")}
           username={NickName}
+          level={Level}
           time={tickts}
           money={Money}
           discount={Money - SaleAmont}

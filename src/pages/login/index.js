@@ -8,7 +8,7 @@ import { Input, Button, CodeButton } from "src/components";
 import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
-//import { login } from "src/common/share";
+import { login } from "src/common/share";
 
 @connect()
 export default class Login extends Component {
@@ -54,14 +54,14 @@ export default class Login extends Component {
     );
   };
   wxLogin = () => {
-    // login("WECHAT")
-    //   .then(res => {
-    //     Tip.success(res);
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //     Tip.fail(e);
-    //   });
+    login("WECHAT")
+      .then(res => {
+        Tip.success(res);
+      })
+      .catch(e => {
+        console.log(e);
+        Tip.fail(e);
+      });
   };
   render() {
     const { phone, code } = this.state;
@@ -130,8 +130,7 @@ export default class Login extends Component {
             </Button>
           </View>
         </View>
-        {/*
-          <Image
+        <Image
           source={require("src/images/login/bg.png")}
           style={styles.bg}
           resizeMode="stretch"
@@ -145,7 +144,6 @@ export default class Login extends Component {
             />
           </Button>
         </View>
-        */}
       </View>
     );
   }
