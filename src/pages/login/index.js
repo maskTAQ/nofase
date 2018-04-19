@@ -17,7 +17,8 @@ export default class Login extends Component {
   };
   state = {
     phone: "",
-    code: ""
+    code: "",
+    wxInfo: null
   };
   handleValueChange(type, value) {
     this.setState({
@@ -25,11 +26,19 @@ export default class Login extends Component {
     });
   }
   login = () => {
-    const { phone, code } = this.state;
+    const { phone, code, wxInfo } = this.state;
     // if (!this.codeRef.isGetCode) {
     //   return Tip.fail("请先获取验证码");
     // }
-    return api
+    if (wxInfo) {
+      // const {WxCode,WxOpenId,WxPhoto,WxSex} =wxInfo;
+      // api.bindWX({
+      //   Tel:phone,
+      //   ExCode:code,
+      //   WxCode,WxOpenId,WxPhoto,WxSex
+      // })
+    }
+    api
       .login({ Tel: phone, ExCode: code })
       .then(res => {
         console.log(res);
@@ -56,7 +65,11 @@ export default class Login extends Component {
   wxLogin = () => {
     login("WECHAT")
       .then(res => {
-        Tip.success(res);
+        console.log(res, "login");
+        this.setState({
+          wxInfo: res
+        });
+        Tip.success(JSON.stringify(res));
       })
       .catch(e => {
         console.log(e);
@@ -64,7 +77,7 @@ export default class Login extends Component {
       });
   };
   render() {
-    const { phone, code } = this.state;
+    const { phone, code, wxInfo } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar
@@ -122,7 +135,7 @@ export default class Login extends Component {
             style={styles.loginButton}
             textStyle={styles.loginText}
           >
-            立即登录
+            {wxInfo ? "立即绑定" : "立即登录"}
           </Button>
           <View style={styles.register}>
             <Button onPress={this.register} textStyle={styles.registerText}>
@@ -130,6 +143,7 @@ export default class Login extends Component {
             </Button>
           </View>
         </View>
+        <Text>{JSON.stringify(wxInfo)}</Text>
         <Image
           source={require("src/images/login/bg.png")}
           style={styles.bg}
