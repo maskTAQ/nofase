@@ -29,18 +29,18 @@ class App extends Component {
     AsyncStorage.getItem('mobile', (e, m) => {
       if (!e && m) {
 
-        // api.rememberLogin({ Tel: m })
-        //   .then(res => {
-        //     this.props.dispatch(
-        //       action.login(res)
-        //     );
-        //     this.props.dispatch(
-        //       action.navigate.go({ routeName: "Home" })
-        //     );
-        //   })
-        //   .catch(e => {
+        api.rememberLogin({ Tel: m })
+          .then(res => {
+            this.props.dispatch(
+              action.login(res)
+            );
+            this.props.dispatch(
+              action.navigate.go({ routeName: "Home" })
+            );
+          })
+          .catch(e => {
 
-        //   })
+          })
       }
     })
 
@@ -52,7 +52,7 @@ class App extends Component {
         }
       })
       .catch(e => {
-        console.log(e)
+        //console.log(e)
       })
   }
   componentDidMount() {

@@ -31,6 +31,7 @@ export default {
   },
   // 获取商家列表(列表模式)
   getStoreList(params) {
+    console.log(params);
     return post("/User/GetStoreListBySeach", params, { loading: false });
   },
   //获取用户信息

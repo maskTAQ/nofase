@@ -49,12 +49,12 @@ export default class StoreDetail extends Component {
     Tip.loading();
     const { Id } = this.props.navigation.state.params;
     Promise.all([
-      // this.getStoreInfo(Id),
-      // this.getStoreImg(Id),
-      this.getScoreUserPortrait(Id)
-      // this.getStoreNowPeople(Id),
-      // this.getDeviceInfo(Id),
-      // this.getCurriculum(Id)
+      this.getStoreInfo(Id),
+      this.getStoreImg(Id),
+      this.getScoreUserPortrait(Id),
+      this.getStoreNowPeople(Id),
+      this.getDeviceInfo(Id),
+      this.getCurriculum(Id)
     ])
       .then(res => {
         res.forEach((item, i) => {
@@ -122,7 +122,6 @@ export default class StoreDetail extends Component {
     return api
       .getScoreUserPortrait(Id)
       .then(res => {
-        console.log(res);
         return {
           portrait: res
         };
@@ -331,7 +330,7 @@ export default class StoreDetail extends Component {
   }
   renderStarScore() {
     //const people = [1, 1, 1, 1, 1, 1, 1];
-    const { portrait } = this.state;
+    const { portrait = [] } = this.state;
     return (
       <View
         style={{

@@ -24,6 +24,7 @@ import {
 const Geolocation = require("Geolocation");
 const Height = () => <View style={{ height: 10 }} />;
 
+const StoreImgIcon = <Icon size={82} source={require("./img/logo.png")} />;
 @connect(state => {
   const { auth: { UserId } } = state;
   return { UserId };
@@ -37,7 +38,7 @@ export default class Home extends Component {
     pattern: "list", //['map','list']
     tabActiveIndex: 0,
     chooseTabActiveIndex: NaN,
-    chooseTypeValue: 0,
+    chooseTypeValue: 1,
     cityValue: 0,
     distanceValue: 0,
     StoreName: "",
@@ -50,7 +51,7 @@ export default class Home extends Component {
   }
   store = {
     chooseType: [
-      { label: "默认", value: 0 },
+      //{ label: "默认", value: 0 },
       { label: "离我最近", value: 1 },
       { label: "价格最低", value: 2 },
       { label: "人气最高", value: 3 },
@@ -506,19 +507,22 @@ export default class Home extends Component {
       StoreImg,
       PeopleNum
     } = row;
-    const icon = StoreImg.includes("https")
-      ? { uri: StoreImg }
-      : require("./img/logo.png");
+    const icon = (StoreImg || "").includes("https") ? (
+      <Icon size={82} source={{ uri: StoreImg }} />
+    ) : (
+      StoreImgIcon
+    );
 
     return (
       <View style={styles.item}>
         <Button onPress={() => this.goStoreDetail(Id)} style={styles.itemTop}>
-          <Icon size={82} source={icon} />
+          {icon}
+
           <View style={styles.itemDetail}>
             <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
             <View style={styles.itemDetailCenter}>
               <Text style={styles.itemDistance}>
-                距离：{Distance.toFixed(0)}
+                距离：{Distance.toFixed(0)}Km
               </Text>
               <View style={styles.lessionButton}>
                 <Text style={styles.lessionText}>

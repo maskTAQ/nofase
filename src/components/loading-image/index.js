@@ -14,10 +14,14 @@ export default class LoadingImage extends Component {
     pending: true,
     status: "" //emua {'success','error'}
   };
+  shouldComponentUpdate(nextProps, nextState) {
+    const { status } = this.state;
+    const { status: nextStatus } = nextState;
+    return status !== nextStatus;
+  }
   renderImageIcon() {
     const { style, source } = this.props;
     const { pending, status } = this.state;
-    console.log(style, source, "asdad");
     return (
       <View style={[styles.imageIconBox, style]}>
         {pending && (
@@ -30,7 +34,7 @@ export default class LoadingImage extends Component {
         <Image
           source={status === "error" ? require("./img/error.png") : source}
           style={[styles.imageIcon, style]}
-          resizeMode="contain"
+          resizeMode="stretch"
           onError={() => {
             this.setState({
               pending: false,

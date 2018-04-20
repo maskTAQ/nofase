@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View, FlatList, Image } from "react-native";
+import { View, FlatList } from "react-native";
 import PropTypes from "prop-types";
 
-import { Page } from "src/components";
+import { Page, LoadingImage } from "src/components";
 import styles from "./style";
 export default class StoreImg extends Component {
   static defaultProps = {};
@@ -25,10 +25,9 @@ export default class StoreImg extends Component {
     });
   }
   renderItem({ item }) {
-    console.log(item.ImgUrl);
     return (
       <View style={styles.imgBox}>
-        <Image
+        <LoadingImage
           style={styles.img}
           source={{ uri: item.ImgUrl }}
           resizeMode="stretch"
@@ -38,7 +37,6 @@ export default class StoreImg extends Component {
   }
   render() {
     const { StoreImgList } = this.state;
-    console.log(StoreImgList);
     return (
       <Page title="店铺图库">
         <View style={styles.container}>
