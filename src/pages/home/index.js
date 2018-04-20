@@ -526,7 +526,7 @@ export default class Home extends Component {
               </Text>
               <View style={styles.lessionButton}>
                 <Text style={styles.lessionText}>
-                  课程：{NowCurriculum || "暂无课程"}
+                  课程:{NowCurriculum || "暂无"}
                 </Text>
                 <Icon size={20} source={require("./img/right.png")} />
               </View>
