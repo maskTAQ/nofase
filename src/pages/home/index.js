@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Text, View, Alert } from "react-native";
+import { Text, View } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import api from "src/api";
+import { Alert } from "src/components";
 import { WebSocket, Tip } from "src/common";
 
 import action from "src/action";
@@ -23,6 +24,51 @@ import {
 } from "src/components";
 const Geolocation = require("Geolocation");
 const Height = () => <View style={{ height: 10 }} />;
+
+const LogoutModal = ({ logout, isVisible }) => {
+  const styles = {
+    container: {
+      padding: 6,
+      borderWidth: 1,
+      borderColor: "#1a98e0",
+      borderRadius: 6,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(255,255,255,0.4)"
+    },
+    detail: {
+      lineHeight: 30,
+      color: "#000"
+    },
+    button: {
+      width: "100%",
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 6,
+      backgroundColor: "#1a98e0"
+    }
+  };
+  return (
+    <Alert isVisible={isVisible}>
+      <View style={styles.container}>
+        <Icon size={30} source={require("./img/error.png")} />
+        <Text style={styles.detail}>此账号在别处登录!</Text>
+        <Button
+          onPress={logout}
+          style={styles.button}
+          textStyle={{ color: "#fff" }}
+        >
+          退出登录
+        </Button>
+      </View>
+    </Alert>
+  );
+};
+LogoutModal.propTypes = {
+  logout: PropTypes.func,
+  isVisible: PropTypes.bool
+};
 
 const StoreImgIcon = <Icon size={82} source={require("./img/logo.png")} />;
 @connect(state => {
@@ -44,7 +90,9 @@ export default class Home extends Component {
     StoreName: "",
 
     startDay: 0,
-    endDay: 4
+    endDay: 4,
+
+    logoutModalVisible: false
   };
   componentWillMount() {
     this.linkSocket();
@@ -85,16 +133,9 @@ export default class Home extends Component {
   linkSocket = () => {
     const { UserId } = this.props;
     WebSocket.uniqueLoginWebsocket(UserId, () => {
-      Alert.alert("提示", "账号在其他地方登陆", [
-        {
-          text: "退出",
-          onPress: () => {
-            this.props.navigation.dispatch(
-              action.navigate.go({ routeName: "Login" })
-            );
-          }
-        }
-      ]);
+      this.setState({
+        logoutModalVisible: true
+      });
     }).catch(e => {});
     WebSocket.QRWebsocket(UserId)
       .then(res => {
@@ -105,6 +146,18 @@ export default class Home extends Component {
       .catch(e => {
         Tip.fail("连接商家失败");
       });
+  };
+  logout = () => {
+    this.setState(
+      {
+        logoutModalVisible: false
+      },
+      () => {
+        this.props.navigation.dispatch(
+          action.navigate.go({ routeName: "Login" })
+        );
+      }
+    );
   };
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
@@ -575,7 +628,7 @@ export default class Home extends Component {
     );
   }
   renderListPattern() {
-    const { tabActiveIndex } = this.state;
+    const { tabActiveIndex, logoutModalVisible } = this.state;
     const { startDay, endDay } = this.store.daysInfo;
     return (
       <Page
@@ -614,6 +667,7 @@ export default class Home extends Component {
         {this.renderChoose()}
         {this.renderList()}
         {this.renderChooseModal()}
+        <LogoutModal logout={this.logout} isVisible={logoutModalVisible} />
       </Page>
     );
   }

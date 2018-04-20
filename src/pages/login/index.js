@@ -143,7 +143,7 @@ export default class Login extends Component {
             </Button>
           </View>
         </View>
-        <Text>{JSON.stringify(wxInfo)}</Text>
+
         <Image
           source={require("src/images/login/bg.png")}
           style={styles.bg}
