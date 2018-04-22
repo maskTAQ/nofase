@@ -147,6 +147,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-push-notification')
     compile project(':RNWebView')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile files('libs/alipaySdk-20180316.jar')
