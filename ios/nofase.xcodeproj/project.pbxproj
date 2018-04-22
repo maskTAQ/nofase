@@ -36,6 +36,15 @@
 		2DCD954D1E0B4F2C00145EB5 /* nofaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nofaseTests.m */; };
 		5C1CF720208A256900A3C706 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C1CF71F208A256900A3C706 /* index.ios.jsbundle */; };
 		5C1CF722208A257F00A3C706 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5C1CF721208A257F00A3C706 /* assets */; };
+		5C3C2B45208CB8660055BA88 /* UMPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B1E208CB8660055BA88 /* UMPush.framework */; };
+		5C3C2B49208CB8740055BA88 /* RNUMConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C2B48208CB8740055BA88 /* RNUMConfigure.m */; };
+		5C3C2B4C208CB87A0055BA88 /* UMPushModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C2B4A208CB87A0055BA88 /* UMPushModule.m */; };
+		5C3C2B50208CBBDF0055BA88 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */; };
+		5C3C2B52208CBC9B0055BA88 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */; };
+		5C3C2B54208CBCB10055BA88 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B53208CBCB10055BA88 /* UMCommon.framework */; };
+		5C3C2B56208CBD360055BA88 /* UMPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B55208CBD360055BA88 /* UMPush.framework */; };
+		5C3C2B58208CBF340055BA88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B57208CBF340055BA88 /* UserNotifications.framework */; };
+		5C3C2B63208CC2F20055BA88 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B60208CC2DF0055BA88 /* libRCTPushNotification.a */; };
 		5C3E1B96206BE97E0066A573 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B95206BE97E0066A573 /* SystemConfiguration.framework */; };
 		5C3E1B98206BE98D0066A573 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B97206BE98D0066A573 /* CoreGraphics.framework */; };
 		5C3E1B9A206BE9980066A573 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B99206BE9980066A573 /* CoreTelephony.framework */; };
@@ -257,6 +266,20 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		5C3C2B5F208CC2DF0055BA88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C3C2B5A208CC2DF0055BA88 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		5C3C2B61208CC2DF0055BA88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C3C2B5A208CC2DF0055BA88 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
+		};
 		5C3E1B75206BE9590066A573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -375,6 +398,18 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1CF71F208A256900A3C706 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5C1CF721208A257F00A3C706 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		5C3C2B1E208CB8660055BA88 /* UMPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMPush.framework; path = UMPush/UMPush.framework; sourceTree = "<group>"; };
+		5C3C2B47208CB8740055BA88 /* RNUMConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNUMConfigure.h; path = UMPush/RNUMConfigure.h; sourceTree = "<group>"; };
+		5C3C2B48208CB8740055BA88 /* RNUMConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNUMConfigure.m; path = UMPush/RNUMConfigure.m; sourceTree = "<group>"; };
+		5C3C2B4A208CB87A0055BA88 /* UMPushModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMPushModule.m; path = UMPush/UMPushModule.m; sourceTree = "<group>"; };
+		5C3C2B4B208CB87A0055BA88 /* UMPushModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMPushModule.h; path = UMPush/UMPushModule.h; sourceTree = "<group>"; };
+		5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = UMPush/UMCommon.framework; sourceTree = "<group>"; };
+		5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = UMPush/UMAnalytics.framework; sourceTree = "<group>"; };
+		5C3C2B53208CBCB10055BA88 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		5C3C2B55208CBD360055BA88 /* UMPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMPush.framework; sourceTree = "<group>"; };
+		5C3C2B57208CBF340055BA88 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		5C3C2B59208CBF3E0055BA88 /* nofase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = nofase.entitlements; path = nofase/nofase.entitlements; sourceTree = "<group>"; };
+		5C3C2B5A208CC2DF0055BA88 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		5C3E1B95206BE97E0066A573 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5C3E1B97206BE98D0066A573 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5C3E1B99206BE9980066A573 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -436,6 +471,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C3C2B63208CC2F20055BA88 /* libRCTPushNotification.a in Frameworks */,
+				5C3C2B58208CBF340055BA88 /* UserNotifications.framework in Frameworks */,
 				5CB4B842206D1E8F00245B9A /* CoreMotion.framework in Frameworks */,
 				5CB4B840206D1E8900245B9A /* CFNetwork.framework in Frameworks */,
 				5CB4B83E206D1E8100245B9A /* Foundation.framework in Frameworks */,
@@ -450,11 +487,14 @@
 				5CF55657206BEB9300BC2461 /* Bolts.framework in Frameworks */,
 				5C3E1B9C206BE9A00066A573 /* ImageIO.framework in Frameworks */,
 				5CF5565A206BEB9300BC2461 /* libUMSocialLog.a in Frameworks */,
+				5C3C2B45208CB8660055BA88 /* UMPush.framework in Frameworks */,
 				5CF55653206BEB9300BC2461 /* FBSDKShareKit.framework in Frameworks */,
 				5C3E1B96206BE97E0066A573 /* SystemConfiguration.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				5CF5564F206BEB9300BC2461 /* UMSocialCore.framework in Frameworks */,
+				5C3C2B56208CBD360055BA88 /* UMPush.framework in Frameworks */,
+				5C3C2B50208CBBDF0055BA88 /* UMCommon.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -464,6 +504,7 @@
 				5CF55650206BEB9300BC2461 /* libSocialUniqueId.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				5C3C2B54208CBCB10055BA88 /* UMCommon.framework in Frameworks */,
 				5CF55655206BEB9300BC2461 /* libSocialFacebook.a in Frameworks */,
 				5CF55654206BEB9300BC2461 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				5CF5564C206BEB9300BC2461 /* UShareUI.framework in Frameworks */,
@@ -477,6 +518,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				5C3C2B52208CBC9B0055BA88 /* UMAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +629,11 @@
 		13B07FAE1A68108700A75B9A /* nofase */ = {
 			isa = PBXGroup;
 			children = (
+				5C3C2B59208CBF3E0055BA88 /* nofase.entitlements */,
+				5C3C2B4B208CB87A0055BA88 /* UMPushModule.h */,
+				5C3C2B4A208CB87A0055BA88 /* UMPushModule.m */,
+				5C3C2B47208CB8740055BA88 /* RNUMConfigure.h */,
+				5C3C2B48208CB8740055BA88 /* RNUMConfigure.m */,
 				5C1CF721208A257F00A3C706 /* assets */,
 				5C1CF71F208A256900A3C706 /* index.ios.jsbundle */,
 				5CB4B857206D230F00245B9A /* Alipay */,
@@ -629,6 +676,12 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C3C2B57208CBF340055BA88 /* UserNotifications.framework */,
+				5C3C2B55208CBD360055BA88 /* UMPush.framework */,
+				5C3C2B53208CBCB10055BA88 /* UMCommon.framework */,
+				5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */,
+				5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */,
+				5C3C2B1E208CB8660055BA88 /* UMPush.framework */,
 				5CB4B878206D277E00245B9A /* AlipaySDK.framework */,
 				5CB4B8AF206D2AC800245B9A /* AlipaySDK.framework */,
 				5CB4B841206D1E8F00245B9A /* CoreMotion.framework */,
@@ -647,6 +700,15 @@
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5C3C2B5B208CC2DF0055BA88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C3C2B60208CC2DF0055BA88 /* libRCTPushNotification.a */,
+				5C3C2B62208CC2DF0055BA88 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5CB4B857206D230F00245B9A /* Alipay */ = {
@@ -808,6 +870,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5C3C2B5A208CC2DF0055BA88 /* RCTPushNotification.xcodeproj */,
 				5CB4B861206D259600245B9A /* AlipaySDK.bundle */,
 				5CF5562B206BEB9300BC2461 /* UMSocial */,
 				13B07FAE1A68108700A75B9A /* nofase */,
@@ -932,6 +995,14 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B9X9R8AKSM;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -983,6 +1054,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 5C3C2B5B208CC2DF0055BA88 /* Products */;
+					ProjectRef = 5C3C2B5A208CC2DF0055BA88 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1184,6 +1259,20 @@
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5C3C2B60208CC2DF0055BA88 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 5C3C2B5F208CC2DF0055BA88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5C3C2B62208CC2DF0055BA88 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = 5C3C2B61208CC2DF0055BA88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5C3E1B76206BE9590066A573 /* libjsinspector.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1362,6 +1451,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				5CF5565D206BEC6800BC2461 /* sharemodule.m in Sources */,
+				5C3C2B49208CB8740055BA88 /* RNUMConfigure.m in Sources */,
+				5C3C2B4C208CB87A0055BA88 /* UMPushModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				5CB4B87B206D279F00245B9A /* AlipayModule.m in Sources */,
 			);
@@ -1454,6 +1545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = nofase/nofase.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1465,6 +1557,7 @@
 					"$(PROJECT_DIR)/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Facebook",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/UMPush",
 				);
 				INFOPLIST_FILE = nofase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1494,6 +1587,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = nofase/nofase.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1504,6 +1598,7 @@
 					"$(PROJECT_DIR)/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Facebook",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/UMPush",
 				);
 				INFOPLIST_FILE = nofase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

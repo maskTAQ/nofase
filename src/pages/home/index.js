@@ -24,7 +24,9 @@ import {
 } from "src/components";
 const Geolocation = require("Geolocation");
 const Height = () => <View style={{ height: 10 }} />;
-
+//DeviceEventEmitter.emit('EventName');
+//PushNotificationIOS
+//console.log(PushNotificationIOS,'1')
 const LogoutModal = ({ logout, isVisible }) => {
   const styles = {
     container: {

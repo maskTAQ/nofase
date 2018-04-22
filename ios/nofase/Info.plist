@@ -131,6 +131,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>请求您的位置以获取周围店铺</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchImageFile~iphone</key>
 	<string>LaunchImage</string>
 	<key>UIRequiredDeviceCapabilities</key>
