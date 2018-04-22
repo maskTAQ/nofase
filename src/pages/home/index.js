@@ -453,7 +453,7 @@ export default class Home extends Component {
       },
       "border",
       {
-        label: chooseType[chooseTypeValue].label,
+        label: chooseType[chooseTypeValue - 1].label,
         onPress: changeChooseTabActiveIndex
       }
     ];
