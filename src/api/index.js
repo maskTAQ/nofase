@@ -35,8 +35,8 @@ export default {
     return post("/User/GetStoreListBySeach", params, { loading: false });
   },
   //获取用户信息
-  getUserInfo() {
-    return post("/User/GetUserInfo");
+  getUserInfo(loading = true) {
+    return post("/User/GetUserInfo", {}, { loading });
   },
   //设置用户信息
   setUserInfo(params) {
@@ -97,5 +97,9 @@ export default {
   //获取店铺 评论头像 /User/GetScoreUserList
   getScoreUserPortrait(StoreId) {
     return post("/User/GetRechargeList", { StoreId }, { loading: false });
+  },
+  //支 付
+  pay(vChargeVal, UserId) {
+    return post("/User/toAliPay", { vChargeVal, UserId });
   }
 };

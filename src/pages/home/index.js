@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Text, View, PushNotificationIOS } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -27,6 +27,7 @@ const Height = () => <View style={{ height: 10 }} />;
 //DeviceEventEmitter.emit('EventName');
 //PushNotificationIOS
 //console.log(PushNotificationIOS,'1')
+
 const LogoutModal = ({ logout, isVisible }) => {
   const styles = {
     container: {
@@ -98,6 +99,16 @@ export default class Home extends Component {
   };
   componentWillMount() {
     this.linkSocket();
+    PushNotificationIOS.presentLocalNotification({
+      alertBody: "test",
+      category: "test"
+    });
+    console.log(
+      PushNotificationIOS.getApplicationIconBadgeNumber(v => {
+        console.log(v, "111");
+      })
+    );
+    PushNotificationIOS.setApplicationIconBadgeNumber(2);
   }
   store = {
     chooseType: [

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, RefreshControl, ScrollView } from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
@@ -7,10 +7,10 @@ import { Tip } from "src/common";
 import { Input, Icon, CheckBox, Page, Button } from "src/components";
 import { Alipay } from "src/common/pay";
 import { connect } from "react-redux";
-
+import api from "src/api";
 @connect(state => {
-  const { userInfo } = state;
-  return { userInfo };
+  const { userInfo, auth: { UserId } } = state;
+  return { userInfo, UserId };
 })
 export default class Recharge extends Component {
   static defaultProps = {
@@ -20,19 +20,49 @@ export default class Recharge extends Component {
   static propTypes = {
     balance: PropTypes.number,
     payStatus: PropTypes.string,
-    userInfo: PropTypes.object
+    userInfo: PropTypes.object,
+    UserId: PropTypes.number,
+    dispatch: PropTypes.func
   };
   state = {
     payWay: 0,
-    recharge: ""
+    recharge: 0,
+    isRefreshing: false
   };
   recharge = () => {
-    const { payWay } = this.state;
+    const { payWay, recharge } = this.state;
+    const { UserId } = this.props;
     if (payWay === 0) {
       Tip.fail("暂不支持微信充值");
     } else {
-      Alipay();
+      api.pay(recharge, UserId).then(res => {
+        Alipay(res.signValue);
+      });
     }
+  };
+  _onRefresh = () => {
+    this.setState({
+      isRefreshing: true
+    });
+    this.props
+      .dispatch({
+        type: "userInfo",
+        api: () => {
+          return api.getUserInfo(false);
+        },
+        promise: true
+      })
+      .then(res => {
+        this.setState({
+          isRefreshing: false
+        });
+      })
+      .catch(e => {
+        this.setState({
+          isRefreshing: false
+        });
+        Tip.loading("刷新失败失败");
+      });
   };
   renderLabel(source, title, subtitle) {
     return (
@@ -153,7 +183,23 @@ export default class Recharge extends Component {
     }
   }
   render() {
-    console.log(this.props);
-    return <Page title="充值">{this.renderConent()}</Page>;
+    const { isRefreshing } = this.state;
+    return (
+      <Page title="充值">
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={this._onRefresh}
+              tintColor="#bbb"
+              colors={["#ddd", "#0398ff"]}
+              progressBackgroundColor="#fff"
+            />
+          }
+        >
+          {this.renderConent()}
+        </ScrollView>
+      </Page>
+    );
   }
 }
