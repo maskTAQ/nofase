@@ -5,3 +5,4 @@ export { default as WebSocket } from "./websocket";
 export { share } from "./share";
 export { default as push } from "./push";
 export { default as localPush } from "./localPush";
+export { default as Wxpay } from "./wxpay";

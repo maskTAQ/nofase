@@ -14,6 +14,7 @@
 
 #import<UMSocialCore/UMSocialCore.h>
 #import <React/RCTPushNotificationManager.h>
+#import "WXApi.h"
 
 @implementation AppDelegate
 
@@ -99,7 +100,9 @@
   BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
   if (!result) {
     // 其他如支付等SDK的回调
+    return [WXApi handleOpenURL:url delegate:self];
   }
+  
   return result;
 }
 // Required to register for notifications
@@ -121,5 +124,34 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
   [RCTPushNotificationManager didReceiveLocalNotification:notification];
+}
+
+//微信支付
+//支付回调9以后
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options {
+  return  [WXApi handleOpenURL:url delegate:self];
+}
+//支付回调9以前
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+  return  [WXApi handleOpenURL:url delegate:self];
+}
+
+
+#pragma mark - wx callback
+
+- (void) onReq:(BaseReq*)req
+{
+  // TODO Something
+}
+
+- (void)onResp:(BaseResp *)resp
+{
+  //判断是否是微信支付回调 (注意是PayResp 而不是PayReq)
+  if ([resp isKindOfClass:[PayResp class]])
+  {
+    //发出通知 从微信回调回来之后,发一个通知,让请求支付的页面接收消息,并且展示出来,或者进行一些自定义的展示或者跳转
+    NSNotification * notification = [NSNotification notificationWithName:@"WXPay" object:nil userInfo:@{@"errCode":@(resp.errCode)}];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+  }
 }
 @end

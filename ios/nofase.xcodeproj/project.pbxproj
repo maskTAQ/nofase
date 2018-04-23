@@ -52,6 +52,9 @@
 		5C3E1B9E206BE9A80066A573 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B9D206BE9A80066A573 /* libsqlite3.tbd */; };
 		5C3E1BA0206BE9AF0066A573 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B9F206BE9AF0066A573 /* libc++.tbd */; };
 		5C3E1BA2206BE9BD0066A573 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1BA1206BE9BD0066A573 /* libz.tbd */; };
+		5C715E17208DA9EA00340B20 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */; };
+		5C7478D8208DACDF002666A0 /* WxpayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7478D7208DACDF002666A0 /* WxpayModule.m */; };
+		5C7478DC208DADA3002666A0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C7478DB208DADA3002666A0 /* libWeChatSDK.a */; };
 		5CB4B838206D1E6400245B9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B837206D1E6400245B9A /* QuartzCore.framework */; };
 		5CB4B83A206D1E6C00245B9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B839206D1E6B00245B9A /* CoreText.framework */; };
 		5CB4B83C206D1E7B00245B9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B83B206D1E7B00245B9A /* UIKit.framework */; };
@@ -417,6 +420,13 @@
 		5C3E1B9D206BE9A80066A573 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		5C3E1B9F206BE9AF0066A573 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		5C3E1BA1206BE9BD0066A573 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = Wxpay/libWeChatSDK.a; sourceTree = "<group>"; };
+		5C7478D3208DACDF002666A0 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WechatAuthSDK.h; path = Wxpay/WechatAuthSDK.h; sourceTree = "<group>"; };
+		5C7478D4208DACDF002666A0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = Wxpay/WXApiObject.h; sourceTree = "<group>"; };
+		5C7478D5208DACDF002666A0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = Wxpay/WXApi.h; sourceTree = "<group>"; };
+		5C7478D6208DACDF002666A0 /* WxpayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WxpayModule.h; path = Wxpay/WxpayModule.h; sourceTree = "<group>"; };
+		5C7478D7208DACDF002666A0 /* WxpayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WxpayModule.m; path = Wxpay/WxpayModule.m; sourceTree = "<group>"; };
+		5C7478DB208DADA3002666A0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = Wxpay/libWeChatSDK.a; sourceTree = "<group>"; };
 		5CB4B837206D1E6400245B9A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5CB4B839206D1E6B00245B9A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		5CB4B83B206D1E7B00245B9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -499,12 +509,14 @@
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
+				5C715E17208DA9EA00340B20 /* libWeChatSDK.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				5CF55650206BEB9300BC2461 /* libSocialUniqueId.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				5C3C2B54208CBCB10055BA88 /* UMCommon.framework in Frameworks */,
+				5C7478DC208DADA3002666A0 /* libWeChatSDK.a in Frameworks */,
 				5CF55655206BEB9300BC2461 /* libSocialFacebook.a in Frameworks */,
 				5CF55654206BEB9300BC2461 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				5CF5564C206BEB9300BC2461 /* UShareUI.framework in Frameworks */,
@@ -629,6 +641,7 @@
 		13B07FAE1A68108700A75B9A /* nofase */ = {
 			isa = PBXGroup;
 			children = (
+				5C7478AB208DACBA002666A0 /* Wxapi */,
 				5C3C2B59208CBF3E0055BA88 /* nofase.entitlements */,
 				5C3C2B4B208CB87A0055BA88 /* UMPushModule.h */,
 				5C3C2B4A208CB87A0055BA88 /* UMPushModule.m */,
@@ -676,6 +689,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */,
 				5C3C2B57208CBF340055BA88 /* UserNotifications.framework */,
 				5C3C2B55208CBD360055BA88 /* UMPush.framework */,
 				5C3C2B53208CBCB10055BA88 /* UMCommon.framework */,
@@ -709,6 +723,19 @@
 				5C3C2B62208CC2DF0055BA88 /* libRCTPushNotification-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5C7478AB208DACBA002666A0 /* Wxapi */ = {
+			isa = PBXGroup;
+			children = (
+				5C7478DB208DADA3002666A0 /* libWeChatSDK.a */,
+				5C7478D3208DACDF002666A0 /* WechatAuthSDK.h */,
+				5C7478D5208DACDF002666A0 /* WXApi.h */,
+				5C7478D4208DACDF002666A0 /* WXApiObject.h */,
+				5C7478D6208DACDF002666A0 /* WxpayModule.h */,
+				5C7478D7208DACDF002666A0 /* WxpayModule.m */,
+			);
+			name = Wxapi;
 			sourceTree = "<group>";
 		};
 		5CB4B857206D230F00245B9A /* Alipay */ = {
@@ -1450,6 +1477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				5C7478D8208DACDF002666A0 /* WxpayModule.m in Sources */,
 				5CF5565D206BEC6800BC2461 /* sharemodule.m in Sources */,
 				5C3C2B49208CB8740055BA88 /* RNUMConfigure.m in Sources */,
 				5C3C2B4C208CB87A0055BA88 /* UMPushModule.m in Sources */,
@@ -1569,6 +1597,8 @@
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/Wxpay",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1610,6 +1640,8 @@
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/Wxpay",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
