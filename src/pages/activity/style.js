@@ -29,7 +29,8 @@ export default {
     width: "100%",
     height: "100%",
     zIndex: 2,
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingRight: 10
     // paddingRight:10,
   },
   item: {

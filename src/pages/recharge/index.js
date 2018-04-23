@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, RefreshControl, ScrollView } from "react-native";
+import { View, Text, RefreshControl, ScrollView, Alert } from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
-import { Tip } from "src/common";
+import { Tip, Wxpay } from "src/common";
 import { Input, Icon, CheckBox, Page, Button } from "src/components";
 import { Alipay } from "src/common/pay";
 import { connect } from "react-redux";
@@ -33,12 +33,37 @@ export default class Recharge extends Component {
     const { payWay, recharge } = this.state;
     const { UserId } = this.props;
     if (payWay === 0) {
-      Tip.fail("暂不支持微信充值");
+      this.Wxpay();
     } else {
       api.pay(recharge, UserId).then(res => {
         Alipay(res.signValue);
       });
     }
+  };
+  Wxpay = async () => {
+    const { recharge } = this.state;
+    const { UserId } = this.props;
+    const isSupported = await Wxpay.isSupported();
+    if (!isSupported) {
+      // 判断是否支持微信支付
+      Alert.alert("提示", "旧手机验证成功，请输入新手机号", [
+        { text: "确定", onPress: () => {} }
+      ]);
+      return;
+    }
+    api.pay(recharge, UserId).then(res => {
+      Wxpay.pay(`<xml>
+      <return_code><![CDATA[SUCCESS]]></return_code>
+      <return_msg><![CDATA[OK]]></return_msg>
+      <appid><![CDATA[wx2421b1c4370ec43b]]></appid>
+      <mch_id><![CDATA[10000100]]></mch_id>
+      <nonce_str><![CDATA[IITRi8Iabbblz1Jc]]></nonce_str>
+      <sign><![CDATA[7921E432F65EB8ED0CE9755F0E86D72F]]></sign>
+      <result_code><![CDATA[SUCCESS]]></result_code>
+      <prepay_id><![CDATA[wx201411101639507cbf6ffd8b0779950874]]></prepay_id>
+      <trade_type><![CDATA[APP]]></trade_type>
+   </xml>`);
+    });
   };
   _onRefresh = () => {
     this.setState({

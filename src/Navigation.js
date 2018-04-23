@@ -19,7 +19,10 @@ import {
   FeedbackProblem,
   UpPortrait,
   Navigation,
-  StoreImg
+  StoreImg,
+  A1,
+  A2,
+  A3
 } from "src/pages";
 
 import { Map } from "src/components";
@@ -88,6 +91,15 @@ export const RouteConfigs = {
   },
   StoreImg: {
     screen: StoreImg
+  },
+  A1: {
+    screen: A1
+  },
+  A2: {
+    screen: A2
+  },
+  A3: {
+    screen: A3
   }
 };
 
