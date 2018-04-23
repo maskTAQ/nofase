@@ -35,7 +35,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ReactNativePushNotificationPackage(),
           new SharePackage(),
           new AlipayPackage(),
-          new RNWebViewPackage()
+          new RNWebViewPackage(),
+          new WxpayPackage()
       );
     }
 
