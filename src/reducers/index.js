@@ -6,8 +6,12 @@ import nav from "./nav";
 const appReducer = combineReducers({
   auth: (state = {}, action) => {
     const { type, payload } = action;
+    console.log(payload, "payload");
     if (type === actionMap.LOGIN) {
       return { ...state, isLogin: true, ...payload };
+    }
+    if (type === "LOGOUT") {
+      return { ...state, isLogin: false, ...payload };
     }
     return state;
   },

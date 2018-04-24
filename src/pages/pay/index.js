@@ -13,7 +13,7 @@ import {
 import PropTypes from "prop-types";
 import moment from "moment";
 
-import { WebSocket, Tip, share, localPush } from "src/common";
+import { WebSocket, Tip, share } from "src/common";
 import api from "src/api";
 import {
   Page,
@@ -111,11 +111,6 @@ export default class Pay extends Component {
           });
           return;
         case 2:
-          localPush({
-            title: "余额不足",
-            subText: "",
-            content: `当前余额不足,不能享受服务,请先充值`
-          });
           Alert.alert(
             "余额不足",
             `当前余额不足,不能享受服务,请先充值`,
@@ -155,11 +150,6 @@ export default class Pay extends Component {
           });
           return;
         case 4:
-          localPush({
-            title: "余额不足",
-            subText: "",
-            content: `当前余额不足,不能享受服务,请先充值`
-          });
           Alert.alert(
             "余额不足",
             `当前余额不足,不能结束,请先充值`,

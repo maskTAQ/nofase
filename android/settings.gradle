@@ -1,4 +1,12 @@
 rootProject.name = 'nofase'
+include ':react-native-webview-android'
+project(':react-native-webview-android').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview-android/android')
+include ':jcore-react-native'
+project(':jcore-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/jcore-react-native/android')
+
+include ':jpush-react-native'
+project(':jpush-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/jpush-react-native/android')
+
 include ':react-native-push-notification'
 project(':react-native-push-notification').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-push-notification/android')
 include ':RNWebView', ':app'

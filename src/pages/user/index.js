@@ -21,7 +21,7 @@ import {
   CodeButton,
   Alert as AlertModal
 } from "src/components";
-import { Tip, localPush } from "src/common";
+import { Tip } from "src/common";
 import styles from "./style";
 import action from "src/action";
 
@@ -331,11 +331,6 @@ export default class User extends Component {
             isRemind: !isRemind
           });
           Tip.dismiss();
-          localPush({
-            title: "设置通知",
-            subText: "",
-            content: `设置通知成功,当前状态:'  ${!isRemind ? "开启" : "关闭"}`
-          });
         }, 500);
       }
     });

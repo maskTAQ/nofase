@@ -5,9 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { BackHandler, Platform, ToastAndroid, View, AsyncStorage, } from "react-native";
+import { BackHandler, Platform, ToastAndroid, View, AsyncStorage, Alert } from "react-native";
 import { Provider, connect } from "react-redux";
 import { addNavigationHelpers } from "react-navigation";
+import JPushModule from 'jpush-react-native'
 
 import PropTypes from 'prop-types';
 
@@ -42,7 +43,7 @@ class App extends Component {
 
           })
       }
-    })
+    });
 
     api.token()
       .then(res => {
@@ -55,16 +56,61 @@ class App extends Component {
         //console.log(e)
       })
   }
+
   componentDidMount() {
     if (Platform.OS === "android") {
       BackHandler.addEventListener("hardwareBackPress", this.handleBack);
     }
 
   }
+  componentWillReceiveProps(nextProps) {
+    const { isLogin } = this.props.auth;
+    const { isLogin: nextIsLogin, UserId } = nextProps.auth;
+    if (!isLogin && nextIsLogin) {
+      this.addReceiveNotificationListener(UserId)
+    }
+    if (isLogin && !nextIsLogin) {
+      JPushModule.cleanTags();
+    }
+  }
   componentWillUnmount() {
     if (Platform.OS === "android") {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
+  }
+  addReceiveNotificationListener(UserId) {
+    if (Platform.OS === 'android') {
+      JPushModule.initPush()
+      JPushModule.getInfo(map => {
+        this.setState({
+          appkey: map.myAppKey,
+          imei: map.myImei,
+          package: map.myPackageName,
+          deviceId: map.myDeviceId,
+          version: map.myVersion
+        })
+      })
+      JPushModule.notifyJSDidLoad(resultCode => {
+        console.log(resultCode)
+      })
+    } else {
+      JPushModule.setupPush()
+    }
+    /**
+       * 请注意这个接口要传一个数组过去，这里只是个简单的示范
+       */
+    JPushModule.setTags([String(UserId)], map => {
+      if (map.errorCode === 0) {
+        console.log('Tag operate succeed, tags: ' + map.tags)
+      } else {
+        console.log('error code: ' + map.errorCode)
+      }
+    })
+    JPushModule.addReceiveOpenNotificationListener(map => {
+      this.props.dispatch(
+        action.navigate.go({ routeName: "Pay" })
+      );
+    })
   }
   handleBack = () => {
     const { nav } = this.props;
@@ -94,7 +140,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    nav: state.nav
+    nav: state.nav,
+    auth: state.auth
   })
 };
 

@@ -57,6 +57,7 @@ export default class Login extends Component {
         Tip.fail(e);
       });
   };
+
   register = () => {
     this.props.navigation.dispatch(
       action.navigate.go({ routeName: "Register" })

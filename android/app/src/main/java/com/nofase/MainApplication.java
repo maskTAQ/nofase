@@ -3,7 +3,7 @@ package com.nofase;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -11,6 +11,8 @@ import com.facebook.soloader.SoLoader;
 
 import com.nofase.module.SharePackage;
 import com.nofase.alipay.AlipayPackage;
+import com.nofase.wxapi.WxpayPackage;
+import cn.jpush.reactnativejpush.JPushPackage;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -21,7 +23,11 @@ import java.util.List;
 import com.burnweb.rnwebview.RNWebViewPackage;
 
 public class MainApplication extends Application implements ReactApplication {
-
+  // 设置为 true 将不会弹出 toast
+  private boolean SHUTDOWN_TOAST = false;
+  // 设置为 true 将不会打印 log
+  private boolean SHUTDOWN_LOG = false;
+  
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -30,14 +36,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-          new ReactNativePushNotificationPackage(),
-          new SharePackage(),
-          new AlipayPackage(),
-          new RNWebViewPackage(),
-          new WxpayPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new SharePackage(), new AlipayPackage(),
+          new RNWebViewPackage(), new WxpayPackage(), new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    SoLoader.init(this,false);
+    SoLoader.init(this, false);
     // 此处配置类型，供后台分析各渠道时使用
     Config.shareType = "react native";
     // 初始化Umeng分享
