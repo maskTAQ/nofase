@@ -33,7 +33,7 @@ const action = {
   LOGIN,
   logout(payload) {
     return {
-      type: LOGIN,
+      type: LOGOUT,
       payload
     };
   },
