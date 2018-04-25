@@ -18,7 +18,7 @@ const QRWebsocket = UserId => {
   });
 };
 
-const uniqueLoginWebsocket = (UserId, logout) => {
+const uniqueLoginWebsocket = ({ UserId, logout, paySuccess, payError }) => {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket("wss://vmslq.cn/UserStateHandler.ashx");
     ws.onopen = () => {
@@ -32,9 +32,15 @@ const uniqueLoginWebsocket = (UserId, logout) => {
       resolve("wensocket连接失败：" + String(e));
     };
     ws.onmessage = e => {
-      console.log;
-      if (e.data === "False") {
+      const { data } = e;
+      if (data === "False") {
         logout();
+      }
+      if (data === "PayTrue") {
+        paySuccess();
+      }
+      if (data === "PayFalse") {
+        payError();
       }
     };
   });

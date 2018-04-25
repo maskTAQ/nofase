@@ -133,10 +133,29 @@ export default class Home extends Component {
   };
   linkSocket = () => {
     const { UserId } = this.props;
-    WebSocket.uniqueLoginWebsocket(UserId, () => {
-      this.setState({
-        logoutModalVisible: true
-      });
+    WebSocket.uniqueLoginWebsocket({
+      UserId,
+      logout: () => {
+        this.setState({
+          logoutModalVisible: true
+        });
+        this.props.navigation.dispatch(
+          action.navigate.go({ routeName: "Login" })
+        );
+      },
+      paySuccess: () => {
+        Tip.success("充值成功");
+        this.props.navigation.dispatch({
+          type: "userInfo",
+          api: () => {
+            return api.getUserInfo();
+          },
+          promise: true
+        });
+      },
+      payError: () => {
+        Tip.fail("充值失败");
+      }
     }).catch(e => {});
     WebSocket.QRWebsocket(UserId)
       .then(res => {
@@ -154,14 +173,13 @@ export default class Home extends Component {
         logoutModalVisible: false
       },
       () => {
-        this.props.navigation.dispatch(
-          action.navigate.go({ routeName: "Login" })
-        );
+        this.props.navigation.dispatch(action.logout());
       }
     );
   };
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
+    this.location = location;
     const {
       distanceValue,
       tabActiveIndex,
@@ -294,6 +312,7 @@ export default class Home extends Component {
           onStoreTap={id => {
             this.goStoreDetail(id);
           }}
+          location={this.location}
         />
         <ToggleButton />
       </Page>

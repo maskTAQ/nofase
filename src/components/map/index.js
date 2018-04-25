@@ -125,13 +125,14 @@ export default class Map extends Component {
 
       window.postMessage = patchedPostMessage;
     };
+    const { userLng, userLat } = this.props.location;
 
     const patchPostMessageJsCode =
       "(" + String(patchPostMessageFunction) + ")();";
     return (
       <WebView
         source={{
-          uri: "https://vmslq.cn/webview/map/index.html"
+          uri: `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}`
         }}
         ref={w => (this.webview = w)}
         style={{ flex: 1 }}

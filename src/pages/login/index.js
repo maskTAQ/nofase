@@ -41,12 +41,11 @@ export default class Login extends Component {
     api
       .login({ Tel: phone, ExCode: code })
       .then(res => {
-        console.log(res);
-        AsyncStorage.setItem("mobile", phone);
         this.props.navigation.dispatch(action.login(res));
         this.props.navigation.dispatch(
           action.navigate.go({ routeName: "Home" })
         );
+        AsyncStorage.setItem("mobile", phone);
       })
       .catch(e => {
         if (e === "用户未注册") {

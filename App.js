@@ -5,15 +5,13 @@
  */
 
 import React, { Component } from 'react';
-import { BackHandler, Platform, ToastAndroid, View, AsyncStorage, Alert } from "react-native";
+import { BackHandler, Platform, ToastAndroid, View, AsyncStorage } from "react-native";
 import { Provider, connect } from "react-redux";
 import { addNavigationHelpers } from "react-navigation";
 import JPushModule from 'jpush-react-native'
-
 import PropTypes from 'prop-types';
 
 import Navigation from "src/Navigation";
-
 import store from 'src/store';
 import { Tip } from 'src/components';
 import action from "src/action";
@@ -24,37 +22,11 @@ class App extends Component {
     dispatch: PropTypes.func.isRequired,
     navigation: PropTypes.object,
     nav: PropTypes.object.isRequired,
+    auth: PropTypes.object
   };
   componentWillMount() {
-    //监听dispatch事件 由onDispatch统一发送action
-    AsyncStorage.getItem('mobile', (e, m) => {
-      if (!e && m) {
-
-        api.rememberLogin({ Tel: m })
-          .then(res => {
-            this.props.dispatch(
-              action.login(res)
-            );
-            this.props.dispatch(
-              action.navigate.go({ routeName: "Home" })
-            );
-          })
-          .catch(e => {
-
-          })
-      }
-    });
-
-    api.token()
-      .then(res => {
-        console.log(res)
-        if (res.data !== 'token') {
-          Platform.OS === "android" && BackHandler.exitApp();
-        }
-      })
-      .catch(e => {
-        //console.log(e)
-      })
+    this.autoLogin();
+    this.verifyToken();
   }
 
   componentDidMount() {
@@ -77,6 +49,33 @@ class App extends Component {
     if (Platform.OS === "android") {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
+  }
+  autoLogin() {
+    AsyncStorage.getItem('mobile', (e, m) => {
+      if (!e && m) {
+        api.rememberLogin({ Tel: m })
+          .then(res => {
+            this.props.dispatch(
+              action.login(res)
+            );
+            this.props.dispatch(action.navigate.go({ routeName: "Home" }));
+          })
+          .catch(e => {
+
+          })
+      }
+    });
+  }
+  verifyToken() {
+    api.token()
+      .then(res => {
+        if (res.data !== 'token') {
+          Platform.OS === "android" && BackHandler.exitApp();
+        }
+      })
+      .catch(e => {
+        //console.log(e)
+      })
   }
   addReceiveNotificationListener(UserId) {
     if (Platform.OS === 'android') {
@@ -107,9 +106,13 @@ class App extends Component {
       }
     })
     JPushModule.addReceiveOpenNotificationListener(map => {
-      this.props.dispatch(
-        action.navigate.go({ routeName: "Pay" })
-      );
+      const { isLogin } = this.props.auth;
+      if (isLogin) {
+        this.props.dispatch(
+          action.navigate.go({ routeName: "Pay" })
+        );
+      }
+
     })
   }
   handleBack = () => {
