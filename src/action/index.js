@@ -1,6 +1,7 @@
 const NAVIGATE_GO = "NAVIGATE_GO";
 const NAVIGATE_BACK = "NAVIGATE_BACK";
 const LOGIN = "LOGIN";
+const LOGOUT = "LOGOUT";
 const action = {
   navigate: {
     go({ routeName, params = {} }) {
@@ -29,6 +30,13 @@ const action = {
       payload
     };
   },
-  LOGIN
+  LOGIN,
+  logout(payload) {
+    return {
+      type: LOGIN,
+      payload
+    };
+  },
+  LOGOUT
 };
 export default action;

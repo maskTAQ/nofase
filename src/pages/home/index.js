@@ -154,9 +154,7 @@ export default class Home extends Component {
         logoutModalVisible: false
       },
       () => {
-        this.props.navigation.dispatch(
-          action.navigate.go({ routeName: "Login" })
-        );
+        this.props.navigation.dispatch(action.logout());
       }
     );
   };
