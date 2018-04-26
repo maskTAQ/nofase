@@ -102,7 +102,15 @@ export const RouteConfigs = {
     screen: A3
   }
 };
-
+console.log(
+  StackNavigator(RouteConfigs, {
+    headerMode: "none",
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  }),
+  "111111111"
+);
 export default StackNavigator(RouteConfigs, {
   headerMode: "none",
   navigationOptions: {

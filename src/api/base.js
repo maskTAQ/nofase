@@ -35,12 +35,13 @@ import { baseURL } from "src/config";
 // );
 
 const requestWrapper = (url, param = {}) => {
+  const { UserId } = require("../store").default.getState().auth;
   return Axios.request({
     baseURL: baseURL,
     url,
     method: "post",
     timeout: 60000,
-    data: param
+    data: Object.assign(param, { UserId })
   });
 };
 const post = (
@@ -49,7 +50,7 @@ const post = (
   { loading = true, handleCatch = true } = {}
 ) => {
   loading && Tip.loading();
-  console.log(loading && url);
+  //console.log(store && url);
   return new Promise((resolve, reject) => {
     requestWrapper(url, params)
       .then(res => {

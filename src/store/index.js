@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-import AppNavigator from "src/Navigation";
+import AppNavigator from "../Navigation";
 import AppReducer from "src/reducers";
 
 const initialNav = AppNavigator.router.getStateForAction(

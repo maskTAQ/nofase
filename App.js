@@ -39,7 +39,7 @@ class App extends Component {
     const { isLogin } = this.props.auth;
     const { isLogin: nextIsLogin, UserId } = nextProps.auth;
     if (!isLogin && nextIsLogin) {
-      this.addReceiveNotificationListener(UserId)
+      //this.addReceiveNotificationListener(UserId)
     }
     if (isLogin && !nextIsLogin) {
       JPushModule.cleanTags();
@@ -78,6 +78,7 @@ class App extends Component {
       })
   }
   addReceiveNotificationListener(UserId) {
+    return
     if (Platform.OS === 'android') {
       JPushModule.initPush()
       JPushModule.getInfo(map => {
