@@ -18,7 +18,7 @@ export default {
     });
   },
   login({ Tel, ExCode }) {
-    return post("/User/UserLogin", { Tel, ExCode });
+    return post("/User/UserLoginTest", { Tel, ExCode });
   },
   rememberLogin({ Tel }) {
     return post("/User/UserLoginTest", { Tel });
@@ -101,5 +101,8 @@ export default {
   //支 付
   pay(vChargeVal, UserId) {
     return post("/User/toAliPay", { vChargeVal, UserId });
+  },
+  wxPay(vChargeVal, UserId) {
+    return post("/User/toWxPay", { vChargeVal, UserId });
   }
 };
