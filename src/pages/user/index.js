@@ -7,8 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
-  AsyncStorage,
-  Clipboard
+  AsyncStorage
 } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -547,10 +546,9 @@ export default class User extends Component {
               </Button>
               <Button
                 onPress={() => {
-                  Clipboard.setString(
-                    `nofase用户:${NickName}邀你注册哦,地址:https://vmslq.cn`
+                  this.props.navigation.dispatch(
+                    action.navigate.go({ routeName: "A3" })
                   );
-                  Tip.success("邀请信息已复制到剪切板去邀请吧");
                 }}
                 style={styles.accountItem}
                 textStyle={styles.accountItemText}

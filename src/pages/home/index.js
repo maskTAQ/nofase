@@ -139,9 +139,6 @@ export default class Home extends Component {
         this.setState({
           logoutModalVisible: true
         });
-        this.props.navigation.dispatch(
-          action.navigate.go({ routeName: "Login" })
-        );
       },
       paySuccess: () => {
         Tip.success("充值成功");
