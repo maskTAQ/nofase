@@ -96,8 +96,13 @@ export default class Home extends Component {
   };
   componentWillMount() {
     this.linkSocket();
+    this.getLocation();
     //this.configPush();
   }
+  getLocation = async () => {
+    const location = await this.getCurrentPosition();
+    this.location = location;
+  };
   store = {
     chooseType: [
       //{ label: "默认", value: 0 },
@@ -592,7 +597,7 @@ export default class Home extends Component {
             <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
             <View style={styles.itemDetailCenter}>
               <Text style={styles.itemDistance}>
-                距离：{Distance.toFixed(0)}Km
+                距离{Distance.toFixed(2)}Km
               </Text>
               <View style={styles.lessionButton}>
                 <Text style={styles.lessionText}>

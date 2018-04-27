@@ -22,7 +22,8 @@ import {
   StoreImg,
   A1,
   A2,
-  A3
+  A3,
+  PayResult
 } from "src/pages";
 
 import { Map } from "src/components";
@@ -100,17 +101,12 @@ export const RouteConfigs = {
   },
   A3: {
     screen: A3
+  },
+  PayResult: {
+    screen: PayResult
   }
 };
-console.log(
-  StackNavigator(RouteConfigs, {
-    headerMode: "none",
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  }),
-  "111111111"
-);
+
 export default StackNavigator(RouteConfigs, {
   headerMode: "none",
   navigationOptions: {

@@ -414,6 +414,7 @@ export default class Pay extends Component {
         <Text style={styles.storeName}>{StoreName}</Text>
         <Button
           onPress={() => {
+            console.log(this.state);
             Linking.openURL(`tel:${StoreTel}`);
           }}
         >

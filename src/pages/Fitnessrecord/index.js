@@ -124,11 +124,18 @@ export default class Fitnessrecord extends Component {
           return (
             <Button
               onPress={() => {
+                const {
+                  StoreName,
+                  TimeLong,
+                  StoreImg
+                } = this.state.currentOrder;
                 share({
-                  title: "title",
-                  content: "xx",
-                  url: "https://www.baidu.com/img/bd_logo1.png",
-                  imgSrc: "https://www.baidu.com/img/bd_logo1.png",
+                  title: "健身记录",
+                  content: `我在${StoreName}中锻炼了${this.getTimeByMinutes(
+                    TimeLong
+                  )}`,
+                  url: "https://vmslq.cn/",
+                  imgSrc: StoreImg,
                   platform
                 })
                   .then(res => {
@@ -153,7 +160,7 @@ export default class Fitnessrecord extends Component {
     );
   }
   render() {
-    const { isShareModalVisible, currentOrder, StoreImg } = this.state;
+    const { isShareModalVisible, currentOrder } = this.state;
     const {
       NickName,
       StoreName,
@@ -162,7 +169,8 @@ export default class Fitnessrecord extends Component {
       StoreAddress = "暂无地址信息",
       SaleAmont,
       UserPhoto,
-      Level
+      Level,
+      StoreImg
     } = currentOrder;
     return (
       <Page title="健身记录">

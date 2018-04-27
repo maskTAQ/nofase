@@ -46,20 +46,11 @@ export default class Recharge extends Component {
     const isSupported = await Wxpay.isSupported();
     if (!isSupported) {
       // 判断是否支持微信支付
-      Alert.alert("提示", "旧手机验证成功，请输入新手机号", [
-        { text: "确定", onPress: () => {} }
-      ]);
+      Alert.alert("你的手机不支持微信充值哦");
       return;
     }
     api.wxPay(recharge, UserId).then(res => {
-      console.log(res);
-      const {
-        appid,
-        mch_id: partnerid,
-        prepay_id: prepayid,
-        nonce_str: noncestr,
-        sign
-      } = res.result.m_values;
+      const { appid, partnerid, prepayid, noncestr, sign, timestamp } = res;
       Wxpay.pay({
         appid,
         partnerid,
@@ -67,7 +58,7 @@ export default class Recharge extends Component {
         package: "Sign=WXPay",
         noncestr,
         sign,
-        timestamp: res.timestamp
+        timestamp
       })
         .then(res => {
           console.log(res);
@@ -115,7 +106,7 @@ export default class Recharge extends Component {
   renderBorder() {
     return <View style={styles.itemBorder} />;
   }
-  renderNot() {
+  renderConent() {
     const { payWay, recharge } = this.state;
     const { Money } = this.props.userInfo;
     const payWayMap = [
@@ -174,51 +165,6 @@ export default class Recharge extends Component {
     );
   }
 
-  renderCommon(source, title) {
-    const data = [
-      {
-        label: "订单号：",
-        value: "123456"
-      },
-      {
-        label: "订单金额：",
-        value: "1234"
-      }
-    ];
-    return (
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <Icon size={50} source={source} />
-          <View style={styles.notTitlewrapper}>
-            <Text style={styles.checklabel}>{title}</Text>
-          </View>
-          {data.map(item => {
-            const { label, value } = item;
-            return (
-              <View style={styles.itemWrapper} key={value}>
-                <Text style={styles.itemLabel}>{label}</Text>
-                <Text style={styles.itemValue}>{value}</Text>
-              </View>
-            );
-          })}
-        </View>
-        <View />
-        <View />
-      </View>
-    );
-  }
-  renderConent() {
-    const { payStatus } = this.props;
-    switch (payStatus) {
-      case "not":
-        return this.renderNot();
-      case "success":
-        return this.renderCommon(require("./img/success.png"), "支付成功");
-      case "error":
-      default:
-        return this.renderCommon(require("./img/error.png"), "支付失败");
-    }
-  }
   render() {
     const { isRefreshing } = this.state;
     return (

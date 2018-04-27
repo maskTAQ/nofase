@@ -129,6 +129,10 @@ export default class Map extends Component {
 
     const patchPostMessageJsCode =
       "(" + String(patchPostMessageFunction) + ")();";
+
+    console.log(
+      `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}`
+    );
     return (
       <WebView
         source={{
