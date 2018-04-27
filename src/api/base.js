@@ -62,7 +62,7 @@ const post = (
           return resolve(d);
         } else {
           console.log("------ start -------");
-          console.log("error:", message);
+          console.log("error:", res);
           console.log("地址:" + url);
           console.log("参数:", params);
           console.log("------ end -------");

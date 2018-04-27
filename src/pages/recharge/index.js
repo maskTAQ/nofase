@@ -26,7 +26,7 @@ export default class Recharge extends Component {
   };
   state = {
     payWay: 0,
-    recharge: 0,
+    recharge: 12,
     isRefreshing: false
   };
   recharge = () => {
@@ -52,6 +52,7 @@ export default class Recharge extends Component {
       return;
     }
     api.wxPay(recharge, UserId).then(res => {
+      console.log(res);
       const {
         appid,
         mch_id: partnerid,
@@ -66,8 +67,14 @@ export default class Recharge extends Component {
         package: "Sign=WXPay",
         noncestr,
         sign,
-        timestamp: +(Date.now() / 1000).toFixed(0)
-      });
+        timestamp: res.timestamp
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(res => {
+          console.log(res);
+        });
     });
   };
   _onRefresh = () => {
