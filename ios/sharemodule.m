@@ -159,10 +159,12 @@ RCT_EXPORT_METHOD(share:(NSString*)title descr:(NSString*)descr
 RCT_EXPORT_METHOD(authLogin: (NSInteger) platformType callback: (RCTResponseSenderBlock) callback) {
   
   [[UMSocialManager defaultManager] getUserInfoWithPlatform: [self configPlatform: platformType]  currentViewController:nil completion:^(id result, NSError *error) {
-
+      //NSLog(NSString * _Nonnull format,error)
       NSNumber *code = @0;
       NSDictionary *userdata = nil;
       if(error) {
+        UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        NSLog(@"move ----------------failed:%@", [error localizedDescription]);
         code = @1;
         userdata = @{
                      @"code": code

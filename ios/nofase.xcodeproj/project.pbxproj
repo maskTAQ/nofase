@@ -35,7 +35,6 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* nofaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nofaseTests.m */; };
-		5C0ECBC92090BAF4004BD06D /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C0ECBC82090BAF4004BD06D /* index.ios.jsbundle */; };
 		5C3C2B45208CB8660055BA88 /* UMPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B1E208CB8660055BA88 /* UMPush.framework */; };
 		5C3C2B50208CBBDF0055BA88 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */; };
 		5C3C2B52208CBC9B0055BA88 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */; };
@@ -48,7 +47,8 @@
 		5C3E1B9E206BE9A80066A573 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B9D206BE9A80066A573 /* libsqlite3.tbd */; };
 		5C3E1BA0206BE9AF0066A573 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1B9F206BE9AF0066A573 /* libc++.tbd */; };
 		5C3E1BA2206BE9BD0066A573 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3E1BA1206BE9BD0066A573 /* libz.tbd */; };
-		5C575D6A209021D9007B77F2 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5C575D69209021D9007B77F2 /* assets */; };
+		5C4547E220936E950061D2EF /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4547E120936E950061D2EF /* assets */; };
+		5C4547E6209389580061D2EF /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C4547E5209389580061D2EF /* index.ios.jsbundle */; };
 		5C715E17208DA9EA00340B20 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */; };
 		5C7478D8208DACDF002666A0 /* WxpayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7478D7208DACDF002666A0 /* WxpayModule.m */; };
 		5C7478DC208DADA3002666A0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C7478DB208DADA3002666A0 /* libWeChatSDK.a */; };
@@ -403,7 +403,6 @@
 		463168D967AC429087755B36 /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJCoreModule.xcodeproj; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; };
 		484B635DFEBB421FB8CA95DC /* libRCTJPushModule.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTJPushModule.a; sourceTree = "<group>"; };
 		4D4525E42C2945379349E8DB /* libresolv.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		5C0ECBC82090BAF4004BD06D /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5C3C2B1E208CB8660055BA88 /* UMPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMPush.framework; path = UMPush/UMPush.framework; sourceTree = "<group>"; };
 		5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = UMPush/UMCommon.framework; sourceTree = "<group>"; };
 		5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = UMPush/UMAnalytics.framework; sourceTree = "<group>"; };
@@ -417,7 +416,8 @@
 		5C3E1B9D206BE9A80066A573 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		5C3E1B9F206BE9AF0066A573 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		5C3E1BA1206BE9BD0066A573 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		5C575D69209021D9007B77F2 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		5C4547E120936E950061D2EF /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		5C4547E5209389580061D2EF /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = Wxpay/libWeChatSDK.a; sourceTree = "<group>"; };
 		5C7478D3208DACDF002666A0 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WechatAuthSDK.h; path = Wxpay/WechatAuthSDK.h; sourceTree = "<group>"; };
 		5C7478D4208DACDF002666A0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = Wxpay/WXApiObject.h; sourceTree = "<group>"; };
@@ -646,8 +646,8 @@
 		13B07FAE1A68108700A75B9A /* nofase */ = {
 			isa = PBXGroup;
 			children = (
-				5C0ECBC82090BAF4004BD06D /* index.ios.jsbundle */,
-				5C575D69209021D9007B77F2 /* assets */,
+				5C4547E5209389580061D2EF /* index.ios.jsbundle */,
+				5C4547E120936E950061D2EF /* assets */,
 				5C7478AB208DACBA002666A0 /* Wxapi */,
 				5C3C2B59208CBF3E0055BA88 /* nofase.entitlements */,
 				5CB4B857206D230F00245B9A /* Alipay */,
@@ -1042,7 +1042,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B9X9R8AKSM;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1433,9 +1433,9 @@
 				5CB4B862206D259600245B9A /* AlipaySDK.bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				5C575D6A209021D9007B77F2 /* assets in Resources */,
+				5C4547E220936E950061D2EF /* assets in Resources */,
 				5CF5564B206BEB9300BC2461 /* UMSocialSDKResources.bundle in Resources */,
-				5C0ECBC92090BAF4004BD06D /* index.ios.jsbundle in Resources */,
+				5C4547E6209389580061D2EF /* index.ios.jsbundle in Resources */,
 				5CF5564E206BEB9300BC2461 /* UMSocialSDKPromptResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1618,10 +1618,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = nofase/nofase.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = B9X9R8AKSM;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
@@ -1654,8 +1654,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = nofase;
-				PROVISIONING_PROFILE = "5d7af0b5-fe6d-42dc-af5f-8580e37285d6";
-				PROVISIONING_PROFILE_SPECIFIER = nofase_develop;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1666,10 +1666,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = nofase/nofase.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B9X9R8AKSM;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
@@ -1702,8 +1702,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = nofase;
-				PROVISIONING_PROFILE = "1b8191b6-f669-430d-b074-7ad117d0933a";
-				PROVISIONING_PROFILE_SPECIFIER = nofase;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
