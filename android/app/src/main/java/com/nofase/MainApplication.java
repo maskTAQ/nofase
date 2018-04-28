@@ -63,7 +63,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   // 配置平台key、secret信息
   {
-    PlatformConfig.setWeixin("wxa0f45f747e934b0b", "4edbdf12d2e975963cfecd35996f9052");
+    PlatformConfig.setWeixin("wxa0f45f747e934b0b", "b30386fbb4dce809d7dfa11cc35d1351");
     PlatformConfig.setQQZone("1106639209", "eKFR5EH6ci3wQpMO");
     PlatformConfig.setSinaWeibo("2733400964", "fac50980a44e3e3afd4bc968ea572887", "www.baidu.com");
   }
