@@ -29,7 +29,8 @@ export default class WxBind extends Component {
       userName: WxCode,
       userId: WxOpenId,
       userAvatar: WxPhoto,
-      userGender
+      userGender,
+      uid
     } = this.props.navigation.state.params;
     // if (!this.codeRef.isGetCode) {
     //   return Tip.fail("请先获取验证码");
@@ -39,7 +40,7 @@ export default class WxBind extends Component {
         Tel: phone,
         ExCode: code,
         WxCode,
-        WxOpenId,
+        WxOpenId: WxOpenId || uid,
         WxPhoto,
         WxSex: userGender === "m" ? 1 : 2
       })
