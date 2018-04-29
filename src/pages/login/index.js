@@ -5,7 +5,9 @@ import {
   Image,
   AsyncStorage,
   StatusBar,
-  Alert
+  Alert,
+  Dimensions,
+  ScrollView
 } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -16,7 +18,7 @@ import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
 import { login } from "src/common/share";
-
+const { height } = Dimensions.get("window");
 @connect()
 export default class Login extends Component {
   static propTypes = {
@@ -90,86 +92,88 @@ export default class Login extends Component {
   render() {
     const { phone, code } = this.state;
     return (
-      <View style={styles.container}>
-        <StatusBar
-          backgroundColor="#1a98e0"
-          translucent={true}
-          barStyle="light-content"
-        />
-        <View style={styles.logo}>
-          <Image
-            source={require("src/images/login/logo.png")}
-            style={styles.logoImg}
+      <ScrollView style={{ height }}>
+        <View style={[styles.container, { height }]}>
+          <StatusBar
+            backgroundColor="#1a98e0"
+            translucent={true}
+            barStyle="light-content"
           />
-          <Text style={styles.logoLabel}>GYM</Text>
-        </View>
-        <View style={styles.form}>
-          <View style={styles.formItem}>
+          <View style={styles.logo}>
             <Image
-              source={require("src/images/login/username.png")}
-              style={styles.formItemImg}
+              source={require("src/images/login/logo.png")}
+              style={styles.logoImg}
             />
-            <Input
-              value={phone}
-              onChangeText={v => {
-                this.handleValueChange("phone", v);
-              }}
-              style={styles.formItemInput}
-              placeholder="用户名"
-              placeholderTextColor="#fff"
-            />
+            <Text style={styles.logoLabel}>GYM</Text>
           </View>
-          <View style={styles.formItem}>
-            <Image
-              source={require("src/images/login/code.png")}
-              style={styles.formItemImg}
-            />
-            <Input
-              value={code}
-              onChangeText={v => {
-                this.handleValueChange("code", v);
-              }}
-              style={styles.formItemInput}
-              placeholder="密码"
-              placeholderTextColor="#fff"
-            />
-            <CodeButton
-              ref={e => (this.codeRef = e)}
-              phone={phone}
-              loading={false}
+          <View style={styles.form}>
+            <View style={styles.formItem}>
+              <Image
+                source={require("src/images/login/username.png")}
+                style={styles.formItemImg}
+              />
+              <Input
+                value={phone}
+                onChangeText={v => {
+                  this.handleValueChange("phone", v);
+                }}
+                style={styles.formItemInput}
+                placeholder="用户名"
+                placeholderTextColor="#fff"
+              />
+            </View>
+            <View style={styles.formItem}>
+              <Image
+                source={require("src/images/login/code.png")}
+                style={styles.formItemImg}
+              />
+              <Input
+                value={code}
+                onChangeText={v => {
+                  this.handleValueChange("code", v);
+                }}
+                style={styles.formItemInput}
+                placeholder="密码"
+                placeholderTextColor="#fff"
+              />
+              <CodeButton
+                ref={e => (this.codeRef = e)}
+                phone={phone}
+                loading={false}
+              >
+                验证码
+              </CodeButton>
+            </View>
+            <Button
+              onPress={this.login}
+              style={styles.loginButton}
+              textStyle={styles.loginText}
             >
-              验证码
-            </CodeButton>
+              立即登录
+            </Button>
+            <View style={styles.register}>
+              <Button onPress={this.register} textStyle={styles.registerText}>
+                注册账号
+              </Button>
+            </View>
           </View>
-          <Button
-            onPress={this.login}
-            style={styles.loginButton}
-            textStyle={styles.loginText}
-          >
-            立即登录
-          </Button>
-          <View style={styles.register}>
-            <Button onPress={this.register} textStyle={styles.registerText}>
-              注册账号
+
+          <Image
+            source={require("src/images/login/bg.png")}
+            style={styles.bg}
+            resizeMode="stretch"
+          />
+          <View style={styles.relevancechar}>
+            <Text style={styles.relevanceText}>关联登录</Text>
+            <Button onPress={this.wxLogin} textStyle={styles.registerText}>
+              <Image
+                source={require("src/images/login/wechat.png")}
+                style={styles.charImg}
+              />
             </Button>
           </View>
         </View>
-
-        <Image
-          source={require("src/images/login/bg.png")}
-          style={styles.bg}
-          resizeMode="stretch"
-        />
-        <View style={styles.relevancechar}>
-          <Text style={styles.relevanceText}>关联登录</Text>
-          <Button onPress={this.wxLogin} textStyle={styles.registerText}>
-            <Image
-              source={require("src/images/login/wechat.png")}
-              style={styles.charImg}
-            />
-          </Button>
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }
