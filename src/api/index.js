@@ -96,7 +96,7 @@ export default {
   },
   //获取店铺 评论头像 /User/GetScoreUserList
   getScoreUserPortrait(StoreId) {
-    return post("/User/GetRechargeList", { StoreId }, { loading: false });
+    return post("/User/GetScoreUserList", { StoreId }, { loading: false });
   },
   //支 付
   pay(vChargeVal, UserId) {
@@ -104,5 +104,8 @@ export default {
   },
   wxPay(vChargeVal, UserId) {
     return post("/User/toWxPay", { vChargeVal, UserId });
+  },
+  WxLogin(WxOpenId) {
+    return post("/User/UserLogin", { WxOpenId });
   }
 };
