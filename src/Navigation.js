@@ -23,7 +23,8 @@ import {
   A1,
   A2,
   A3,
-  PayResult
+  PayResult,
+  WxBind
 } from "src/pages";
 
 import { Map } from "src/components";
@@ -104,6 +105,9 @@ export const RouteConfigs = {
   },
   PayResult: {
     screen: PayResult
+  },
+  WxBind: {
+    screen: WxBind
   }
 };
 

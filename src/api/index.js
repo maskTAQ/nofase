@@ -105,7 +105,12 @@ export default {
   wxPay(vChargeVal, UserId) {
     return post("/User/toWxPay", { vChargeVal, UserId });
   },
+  //微信登录
   WxLogin(WxOpenId) {
-    return post("/User/UserLogin", { WxOpenId });
+    return post("/User/WxLogin", { WxOpenId }, { handleCatch: false });
+  },
+  //绑定微信
+  WxBind(params) {
+    return post("/User/WxBind", params);
   }
 };

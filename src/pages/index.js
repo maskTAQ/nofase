@@ -19,3 +19,4 @@ export { default as Navigation } from "./navigation";
 export { default as StoreImg } from "./store-img";
 export { default as PayResult } from "./payResult";
 export { A1, A2, A3 } from "./activity";
+export { default as WxBind } from "./wx-bind";

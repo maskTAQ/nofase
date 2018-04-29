@@ -39,10 +39,10 @@ class App extends Component {
     const { isLogin } = this.props.auth;
     const { isLogin: nextIsLogin, UserId } = nextProps.auth;
     if (!isLogin && nextIsLogin) {
-      //this.addReceiveNotificationListener(UserId)
+      this.addReceiveNotificationListener(UserId)
     }
     if (isLogin && !nextIsLogin) {
-      JPushModule.cleanTags();
+      JPushModule.stopPush();
     }
   }
   componentWillUnmount() {
@@ -78,7 +78,6 @@ class App extends Component {
       })
   }
   addReceiveNotificationListener(UserId) {
-    return
     if (Platform.OS === 'android') {
       JPushModule.initPush()
       JPushModule.getInfo(map => {
@@ -94,7 +93,7 @@ class App extends Component {
         console.log(resultCode)
       })
     } else {
-      JPushModule.stopPush();
+      JPushModule.setupPush();
     }
     /**
        * 请注意这个接口要传一个数组过去，这里只是个简单的示范

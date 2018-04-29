@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, AsyncStorage, StatusBar } from "react-native";
+import { View, Text, Image, StatusBar } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -8,10 +8,9 @@ import { Input, Button, CodeButton } from "src/components";
 import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
-import { login } from "src/common/share";
 
 @connect()
-export default class Login extends Component {
+export default class WxBind extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
@@ -26,24 +25,29 @@ export default class Login extends Component {
   }
   login = () => {
     const { phone, code } = this.state;
+    const {
+      userName: WxCode,
+      userId: WxOpenId,
+      userAvatar: WxPhoto,
+      userGender
+    } = this.props.navigation.state.params;
     // if (!this.codeRef.isGetCode) {
     //   return Tip.fail("请先获取验证码");
     // }
     api
-      .login({ Tel: phone, ExCode: code })
+      .WxBind({
+        Tel: phone,
+        ExCode: code,
+        WxCode,
+        WxOpenId,
+        WxPhoto,
+        WxSex: userGender === "m" ? 1 : 2
+      })
       .then(res => {
-        this.props.navigation.dispatch(action.login(res));
-        this.props.navigation.dispatch(
-          action.navigate.go({ routeName: "Home" })
-        );
-        AsyncStorage.setItem("mobile", phone);
+        Tip.success("绑定成功");
+        this.props.navigation.dispatch(action.navigate.back());
       })
       .catch(e => {
-        if (e === "用户未注册") {
-          this.props.navigation.dispatch(
-            action.navigate.go({ routeName: "Register" })
-          );
-        }
         Tip.fail(e);
       });
   };
@@ -52,33 +56,6 @@ export default class Login extends Component {
     this.props.navigation.dispatch(
       action.navigate.go({ routeName: "Register" })
     );
-  };
-  wxLogin = () => {
-    login("WECHAT")
-      .then(res => {
-        // Alert.alert(res.userId);
-        api
-          .WxLogin(res.userId)
-          .then(res => {
-            this.props.navigation.dispatch(action.login(res));
-            this.props.navigation.dispatch(
-              action.navigate.go({ routeName: "Home" })
-            );
-          })
-          .catch(e => {
-            if (e === "用户未注册") {
-              this.props.navigation.dispatch(
-                action.navigate.go({ routeName: "WxBind", params: res })
-              );
-            } else {
-              Tip.fail(e);
-            }
-          });
-      })
-      .catch(e => {
-        console.log(e);
-        Tip.fail(e);
-      });
   };
   render() {
     const { phone, code } = this.state;
@@ -108,7 +85,7 @@ export default class Login extends Component {
                 this.handleValueChange("phone", v);
               }}
               style={styles.formItemInput}
-              placeholder="用户名"
+              placeholder="手机号"
               placeholderTextColor="#fff"
             />
           </View>
@@ -123,7 +100,7 @@ export default class Login extends Component {
                 this.handleValueChange("code", v);
               }}
               style={styles.formItemInput}
-              placeholder="密码"
+              placeholder="验证码"
               placeholderTextColor="#fff"
             />
             <CodeButton
@@ -139,28 +116,13 @@ export default class Login extends Component {
             style={styles.loginButton}
             textStyle={styles.loginText}
           >
-            立即登录
+            立即绑定
           </Button>
           <View style={styles.register}>
             <Button onPress={this.register} textStyle={styles.registerText}>
               注册账号
             </Button>
           </View>
-        </View>
-
-        <Image
-          source={require("src/images/login/bg.png")}
-          style={styles.bg}
-          resizeMode="stretch"
-        />
-        <View style={styles.relevancechar}>
-          <Text style={styles.relevanceText}>关联登录</Text>
-          <Button onPress={this.wxLogin} textStyle={styles.registerText}>
-            <Image
-              source={require("src/images/login/wechat.png")}
-              style={styles.charImg}
-            />
-          </Button>
         </View>
       </View>
     );
