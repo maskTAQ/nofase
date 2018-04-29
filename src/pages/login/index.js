@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, Image, AsyncStorage, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  AsyncStorage,
+  StatusBar,
+  Alert
+} from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -56,9 +63,9 @@ export default class Login extends Component {
   wxLogin = () => {
     login("WECHAT")
       .then(res => {
-        // Alert.alert(res.userId);
+        Alert.alert(res.userId + res.uid);
         api
-          .WxLogin(res.userId)
+          .WxLogin(res.userId || res.uid)
           .then(res => {
             this.props.navigation.dispatch(action.login(res));
             this.props.navigation.dispatch(
