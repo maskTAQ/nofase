@@ -1,4 +1,5 @@
 import { wss } from "src/config";
+import { Alert } from "react-native";
 let fn = () => {};
 
 const QRWebsocket = UserId => {
@@ -24,7 +25,7 @@ const uniqueLoginWebsocket = ({ UserId, logout, paySuccess, payError }) => {
     ws.onopen = () => {
       console.log(UserId, "发送");
       ws.send(String(UserId)); // 注册服务
-      console.log("uniqueLoginWebsocket连接成功");
+      Alert.alert("uniqueLoginWebsocket连接成功");
       resolve("uniqueLoginWebsocket连接成功");
     };
     ws.onerror = e => {
@@ -33,6 +34,7 @@ const uniqueLoginWebsocket = ({ UserId, logout, paySuccess, payError }) => {
     };
     ws.onmessage = e => {
       const { data } = e;
+      Alert.alert(JSON.stringify(data));
       if (data === "False") {
         logout();
       }
