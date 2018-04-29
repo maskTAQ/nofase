@@ -170,7 +170,9 @@ export default class Fitnessrecord extends Component {
       SaleAmont,
       UserPhoto,
       Level,
-      StoreImg
+      StoreImg,
+      NowCurriculum,
+      NowInPeopel
     } = currentOrder;
     return (
       <Page title="健身记录">
@@ -200,7 +202,8 @@ export default class Fitnessrecord extends Component {
               money={Amont}
               discount={Amont - SaleAmont}
               storeName={StoreName}
-              onlinePeople={0}
+              onlinePeople={NowInPeopel}
+              NowCurriculum={NowCurriculum}
               addr={StoreAddress}
               close={() => {
                 this.setState({

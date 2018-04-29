@@ -88,6 +88,7 @@ export default class Pay extends Component {
 
     WebSocket.addEventListenter(data => {
       const { Type } = data;
+      console.log(data, "data");
       if (Type === 3 && this.state.Type !== 3) {
         console.log(this.state);
         this.setState({
@@ -408,14 +409,13 @@ export default class Pay extends Component {
     );
   }
   renderStoreInfo() {
-    const { StoreName, StoreTel } = this.state;
+    const { StoreName, StoreCsTel } = this.state;
     return (
       <View style={styles.storeInfo}>
         <Text style={styles.storeName}>{StoreName}</Text>
         <Button
           onPress={() => {
-            console.log(this.state);
-            Linking.openURL(`tel:${StoreTel}`);
+            Linking.openURL(`tel:${StoreCsTel}`);
           }}
         >
           <Icon size={15} source={require("./img/u204.png")} />
@@ -630,8 +630,9 @@ export default class Pay extends Component {
       CardId,
       SaleAmont,
       UserPhoto,
-      StoreImg,
-      Level
+      StorePhoto,
+      Level,
+      NowCurriculum
     } = this.state;
     const { NickName } = this.props.userInfo;
     return (
@@ -690,7 +691,9 @@ export default class Pay extends Component {
         <ShareModal
           isVisible={isShareModalVisible}
           portrait={UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")}
-          storeImg={StoreImg ? { uri: StoreImg } : require("./img/logo.png")}
+          storeImg={
+            StorePhoto ? { uri: StorePhoto } : require("./img/logo.png")
+          }
           username={NickName}
           level={Level}
           time={tickts}
@@ -698,6 +701,7 @@ export default class Pay extends Component {
           discount={Money - SaleAmont}
           storeName={StoreName}
           onlinePeople={NowInPeople}
+          NowCurriculum={NowCurriculum}
           addr={StoreAddress}
           close={() => {
             this.setState({
