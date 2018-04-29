@@ -236,8 +236,9 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
                         @Override
                         public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
                             result.putInt("code", 1);
+                            result.putString("message", throwable.getMessage());
                             resultCallback.invoke(result);
-                            Log.e("--react-native-share--","授权登录失败: " + throwable.getMessage());
+                           // Log.e("--react-native-share--","授权登录失败: " + throwable.getMessage());
                         }
 
                         @Override

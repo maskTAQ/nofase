@@ -2,7 +2,7 @@
  * 原生桥接
  */
 import { NativeModules } from "react-native";
-
+import { Tip } from "src/common";
 /**
  * 平台
  */
@@ -38,6 +38,7 @@ const share = ({ title, content, url, imgSrc, platform }) => {
 const login = platform => {
   return new Promise((resolve, reject) => {
     NativeModules.sharemodule.authLogin(SharePlatform[platform], result => {
+      Tip.fail(JSON.stringify(result));
       // code: 0成功、1失败、2取消
       if (result.code === 0) {
         console.log(
