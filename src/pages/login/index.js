@@ -5,7 +5,6 @@ import {
   Image,
   AsyncStorage,
   StatusBar,
-  Alert,
   Dimensions,
   ScrollView
 } from "react-native";
@@ -65,9 +64,8 @@ export default class Login extends Component {
   wxLogin = () => {
     login("WECHAT")
       .then(res => {
-        Alert.alert(res.userId + res.uid);
         api
-          .WxLogin(res.userId || res.uid)
+          .WxLogin(res.userId)
           .then(res => {
             this.props.navigation.dispatch(action.login(res));
             this.props.navigation.dispatch(

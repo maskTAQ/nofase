@@ -2,7 +2,6 @@
  * 原生桥接
  */
 import { NativeModules } from "react-native";
-
 /**
  * 平台
  */
@@ -17,11 +16,11 @@ const SharePlatform = {
 
 const share = ({ title, content, url, imgSrc, platform }) => {
   return new Promise((resolve, reject) => {
-    NativeModules.sharemodule.share(
-      title,
+    NativeModules.UMShareModule.share(
       content,
-      url,
       imgSrc,
+      url,
+      title,
       SharePlatform[platform],
       message => {
         console.log(message);
@@ -37,8 +36,7 @@ const share = ({ title, content, url, imgSrc, platform }) => {
 };
 const login = platform => {
   return new Promise((resolve, reject) => {
-    NativeModules.sharemodule.authLogin(SharePlatform[platform], result => {
-      // code: 0成功、1失败、2取消
+    NativeModules.UMShareModule.auth(SharePlatform[platform], result => {
       if (result.code === 0) {
         console.log(
           "授权登录成功:" +
@@ -53,7 +51,7 @@ const login = platform => {
             "userAvatar: " +
             result.userAvatar
         );
-        resolve(result);
+        resolve(Object.assign(result, { userId: result.uid }));
       } else {
         reject(result.code === 1 ? "登录失败" : "取消登录");
       }

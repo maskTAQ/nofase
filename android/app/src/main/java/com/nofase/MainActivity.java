@@ -3,9 +3,18 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
-import com.nofase.module.ShareModule;
-import com.umeng.socialize.UMShareAPI;
+// import com.nofase.module.ShareModule;
+// import com.umeng.socialize.UMShareAPI;
 
+
+// import com.umeng.analytics.MobclickAgent;
+// import com.umeng.analytics.MobclickAgent.EScenarioType;
+// import com.umeng.message.PushAgent;
+
+// import com.umeng.soexample.invokenative.PushModule;
+
+import com.umeng.socialize.UMShareAPI;
+import com.nofase.invokenative.ShareModule;
 
 public class MainActivity extends ReactActivity {
 
@@ -21,7 +30,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ShareModule.initActivity(this);
+        ShareModule.initSocialSDK(this);
     }
 
     @Override
