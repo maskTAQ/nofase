@@ -354,7 +354,7 @@ export default class StoreDetail extends Component {
         {portrait.map((item, i) => (
           <Icon
             size={20}
-            source={{ uri: item }}
+            source={{ uri: item.UserPhoto }}
             key={i}
             style={{ marginLeft: 4 }}
           />

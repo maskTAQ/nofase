@@ -263,17 +263,11 @@ export default class Home extends Component {
     }
   }
   goStoreDetail = Id => {
-    let dataSource = null;
-    if (this.storeListRef) {
-      dataSource = this.storeListRef.state.dataSource;
-    }
-
     this.props.navigation.dispatch(
       action.navigate.go({
         routeName: "StoreDetail",
         params: {
-          Id,
-          storeNum: dataSource ? dataSource.length : 1
+          Id
         }
       })
     );

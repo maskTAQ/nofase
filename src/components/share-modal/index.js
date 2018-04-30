@@ -21,7 +21,8 @@ const ShareModal = ({
   portrait,
   storeImg,
   level,
-  NowCurriculum
+  NowCurriculum,
+  goStoreDetail
 }) => {
   return (
     <Alert isVisible={isVisible} close={close}>
@@ -78,7 +79,7 @@ const ShareModal = ({
                   <Text style={styles.onlinePeople}>
                     在线人数：{onlinePeople}人
                   </Text>
-                  <Button style={styles.lession}>
+                  <Button style={styles.lession} onPress={goStoreDetail}>
                     <Text style={styles.lessionText}>课程:{NowCurriculum}</Text>
                     <Icon size={14} source={require("./img/u79.png")} />
                   </Button>
@@ -118,6 +119,7 @@ ShareModal.propTypes = {
   portrait: PropTypes.any,
   storeImg: PropTypes.any,
   level: PropTypes.any,
-  NowCurriculum: PropTypes.any
+  NowCurriculum: PropTypes.any,
+  goStoreDetail: PropTypes.func
 };
 export default ShareModal;

@@ -632,7 +632,8 @@ export default class Pay extends Component {
       UserPhoto,
       StorePhoto,
       Level,
-      NowCurriculum
+      NowCurriculum,
+      StoreId
     } = this.state;
     const { NickName } = this.props.userInfo;
     return (
@@ -713,6 +714,23 @@ export default class Pay extends Component {
               isShareModalVisible: false,
               isShareBarVisible: true
             });
+          }}
+          goStoreDetail={() => {
+            this.setState(
+              {
+                isShareModalVisible: false
+              },
+              () => {
+                this.props.navigation.dispatch(
+                  action.navigate.go({
+                    routeName: "StoreDetail",
+                    params: {
+                      Id: StoreId
+                    }
+                  })
+                );
+              }
+            );
           }}
         />
       </Page>

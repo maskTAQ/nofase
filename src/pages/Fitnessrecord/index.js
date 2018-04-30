@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 import moment from "moment";
+import { connect } from "react-redux";
 
 import { Tip, share } from "src/common";
 import api from "src/api";
 import action from "src/action";
 import { Button, Icon, Page, ShareModal, DataView } from "src/components";
 import styles from "./style";
-
+("");
+@connect()
 export default class Fitnessrecord extends Component {
   static propTypes = {
     navigation: PropTypes.object
@@ -172,7 +174,8 @@ export default class Fitnessrecord extends Component {
       Level,
       StoreImg,
       NowCurriculum,
-      NowInPeopel
+      NowInPeopel,
+      StoreId
     } = currentOrder;
     return (
       <Page title="健身记录">
@@ -215,6 +218,23 @@ export default class Fitnessrecord extends Component {
                   isShareModalVisible: false,
                   isShareBarVisible: true
                 });
+              }}
+              goStoreDetail={() => {
+                this.setState(
+                  {
+                    isShareModalVisible: false
+                  },
+                  () => {
+                    this.props.navigation.dispatch(
+                      action.navigate.go({
+                        routeName: "StoreDetail",
+                        params: {
+                          Id: StoreId
+                        }
+                      })
+                    );
+                  }
+                );
               }}
             >
               <Text>12</Text>
