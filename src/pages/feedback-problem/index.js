@@ -21,7 +21,7 @@ export default class FeedbackProblem extends Component {
       <Page title="问题反馈">
         <WebView
           source={{
-            uri: `https://vmslq.cn/webview/feedback/index.html?OpinionType=2&UserId=${UserId}`
+            uri: `https://vmslq.cn/webview/feedback/index.html?OpinionType=1&UserId=${UserId}`
           }}
         />
       </Page>

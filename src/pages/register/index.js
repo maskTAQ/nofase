@@ -91,7 +91,7 @@ export default class Register extends Component {
                 this.handleValueChange("ExCode", v);
               }}
               style={styles.formItemInput}
-              placeholder="验证码"
+              placeholder="手机验证码"
               placeholderTextColor="#fff"
             />
             <CodeButton

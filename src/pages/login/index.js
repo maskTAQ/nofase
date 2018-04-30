@@ -116,7 +116,7 @@ export default class Login extends Component {
                   this.handleValueChange("phone", v);
                 }}
                 style={styles.formItemInput}
-                placeholder="用户名"
+                placeholder="已注册手机号"
                 placeholderTextColor="#fff"
               />
             </View>
@@ -131,7 +131,7 @@ export default class Login extends Component {
                   this.handleValueChange("code", v);
                 }}
                 style={styles.formItemInput}
-                placeholder="密码"
+                placeholder="短信验证码"
                 placeholderTextColor="#fff"
               />
               <CodeButton

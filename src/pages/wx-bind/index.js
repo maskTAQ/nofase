@@ -86,7 +86,7 @@ export default class WxBind extends Component {
                 this.handleValueChange("phone", v);
               }}
               style={styles.formItemInput}
-              placeholder="手机号"
+              placeholder="已注册手机号"
               placeholderTextColor="#fff"
             />
           </View>
@@ -101,7 +101,7 @@ export default class WxBind extends Component {
                 this.handleValueChange("code", v);
               }}
               style={styles.formItemInput}
-              placeholder="验证码"
+              placeholder="短信验证码"
               placeholderTextColor="#fff"
             />
             <CodeButton
