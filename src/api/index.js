@@ -26,8 +26,9 @@ export default {
   register({ NickName, Tel, ExCode }) {
     return post("/User/UserReg", { NickName, Tel, ExCode });
   },
-  sendCode(Tel) {
-    return post("/User/GetExCode", { Tel }, { loading: false });
+  sendCode(Tel, isLogin) {
+    const url = isLogin ? "/User/GetExCodeByLogin" : "/User/GetExCode";
+    return post(url, { Tel }, { loading: false });
   },
   // 获取商家列表(列表模式)
   getStoreList(params) {

@@ -25,7 +25,8 @@ const styles = {
 };
 export default class CodeButton extends Component {
   static propTypes = {
-    phone: PropTypes.string
+    phone: PropTypes.string,
+    isLogin: PropTypes.bool
   };
   state = {
     isRequestSmscode: false,
@@ -70,11 +71,11 @@ export default class CodeButton extends Component {
   };
   getCode = () => {
     const { isCan } = this.state;
-    const { phone } = this.props;
+    const { phone, isLogin = false } = this.props;
     if (isCan && /^1[3|4|5|8][0-9]\d{4,8}$/.test(phone)) {
       this.setState({ isRequestSmscode: true });
       api
-        .sendCode(phone)
+        .sendCode(phone, isLogin)
         .then(response => {
           this.setState({ isRequestSmscode: false });
           const timer = this.timer();

@@ -136,6 +136,7 @@ export default class Login extends Component {
               />
               <CodeButton
                 ref={e => (this.codeRef = e)}
+                isLogin={true}
                 phone={phone}
                 loading={false}
               >
