@@ -87,7 +87,7 @@ export default class Pay extends Component {
     });
 
     WebSocket.addEventListenter(data => {
-      const { Type } = data;
+      const { Type, MinMoney } = data;
       console.log(data, "data");
       if (Type === 3 && this.state.Type !== 3) {
         console.log(this.state);
@@ -114,7 +114,7 @@ export default class Pay extends Component {
         case 2:
           Alert.alert(
             "余额不足",
-            `当前余额不足,不能享受服务,请先充值`,
+            `当前余额不足,不能享受服务,请先充值,最少充值${MinMoney}元`,
             [
               {
                 text: "充值",
@@ -153,7 +153,7 @@ export default class Pay extends Component {
         case 4:
           Alert.alert(
             "余额不足",
-            `当前余额不足,不能结束,请先充值`,
+            `当前余额不足,不能结束,请先充值，最少充值${MinMoney}元`,
             [
               {
                 text: "充值",

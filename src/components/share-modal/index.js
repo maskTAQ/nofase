@@ -72,7 +72,7 @@ const ShareModal = ({
               </View>
             </View>
             <View style={styles.storeInfo}>
-              <Icon size={50} source={storeImg} />
+              <Icon size={70} source={storeImg} />
               <View style={styles.storeInfoWrapper}>
                 <Text style={styles.storeName}>{storeName}</Text>
                 <View style={styles.storeInfoCenter}>
