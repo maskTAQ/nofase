@@ -176,6 +176,9 @@ export default class Home extends Component {
       },
       () => {
         this.props.navigation.dispatch(action.logout());
+        this.props.navigation.dispatch({
+          type: "userInfo_result"
+        });
       }
     );
   };

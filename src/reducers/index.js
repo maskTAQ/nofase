@@ -20,6 +20,10 @@ const appReducer = combineReducers({
     if (type === "userInfo") {
       return { ...state, ...payload };
     }
+
+    if (type === "userInfo_result") {
+      return { hasData: false };
+    }
     return state;
   }
 });

@@ -358,6 +358,9 @@ export default class User extends Component {
   };
   logout = () => {
     this.props.navigation.dispatch(action.logout());
+    this.props.navigation.dispatch({
+      type: "userInfo_result"
+    });
     AsyncStorage.removeItem("mobile");
     this.props.navigation.dispatch(action.navigate.go({ routeName: "Login" }));
   };
