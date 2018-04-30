@@ -46,7 +46,7 @@ public class ShareModule extends ReactContextBaseJavaModule {
     }
     @Override
     public String getName() {
-        return "UMShareModule";
+        return "sharemodule";
     }
     private static void runOnMainThread(Runnable runnable) {
         mSDKHandler.postDelayed(runnable, 0);
@@ -123,7 +123,7 @@ public class ShareModule extends ReactContextBaseJavaModule {
         }
     }
     @ReactMethod
-    public void auth(final int  sharemedia, final Callback successCallback){
+    public void authLogin(final int  sharemedia, final Callback successCallback){
         runOnMainThread(new Runnable() {
             @Override
             public void run() {

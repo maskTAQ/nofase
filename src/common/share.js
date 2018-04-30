@@ -16,7 +16,7 @@ const SharePlatform = {
 
 const share = ({ title, content, url, imgSrc, platform }) => {
   return new Promise((resolve, reject) => {
-    NativeModules.UMShareModule.share(
+    NativeModules.sharemodule.share(
       content,
       imgSrc,
       url,
@@ -36,7 +36,7 @@ const share = ({ title, content, url, imgSrc, platform }) => {
 };
 const login = platform => {
   return new Promise((resolve, reject) => {
-    NativeModules.UMShareModule.auth(SharePlatform[platform], result => {
+    NativeModules.sharemodule.authLogin(SharePlatform[platform], result => {
       if (result.code === 0) {
         console.log(
           "授权登录成功:" +
