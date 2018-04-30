@@ -51,7 +51,7 @@ const login = platform => {
             "userAvatar: " +
             result.userAvatar
         );
-        resolve(Object.assign(result, { userId: result.uid }));
+        resolve(Object.assign(result, { userId: result.userId || result.uid }));
       } else {
         reject(result.code === 1 ? "登录失败" : "取消登录");
       }
