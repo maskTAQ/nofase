@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, RefreshControl, ScrollView, AppState } from "react-native";
+import {
+  View,
+  Text,
+  RefreshControl,
+  ScrollView,
+  AppState,
+  Alert
+} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
@@ -79,12 +86,12 @@ export default class Recharge extends Component {
   Wxpay = async () => {
     const { recharge } = this.state;
     const { UserId } = this.props;
-    // const isSupported = await Wxpay.isSupported();
-    // if (!isSupported) {
-    //   // 判断是否支持微信支付
-    //   Alert.alert("你的手机不支持微信充值哦");
-    //   return;
-    // }
+    const isSupported = await Wxpay.isSupported();
+    if (!isSupported) {
+      // 判断是否支持微信支付
+      Alert.alert("你的手机不支持微信充值哦");
+      return;
+    }
     api
       .wxPay(recharge, UserId)
       .then(async res => {

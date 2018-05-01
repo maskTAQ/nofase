@@ -5,23 +5,36 @@ import { connect } from "react-redux";
 
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
+import api from "src/api";
 import action from "src/action";
 
 @connect(state => {
   console.log(state);
-  const { userInfo: { Money, PayMoney } } = state;
-  return { Money, PayMoney };
+  const { userInfo: { Money, PayMoney }, auth: { UserId } } = state;
+  return { Money, PayMoney, UserId };
 })
 export default class Transacion extends Component {
   static propTypes = {
     navigation: PropTypes.object,
     Money: PropTypes.number,
-    PayMoney: PropTypes.number
+    PayMoney: PropTypes.number,
+    UserId: PropTypes.number
   };
-  state = {};
+  state = {
+    PaysMoney: 0
+  };
+  componentWillMount() {
+    this.getUserPaysToday();
+  }
   back = () => {
     this.props.navigation.dispatch(action.navigate.back());
   };
+  getUserPaysToday() {
+    const { UserId } = this.props;
+    api.getUserPaysToday(UserId).then(res => {
+      this.setState({ ...res });
+    });
+  }
   renderItem(row) {
     const { type, onPress } = row;
     return (
@@ -68,7 +81,8 @@ export default class Transacion extends Component {
     );
   }
   render() {
-    const { Money = "-", PayMoney = "-" } = this.props;
+    const { Money = "-" } = this.props;
+    const { PaysMoney } = this.state;
 
     return (
       <View style={styles.container}>
@@ -90,7 +104,7 @@ export default class Transacion extends Component {
           <View style={styles.containers}>
             <View style={styles.consume}>
               <Text style={styles.consumeLabel}>今日消费</Text>
-              <Text style={styles.consumeValue}>{PayMoney}元</Text>
+              <Text style={styles.consumeValue}>{PaysMoney}元</Text>
             </View>
             {this.renderList()}
           </View>
