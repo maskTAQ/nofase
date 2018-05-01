@@ -113,5 +113,9 @@ export default {
   //绑定微信
   WxBind(params) {
     return post("/User/WxBind", params);
+  },
+  //获取今日消费金额
+  getUserPaysToday(UserId) {
+    return post("/User/GetUserPaysToday", { UserId });
   }
 };

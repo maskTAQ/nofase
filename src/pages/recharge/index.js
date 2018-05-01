@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-import { View, Text, RefreshControl, ScrollView, Alert } from "react-native";
+import {
+  View,
+  Text,
+  RefreshControl,
+  ScrollView,
+  Alert,
+  AppState
+} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
-import { Tip, Wxpay } from "src/common";
+import { Tip, Wxpay, Alipay } from "src/common";
 import { Input, Icon, CheckBox, Page, Button } from "src/components";
-import { Alipay } from "src/common/pay";
 import { connect } from "react-redux";
+import action from "src/action";
+
 import api from "src/api";
 @connect(state => {
   const { userInfo, auth: { UserId } } = state;
@@ -22,23 +30,54 @@ export default class Recharge extends Component {
     payStatus: PropTypes.string,
     userInfo: PropTypes.object,
     UserId: PropTypes.number,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    navigation: PropTypes.object
   };
   state = {
     payWay: 0,
     recharge: 0.01,
     isRefreshing: false
   };
+
+  componentWillMount() {
+    AppState.addEventListener("change", this._handleAppStateChange);
+  }
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this._handleAppStateChange);
+  }
+  _handleAppStateChange = state => {
+    this.appStatusQueue.push(state);
+    const currentStatus = this.appStatusQueue[this.appStatusQueue.length - 1];
+    const prevStatus = this.appStatusQueue[this.appStatusQueue.length - 2];
+    if (prevStatus === "background" && currentStatus === "active") {
+      this.props.navigation.dispatch(
+        action.navigate.go({
+          routeName: "PayResult",
+          params: { type: this.state.payWay ? "Alipay" : "Wxpay" }
+        })
+      );
+    }
+  };
+  appStatusQueue = [];
   recharge = () => {
-    const { payWay, recharge } = this.state;
-    const { UserId } = this.props;
+    const { payWay } = this.state;
     if (payWay === 0) {
       this.Wxpay();
     } else {
-      api.pay(recharge, UserId).then(res => {
-        Alipay(res.signValue);
-      });
+      this.Alipay();
     }
+  };
+  Alipay = () => {
+    const { recharge } = this.state;
+    const { UserId } = this.props;
+    api
+      .pay(recharge, UserId)
+      .then(async res => {
+        Alipay.pay(res.signValue);
+      })
+      .catch(e => {
+        Tip.fail(e);
+      });
   };
   Wxpay = async () => {
     const { recharge } = this.state;
@@ -49,24 +88,23 @@ export default class Recharge extends Component {
       Alert.alert("你的手机不支持微信充值哦");
       return;
     }
-    api.wxPay(recharge, UserId).then(res => {
-      const { appid, partnerid, prepayid, noncestr, sign, timestamp } = res;
-      Wxpay.pay({
-        appid,
-        partnerid,
-        prepayid,
-        package: "Sign=WXPay",
-        noncestr,
-        sign,
-        timestamp
-      })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(res => {
-          console.log(res);
+    api
+      .wxPay(recharge, UserId)
+      .then(async res => {
+        const { appid, partnerid, prepayid, noncestr, sign, timestamp } = res;
+        Wxpay.pay({
+          appid,
+          partnerid,
+          prepayid,
+          package: "Sign=WXPay",
+          noncestr,
+          sign,
+          timestamp
         });
-    });
+      })
+      .catch(res => {
+        Tip.fail(res);
+      });
   };
   _onRefresh = () => {
     this.setState({
@@ -147,7 +185,9 @@ export default class Recharge extends Component {
             </View>
           </View>
           <View style={styles.balanceWrapper}>
-            <Text style={{ color: "#1e89e4" }}>当前余额：{Money}</Text>
+            <Text style={{ color: "#1e89e4" }}>
+              当前余额：{Number(Money).toFixed(2)}
+            </Text>
           </View>
           <Text style={styles.checklabel}>选择支付方式：</Text>
         </View>

@@ -85,7 +85,7 @@ export default class Transacion extends Component {
           headerStyle={{ backgroundColor: "#fff" }}
           titleStyle={{ color: "#1ba0ea" }}
         >
-          <Text style={styles.Balance}>{Money}</Text>
+          <Text style={styles.Balance}>{Number(Money).toFixed(2)}</Text>
           <Text style={styles.titBalance}>(余额)</Text>
           <View style={styles.containers}>
             <View style={styles.consume}>
