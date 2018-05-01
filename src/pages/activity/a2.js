@@ -62,10 +62,11 @@ export default class A2 extends Component {
             <Button
               onPress={() => {
                 share({
-                  title: "拼团运动",
-                  content: "",
+                  title: "好友邀请你来一起没脸共享运动吧！",
+                  content:
+                    "全城运动场所按时共享计费，不办卡最低4.9元/小时起参与。",
                   url: `https://vmslq.cn/Share/Guide?UserId=${UserId}`,
-                  imgSrc: "http://vmslq.com/images/logo_2x279486.png",
+                  imgSrc: "http://vmslq.com/wxicon/2.jpg",
                   platform
                 })
                   .then(res => {

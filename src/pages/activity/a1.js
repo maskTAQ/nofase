@@ -62,10 +62,11 @@ export default class A1 extends Component {
             <Button
               onPress={() => {
                 share({
-                  title: "拼团运动",
-                  content: "",
+                  title: "没脸拼团运动—没脸在一起 拼团好身材",
+                  content:
+                    "好友发起拼团运动，2人以上当日参与运动随机赠送6-9折卡",
                   url: `https://vmslq.cn/Share/Spell?UserId=${UserId}`,
-                  imgSrc: "http://vmslq.com/images/logo_2x279486.png",
+                  imgSrc: "http://vmslq.com/wxicon/1.jpg",
                   platform
                 })
                   .then(res => {
