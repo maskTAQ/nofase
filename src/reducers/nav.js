@@ -2,11 +2,18 @@ import { NavigationActions } from "react-navigation";
 
 import AppNavigator from "src/Navigation";
 import actionMap from "src/action";
+
+function getCurrentRouteName(state) {
+  return state.routes[state.routes.length - 1].routeName;
+}
 const nav = (state, action) => {
   const { type } = action;
   switch (type) {
     case actionMap.NAVIGATE_GO: {
       const { payload: { routeName: nextRouteName, params } } = action;
+      if (getCurrentRouteName(state) === nextRouteName) {
+        return state;
+      }
 
       //解决路由栈中存在相同路由 依旧push的问题
       const { routes } = state;

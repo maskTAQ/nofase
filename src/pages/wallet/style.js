@@ -32,10 +32,13 @@ export default {
     backgroundColor: "#0a9ae4",
     bottom: 0
   },
-  list: {
+  listContainer: {
     flex: 1,
     padding: 10,
     paddingBottom: 0
+  },
+  list: {
+    flex: 1
   },
   item: {
     backgroundColor: "#fff",

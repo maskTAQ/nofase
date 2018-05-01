@@ -68,25 +68,29 @@ export default class Wallet extends Component {
     const { activeIndex } = this.state;
     if (activeIndex === 0) {
       return (
-        <DataView
-          ref={e => (this.userOrderList = e)}
-          style={styles.list}
-          getData={this.getUserOrderList}
-          ListEmptyComponent={<Text>暂时没有数据哦</Text>}
-          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-          renderItem={({ item }) => this.renderItem(item)}
-        />
+        <View style={styles.listContainer}>
+          <DataView
+            ref={e => (this.userOrderList = e)}
+            style={styles.list}
+            getData={this.getUserOrderList}
+            ListEmptyComponent={<Text>暂时没有数据哦</Text>}
+            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            renderItem={({ item }) => this.renderItem(item)}
+          />
+        </View>
       );
     } else {
       return (
-        <DataView
-          ref={e => (this.rechargeList = e)}
-          style={styles.list}
-          getData={this.getRechargeList}
-          ListEmptyComponent={<Text>暂时没有数据哦</Text>}
-          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-          renderItem={({ item }) => this.renderItem(item)}
-        />
+        <View style={styles.listContainer}>
+          <DataView
+            ref={e => (this.rechargeList = e)}
+            style={styles.list}
+            getData={this.getRechargeList}
+            ListEmptyComponent={<Text>暂时没有数据哦</Text>}
+            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            renderItem={({ item }) => this.renderItem(item)}
+          />
+        </View>
       );
     }
   }
