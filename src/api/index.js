@@ -117,5 +117,9 @@ export default {
   //获取今日消费金额
   getUserPaysToday(UserId) {
     return post("/User/GetUserPaysToday", { UserId });
+  },
+  //获取订单状态
+  getRecInfo(OrderNo) {
+    return post("User/GetRecInfo", { OrderNo }, { loading: false });
   }
 };

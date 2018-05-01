@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  RefreshControl,
-  ScrollView,
-  Alert,
-  AppState
-} from "react-native";
+import { View, Text, RefreshControl, ScrollView, AppState } from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
@@ -53,7 +46,10 @@ export default class Recharge extends Component {
       this.props.navigation.dispatch(
         action.navigate.go({
           routeName: "PayResult",
-          params: { type: this.state.payWay ? "Alipay" : "Wxpay" }
+          params: {
+            type: this.state.payWay ? "Alipay" : "Wxpay",
+            OrderNo: this.OrderNo
+          }
         })
       );
     }
@@ -73,6 +69,7 @@ export default class Recharge extends Component {
     api
       .pay(recharge, UserId)
       .then(async res => {
+        this.OrderNo = res.OrderNo;
         Alipay.pay(res.signValue);
       })
       .catch(e => {
@@ -82,16 +79,25 @@ export default class Recharge extends Component {
   Wxpay = async () => {
     const { recharge } = this.state;
     const { UserId } = this.props;
-    const isSupported = await Wxpay.isSupported();
-    if (!isSupported) {
-      // 判断是否支持微信支付
-      Alert.alert("你的手机不支持微信充值哦");
-      return;
-    }
+    // const isSupported = await Wxpay.isSupported();
+    // if (!isSupported) {
+    //   // 判断是否支持微信支付
+    //   Alert.alert("你的手机不支持微信充值哦");
+    //   return;
+    // }
     api
       .wxPay(recharge, UserId)
       .then(async res => {
-        const { appid, partnerid, prepayid, noncestr, sign, timestamp } = res;
+        const {
+          appid,
+          partnerid,
+          prepayid,
+          noncestr,
+          sign,
+          timestamp,
+          OrderNo
+        } = res;
+        this.OrderNo = OrderNo;
         Wxpay.pay({
           appid,
           partnerid,
