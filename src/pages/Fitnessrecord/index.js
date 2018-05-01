@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 
-import { Tip, share } from "src/common";
+import { share } from "src/common";
 import api from "src/api";
 import action from "src/action";
 import { Button, Icon, Page, ShareModal, DataView } from "src/components";
@@ -144,7 +144,6 @@ export default class Fitnessrecord extends Component {
                     this.setState({ isShareBarVisible: false });
                   })
                   .catch(e => {
-                    Tip.fail(e);
                     this.setState({ isShareBarVisible: false }, () => {
                       this.props.navigation.dispatch(action.navigate.back());
                     });

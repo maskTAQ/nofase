@@ -599,7 +599,6 @@ export default class Pay extends Component {
                     this.setState({ isShareBarVisible: false });
                   })
                   .catch(e => {
-                    Tip.fail(e);
                     this.setState({ isShareBarVisible: false }, () => {
                       this.props.navigation.dispatch(action.navigate.back());
                     });

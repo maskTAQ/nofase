@@ -3,7 +3,7 @@ import { View, Image, Text } from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./style";
-import { Tip, share } from "src/common";
+import { share } from "src/common";
 import action from "src/action";
 import { Button, Icon, Page } from "src/components";
 
@@ -85,7 +85,6 @@ export default class Activity extends Component {
                     this.setState({ isShareBarVisible: false });
                   })
                   .catch(e => {
-                    Tip.fail(e);
                     this.setState({ isShareBarVisible: false }, () => {
                       this.props.navigation.dispatch(action.navigate.back());
                     });

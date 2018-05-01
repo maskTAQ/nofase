@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import styles from "./a";
-import { Tip, share } from "src/common";
+import { share } from "src/common";
 import action from "src/action";
 import { Button, Icon, Page } from "src/components";
 
@@ -72,7 +72,6 @@ export default class A2 extends Component {
                     this.setState({ isShareBarVisible: false });
                   })
                   .catch(e => {
-                    Tip.fail(e);
                     this.setState({ isShareBarVisible: false }, () => {
                       this.props.navigation.dispatch(action.navigate.back());
                     });
