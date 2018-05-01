@@ -15,7 +15,8 @@ import { Button, Icon, Page } from "src/components";
 })
 export default class A1 extends Component {
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    UserId: PropTypes.number
   };
   state = {
     isShareBarVisible: false
@@ -23,6 +24,7 @@ export default class A1 extends Component {
 
   renderShareBar() {
     const { isShareBarVisible } = this.state;
+    const { UserId } = this.props;
     const data = [
       {
         icon: require("./img/u227.png"),
@@ -62,7 +64,7 @@ export default class A1 extends Component {
                 share({
                   title: "拼团运动",
                   content: "",
-                  url: "https://vmslq.com/spell",
+                  url: `https://vmslq.cn/Share/Spell?UserId=${UserId}`,
                   imgSrc: "http://vmslq.com/images/logo_2x279486.png",
                   platform
                 })

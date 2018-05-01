@@ -621,7 +621,7 @@ export default class Home extends Component {
           <Text style={styles.evaluateLabel}>评价:</Text>
           <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
             <StarScore operable={false} currentScore={StoreScore} />
-            <Text style={styles.evaluateValue}>{StoreScore}</Text>
+            <Text style={styles.evaluateValue}>{StoreScore.toFixed(2)}</Text>
           </View>
           <Text style={styles.price}>{Charge || "0"}元/小时</Text>
         </View>

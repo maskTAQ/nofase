@@ -52,6 +52,7 @@ export default class StoreDetail extends Component {
       this.getStoreInfo(Id),
       this.getStoreImg(Id),
       this.getScoreUserPortrait(Id),
+      this.getStoreScore(Id),
       this.getStoreNowPeople(Id),
       this.getDeviceInfo(Id),
       this.getCurriculum(Id)
@@ -122,6 +123,7 @@ export default class StoreDetail extends Component {
     return api
       .getScoreUserPortrait(Id)
       .then(res => {
+        console.log(res);
         return {
           portrait: res
         };
@@ -131,6 +133,19 @@ export default class StoreDetail extends Component {
         return {
           portrait: []
         };
+      });
+  }
+  getStoreScore(Id) {
+    return api
+      .getStoreScore(Id)
+      .then(res => {
+        return {
+          StoreScore: +res.StoreScore
+        };
+      })
+      .catch(e => {
+        console.log(e);
+        return {};
       });
   }
   getStoreNowPeople(id) {
@@ -197,8 +212,10 @@ export default class StoreDetail extends Component {
       StoreImg,
       NowPeopleNum,
       isLoadingStoreImg,
-      StoreImgList = []
+      StoreImgList = [],
+      storeAddrDes
     } = this.state;
+    console.log(this.state, storeAddrDes);
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -260,6 +277,7 @@ export default class StoreDetail extends Component {
                     }}
                   >
                     {Address}
+                    {storeAddrDes}
                   </Text>
                 </View>
                 <View style={{ justifyContent: "center" }}>
@@ -330,7 +348,7 @@ export default class StoreDetail extends Component {
   }
   renderStarScore() {
     //const people = [1, 1, 1, 1, 1, 1, 1];
-    const { portrait = [] } = this.state;
+    const { portrait = [], StoreScore = 5 } = this.state;
     return (
       <View
         style={{
@@ -344,11 +362,11 @@ export default class StoreDetail extends Component {
         }}
       >
         <Text style={{ fontSize: 14, color: "#1a97df", fontWeight: "bold" }}>
-          4.3
+          {StoreScore.toFixed(2)}
         </Text>
         <StarScore
           operable={false}
-          currentScore={4.3}
+          currentScore={StoreScore}
           style={{ flex: 1, paddingLeft: 6 }}
         />
         {portrait.map((item, i) => (

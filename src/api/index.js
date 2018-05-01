@@ -18,7 +18,7 @@ export default {
     });
   },
   login({ Tel, ExCode }) {
-    return post("/User/UserLogin", { Tel, ExCode });
+    return post("/User/UserLoginTest", { Tel, ExCode });
   },
   rememberLogin({ Tel }) {
     return post("/User/UserLoginTest", { Tel });
@@ -98,6 +98,9 @@ export default {
   //获取店铺 评论头像 /User/GetScoreUserList
   getScoreUserPortrait(StoreId) {
     return post("/User/GetScoreUserList", { StoreId }, { loading: false });
+  },
+  getStoreScore(StoreId) {
+    return post("/Store/GetStoreScore", { StoreId }, { loading: false });
   },
   //支 付
   pay(vChargeVal, UserId) {
