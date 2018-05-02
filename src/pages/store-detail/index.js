@@ -15,12 +15,16 @@ import styles from "./style";
 import { Table, Header, Button, Icon, StarScore } from "src/components";
 import api from "src/api";
 import action from "src/action";
-import { Tip } from "src/common";
+import { Tip, share } from "src/common";
 
-@connect()
+@connect(state => {
+  const { auth: { UserId } } = this.props;
+  return { UserId };
+})
 export default class StoreDetail extends Component {
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    UserId: PropTypes.number
   };
   state = {
     isLoadingStoreImg: true,
@@ -43,7 +47,9 @@ export default class StoreDetail extends Component {
     BusinessWeeks: "0,0",
     BusinessTimes: "",
 
-    timetable: []
+    timetable: [],
+
+    isShareBarVisible: false
   };
   componentWillMount() {
     Tip.loading();
@@ -203,6 +209,80 @@ export default class StoreDetail extends Component {
   getTableData = () => {
     return Promise.resolve(this.store.data);
   };
+  navgation = () => {
+    const { Lat, Lng } = this.state;
+    this.props.navigation.dispatch(
+      action.navigate.go({
+        routeName: "Navigation",
+        params: { Lat, Lng }
+      })
+    );
+  };
+  renderShareBar() {
+    const { isShareBarVisible } = this.state;
+    const { UserId } = this.props;
+    const data = [
+      {
+        icon: require("./img/u227.png"),
+        label: "微信",
+        platform: "WECHAT"
+      },
+      {
+        icon: require("./img/u231.png"),
+        label: "朋友圈",
+        platform: "WECHATMOMENT"
+      },
+      {
+        icon: require("./img/u229.png"),
+        label: "QQ",
+        platform: "QQ"
+      },
+      {
+        icon: require("./img/u233.png"),
+        label: "QQ空间",
+        platform: "QQZONE"
+      },
+      {
+        icon: require("./img/u235.png"),
+        label: "新浪微博",
+        platform: "SINA"
+      }
+    ];
+    if (!isShareBarVisible) {
+      return null;
+    }
+    return (
+      <View style={styles.shareBar}>
+        {data.map(({ icon, label, platform }) => {
+          return (
+            <Button
+              onPress={() => {
+                share({
+                  title: "好友邀请你来一起没脸共享运动吧！",
+                  content:
+                    "全城运动场所按时共享计费，不办卡最低4.9元/小时起参与。",
+                  url: `https://vmslq.cn/Share/Guide?UserId=${UserId}`,
+                  imgSrc: "http://vmslq.com/wxicon/2.jpg",
+                  platform
+                })
+                  .then(res => {
+                    this.setState({ isShareBarVisible: false });
+                  })
+                  .catch(e => {
+                    this.setState({ isShareBarVisible: false });
+                  });
+              }}
+              style={styles.shareBarItem}
+              key={label}
+            >
+              <Icon size={40} source={icon} />
+              <Text style={styles.shareBarItemLabel}>{label}</Text>
+            </Button>
+          );
+        })}
+      </View>
+    );
+  }
   renderHeader() {
     const {
       StoreName,
@@ -215,7 +295,6 @@ export default class StoreDetail extends Component {
       StoreImgList = [],
       storeAddrDes
     } = this.state;
-    console.log(this.state, storeAddrDes);
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -280,7 +359,10 @@ export default class StoreDetail extends Component {
                     {storeAddrDes}
                   </Text>
                 </View>
-                <View style={{ justifyContent: "center" }}>
+                <Button
+                  onPress={this.navgation}
+                  style={{ justifyContent: "center" }}
+                >
                   <Icon
                     size={20}
                     source={require("./img/u101.png")}
@@ -296,7 +378,7 @@ export default class StoreDetail extends Component {
                   >
                     计费一次
                   </Text>
-                </View>
+                </Button>
               </View>
             </View>
             <View
@@ -473,7 +555,13 @@ export default class StoreDetail extends Component {
           style={styles.statusBar}
           title={`${StoreImgList.length === 0 ? 0 : 1}/${StoreImgList.length}`}
           RightComponent={
-            <Button>
+            <Button
+              onPress={() => {
+                this.setState({
+                  isShareBarVisible: true
+                });
+              }}
+            >
               <Icon size={22} source={require("./img/u141.png")} />
             </Button>
           }
@@ -567,6 +655,7 @@ export default class StoreDetail extends Component {
             </Text>
           </Button>
         </View>
+        {this.renderShareBar()}
       </View>
     );
   }

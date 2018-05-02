@@ -26,5 +26,26 @@ export default {
   introTitleBox: {
     flexDirection: "row",
     padding: 10
+  },
+
+  shareBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 999,
+    flexDirection: "row",
+    width: "100%",
+    height: 70,
+    backgroundColor: "#fff"
+  },
+  shareBarItem: {
+    flex: 1,
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  shareBarItemLabel: {
+    fontSize: 14,
+    color: "#1a9bfc"
   }
 };
