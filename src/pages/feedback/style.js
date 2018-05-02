@@ -1,3 +1,6 @@
+import { Dimensions } from "react-native";
+
+const { height } = Dimensions.get("window");
 export default {
   container: {
     flex: 1,
@@ -111,6 +114,7 @@ export default {
     color: "#666"
   },
   modalDetailsWrapper: {
+    height: height * 0.8,
     padding: 10,
     paddingTop: 15
   },

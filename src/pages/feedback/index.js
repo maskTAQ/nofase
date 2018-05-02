@@ -4,13 +4,14 @@ import {
   Text,
   FlatList,
   Modal,
-  TouchableWithoutFeedback,
   Linking,
-  ScrollView
+  ScrollView,
+  Image
 } from "react-native";
 import action from "src/action";
 import PropTypes from "prop-types";
 
+import data from "./data";
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
 
@@ -19,6 +20,7 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
     return null;
   }
   const { q, a } = QA;
+  console.log(a.split(/\n/));
   return (
     <Modal
       animationType={"slide"}
@@ -26,21 +28,38 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
       visible={isVisible}
       onRequestClose={() => {}}
     >
-      <TouchableWithoutFeedback onPress={onRequestClose}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>{q}</Text>
-              <Button onPress={onRequestClose}>
-                <Icon size={20} source={require("./img/u284.png")} />
-              </Button>
-            </View>
-            <View style={styles.modalDetailsWrapper}>
-              <Text style={styles.modalDetails}>{a}</Text>
-            </View>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>{q}</Text>
+            <Button onPress={onRequestClose}>
+              <Icon size={20} source={require("./img/u284.png")} />
+            </Button>
+          </View>
+
+          <View style={styles.modalDetailsWrapper}>
+            <ScrollView>
+              {a.split(/\n/).map(item => {
+                if (item.includes("source")) {
+                  return (
+                    <Image
+                      style={{ width: "100%", height: 400 }}
+                      source={/source:([0-9]+)/.exec(item)[1]}
+                      key={item}
+                    />
+                  );
+                } else {
+                  return (
+                    <Text style={styles.modalDetails} key={item}>
+                      {item}
+                    </Text>
+                  );
+                }
+              })}
+            </ScrollView>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </View>
     </Modal>
   );
 };
@@ -59,14 +78,7 @@ export default class Feedback extends Component {
     activeQA: null
   };
   store = {
-    data: [
-      { q: "商家提现分成规则", a: "----" },
-      { q: "如何修改绑定银行卡信息", a: "----" },
-      { q: "如何提高账户的安全性", a: "----" },
-      { q: "收款后域名提示内容", a: "----" },
-      { q: "查看剩余额度", a: "----" },
-      { q: "关于用户余额不足的提示", a: "----" }
-    ]
+    data
   };
   feedback = () => {
     this.props.navigation.dispatch(
