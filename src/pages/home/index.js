@@ -574,6 +574,7 @@ export default class Home extends Component {
       StoreScore,
       NowCurriculum,
       Address,
+      storeAddrDes,
       Charge,
       Id,
       StoreImg,
@@ -605,7 +606,7 @@ export default class Home extends Component {
             </View>
             <View style={styles.itemDetailBottom}>
               <Text style={styles.itemAddr} numberOfLines={2}>
-                {Address || "暂无地址"}
+                {Address || "" + storeAddrDes || "暂无地址"}
               </Text>
               <Button
                 onPress={() => this.navgation(row)}
