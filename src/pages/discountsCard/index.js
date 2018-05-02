@@ -16,7 +16,10 @@ export default class Transacion extends Component {
     this.props.navigation.dispatch(action.navigate.back());
   };
   getDiscountList = PageSize => {
-    return api.getDiscountList({ PageSize, PageNum: 20 });
+    return api.getDiscountList({ PageSize, PageNum: 20 }).then(res => {
+      console.log(res);
+      return res;
+    });
   };
   renderItem(row) {
     const { CardName, EDateTime } = row;

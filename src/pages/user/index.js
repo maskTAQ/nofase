@@ -144,13 +144,15 @@ class ModifMobile extends Component {
             { text: "确定", onPress: () => {} }
           ]);
           requestVerifySetpChange(1);
-          this.setState({ isLoading: false });
+          this.codeButton.reset();
+          this.setState({ isLoading: false, code: "" });
         })
         .catch(e => {
           Alert.alert("提示", "旧手机验证失败:" + e, [
             { text: "确定", onPress: () => {} }
           ]);
-          this.setState({ isLoading: false });
+          this.codeButton.reset();
+          this.setState({ isLoading: false, code: "" });
         });
     }
     if (verifySetp === 1) {
@@ -167,13 +169,15 @@ class ModifMobile extends Component {
               { text: "确定", onPress: () => {} }
             ]);
             requestVerifySetpChange(2);
-            this.setState({ isLoading: false });
+            this.codeButton.reset();
+            this.setState({ isLoading: false, code: "" });
           })
           .catch(e => {
             Alert.alert("提示", "新手机验证失败:" + e, [
               { text: "确定", onPress: () => {} }
             ]);
-            this.setState({ isLoading: false });
+            this.codeButton.reset();
+            this.setState({ isLoading: false, code: "" });
           });
       }
     }
@@ -204,7 +208,7 @@ class ModifMobile extends Component {
     const currentMobile = verifySetp === 0 ? oldMobile : mobile;
     let buttonLabel = "验证旧手机";
     if (verifySetp === 1) {
-      buttonLabel = "验证新手机";
+      buttonLabel = "完成";
     }
     if (verifySetp === 2) {
       buttonLabel = "修改手机号";
@@ -237,7 +241,12 @@ class ModifMobile extends Component {
               placeholder="验证码"
               placeholderTextColor={styles.modalItemInput.color}
             />
-            <CodeButton phone={currentMobile} type="modal" time={10}>
+            <CodeButton
+              ref={e => (this.codeButton = e)}
+              phone={currentMobile}
+              type="modal"
+              time={10}
+            >
               验证码
             </CodeButton>
           </View>

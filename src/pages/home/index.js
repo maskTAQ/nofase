@@ -606,7 +606,8 @@ export default class Home extends Component {
             </View>
             <View style={styles.itemDetailBottom}>
               <Text style={styles.itemAddr} numberOfLines={2}>
-                {Address || "" + storeAddrDes || "暂无地址"}
+                {String(Address || "") + String(storeAddrDes || "") ||
+                  "暂无地址"}
               </Text>
               <Button
                 onPress={() => this.navgation(row)}

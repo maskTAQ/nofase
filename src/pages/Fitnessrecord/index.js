@@ -207,7 +207,10 @@ export default class Fitnessrecord extends Component {
               storeName={StoreName}
               onlinePeople={NowInPeopel}
               NowCurriculum={NowCurriculum}
-              addr={StoreAddress || "" + storeAddrDes || "暂无"}
+              addr={
+                String(StoreAddress || "") + String(storeAddrDes || "") ||
+                "暂无"
+              }
               close={() => {
                 this.setState({
                   isShareModalVisible: false

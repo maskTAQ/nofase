@@ -6,7 +6,8 @@ import {
   Modal,
   Linking,
   ScrollView,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import action from "src/action";
 import PropTypes from "prop-types";
@@ -14,13 +15,12 @@ import PropTypes from "prop-types";
 import data from "./data";
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
-
+const { width } = Dimensions.get("window");
 const QAModal = ({ QA, isVisible, onRequestClose }) => {
   if (!QA) {
     return null;
   }
   const { q, a } = QA;
-  console.log(a.split(/\n/));
   return (
     <Modal
       animationType={"slide"}
@@ -43,7 +43,8 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
                 if (item.includes("source")) {
                   return (
                     <Image
-                      style={{ width: "100%", height: 400 }}
+                      resizeMode="stretch"
+                      style={{ width: "100%", height: width * 0.3 }}
                       source={/source:([0-9]+)/.exec(item)[1]}
                       key={item}
                     />
