@@ -18,6 +18,11 @@ export default class Transacion extends Component {
   back = () => {
     this.props.navigation.dispatch(action.navigate.back());
   };
+  go = () => {
+    this.props.navigation.dispatch(
+      action.navigate.go({ routeName: "Activity" })
+    );
+  };
   getDiscountList = PageSize => {
     return api.getDiscountList({ PageSize, PageNum: 20 }).then(res => {
       console.log(res);
@@ -44,15 +49,17 @@ export default class Transacion extends Component {
   }
   renderList() {
     return (
-      <DataView
-        style={styles.list}
-        ref={e => (this.discountList = e)}
-        isPulldownLoadMore={false}
-        ListEmptyComponent={<Text>没有优惠券哦~</Text>}
-        getData={this.getDiscountList}
-        ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-        renderItem={({ item }) => this.renderItem(item)}
-      />
+      <View style={styles.listContainer}>
+        <DataView
+          style={styles.list}
+          ref={e => (this.discountList = e)}
+          isPulldownLoadMore={false}
+          ListEmptyComponent={<Text>没有优惠券哦~</Text>}
+          getData={this.getDiscountList}
+          ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+          renderItem={({ item }) => this.renderItem(item)}
+        />
+      </View>
     );
   }
   render() {
@@ -92,7 +99,9 @@ export default class Transacion extends Component {
             </View>
             <View style={styles.discountitright}>
               <Text style={styles.titBalance}>即点即送</Text>
-              <Button style={styles.huize}>点击前往查看规则</Button>
+              <Button onPress={this.go} style={styles.huize}>
+                点击前往查看规则
+              </Button>
             </View>
           </View>
 

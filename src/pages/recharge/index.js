@@ -35,7 +35,7 @@ export default class Recharge extends Component {
   };
   state = {
     payWay: 0,
-    recharge: 0.01,
+    recharge: 0,
     isRefreshing: false
   };
 

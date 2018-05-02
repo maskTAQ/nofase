@@ -88,7 +88,7 @@ export default {
   },
   //获取优惠列表
   getDiscountList() {
-    return post("/User/GetUserCardList");
+    return post("/User/GetUserCardList", {}, { loading: false });
   },
   //获取充值记录 http://101.200.196.202:8888/User/GetRechargeList
   getGetRechargeList(params) {
