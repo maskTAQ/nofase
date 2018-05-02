@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 import { Page, Button, Icon, DataView } from "src/components";
 import styles from "./style";
@@ -11,25 +12,31 @@ export default class Transacion extends Component {
   static propTypes = {
     navigation: PropTypes.object
   };
-  state = {};
+  state = {
+    discountList: []
+  };
   back = () => {
     this.props.navigation.dispatch(action.navigate.back());
   };
   getDiscountList = PageSize => {
     return api.getDiscountList({ PageSize, PageNum: 20 }).then(res => {
       console.log(res);
+      this.setState({
+        discountList: res
+      });
       return res;
     });
   };
   renderItem(row) {
     const { CardName, EDateTime } = row;
+    const timestamp = +/\/Date\(([0-9]+)\)/.exec(EDateTime)[1];
     return (
       <View style={styles.item}>
         <Image source={require("./img/u35.png")} style={styles.jeimgs} />
         <View style={styles.texts}>
           <Text style={{ color: "#000", fontSize: 16 }}>{CardName}</Text>
           <Text style={{ color: "#333", fontSize: 13 }}>
-            有效期:{EDateTime}
+            有效期:{moment(new Date(timestamp)).format("YYYY/MM/DD HH:mm")}
           </Text>
         </View>
       </View>
@@ -40,6 +47,7 @@ export default class Transacion extends Component {
       <DataView
         style={styles.list}
         ref={e => (this.discountList = e)}
+        isPulldownLoadMore={false}
         ListEmptyComponent={<Text>没有优惠券哦~</Text>}
         getData={this.getDiscountList}
         ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
@@ -48,10 +56,20 @@ export default class Transacion extends Component {
     );
   }
   render() {
-    const cardNum = this.discountList
-      ? this.discountList.state.dataSource.length
-      : 0;
-    const tabMap = [["打折卡", cardNum, 0], "border", ["抵现卷", cardNum, 1]];
+    const { discountList } = this.state;
+    const tabMap = [
+      [
+        "打折卡",
+        discountList.filter(item => item.CardName.includes("折")).length,
+        0
+      ],
+      "border",
+      [
+        "抵现卷",
+        discountList.filter(item => item.CardName.includes("优惠")).length,
+        1
+      ]
+    ];
     return (
       <View style={styles.container}>
         <View style={styles.bgContainer}>

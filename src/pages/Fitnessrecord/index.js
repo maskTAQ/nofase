@@ -41,7 +41,6 @@ export default class Fitnessrecord extends Component {
     return `${pad(h)}:${pad(m)}`;
   }
   renderItem(row) {
-    console.log(row);
     const { StoreName, Amont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
     return (
