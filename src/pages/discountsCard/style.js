@@ -96,10 +96,13 @@ export default {
     height: 40,
     width: 40
   },
-  list: {
+  listContainer: {
     flex: 1,
     padding: 10,
     paddingBottom: 0
+  },
+  list: {
+    flex: 1
   },
   item: {
     justifyContent: "center",
