@@ -18,7 +18,7 @@ import action from "src/action";
 import { Tip, share } from "src/common";
 
 @connect(state => {
-  const { auth: { UserId } } = this.props;
+  const { auth: { UserId } } = state;
   return { UserId };
 })
 export default class StoreDetail extends Component {
