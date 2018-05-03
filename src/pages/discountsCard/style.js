@@ -97,6 +97,7 @@ export default {
     width: 40
   },
   listContainer: {
+    flex: 1,
     padding: 10,
     paddingBottom: 0
   },

@@ -84,7 +84,7 @@ export default {
   },
   //获取用户订单状态
   getOrderStatus() {
-    return post("/User/GetUsingOrder");
+    return post("/User/GetUsingOrder", {}, { handleCatch: false });
   },
   //获取优惠列表
   getDiscountList() {

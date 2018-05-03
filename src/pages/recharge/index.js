@@ -186,11 +186,9 @@ export default class Recharge extends Component {
             <Input
               style={styles.input}
               value={String(recharge)}
+              keyboardType="numeric"
               onChangeText={v => {
                 this.setState({ recharge: v });
-                if (v === 1) {
-                  Alipay();
-                }
               }}
             />
             <View style={styles.inputLabelWrapper}>
