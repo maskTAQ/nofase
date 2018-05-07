@@ -67,7 +67,7 @@ export default class Login extends Component {
         api
           .WxLogin(res.userId)
           .then(res => {
-            AsyncStorage.setItem("mobile", res.Tel);
+            AsyncStorage.setItem("mobile", res.Tel || "");
             this.props.navigation.dispatch(action.login(res));
             this.props.navigation.dispatch(
               action.navigate.go({ routeName: "Home" })

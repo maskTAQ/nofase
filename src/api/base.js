@@ -66,7 +66,9 @@ const post = (
           console.log("地址:" + url);
           console.log("参数:", params);
           console.log("------ end -------");
-          Tip.fail(`error:${message}`);
+          if (handleCatch) {
+            Tip.fail(`error:${message}`);
+          }
           return reject(message);
         }
       })

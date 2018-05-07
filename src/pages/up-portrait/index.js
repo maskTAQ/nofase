@@ -41,9 +41,9 @@ export default class UpPortrait extends Component {
             });
         }}
         title="上传头像"
-        url={`https://vmslq.cn/webview/up-portrait?params=${JSON.stringify(
+        url={`https://vmslq.cn/webview/up-portrait/index.html?params=${JSON.stringify(
           params
-        )}&timestamp=${Date.now}`}
+        )}&t=${Date.now()}`}
         ref={w => (this.webview = w)}
       />
     );

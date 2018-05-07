@@ -101,13 +101,13 @@ export default class StoreDetail extends Component {
           );
         }
       },
-      { title: "周一", dataIndex: "Week0" },
-      { title: "周二", dataIndex: "Week1" },
-      { title: "周三", dataIndex: "Week2" },
-      { title: "周四", dataIndex: "Week3" },
-      { title: "周五", dataIndex: "Week4" },
-      { title: "周六", dataIndex: "Week5" },
-      { title: "周日", dataIndex: "Week6" }
+      { title: "周一", dataIndex: "Week1" },
+      { title: "周二", dataIndex: "Week2" },
+      { title: "周三", dataIndex: "Week3" },
+      { title: "周四", dataIndex: "Week4" },
+      { title: "周五", dataIndex: "Week5" },
+      { title: "周六", dataIndex: "Week6" },
+      { title: "周日", dataIndex: "Week0" }
     ]
   };
 

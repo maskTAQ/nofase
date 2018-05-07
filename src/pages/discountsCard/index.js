@@ -34,14 +34,17 @@ export default class Transacion extends Component {
   };
   renderItem(row) {
     const { CardName, EDateTime } = row;
-    const timestamp = +/\/Date\(([0-9]+)\)/.exec(EDateTime)[1];
     return (
       <View style={styles.item}>
         <Image source={require("./img/u35.png")} style={styles.jeimgs} />
         <View style={styles.texts}>
           <Text style={{ color: "#000", fontSize: 16 }}>{CardName}</Text>
           <Text style={{ color: "#333", fontSize: 13 }}>
-            有效期:{moment(new Date(timestamp)).format("YYYY/MM/DD HH:mm")}
+            有效期:{EDateTime
+              ? moment(
+                  new Date(+/\/Date\(([0-9]+)\)/.exec(EDateTime)[1])
+                ).format("YYYY/MM/DD HH:mm")
+              : "永不过期"}
           </Text>
         </View>
       </View>
