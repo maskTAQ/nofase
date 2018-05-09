@@ -12,12 +12,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import styles from "./style";
-import { Input, Button, CodeButton } from "src/components";
+import { Input, Button, CodeButton, Icon } from "src/components";
 import action from "src/action";
 import api from "src/api";
 import { Tip } from "src/common";
 import { login } from "src/common/share";
 const { height } = Dimensions.get("window");
+const logoSource = require("src/images/login/logo.png");
 @connect()
 export default class Login extends Component {
   static propTypes = {
@@ -99,11 +100,10 @@ export default class Login extends Component {
             barStyle="light-content"
           />
           <View style={styles.logo}>
-            <Image
-              source={require("src/images/login/logo.png")}
-              style={styles.logoImg}
-            />
-            <Text style={styles.logoLabel}>GYM</Text>
+            <View style={styles.logoWrapper}>
+              <Icon source={logoSource} size={60} />
+            </View>
+            <Text style={styles.logoLabel}>没脸运动</Text>
           </View>
           <View style={styles.form}>
             <View style={styles.formItem}>

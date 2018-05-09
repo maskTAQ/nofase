@@ -1,6 +1,6 @@
 import { Dimensions } from "react-native";
 
-const { height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 export default {
   container: {
     flex: 1,
@@ -93,32 +93,42 @@ export default {
     justifyContent: "flex-end"
   },
   modalContent: {
+    padding: 10,
+    paddingTop: 0,
     borderWidth: 1,
-    borderColor: "#666",
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
+    borderColor: "#fff",
+    // borderTopLeftRadius: 6,
+    // borderTopRightRadius: 6,
     backgroundColor: "#fff"
   },
   modalHeader: {
     height: 40,
-    padding: 10,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderColor: "#666"
+    alignItems: "center"
   },
   modalTitle: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#666"
+    color: "#868686"
+  },
+  modalLine: {
+    height: 1,
+    backgroundColor: "#aaa"
   },
   modalDetailsWrapper: {
-    height: height * 0.8,
-    padding: 10,
-    paddingTop: 15
+    height: height - 182
+    //padding: 10,
+    //paddingTop: 15
   },
   modalDetails: {
+    lineHeight: 20,
     color: "#999"
+  },
+  modalImg: {
+    width: "100%",
+    height: width * 0.4,
+    marginTop: 10,
+    marginBottom: 10
   }
 };

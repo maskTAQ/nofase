@@ -13,6 +13,10 @@ export default {
     right: 0,
     bottom: 0
   },
+  logoWrapper: {
+    borderRadius: 60,
+    overflow: "hidden"
+  },
   logo: {
     alignItems: "center"
   },

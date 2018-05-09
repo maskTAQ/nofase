@@ -3,6 +3,7 @@ import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 
 import { Alert, Icon, Button } from "src/components";
+import action from "src/action";
 import styles from "./style";
 const ShareModal = ({
   close,
@@ -22,16 +23,18 @@ const ShareModal = ({
   storeImg,
   level,
   NowCurriculum,
-  goStoreDetail
+  goStoreDetail,
+  Lat,
+  Lng
 }) => {
   return (
-    <Alert isVisible={isVisible} close={close}>
+    <Alert style={{ flex: 1 }} isVisible={isVisible} close={close}>
       <View style={styles.layer}>
         <View style={styles.container}>
           <View style={styles.bg}>
             <Image
               style={styles.bg}
-              source={require("./img/u42.png")}
+              source={require("./img/bg.png")}
               resizeMode="stretch"
             />
           </View>
@@ -49,12 +52,19 @@ const ShareModal = ({
                 >
                   <Icon size={60} source={portrait} />
                 </View>
-                <Text style={styles.username}>
-                  {username} LV:{level}
-                </Text>
+                <View style={styles.usernameWrapper}>
+                  <Text style={styles.username}>{username}</Text>
+                  <Image
+                    style={styles.lvImg}
+                    source={require("./img/lv.png")}
+                  />
+                  <View style={styles.userLvWrapper}>
+                    <Text style={styles.userLv}> {level}</Text>
+                  </View>
+                </View>
               </View>
               <Button onPress={close} style={styles.closeWrapper}>
-                <Icon size={22} source={require("./img/u221.png")} />
+                <Icon size={28} source={require("./img/u78.png")} />
               </Button>
             </View>
             <View style={styles.centerContainer}>
@@ -84,7 +94,25 @@ const ShareModal = ({
                     <Icon size={14} source={require("./img/u79.png")} />
                   </Button>
                 </View>
-                <Text style={styles.storeAddr}>{addr}</Text>
+                <View style={styles.storeInfoBottom}>
+                  <Text style={styles.storeAddr}>{addr}</Text>
+                  {Lat && (
+                    <Button
+                      onPress={() => {
+                        this.props.navigation.dispatch(
+                          action.navigate.go({
+                            routeName: "Navigation",
+                            params: { Lat, Lng }
+                          })
+                        );
+                      }}
+                      style={styles.navgation}
+                    >
+                      <Icon size={18} source={require("./img/nav.png")} />
+                      <Text style={styles.navgationText}>导航</Text>
+                    </Button>
+                  )}
+                </View>
               </View>
             </View>
           </View>
@@ -120,6 +148,8 @@ ShareModal.propTypes = {
   storeImg: PropTypes.any,
   level: PropTypes.any,
   NowCurriculum: PropTypes.any,
-  goStoreDetail: PropTypes.func
+  goStoreDetail: PropTypes.func,
+  Lat: PropTypes.number,
+  Lng: PropTypes.number
 };
 export default ShareModal;

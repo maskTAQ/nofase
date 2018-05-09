@@ -174,7 +174,9 @@ export default class Fitnessrecord extends Component {
       StoreImg,
       NowCurriculum,
       NowInPeopel,
-      StoreId
+      StoreId,
+      Lat,
+      Lng
     } = currentOrder;
     return (
       <Page title="健身记录">
@@ -192,6 +194,8 @@ export default class Fitnessrecord extends Component {
             <View />
             <ShareModal
               isVisible={isShareModalVisible}
+              Lat={Lat}
+              Lng={Lng}
               username={NickName}
               portrait={
                 UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")

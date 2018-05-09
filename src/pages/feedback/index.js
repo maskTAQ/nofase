@@ -6,8 +6,7 @@ import {
   Modal,
   Linking,
   ScrollView,
-  Image,
-  Dimensions
+  Image
 } from "react-native";
 import action from "src/action";
 import PropTypes from "prop-types";
@@ -15,7 +14,7 @@ import PropTypes from "prop-types";
 import data from "./data";
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
-const { width } = Dimensions.get("window");
+
 const QAModal = ({ QA, isVisible, onRequestClose }) => {
   if (!QA) {
     return null;
@@ -36,6 +35,7 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
               <Icon size={20} source={require("./img/u284.png")} />
             </Button>
           </View>
+          <View style={styles.modalLine} />
 
           <View style={styles.modalDetailsWrapper}>
             <ScrollView>
@@ -44,7 +44,7 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
                   return (
                     <Image
                       resizeMode="stretch"
-                      style={{ width: "100%", height: width * 0.3 }}
+                      style={styles.modalImg}
                       source={/source:([0-9]+)/.exec(item)[1]}
                       key={item}
                     />

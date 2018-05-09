@@ -303,7 +303,7 @@ export default class Home extends Component {
               this.togglePattern("list");
             }}
           >
-            <Icon size={20} source={require("./img/search.png")} />
+            <Icon size={16} source={require("./img/search.png")} />
           </Button>
         }
       >

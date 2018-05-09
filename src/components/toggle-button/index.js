@@ -25,12 +25,12 @@ export default class ToggleButton extends Component {
   };
   render() {
     const arrow = {
-      unfold: "90deg",
-      packUp: "270deg"
+      unfold: "0deg",
+      packUp: "180deg"
     };
     const bottom = {
       unfold: -12,
-      packUp: -80
+      packUp: -60
     };
     const { status } = this.state;
     return (
@@ -43,20 +43,23 @@ export default class ToggleButton extends Component {
         <View style={styles.wrapper}>
           <Button onPress={this.toggle} style={styles.toggleButton}>
             <Icon
-              size={20}
+              size={30}
               source={require("./img/arrow.png")}
               style={{ transform: [{ rotate: arrow[status] }] }}
             />
           </Button>
           <View style={styles.buttonGroup}>
-            <Button onPress={() => this.go("User")}>
-              <Icon size={36} source={require("./img/user.png")} />
+            <Button style={styles.buttonLeft} onPress={() => this.go("User")}>
+              <Icon size={30} source={require("./img/user.png")} />
             </Button>
-            <Button onPress={() => this.go("Pay")}>
-              <Icon size={60} source={require("./img/code.png")} />
+            <Button style={styles.buttonCenter} onPress={() => this.go("Pay")}>
+              <Icon size={50} source={require("./img/code.png")} />
             </Button>
-            <Button onPress={() => this.go("Activity")}>
-              <Icon size={36} source={require("./img/run.png")} />
+            <Button
+              style={styles.buttonRight}
+              onPress={() => this.go("Activity")}
+            >
+              <Icon size={30} source={require("./img/run.png")} />
             </Button>
           </View>
         </View>

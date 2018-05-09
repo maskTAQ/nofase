@@ -20,10 +20,7 @@ export default {
   header: {
     position: "relative"
   },
-  portraitWrapper: {
-    borderRadius: 60,
-    overflow: "hidden"
-  },
+
   headerBg: {
     position: "absolute",
     top: 0,
@@ -39,29 +36,37 @@ export default {
   },
   headerContent: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "flex-end"
+  },
+  portraitWrapper: {
+    borderRadius: 55,
+    marginRight: 16,
+    overflow: "hidden"
   },
   closeWrapper: {
     alignItems: "flex-end"
   },
   editIconButton: {
-    marginLeft: 4,
+    marginLeft: 8,
     justifyContent: "center"
   },
   headerContentRight: {
-    flex: 1
+    flex: 1,
+    justifyContent: "flex-end"
   },
   usernameWrapper: {
-    flexDirection: "row"
+    flexDirection: "row",
+    height: 26,
+    alignItems: "center"
   },
   username: {
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: "bold",
     color: "#fff"
   },
   userIdWrapper: {
     flexDirection: "row",
-    height: 40,
+    height: 20,
     alignItems: "center"
   },
   userId: {
@@ -88,13 +93,14 @@ export default {
   },
   list: {
     marginTop: 4,
+    marginBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    borderRadius: 6,
+    borderRadius: 12,
     backgroundColor: "#46b6ec"
   },
   item: {
-    height: 40,
+    height: 36,
     justifyContent: "center",
     borderBottomWidth: 1,
     borderColor: "#fff"
@@ -110,18 +116,22 @@ export default {
     color: "#fff"
   },
   accountContianer: {
-    marginTop: 30,
+    marginTop: 10,
     padding: 10,
     marginBottom: 10,
-    borderRadius: 6,
+    borderRadius: 10,
     backgroundColor: "#fff"
+  },
+  accountTitleWrapper: {
+    height: 25,
+    justifyContent: "center"
   },
   accountTitle: {
     fontSize: 14,
     color
   },
   accountItem: {
-    height: 30,
+    height: 25,
     flexDirection: "row",
     alignItems: "center"
     //backgroundColor:'red'
@@ -132,13 +142,15 @@ export default {
     justifyContent: "flex-end"
   },
   itemButtonText: {
-    color: "#f76f25"
+    color: "#f8b84a"
   },
   accountItemText: {
     marginRight: 10,
     color
   },
   button: {
+    marginTop: 12,
+    marginBottom: 41,
     width: "100%",
     height: 40,
     borderRadius: 8,

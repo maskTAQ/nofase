@@ -115,7 +115,7 @@ export default {
     paddingTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    paddingBottom: 60,
+    paddingBottom: 30,
     backgroundColor: "#a9daef"
   },
   item: {

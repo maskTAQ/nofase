@@ -23,6 +23,10 @@ import {
 import { Tip } from "src/common";
 import styles from "./style";
 import action from "src/action";
+const portraitSource = require("./img/u128.png"),
+  closeSource = require("./img/u78.png"),
+  lvSource = require("./img/u137.png"),
+  editSource = require("./img/u133.png");
 
 class ModifUserName extends Component {
   static propTypes = {
@@ -380,10 +384,7 @@ export default class User extends Component {
       Level = "-",
       Photo
     } = this.props.userInfo;
-    const portraitSource = require("./img/u128.png"),
-      closeSource = require("./img/u78.png"),
-      lvSource = require("./img/u137.png"),
-      editSource = require("./img/u133.png");
+
     return (
       <View style={styles.header}>
         <Image
@@ -394,7 +395,7 @@ export default class User extends Component {
         <View style={styles.headerWrapper}>
           <View style={styles.closeWrapper}>
             <Button onPress={this.back}>
-              <Icon size={24} source={closeSource} />
+              <Icon size={20} source={closeSource} />
             </Button>
           </View>
           <View style={styles.headerContent}>
@@ -407,7 +408,7 @@ export default class User extends Component {
               }}
             >
               <Icon
-                size={60}
+                size={55}
                 source={Photo ? { uri: Photo } : portraitSource}
               />
             </Button>
@@ -424,9 +425,6 @@ export default class User extends Component {
                 >
                   <Icon size={16} source={editSource} />
                 </Button>
-              </View>
-              <View style={styles.userIdWrapper}>
-                <Text style={styles.userId}>ID:{UserCode}</Text>
                 <View style={styles.lvWrapper}>
                   <Image
                     style={styles.lvImg}
@@ -436,9 +434,17 @@ export default class User extends Component {
                   <Text style={styles.lvLabel}>{Level}</Text>
                 </View>
               </View>
+              <View style={styles.userIdWrapper}>
+                <Text style={styles.userId}>ID:{UserCode}</Text>
+              </View>
             </View>
           </View>
-          <View style={[styles.border, { margin: 6, marginBottom: 0 }]} />
+          <View
+            style={[
+              styles.border,
+              { margin: 6, marginTop: 20, marginBottom: 0 }
+            ]}
+          />
         </View>
       </View>
     );
@@ -491,6 +497,8 @@ export default class User extends Component {
                 <Switch
                   value={this.state.isRemind}
                   onValueChange={this.setRemind}
+                  size="samll"
+                  onTintColor="#f8b84a"
                 />
               ) : null}
             </Button>
@@ -503,13 +511,13 @@ export default class User extends Component {
     const { UserName = "-" } = this.props.userInfo;
     return (
       <View style={styles.accountContianer}>
-        <Text style={styles.accountTitle}>账号绑定</Text>
-        <View style={[styles.accountItem, { paddingLeft: 10 }]}>
-          <Text style={styles.accountItemText}>手机号码</Text>
+        <View style={styles.accountTitleWrapper}>
+          <Text style={styles.accountTitle}>账号绑定</Text>
+        </View>
+        <View style={[styles.border, { marginTop: 10, marginBottom: 10 }]} />
+        <View style={[styles.accountItem, { paddingLeft: 20 }]}>
+          <Text style={styles.accountItemText}>手机号码:{UserName}</Text>
           <View style={styles.accountItemRight}>
-            <Text style={styles.accountItemText}>
-              {UserName.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2")}
-            </Text>
             <Button
               onPress={() => {
                 this.setState({
@@ -556,6 +564,9 @@ export default class User extends Component {
               >
                 客户反馈
               </Button>
+              <View
+                style={[styles.border, { marginTop: 10, marginBottom: 10 }]}
+              />
               <Button
                 onPress={() => {
                   this.props.navigation.dispatch(

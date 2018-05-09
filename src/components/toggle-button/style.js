@@ -4,8 +4,8 @@ export default {
     left: 0,
     right: 0,
     bottom: 0,
-    height: 120,
-    paddingTop: 12
+    height: 88,
+    paddingTop: 0
   },
   bg: {
     position: "absolute",
@@ -14,15 +14,28 @@ export default {
   },
   wrapper: {
     flex: 1,
-    paddingBottom: 20
+    paddingBottom: 10
   },
   toggleButton: {
     alignItems: "center"
   },
   buttonGroup: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "flex-end"
+    flexDirection: "row"
+  },
+  buttonLeft: {
+    width: 56,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonCenter: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonRight: {
+    width: 56,
+    justifyContent: "center",
+    alignItems: "center"
   }
 };
