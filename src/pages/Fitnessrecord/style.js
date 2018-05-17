@@ -4,32 +4,47 @@ export default {
     position: "relative",
     backgroundColor: "#a7daf7"
   },
-  box: {
+  bg: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%"
+  },
+  bgTop: {
+    height: 160,
+    backgroundColor: "#278be1"
+  },
+  bgBottom: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    backgroundColor: "#e0dede"
+  },
+  content: {
+    flex: 1,
+    paddingLeft: 12,
+    paddingRight: 12,
     paddingTop: 20
   },
 
   banner: {
     width: "100%",
-    height: 160,
+    height: 180,
     zIndex: 999,
     marginBottom: 15
   },
   item: {
-    height: 80,
-    paddingLeft: 10,
-    paddingRight: 10,
+    height: 90,
+    paddingLeft: 12,
+    paddingRight: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#fff",
-    borderRadius: 5
+    borderRadius: 6
   },
   itemLeft: {},
-  itemTime: { color: "#333", fontSize: 14, lineHeight: 30 },
-  itemDetail: { color: "#333", fontSize: 14, lineHeight: 30 },
+  itemTime: { color: "#777", fontSize: 14, lineHeight: 30 },
+  itemDetail: { color: "#777", fontSize: 14, lineHeight: 30 },
   rightimg: {
     flexDirection: "row",
     width: 50,

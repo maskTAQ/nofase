@@ -29,14 +29,14 @@ export default {
 
   titBalance: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 16,
     color: "#0399e7"
   },
   Balance: {
     textAlign: "center",
     width: "100%",
     lineHeight: 35,
-    fontSize: 20,
+    fontSize: 30,
     color: "#0399e7"
   },
   consume: {

@@ -324,9 +324,11 @@ export default class Pay extends Component {
               <Text style={styles.headerItemValue}>{data[OrderType][0]}</Text>
             </View>
           </View>
-          <Icon size={30} source={require("./img/u17.png")} />
+          <View style={styles.rightIconWrapepr}>
+            <Icon size={30} source={require("./img/u17.png")} />
+          </View>
           <View style={styles.headerItemWrapper}>
-            <View style={styles.headerItem}>
+            <View style={[styles.headerItem, styles.headerItemRight]}>
               <Text style={styles.headerItemLabel}>结束时间</Text>
               <Text style={styles.headerItemValue}>{data[OrderType][1]}</Text>
             </View>
@@ -385,7 +387,6 @@ export default class Pay extends Component {
           <View style={[styles.tItem, { alignItems: "flex-end" }]}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.tItemLabel}>{data[1][0]}</Text>
-              <Icon size={20} source={require("./img/u328.png")} />
             </View>
             <Button
               onPress={() => {
@@ -395,7 +396,10 @@ export default class Pay extends Component {
               }}
               style={styles.tItemValueWrapper}
             >
-              <Text style={styles.tItemValue}>{data[1][1]}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={styles.tItemValue}>{data[1][1]}</Text>
+                <Icon size={20} source={require("./img/u328.png")} />
+              </View>
             </Button>
           </View>
         </View>
@@ -411,15 +415,23 @@ export default class Pay extends Component {
   renderStoreInfo() {
     const { StoreName, StoreCsTel } = this.state;
     return (
-      <View style={styles.storeInfo}>
-        <Text style={styles.storeName}>{StoreName}</Text>
-        <Button
-          onPress={() => {
-            Linking.openURL(`tel:${StoreCsTel}`);
-          }}
-        >
-          <Icon size={15} source={require("./img/u204.png")} />
-        </Button>
+      <View style={styles.storeInfoWrapper}>
+        <View style={styles.storeInfo}>
+          <Text style={styles.storeName}>当前所在位置:{StoreName}</Text>
+          <Button
+            onPress={() => {
+              Linking.openURL(`tel:${StoreCsTel}`);
+            }}
+          >
+            <Icon size={15} source={require("./img/u204.png")} />
+          </Button>
+        </View>
+        <View style={styles.itemBorder}>
+          <Image
+            source={require("./img/u14_line.png")}
+            style={styles.itemBorderIcon}
+          />
+        </View>
       </View>
     );
   }
@@ -473,7 +485,6 @@ export default class Pay extends Component {
               ["Choice", discountLabel]
             ])}
             {this.renderQr()}
-            <View style={{ height: 15 }} />
           </ScrollView>
         );
       case "1":
@@ -490,7 +501,6 @@ export default class Pay extends Component {
               ["Choice", discountLabel]
             ])}
             {this.renderQr()}
-            <View style={{ height: 15 }} />
           </ScrollView>
         );
       default:
@@ -615,6 +625,29 @@ export default class Pay extends Component {
       </View>
     );
   }
+  renderNotif() {
+    const { OrderType } = this.state;
+    switch (true) {
+      case OrderType === 0:
+        return (
+          <View style={styles.notif}>
+            <Text style={styles.notifText} numberOfLines={1}>
+              提示:开始运动/商家扫码前,余额要多于计费单价的两倍
+            </Text>
+          </View>
+        );
+      case OrderType === 1:
+        return (
+          <View style={styles.notif}>
+            <Text style={styles.notifText} numberOfLines={1}>
+              一定要记得:运动结束是再次出示页面扫码后才可结束运动
+            </Text>
+          </View>
+        );
+      default:
+        return null;
+    }
+  }
   render() {
     const {
       isPickerVisible,
@@ -623,7 +656,8 @@ export default class Pay extends Component {
       tickts,
       StoreName,
       StoreAddress,
-      NowInPeople,
+      NowInPeopel,
+      PeopleNum,
       discountList,
       discountLabel,
       CardId,
@@ -652,6 +686,8 @@ export default class Pay extends Component {
         }
       >
         <View style={styles.container}>
+          {this.renderNotif()}
+
           <View style={styles.box}>
             {this.renderContent()}
             <View style={styles.chunk} />
@@ -691,6 +727,7 @@ export default class Pay extends Component {
         <ShareModal
           isVisible={isShareModalVisible}
           portrait={UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")}
+          people={Number(PeopleNum) - NowInPeopel}
           storeImg={
             StorePhoto ? { uri: StorePhoto } : require("./img/logo.png")
           }
@@ -700,7 +737,7 @@ export default class Pay extends Component {
           money={Money}
           discount={Money - SaleAmont}
           storeName={StoreName}
-          onlinePeople={NowInPeople}
+          onlinePeople={NowInPeopel}
           NowCurriculum={NowCurriculum}
           addr={StoreAddress}
           close={() => {

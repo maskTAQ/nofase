@@ -25,7 +25,7 @@ import styles from "./style";
 import action from "src/action";
 const portraitSource = require("./img/u128.png"),
   closeSource = require("./img/u78.png"),
-  lvSource = require("./img/u137.png"),
+  lvSource = require("./img/lv.png"),
   editSource = require("./img/u133.png");
 
 class ModifUserName extends Component {
@@ -584,7 +584,7 @@ export default class User extends Component {
               style={styles.button}
               textStyle={styles.buttonText}
             >
-              退出登录
+              退出
             </Button>
           </View>
         </ScrollView>

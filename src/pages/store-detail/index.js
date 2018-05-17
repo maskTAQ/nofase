@@ -84,16 +84,16 @@ export default class StoreDetail extends Component {
 
           switch (true) {
             case !!STime && !!ETime:
-              label = STime + "-" + ETime;
+              label = STime + "至" + ETime;
               break;
             case !!STime:
-              label = STime + "-" + "?";
+              label = STime + "至" + "?";
               break;
             case !!ETime:
-              label = "?" + "-" + ETime;
+              label = "?" + "至" + ETime;
               break;
             default:
-              label = "?-?";
+              label = "?至?";
               break;
           }
           return (
@@ -287,10 +287,7 @@ export default class StoreDetail extends Component {
     const {
       StoreName,
       Address,
-      PeopleNum,
-      Charge,
       StoreImg,
-      NowPeopleNum,
       isLoadingStoreImg,
       StoreImgList = [],
       storeAddrDes
@@ -342,85 +339,16 @@ export default class StoreDetail extends Component {
             <View style={styles.introTitleWrapper}>
               <View style={styles.introTitleBox}>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{ fontSize: 20, color: "#fff", fontWeight: "bold" }}
-                  >
-                    {StoreName}
-                  </Text>
-                  <Text
-                    style={{
-                      marginTop: 4,
-                      fontSize: 14,
-                      color: "#fff",
-                      fontWeight: "bold"
-                    }}
-                  >
+                  <Text style={styles.storeName}>{StoreName}</Text>
+                  <Text style={styles.storeAddr} numberOfLines={1}>
                     {Address}
                     {storeAddrDes}
                   </Text>
                 </View>
-                <Button
-                  onPress={this.navgation}
-                  style={{ justifyContent: "center" }}
-                >
-                  <Icon
-                    size={20}
-                    source={require("./img/u101.png")}
-                    style={{ alignItems: "center" }}
-                  />
-                  <Text
-                    style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
-                  >
-                    每一小时
-                  </Text>
-                  <Text
-                    style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
-                  >
-                    计费一次
-                  </Text>
+                <Button onPress={this.navgation} style={styles.navgation}>
+                  <Icon size={20} source={require("./img/u101.png")} />
+                  <Text style={styles.navgationText}>每一小时计费一次</Text>
                 </Button>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                padding: 6,
-                backgroundColor: "#666",
-                alignContent: "center"
-              }}
-            >
-              <Icon
-                size={26}
-                source={require("./img/u177.png")}
-                style={{ paddingLeft: 10, paddingRight: 10 }}
-              />
-              <View style={{ flex: 1 }}>
-                <Text
-                  style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
-                >
-                  可容纳线上{PeopleNum}人位
-                </Text>
-                <Text
-                  style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}
-                >
-                  当前剩余{PeopleNum - NowPeopleNum}人位
-                </Text>
-              </View>
-              <View
-                style={{
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  height: 30,
-                  justifyContent: "center",
-                  backgroundColor: "#1a97df",
-                  borderRadius: 4
-                }}
-              >
-                <Text
-                  style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}
-                >
-                  {Charge}元 / 小时
-                </Text>
               </View>
             </View>
           </View>
@@ -428,37 +356,64 @@ export default class StoreDetail extends Component {
       </TouchableWithoutFeedback>
     );
   }
+  renderPrice() {
+    const { PeopleNum, Charge, NowPeopleNum } = this.state;
+    return (
+      <View style={styles.priceWrapper}>
+        <Icon
+          size={26}
+          source={require("./img/u177.png")}
+          style={{ paddingLeft: 10, paddingRight: 10 }}
+        />
+        <View style={{ flex: 1 }}>
+          <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
+            可容纳线上{PeopleNum}人位
+          </Text>
+          <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
+            当前剩余{PeopleNum - NowPeopleNum}人位
+          </Text>
+        </View>
+        <View
+          style={{
+            paddingLeft: 20,
+            paddingRight: 20,
+            height: 30,
+            justifyContent: "center",
+            backgroundColor: "#1a97df",
+            borderRadius: 4
+          }}
+        >
+          <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>
+            {Charge}元 / 小时
+          </Text>
+        </View>
+      </View>
+    );
+  }
   renderStarScore() {
     //const people = [1, 1, 1, 1, 1, 1, 1];
     const { portrait = [], StoreScore = 5 } = this.state;
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          height: 40,
-          alignItems: "center",
-          paddingLeft: 6,
-          paddingRight: 6,
-          borderBottomWidth: 1,
-          borderBottomColor: "#e4e4e4"
-        }}
-      >
-        <Text style={{ fontSize: 14, color: "#1a97df", fontWeight: "bold" }}>
-          {StoreScore.toFixed(2)}
-        </Text>
-        <StarScore
-          operable={false}
-          currentScore={StoreScore}
-          style={{ flex: 1, paddingLeft: 6 }}
-        />
-        {portrait.map((item, i) => (
-          <Icon
-            size={20}
-            source={{ uri: item.UserPhoto }}
-            key={i}
-            style={{ marginLeft: 4 }}
+      <View style={styles.starScoreWrapper}>
+        <View style={styles.starScorContent}>
+          <Text style={styles.starScoreLabel}>评分:</Text>
+          <StarScore
+            operable={false}
+            currentScore={StoreScore}
+            //style={{ flex: 1, paddingLeft: 6 }}
           />
-        ))}
+          <Text style={styles.starScoreValue}>{StoreScore.toFixed(2)}</Text>
+        </View>
+        <View style={styles.portraitWrapper}>
+          {portrait.map((item, i) => (
+            <Icon
+              size={20}
+              source={{ uri: item.UserPhoto }}
+              key={i}
+              style={{ marginLeft: 4 }}
+            />
+          ))}
+        </View>
       </View>
     );
   }
@@ -481,18 +436,7 @@ export default class StoreDetail extends Component {
       { label: "康体设备", hasKey: IsHealthCare, valueKey: HealthCare }
     ];
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          height: 40,
-          alignItems: "center",
-          paddingLeft: 6,
-          paddingRight: 6,
-          borderBottomWidth: 1,
-          borderBottomColor: "#e4e4e4"
-        }}
-      >
+      <View style={styles.propsWrapper}>
         {data.map(({ label, hasKey, valueKey }) => {
           return (
             <View
@@ -512,7 +456,7 @@ export default class StoreDetail extends Component {
             >
               <Text
                 style={[
-                  { fontSize: 14, color: "#a1a1a1" },
+                  { fontSize: 12, color: "#a1a1a1" },
                   hasKey && { color: "#1a97df" }
                 ]}
               >
@@ -525,16 +469,8 @@ export default class StoreDetail extends Component {
       </View>
     );
   }
-  render() {
-    const { tableColumns } = this.store;
-    const {
-      BusinessTimes,
-      BusinessWeeks,
-      Charge,
-      CsTel,
-      StoreRemarks,
-      StoreImgList = []
-    } = this.state;
+  renderHour() {
+    const { BusinessTimes, BusinessWeeks } = this.state;
     const weeks = [
       "星期日",
       "星期一",
@@ -548,12 +484,38 @@ export default class StoreDetail extends Component {
     const endWeek = BusinessWeeks
       ? weeks[BusinessWeeks[BusinessWeeks.length - 1]]
       : "暂无";
+    return (
+      <View style={styles.hourSwapper}>
+        <Text style={{ fontSize: 14, color: "#bfbfbf", fontWeight: "bold" }}>
+          营业时间：
+        </Text>
+        <Text style={{ color: "#a1a1a1" }}>
+          {startWeek}至{endWeek} {BusinessTimes}
+        </Text>
+      </View>
+    );
+  }
+  renderRemarks() {
+    const { StoreRemarks } = this.state;
+    return (
+      <View style={styles.remarksWrapper}>
+        <View style={styles.remarksLabelWrapper}>
+          <Text style={styles.remarksLabel}>商家留言：</Text>
+        </View>
+        <Text style={styles.remarksValue}>{StoreRemarks}</Text>
+      </View>
+    );
+  }
+  render() {
+    const { tableColumns } = this.store;
+    const { Charge, CsTel } = this.state;
+
     const { timetable } = this.state;
     return (
       <View style={styles.container}>
         <Header
           style={styles.statusBar}
-          title={`${StoreImgList.length === 0 ? 0 : 1}/${StoreImgList.length}`}
+          title=""
           RightComponent={
             <Button
               onPress={() => {
@@ -570,43 +532,16 @@ export default class StoreDetail extends Component {
           }}
         />
         {this.renderHeader()}
+        {this.renderPrice()}
         <ScrollView>
-          <View style={{ marginTop: 6, flex: 1, backgroundColor: "#f2f2f2" }}>
+          <View style={{ flex: 1 }}>
             {this.renderStarScore()}
             {this.renderProps()}
-            <View
-              style={{
-                flexDirection: "row",
-                height: 40,
-                alignItems: "center",
-                paddingLeft: 6,
-                paddingRight: 6,
-                borderBottomWidth: 1,
-                borderBottomColor: "#e4e4e4"
-              }}
-            >
-              <Text
-                style={{ fontSize: 14, color: "#1a97df", fontWeight: "bold" }}
-              >
-                营业时间：
-              </Text>
-              <Text style={{ color: "#a1a1a1" }}>
-                {startWeek}至{endWeek} {BusinessTimes}
-              </Text>
-            </View>
-            <View style={{ padding: 6 }}>
-              <Text
-                style={{
-                  marginBottom: 6,
-                  fontSize: 14,
-                  color: "#1a97df",
-                  fontWeight: "bold"
-                }}
-              >
-                商家留言：
-              </Text>
-              <Text style={{ lineHeight: 20 }}> {StoreRemarks}</Text>
-            </View>
+            {this.renderHour()}
+            {this.renderRemarks()}
+          </View>
+          <View style={styles.timetableTitle}>
+            <Text style={styles.timetableTitleText}>课程表</Text>
           </View>
           <Table columns={tableColumns} dataSource={timetable} />
         </ScrollView>
@@ -615,7 +550,7 @@ export default class StoreDetail extends Component {
           style={{
             flexDirection: "row",
             height: 40,
-            backgroundColor: "#c6c6c6",
+            backgroundColor: "#fff",
             justifyContent: "space-between",
             alignItems: "center"
           }}
@@ -628,7 +563,7 @@ export default class StoreDetail extends Component {
           >
             <Icon size={16} source={require("./img/u204.png")} />
             <Text
-              style={{ fontSize: 14, color: "#1a97df", fontWeight: "bold" }}
+              style={{ fontSize: 12, color: "#1a97df", fontWeight: "bold" }}
             >
               电话咨询
             </Text>

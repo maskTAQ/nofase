@@ -80,13 +80,14 @@ export default {
     position: "relative"
   },
   lvImg: {
+    marginLeft: 4,
     width: 40,
     height: "100%"
   },
   lvLabel: {
     position: "absolute",
-    top: 13,
-    left: 22,
+    top: 9,
+    left: 26,
     fontSize: 12,
     fontWeight: "bold",
     color: "#fff"
@@ -156,7 +157,7 @@ export default {
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: color
+    backgroundColor: "#4cb6ed"
   },
   buttonText: {
     color: "#fff"

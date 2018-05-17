@@ -2,7 +2,7 @@ export default {
   container: {
     position: "relative",
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#f2f2f2"
   },
   statusBar: {
     position: "absolute",
@@ -25,9 +25,26 @@ export default {
   },
   introTitleBox: {
     flexDirection: "row",
-    padding: 10
+    padding: 4,
+    paddingLeft: 12,
+    paddingRight: 12
   },
-
+  storeName: { fontSize: 16, color: "#fff", fontWeight: "bold" },
+  storeAddr: {
+    marginTop: 4,
+    fontSize: 14,
+    color: "#fff",
+    fontWeight: "bold"
+  },
+  navgation: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  navgationText: {
+    fontSize: 10,
+    fontWeight: "bold",
+    color: "#fff"
+  },
   shareBar: {
     position: "absolute",
     bottom: 0,
@@ -39,6 +56,14 @@ export default {
     height: 70,
     backgroundColor: "#fff"
   },
+  priceWrapper: {
+    marginTop: 4,
+    marginBottom: 4,
+    flexDirection: "row",
+    padding: 6,
+    backgroundColor: "#666",
+    alignContent: "center"
+  },
   shareBarItem: {
     flex: 1,
     justifyContent: "space-around",
@@ -47,5 +72,84 @@ export default {
   shareBarItemLabel: {
     fontSize: 14,
     color: "#1a9bfc"
+  },
+  starScoreWrapper: {
+    flexDirection: "row",
+    paddingLeft: 6,
+    paddingRight: 6,
+    height: 40,
+    alignItems: "center",
+    backgroundColor: "#fff"
+  },
+  starScorContent: {
+    flexDirection: "row"
+  },
+  starScoreLabel: {
+    fontSize: 14,
+    color: "#898989"
+  },
+  starScoreValue: {
+    paddingLeft: 4,
+    fontSize: 12,
+    color: "#1a97df"
+  },
+  portraitWrapper: {
+    flex: 1,
+    alignItems: "flex-end"
+  },
+  propsWrapper: {
+    marginTop: 4,
+    marginBottom: 4,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    height: 40,
+    alignItems: "center",
+    paddingLeft: 6,
+    paddingRight: 6,
+    backgroundColor: "#fff"
+  },
+  hourSwapper: {
+    marginBottom: 4,
+    flexDirection: "row",
+    height: 40,
+    alignItems: "center",
+    paddingLeft: 6,
+    paddingRight: 6,
+    backgroundColor: "#fff"
+  },
+  remarksWrapper: {
+    marginBottom: 4,
+
+    backgroundColor: "#fff"
+  },
+  remarksLabelWrapper: {
+    height: 36,
+    paddingLeft: 6,
+    justifyContent: "center",
+    borderBottomWidth: 0.6,
+    borderColor: "#bfbfbf"
+  },
+  remarksLabel: {
+    marginBottom: 6,
+    fontSize: 14,
+    color: "#bfbfbf",
+    fontWeight: "bold"
+  },
+  remarksValue: {
+    fontSize: 12,
+    paddingLeft: 6,
+    lineHeight: 30,
+    color: "#bfbfbf"
+  },
+  timetableTitle: {
+    height: 36,
+    justifyContent: "center",
+    paddingLeft: 12,
+    backgroundColor: "#fff"
+  },
+  timetableTitleText: {
+    fontSize: 14,
+    //lineHeight:20,
+    color: "#bfbfbf"
   }
 };

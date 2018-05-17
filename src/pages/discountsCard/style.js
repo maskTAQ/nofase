@@ -1,151 +1,125 @@
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
 export default {
   container: {
     flex: 1,
-    position: "relative",
-    backgroundColor: "transparent"
+    position: "relative"
+    //backgroundColor: "transparent"
   },
-  containers: {
-    flex: 1,
-    position: "relative",
-    backgroundColor: "#00a9ff",
-    marginTop: 90
-  },
-  bgContainer: {
+  bg: {
     position: "absolute",
     top: 0,
     left: 0,
     width: "100%",
     height: "100%",
+    backgroundColor: "#fff"
+  },
+  bgImgBox: {
+    //height: 120,
     backgroundColor: "#fff",
-    alignItems: "center"
+    marginBottom: 40
+  },
+  bgImg: {
+    width: "100%",
+    height: 130
+  },
+  bgContent: {
+    flex: 1,
+    backgroundColor: "#1b9ee6"
   },
   content: {
-    position: "absolute",
-    zIndex: 1,
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%"
+    flex: 1
   },
-  tabContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    marginTop: -10,
-    height: 60,
+  header: {
+    paddingTop: 30,
+    paddingLeft: 22,
+    paddingRight: 22,
+    flexDirection: "row"
+  },
+  headerLeft: {
+    flex: 2
+  },
+  headerLeftText: {
+    fontSize: (width - 44) / 5 * 2 / 5 - 1,
+    color: "#fff"
+  },
+  headerRight: {
+    flex: 3
+  },
+  headerRightText: {
+    fontSize: (width - 44) / 5 * 3 / 4 - 1,
+    color: "#fff"
+  },
+  lookButton: {
+    marginTop: 8,
+    width: "100%",
+    height: 25,
     borderWidth: 1,
-    borderColor: "#1dabfc",
-    marginLeft: 10,
-    marginRight: 10,
-    paddingLeft: 40,
-    paddingRight: 40,
-    borderRadius: 10
-  },
-  discountitleft: {
-    alignItems: "center",
-    justifyContent: "center",
-
-    width: "50%"
-  },
-  discountitright: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "50%"
-  },
-  titBalance: {
-    textAlign: "center",
-    fontSize: 22,
-    color: "#fff"
-  },
-  Balance: {
-    textAlign: "center",
-    width: "100%",
-    lineHeight: 35,
-    fontSize: 22,
-    color: "#fff"
-  },
-  tabItem: {
-    position: "relative",
-    flex: 1,
-    height: "100%",
+    borderColor: "#fff",
+    borderRadius: 6,
     justifyContent: "center",
     alignItems: "center"
   },
-  Itemmoney: {
-    color: "#0399e7",
-    fontSize: 20
+  centerWrapper: {
+    marginTop: 30,
+    paddingLeft: 22,
+    paddingRight: 22
   },
-  tabItemBorder: {
+  center: {
+    height: 65,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#1b9fe8",
+    borderRadius: 4,
+    backgroundColor: "#fff"
+  },
+  centerItem: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  centerItemLabel: {
+    fontSize: 14,
+    color: "#1b9ee6"
+  },
+  centerItemValue: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#1b9ee6"
+  },
+  centerSeparator: {
     width: 1,
     height: "80%",
-    backgroundColor: "#0399e7"
-  },
-  tabItemActiveBorder: {
-    position: "absolute",
-    width: "50%",
-    height: 3,
-    backgroundColor: "#0a9ae4",
-    bottom: 0
-  },
-  bjImg: {
-    width: "100%",
-    height: "100%",
-    flex: 1
-  },
-  jeimgs: {
-    height: 40,
-    width: 40
+    backgroundColor: "#1b9ee6"
   },
   listContainer: {
     flex: 1,
-    padding: 10,
-    paddingBottom: 0
-  },
-  list: {
-    flex: 1
+    paddingTop: 10,
+    paddingLeft: 12,
+    paddingRight: 12
   },
   item: {
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    height: 80,
-    padding: 10,
-    borderRadius: 10,
+    height: 66,
     flexDirection: "row",
-    alignItems: "center"
-  },
-
-  itemBottom: {
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  bjimgs: {
-    zIndex: -4,
-    width: "100%",
-    height: 230,
+    alignItems: "center",
+    borderRadius: 4,
     backgroundColor: "#fff"
   },
-  texts: {
-    flex: 1,
-    alignItems: "flex-start",
-    borderLeftWidth: 1,
-    paddingLeft: 20,
-    marginLeft: 20
+  itemIconWrapper: {
+    paddingLeft: 12,
+    paddingRight: 12
   },
-  discountit: {
-    width: "100%",
-    paddingTop: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+  itemSeparator: {
+    width: 1,
+    height: 30,
+    backgroundColor: "#1b9ee6"
   },
-  huize: {
-    height: 26,
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#fff"
+  itemContent: {
+    paddingLeft: 10
+  },
+  itemContentText: {
+    fontSize: 14,
+    color: "#1b9ee6"
   }
 };

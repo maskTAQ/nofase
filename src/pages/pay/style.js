@@ -12,84 +12,99 @@ export default {
   },
   content: {
     flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: "#fff",
     borderRadius: 12
   },
   chunk: {
     marginLeft: 12,
     marginRight: 12,
-    height: 18,
+    height: 14,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: "#8dcffc"
   },
   headerWrapper: {
     paddingTop: 50,
-    padding: 20,
+    padding: 4,
     paddingBottom: 0
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: "row"
+  },
+  rightIconWrapepr: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
   headerItemWrapper: {
     flex: 1,
-    paddingLeft: 20
+    paddingTop: 12,
+    paddingLeft: 4
+  },
+  headerItemRight: {
+    alignItems: "flex-end"
   },
   headerItemLabel: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     color: mainColor
   },
   headerItemValue: {
-    fontSize: 18,
+    fontSize: 14,
     color: mainColor
   },
+  storeInfoWrapper: {
+    height: 40
+  },
   storeInfo: {
-    height: 40,
-    paddingLeft: 40,
-    paddingRight: 20,
+    flex: 1,
+    paddingLeft: 8,
+    paddingRight: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between"
   },
   storeName: {
-    fontSize: 16,
+    fontSize: 12,
+    fontWeight: "bold",
     color: mainColor
   },
   timeCount: {
-    height: 36,
-    lineHeight: 36,
+    height: 26,
+    lineHeight: 26,
     justifyContent: "center",
-    paddingLeft: 20,
+    paddingLeft: 4,
     fontSize: 14,
     fontWeight: "bold",
     color: mainColor
   },
   tWrapper: {
-    padding: 20,
+    padding: 4,
     paddingTop: 10,
-    paddingBottom: 15
+    paddingBottom: 1
   },
   t: {
     flexDirection: "row",
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: 4,
+    paddingRight: 4
   },
   tItem: {
     flex: 1
   },
   tItemLabel: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     color: mainColor
   },
   tItemValueWrapper: {
+    //flexDirection:'row',
     height: 40,
     justifyContent: "center"
   },
   tItemValue: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     color: mainColor
   },
@@ -107,6 +122,7 @@ export default {
     height: 40,
     flexDirection: "row",
     alignItems: "center",
+
     justifyContent: "space-between"
   },
   submit: {
@@ -134,6 +150,8 @@ export default {
   },
   QR: {
     flex: 1,
+    marginTop: 13,
+    marginBottom: 10,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -166,5 +184,16 @@ export default {
   shareBarItemLabel: {
     fontSize: 14,
     color: "#1a9bfc"
+  },
+
+  notif: {
+    height: 20,
+    paddingLeft: 15,
+    justifyContent: "center",
+    backgroundColor: "#f8b84a"
+  },
+  notifText: {
+    fontSize: 12,
+    color: "#fff"
   }
 };

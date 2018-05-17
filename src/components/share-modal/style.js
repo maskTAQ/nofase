@@ -48,7 +48,7 @@ export default {
   userLvWrapper: {
     position: "absolute",
     top: 11,
-    right: 4
+    right: 8
   },
   userLv: {
     fontSize: 10,
@@ -104,6 +104,26 @@ export default {
   storeInfoWrapper: {
     flex: 1,
     paddingLeft: 15
+  },
+  storeImgWrapper: {
+    position: "relative",
+    width: 70,
+    height: 70
+  },
+  storePeople: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: 16,
+    paddingLeft: 4,
+    paddingRight: 4,
+    backgroundColor: "#f8b84a",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  storePeopleText: {
+    fontSize: 10,
+    color: "#fff"
   },
   storeName: {
     height: 20,

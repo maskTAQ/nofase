@@ -176,7 +176,7 @@ export default class DataView extends Component {
       //在y轴偏移度加上高度等于内容的高度并且y轴偏移值为正值时
       //？在android下并不会像ios有默认的缓动区域 所以并不能产生 在y轴偏移度加上高度大于内容的高度 的情况
       //>= 大于适用于ios ===适用于android
-      if (y + height >= contentHeight - 5 && y >= 0) {
+      if (y + height >= contentHeight - 5 && y >= 1) {
         this.prevCalledPulldownLoadMoreTimes = now;
         this.pulldownLoadMore();
       }
@@ -184,6 +184,7 @@ export default class DataView extends Component {
   };
   renderFooter = () => {
     const { isLoadingMore, loaded, dataSource, refreshing } = this.state;
+    const { isPulldownLoadMore } = this.props;
     let footerContent;
     switch (true) {
       case isLoadingMore:
@@ -197,6 +198,9 @@ export default class DataView extends Component {
             正在加载数据中...
           </Text>
         ];
+        break;
+      case !isPulldownLoadMore:
+        footerContent = null;
         break;
       //在loaded时 数据不为空时显示footer组件 否则显示FlatList组件中的ListEmptyComponent
       case loaded && dataSource.length !== 0:
@@ -229,6 +233,7 @@ export default class DataView extends Component {
     const hint = [];
     isPulldownLoadMore && hint.push("下拉");
     isPullupRefresh && hint.push("上拉");
+
     return (
       <View style={styles.container}>
         <FlatList

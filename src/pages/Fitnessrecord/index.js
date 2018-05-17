@@ -43,6 +43,7 @@ export default class Fitnessrecord extends Component {
   renderItem(row) {
     const { StoreName, Amont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
+    console.log(row);
     return (
       <Button
         onPress={() => {
@@ -176,19 +177,22 @@ export default class Fitnessrecord extends Component {
       NowInPeopel,
       StoreId,
       Lat,
-      Lng
+      Lng,
+      PeopleNum
     } = currentOrder;
     return (
       <Page title="健身记录">
         <View style={styles.contianer}>
-          <View style={styles.box}>
-            <View>
-              <Image
-                source={require("./img/banner.png")}
-                style={styles.banner}
-                resizeMode="stretch"
-              />
-            </View>
+          <View style={styles.bg}>
+            <View style={styles.bgTop} />
+            <View style={styles.bgBottom} />
+          </View>
+          <View style={styles.content}>
+            <Image
+              source={require("./img/banner.png")}
+              style={styles.banner}
+              resizeMode="stretch"
+            />
             {this.renderList()}
             {this.renderShareBar()}
             <View />
@@ -197,6 +201,7 @@ export default class Fitnessrecord extends Component {
               Lat={Lat}
               Lng={Lng}
               username={NickName}
+              people={Number(PeopleNum) - NowInPeopel}
               portrait={
                 UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")
               }

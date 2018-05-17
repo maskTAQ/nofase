@@ -25,7 +25,8 @@ const ShareModal = ({
   NowCurriculum,
   goStoreDetail,
   Lat,
-  Lng
+  Lng,
+  people
 }) => {
   return (
     <Alert style={{ flex: 1 }} isVisible={isVisible} close={close}>
@@ -82,7 +83,13 @@ const ShareModal = ({
               </View>
             </View>
             <View style={styles.storeInfo}>
-              <Icon size={70} source={storeImg} />
+              <View style={styles.storeImgWrapper}>
+                <Icon size={70} source={storeImg} />
+                <View style={styles.storePeople}>
+                  <Text style={styles.storePeopleText}>剩{people}位</Text>
+                </View>
+              </View>
+
               <View style={styles.storeInfoWrapper}>
                 <Text style={styles.storeName}>{storeName}</Text>
                 <View style={styles.storeInfoCenter}>
@@ -150,6 +157,7 @@ ShareModal.propTypes = {
   NowCurriculum: PropTypes.any,
   goStoreDetail: PropTypes.func,
   Lat: PropTypes.number,
-  Lng: PropTypes.number
+  Lng: PropTypes.number,
+  people: PropTypes.number
 };
 export default ShareModal;
