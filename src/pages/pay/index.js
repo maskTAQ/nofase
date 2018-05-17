@@ -398,7 +398,10 @@ export default class Pay extends Component {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={styles.tItemValue}>{data[1][1]}</Text>
-                <Icon size={20} source={require("./img/u328.png")} />
+                <Image
+                  style={{ width: 16, height: 9, marginLeft: 4 }}
+                  source={require("./img/arrow-bottom.png")}
+                />
               </View>
             </Button>
           </View>
