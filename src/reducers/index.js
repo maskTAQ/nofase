@@ -21,7 +21,7 @@ const appReducer = combineReducers({
       return { ...state, ...payload };
     }
 
-    if (type === "userInfo_result") {
+    if (type === "userInfo_reset") {
       return { hasData: false };
     }
     return state;

@@ -123,5 +123,9 @@ export default {
   //获取订单状态
   getRecInfo(OrderNo) {
     return post("User/GetRecInfo", { OrderNo }, { loading: false });
+  },
+  //获取最新版app
+  getNewApp(params) {
+    return post("/Admin/GetNewUserApp", params, { loading: false });
   }
 };

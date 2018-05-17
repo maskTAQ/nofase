@@ -13,9 +13,11 @@ import PropTypes from 'prop-types';
 
 import Navigation from "src/Navigation";
 import store from 'src/store';
-import { Tip } from 'src/components';
+import { Tip ,LogoutModal} from 'src/components';
 import action from "src/action";
 import api from "src/api";
+import {WebSocket} from 'src/common';
+
 
 class App extends Component {
   static propTypes = {
@@ -24,6 +26,9 @@ class App extends Component {
     nav: PropTypes.object.isRequired,
     auth: PropTypes.object
   };
+  state={
+    logoutModalVisible: false
+  }
   componentWillMount() {
     this.autoLogin();
     this.verifyToken();
@@ -39,7 +44,9 @@ class App extends Component {
     const { isLogin } = this.props.auth;
     const { isLogin: nextIsLogin, UserId } = nextProps.auth;
     if (!isLogin && nextIsLogin) {
-      this.addReceiveNotificationListener(UserId)
+      console.log(UserId,'UserId')
+      this.addReceiveNotificationListener(UserId);
+      this.linkSocket(UserId)
     }
     if (isLogin && !nextIsLogin) {
       JPushModule.stopPush();
@@ -50,6 +57,41 @@ class App extends Component {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
   }
+  linkSocket = async (UserId) => {
+    this.ws = await WebSocket.uniqueLoginWebsocket(UserId, () => {
+      this.setState({
+        logoutModalVisible: true
+      });
+    })
+      .catch(e => ({ close: () => { } }));
+      WebSocket.QRWebsocket(UserId)
+      .then(res => {
+        // this.props.navigation.dispatch(
+        //   action.navigate.go({ routeName: "Pay" })
+        // );
+      })
+      .catch(e => {
+        Tip.fail("连接商家失败");
+      });
+  }
+  
+  logout = () => {
+    this.setState(
+      {
+        logoutModalVisible: false
+      },
+      () => {
+        AsyncStorage.removeItem("mobile");
+        this.props.dispatch(action.logout());
+        this.props.dispatch(
+          action.navigate.go({ routeName: "Login" })
+        );
+        this.props.dispatch({
+          type: "userInfo_reset"
+        });
+      }
+    );
+  };
   autoLogin() {
     AsyncStorage.getItem('mobile', (e, m) => {
       if (!e && m) {
@@ -124,7 +166,8 @@ class App extends Component {
     }
     if (routeName === "Home") {
       if (this.lastBack && new Date().getTime() - this.lastBack < 2000) {
-        BackHandler.exitApp()
+        this.ws && this.ws.close();
+        BackHandler.exitApp();
       } else {
         this.lastBack = new Date().getTime();
         ToastAndroid.show("再按一次返回键退出程序", 2000);
@@ -135,8 +178,12 @@ class App extends Component {
   };
   render() {
     const { dispatch, nav } = this.props;
+    const {logoutModalVisible} = this.state;
     return (
-      <Navigation navigation={addNavigationHelpers({ dispatch, state: nav })} />
+      <View style={{ flex: 1 }}>
+        <Navigation navigation={addNavigationHelpers({ dispatch, state: nav })} />
+        <LogoutModal logout={this.logout} isVisible={logoutModalVisible} />
+      </View>
     )
   }
 }

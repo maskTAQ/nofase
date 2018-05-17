@@ -25,7 +25,7 @@ export default class Login extends Component {
     navigation: PropTypes.object
   };
   state = {
-    phone: "",
+    phone: "13696526122",
     code: ""
   };
   handleValueChange(type, value) {

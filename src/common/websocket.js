@@ -18,13 +18,13 @@ const QRWebsocket = UserId => {
   });
 };
 
-const uniqueLoginWebsocket = ({ UserId, logout, paySuccess, payError }) => {
+const uniqueLoginWebsocket = (UserId, logout) => {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket("wss://vmslq.cn/UserStateHandler.ashx");
     ws.onopen = () => {
       console.log(UserId, "发送");
       ws.send(String(UserId)); // 注册服务
-      resolve("uniqueLoginWebsocket连接成功");
+      resolve(ws);
     };
     ws.onerror = e => {
       console.log(e);
