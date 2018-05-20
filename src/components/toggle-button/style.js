@@ -14,7 +14,7 @@ export default {
   },
   wrapper: {
     flex: 1,
-    paddingBottom: 10
+    paddingBottom: 0
   },
   toggleButton: {
     alignItems: "center"

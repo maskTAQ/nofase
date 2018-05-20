@@ -57,7 +57,11 @@ export default class Transacion extends Component {
           style={styles.list}
           ref={e => (this.discountList = e)}
           isPulldownLoadMore={false}
-          ListEmptyComponent={<Text>没有优惠券哦~</Text>}
+          ListEmptyComponent={
+            <View style={styles.noData}>
+              <Text>没有优惠券哦~</Text>
+            </View>
+          }
           getData={this.getDiscountList}
           ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           renderItem={({ item }) => this.renderItem(item)}

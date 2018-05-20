@@ -96,9 +96,11 @@ export default class StoreDetail extends Component {
               label = "?至?";
               break;
           }
-          return (
-            <Text style={{ fontSize: 12, color: "#1a97df" }}>{label}</Text>
-          );
+          return label.split("至").map((item, i) => (
+            <View style={{ alignItems: "center" }} key={i}>
+              <Text style={{ fontSize: 12, color: "#1a97df" }}>{item}</Text>
+            </View>
+          ));
         }
       },
       { title: "周一", dataIndex: "Week1" },
@@ -543,7 +545,11 @@ export default class StoreDetail extends Component {
           <View style={styles.timetableTitle}>
             <Text style={styles.timetableTitleText}>课程表</Text>
           </View>
-          <Table columns={tableColumns} dataSource={timetable} />
+          <Table
+            columns={tableColumns}
+            dataSource={timetable}
+            style={styles.table}
+          />
         </ScrollView>
 
         <View

@@ -32,7 +32,7 @@ export default {
   storeName: { fontSize: 16, color: "#fff", fontWeight: "bold" },
   storeAddr: {
     marginTop: 4,
-    fontSize: 14,
+    fontSize: 12,
     color: "#fff",
     fontWeight: "bold"
   },
@@ -151,5 +151,18 @@ export default {
     fontSize: 14,
     //lineHeight:20,
     color: "#bfbfbf"
+  },
+
+  table: {
+    th: {
+      backgroundColor: "#1a9bfc"
+    },
+    thText: {
+      color: "#fff"
+    },
+    tdText: {
+      fontSize: 10,
+      color: "red"
+    }
   }
 };

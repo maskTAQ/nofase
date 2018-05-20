@@ -212,20 +212,30 @@ export default class Table extends Component {
   renderBodyRow = (row, rowIndex) => {
     const children = [],
       { renderRowRule } = this,
-      defaultRenderTd = (row, value, columnsIndex, rowIndex) => {
-        return <Text style={styles.tdText}>{value}</Text>;
+      defaultRenderTd = (row, value, columnsIndex, rowIndex, style) => {
+        return <Text style={[styles.tdText, style]}>{value}</Text>;
       };
     const { onItemPress, style: customStyle } = this.props;
     for (const item in row) {
       if (!renderRowRule[item]) {
         continue;
       }
-      const { index, render = defaultRenderTd, style, tdStyle } = renderRowRule[
-        item
-      ];
+      const {
+        index,
+        render = defaultRenderTd,
+        style,
+        tdStyle,
+        tdText
+      } = renderRowRule[item];
       children[index] = (
         <View style={[styles.td, customStyle.td, style, tdStyle]} key={item}>
-          {render(row, row[item], index, rowIndex, styles.tdText)}
+          {render(
+            row,
+            row[item],
+            index,
+            rowIndex,
+            Object.assign({}, styles.tdText, tdText)
+          )}
         </View>
       );
     }

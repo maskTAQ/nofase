@@ -4,12 +4,7 @@ export default {
     position: "relative",
     backgroundColor: "transparent"
   },
-  containers: {
-    flex: 1,
-    position: "relative",
-    backgroundColor: "transparent",
-    marginTop: 50
-  },
+
   bgContainer: {
     position: "absolute",
     top: 0,
@@ -17,6 +12,11 @@ export default {
     width: "100%",
     height: "100%",
     backgroundColor: "rgb(3,159,238)"
+  },
+  bgImg: {
+    width: "100%",
+    height: 105,
+    transform: [{ rotate: "180deg" }]
   },
   content: {
     position: "absolute",
@@ -26,16 +26,20 @@ export default {
     width: "100%",
     height: "100%"
   },
-
-  titBalance: {
+  BalanceWrapper: {
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  balanceValue: {
     textAlign: "center",
     fontSize: 16,
     color: "#0399e7"
   },
-  Balance: {
+  balanceLabel: {
     textAlign: "center",
     width: "100%",
-    lineHeight: 35,
+    lineHeight: 45,
     fontSize: 30,
     color: "#0399e7"
   },
@@ -89,9 +93,5 @@ export default {
   itemBottom: {
     flexDirection: "row",
     justifyContent: "space-between"
-  },
-  bjimgs: {
-    width: "100%",
-    transform: [{ rotate: "180deg" }]
   }
 };

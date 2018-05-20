@@ -8,6 +8,7 @@ export default {
   },
   container: {
     width: "100%",
+    // height:360,
     position: "relative"
   },
   bg: {
@@ -59,6 +60,8 @@ export default {
     alignItems: "center"
   },
   centerContainer: {
+    marginTop: 25,
+    marginBottom: 25,
     flexDirection: "row",
     alignItems: "center"
   },

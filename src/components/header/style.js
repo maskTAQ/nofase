@@ -1,11 +1,11 @@
 export default {
   container: {
-    height: 64,
+    height: 70,
     backgroundColor: "#1b9de6"
   },
   navigationContainer: {
     marginTop: 20,
-    height: 44,
+    height: 50,
     flexDirection: "row"
   },
   item: {

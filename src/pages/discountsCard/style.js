@@ -12,12 +12,10 @@ export default {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "#fff"
+    backgroundColor: "#ebebeb"
   },
   bgImgBox: {
-    //height: 120,
-    backgroundColor: "#fff",
-    marginBottom: 40
+    backgroundColor: "transparent"
   },
   bgImg: {
     width: "100%",
@@ -25,13 +23,13 @@ export default {
   },
   bgContent: {
     flex: 1,
-    backgroundColor: "#1b9ee6"
+    backgroundColor: "#ebebeb"
   },
   content: {
     flex: 1
   },
   header: {
-    paddingTop: 30,
+    paddingTop: 10,
     paddingLeft: 22,
     paddingRight: 22,
     flexDirection: "row"
@@ -121,5 +119,8 @@ export default {
   itemContentText: {
     fontSize: 14,
     color: "#1b9ee6"
+  },
+  noData: {
+    alignItems: "center"
   }
 };

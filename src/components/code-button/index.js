@@ -12,7 +12,9 @@ const styles = {
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4
   },
   codeButtonText: {
     fontSize: 14,
@@ -72,7 +74,7 @@ export default class CodeButton extends Component {
   getCode = () => {
     const { isCan } = this.state;
     const { phone, isLogin = false } = this.props;
-    if (isCan && /^1[3|4|5|8][0-9]\d{4,8}$/.test(phone)) {
+    if (isCan && /^1[3|4|5|8|7][0-9]\d{4,8}$/.test(phone)) {
       this.setState({ isRequestSmscode: true });
       api
         .sendCode(phone, isLogin)

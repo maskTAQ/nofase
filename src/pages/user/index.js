@@ -80,7 +80,9 @@ class ModifUserName extends Component {
             <Input
               style={styles.modalInput}
               value={NickName}
-              onChangeText={v => this.setState({ NickName: v })}
+              onChangeText={v =>
+                this.setState({ NickName: v.substring(0, 10) })
+              }
             />
           </View>
           <View style={styles.modalButtonGroupWrapper}>
@@ -395,7 +397,7 @@ export default class User extends Component {
         <View style={styles.headerWrapper}>
           <View style={styles.closeWrapper}>
             <Button onPress={this.back}>
-              <Icon size={20} source={closeSource} />
+              <Icon size={25} source={closeSource} />
             </Button>
           </View>
           <View style={styles.headerContent}>
@@ -408,7 +410,7 @@ export default class User extends Component {
               }}
             >
               <Icon
-                size={55}
+                size={60}
                 source={Photo ? { uri: Photo } : portraitSource}
               />
             </Button>
@@ -499,6 +501,7 @@ export default class User extends Component {
                   onValueChange={this.setRemind}
                   size="samll"
                   onTintColor="#f8b84a"
+                  thumbTintColor="#fff"
                 />
               ) : null}
             </Button>
@@ -562,7 +565,7 @@ export default class User extends Component {
                 style={styles.accountItem}
                 textStyle={styles.accountItemText}
               >
-                客户反馈
+                用户反馈
               </Button>
               <View
                 style={[styles.border, { marginTop: 10, marginBottom: 10 }]}

@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 const color = "#1b9cee";
 
 export default {
@@ -39,7 +40,7 @@ export default {
     alignItems: "flex-end"
   },
   portraitWrapper: {
-    borderRadius: 55,
+    borderRadius: 60,
     marginRight: 16,
     overflow: "hidden"
   },
@@ -61,7 +62,6 @@ export default {
   },
   username: {
     fontSize: 14,
-    fontWeight: "bold",
     color: "#fff"
   },
   userIdWrapper: {
@@ -70,8 +70,7 @@ export default {
     alignItems: "center"
   },
   userId: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 14,
     color: "#fff"
   },
   lvWrapper: {
@@ -86,14 +85,14 @@ export default {
   },
   lvLabel: {
     position: "absolute",
-    top: 9,
+    top: Platform.select({ ios: 8, android: 7 }),
     left: 26,
     fontSize: 12,
     fontWeight: "bold",
     color: "#fff"
   },
   list: {
-    marginTop: 4,
+    marginTop: 24,
     marginBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
@@ -101,9 +100,9 @@ export default {
     backgroundColor: "#46b6ec"
   },
   item: {
-    height: 36,
+    height: 40,
     justifyContent: "center",
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.4,
     borderColor: "#fff"
   },
   switchItem: {

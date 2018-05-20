@@ -321,6 +321,7 @@ export default class Pay extends Component {
           <View style={styles.headerItemWrapper}>
             <View style={styles.headerItem}>
               <Text style={styles.headerItemLabel}>开始时间</Text>
+              <View style={{ height: 10 }} />
               <Text style={styles.headerItemValue}>{data[OrderType][0]}</Text>
             </View>
           </View>
@@ -330,13 +331,12 @@ export default class Pay extends Component {
           <View style={styles.headerItemWrapper}>
             <View style={[styles.headerItem, styles.headerItemRight]}>
               <Text style={styles.headerItemLabel}>结束时间</Text>
+              <View style={{ height: 10 }} />
               <Text style={styles.headerItemValue}>{data[OrderType][1]}</Text>
             </View>
           </View>
         </View>
-        {OrderType === 0 ? (
-          <View style={{ height: styles.timeCount.height }} />
-        ) : (
+        {OrderType === 1 && (
           <Text style={styles.timeCount}>使用时长:{tickts}</Text>
         )}
         <View style={styles.itemBorder}>
@@ -643,7 +643,7 @@ export default class Pay extends Component {
         return (
           <View style={styles.notif}>
             <Text style={styles.notifText} numberOfLines={1}>
-              一定要记得:运动结束是再次出示页面扫码后才可结束运动
+              一定要记得:运动结束时再次出示页面扫码后才可结束运动
             </Text>
           </View>
         );

@@ -101,9 +101,8 @@ export default class Login extends Component {
           />
           <View style={styles.logo}>
             <View style={styles.logoWrapper}>
-              <Icon source={logoSource} size={60} />
+              <Icon source={logoSource} size={80} />
             </View>
-            <Text style={styles.logoLabel}>没脸运动</Text>
           </View>
           <View style={styles.form}>
             <View style={styles.formItem}>
@@ -117,6 +116,7 @@ export default class Login extends Component {
                   this.handleValueChange("phone", v);
                 }}
                 style={styles.formItemInput}
+                keyboardType="numeric"
                 placeholder="已注册手机号"
                 placeholderTextColor="#fff"
               />
@@ -129,8 +129,9 @@ export default class Login extends Component {
               <Input
                 value={code}
                 onChangeText={v => {
-                  this.handleValueChange("code", v);
+                  this.handleValueChange("code", v.substring(0, 7));
                 }}
+                keyboardType="numeric"
                 style={styles.formItemInput}
                 placeholder="短信验证码"
                 placeholderTextColor="#fff"

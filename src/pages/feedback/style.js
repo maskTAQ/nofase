@@ -39,9 +39,13 @@ export default {
   item: {
     height: 40,
     justifyContent: "center",
-    paddingLeft: 15,
-    borderBottomWidth: 1,
-    borderColor: "#ccc"
+    paddingLeft: 15
+  },
+  itemSeparator: {
+    marginLeft: 15,
+    marginRight: 15,
+    height: 0.6,
+    backgroundColor: "#ccc"
   },
   itemLabel: {
     fontSize: 14,
@@ -90,7 +94,8 @@ export default {
   //modal
   modalContainer: {
     flex: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0,0,0,0.8)"
   },
   modalContent: {
     padding: 10,

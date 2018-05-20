@@ -77,7 +77,11 @@ export default class Fitnessrecord extends Component {
       <DataView
         style={styles.list}
         getData={this.getUserOrderList}
-        ListEmptyComponent={<Text>暂时没有数据哦</Text>}
+        ListEmptyComponent={
+          <View style={styles.noData}>
+            <Text>您还没有运动记录</Text>
+          </View>
+        }
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         renderItem={({ item }) => this.renderItem(item)}
       />

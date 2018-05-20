@@ -6,7 +6,8 @@ import {
   Modal,
   Linking,
   ScrollView,
-  Image
+  Image,
+  TouchableWithoutFeedback
 } from "react-native";
 import action from "src/action";
 import PropTypes from "prop-types";
@@ -22,45 +23,46 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
   const { q, a } = QA;
   return (
     <Modal
-      animationType={"slide"}
+      //animationType={"slide"}
       transparent={true}
       visible={isVisible}
-      onRequestClose={() => {}}
     >
-      <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
-          <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>{q}</Text>
-            <Button onPress={onRequestClose}>
-              <Icon size={20} source={require("./img/u284.png")} />
-            </Button>
-          </View>
-          <View style={styles.modalLine} />
+      <TouchableWithoutFeedback onPress={onRequestClose}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>{q}</Text>
+              <Button onPress={onRequestClose}>
+                <Icon size={20} source={require("./img/u284.png")} />
+              </Button>
+            </View>
+            <View style={styles.modalLine} />
 
-          <View style={styles.modalDetailsWrapper}>
-            <ScrollView>
-              {a.split(/\n/).map(item => {
-                if (item.includes("source")) {
-                  return (
-                    <Image
-                      resizeMode="stretch"
-                      style={styles.modalImg}
-                      source={/source:([0-9]+)/.exec(item)[1]}
-                      key={item}
-                    />
-                  );
-                } else {
-                  return (
-                    <Text style={styles.modalDetails} key={item}>
-                      {item}
-                    </Text>
-                  );
-                }
-              })}
-            </ScrollView>
+            <View style={styles.modalDetailsWrapper}>
+              <ScrollView>
+                {a.split(/\n/).map(item => {
+                  if (item.includes("source")) {
+                    return (
+                      <Image
+                        resizeMode="stretch"
+                        style={styles.modalImg}
+                        source={/source:([0-9]+)/.exec(item)[1]}
+                        key={item}
+                      />
+                    );
+                  } else {
+                    return (
+                      <Text style={styles.modalDetails} key={item}>
+                        {item}
+                      </Text>
+                    );
+                  }
+                })}
+              </ScrollView>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
@@ -110,7 +112,7 @@ export default class Feedback extends Component {
   renderHeader() {
     return (
       <View style={styles.header}>
-        <Text style={styles.title}>Hi,掌柜</Text>
+        <Text style={styles.title}>Hi,这里是没脸运动</Text>
         <Text style={styles.subtitle}>已为您定制以下内容</Text>
       </View>
     );
@@ -135,6 +137,7 @@ export default class Feedback extends Component {
           extraData={this.state}
           keyExtractor={item => item.q}
           renderItem={({ item }) => this.renderItem(item)}
+          ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
         />
       </View>
     );
@@ -142,7 +145,7 @@ export default class Feedback extends Component {
   render() {
     const { isQAModalVisible, activeQA } = this.state;
     return (
-      <Page title="客户反馈">
+      <Page title="用户反馈">
         <ScrollView>
           <View style={styles.container}>
             <QAModal
@@ -166,28 +169,11 @@ export default class Feedback extends Component {
                 </View>
                 <Button
                   onPress={() => {
-                    this.call("4008650152");
+                    this.call("075521044375");
                   }}
                   style={styles.call}
                 >
-                  <Text style={styles.callText}>4008-650-152</Text>
-                  <Icon size={20} source={require("./img/u204.png")} />
-                </Button>
-              </View>
-              <View style={styles.contactItem}>
-                <View style={styles.contactItemLabel}>
-                  <Text style={styles.contactItemLabelText}>
-                    广东省-深圳市-罗湖区
-                  </Text>
-                  <Text style={styles.contactItemLabelText}>分站客服:</Text>
-                </View>
-                <Button
-                  onPress={() => {
-                    this.call("150489218870");
-                  }}
-                  style={styles.call}
-                >
-                  <Text style={styles.callText}>150489218870</Text>
+                  <Text style={styles.callText}>0755-2104-4375</Text>
                   <Icon size={20} source={require("./img/u204.png")} />
                 </Button>
               </View>

@@ -4,7 +4,7 @@ export default {
     paddingTop: 80,
     position: "relative",
     alignItems: "center",
-    backgroundColor: "#1a98e0"
+    backgroundColor: "#1b9de6"
   },
   bg: {
     position: "absolute",
@@ -14,7 +14,7 @@ export default {
     bottom: 0
   },
   logoWrapper: {
-    borderRadius: 60,
+    borderRadius: 80,
     overflow: "hidden"
   },
   logo: {

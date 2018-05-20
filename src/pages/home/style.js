@@ -19,7 +19,7 @@ export default {
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderColor: "#fff",
-    backgroundColor: "#2fc2d9"
+    backgroundColor: "#f8b94a"
   },
   tabActive: {
     backgroundColor: "#fff"
@@ -58,7 +58,7 @@ export default {
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "#fff",
-    backgroundColor: "#2fc2d9",
+    backgroundColor: "#f8b94a",
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8
   },
@@ -70,7 +70,9 @@ export default {
   chooseWrapper: {
     flexDirection: "row",
     height: 24,
-    backgroundColor: "#fff"
+    backgroundColor: "#1b9de6",
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8
   },
   chooseModal: {
     position: "absolute",
@@ -99,7 +101,8 @@ export default {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#fff"
   },
   chooseItemBorder: {
     width: 1,
@@ -198,7 +201,7 @@ export default {
   },
   navgationText: {
     fontSize: 12,
-    fontWeight: "bold",
+    //fontWeight: "bold",
     color: "#1296DB"
   },
   evaluateLabel: {

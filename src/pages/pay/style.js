@@ -7,13 +7,13 @@ export default {
   },
   box: {
     flex: 1,
-    padding: 30,
+    padding: 20,
     paddingBottom: 50
   },
   content: {
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
     backgroundColor: "#fff",
     borderRadius: 12
   },
@@ -26,7 +26,7 @@ export default {
     backgroundColor: "#8dcffc"
   },
   headerWrapper: {
-    paddingTop: 50,
+    //paddingTop: 50,
     padding: 4,
     paddingBottom: 0
   },
@@ -67,7 +67,7 @@ export default {
     justifyContent: "space-between"
   },
   storeName: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "bold",
     color: mainColor
   },
@@ -187,13 +187,13 @@ export default {
   },
 
   notif: {
-    height: 20,
-    paddingLeft: 15,
+    height: 24,
+    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#f8b84a"
   },
   notifText: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#fff"
   }
 };

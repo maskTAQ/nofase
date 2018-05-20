@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Input, Button, CodeButton } from "src/components";
+import { Input, Icon, Button, CodeButton, Page } from "src/components";
 import api from "src/api";
 import { Tip } from "src/common";
 import action from "src/action";
 import styles from "../login/style";
-
+const logoSource = require("src/images/login/logo.png");
 @connect()
 export default class Register extends Component {
   static propTypes = {
@@ -29,8 +29,9 @@ export default class Register extends Component {
     api
       .register({ NickName, Tel, ExCode })
       .then(res => {
+        this.props.navigation.dispatch(action.login(res));
         this.props.navigation.dispatch(
-          action.navigate.go({ routeName: "Login" })
+          action.navigate.go({ routeName: "Home" })
         );
       })
       .catch(e => {
@@ -41,76 +42,78 @@ export default class Register extends Component {
   render() {
     const { NickName, ExCode, Tel } = this.state;
     return (
-      <View style={styles.container}>
-        <View style={styles.logo}>
-          <Image
-            source={require("src/images/login/logo.png")}
-            style={styles.logoImg}
-          />
-          <Text style={styles.logoLabel}>GYM</Text>
-        </View>
-        <View style={styles.form}>
-          <View style={styles.formItem}>
-            <Image
-              source={require("src/images/login/username.png")}
-              style={styles.formItemImg}
-            />
-            <Input
-              value={NickName}
-              onChangeText={v => {
-                this.handleValueChange("NickName", v);
-              }}
-              style={styles.formItemInput}
-              placeholder="用户名"
-              placeholderTextColor="#fff"
-            />
+      <Page title="登录">
+        <View style={[styles.container, { paddingTop: 20 }]}>
+          <View style={styles.logo}>
+            <View style={styles.logoWrapper}>
+              <Icon source={logoSource} size={80} />
+            </View>
           </View>
-          <View style={styles.formItem}>
-            <Image
-              source={require("src/images/login/phone.png")}
-              style={styles.formItemImg}
-            />
-            <Input
-              value={Tel}
-              onChangeText={v => {
-                this.handleValueChange("Tel", v);
-              }}
-              style={styles.formItemInput}
-              placeholder="手机号"
-              placeholderTextColor="#fff"
-            />
-          </View>
-          <View style={styles.formItem}>
-            <Image
-              source={require("src/images/login/code.png")}
-              style={styles.formItemImg}
-            />
-            <Input
-              value={ExCode}
-              onChangeText={v => {
-                this.handleValueChange("ExCode", v);
-              }}
-              style={styles.formItemInput}
-              placeholder="手机验证码"
-              placeholderTextColor="#fff"
-            />
-            <CodeButton
-              ref={e => (this.codeRef = e)}
-              phone={Tel}
-              loading={false}
+          <View style={styles.form}>
+            <View style={styles.formItem}>
+              <Image
+                source={require("src/images/login/username.png")}
+                style={styles.formItemImg}
+              />
+              <Input
+                value={NickName}
+                onChangeText={v => {
+                  this.handleValueChange("NickName", v.substring(0, 11));
+                }}
+                style={styles.formItemInput}
+                placeholder="用户名"
+                placeholderTextColor="#fff"
+              />
+            </View>
+            <View style={styles.formItem}>
+              <Image
+                source={require("src/images/login/phone.png")}
+                style={styles.formItemImg}
+              />
+              <Input
+                value={Tel}
+                onChangeText={v => {
+                  this.handleValueChange("Tel", v);
+                }}
+                style={styles.formItemInput}
+                keyboardType="numeric"
+                placeholder="手机号"
+                placeholderTextColor="#fff"
+              />
+            </View>
+            <View style={styles.formItem}>
+              <Image
+                source={require("src/images/login/code.png")}
+                style={styles.formItemImg}
+              />
+              <Input
+                value={ExCode}
+                onChangeText={v => {
+                  this.handleValueChange("ExCode", v.substring(0, 7));
+                }}
+                style={styles.formItemInput}
+                keyboardType="numeric"
+                placeholder="手机验证码"
+                placeholderTextColor="#fff"
+              />
+              <CodeButton
+                ref={e => (this.codeRef = e)}
+                phone={Tel}
+                loading={false}
+              >
+                验证码
+              </CodeButton>
+            </View>
+            <Button
+              onPress={this.register}
+              style={styles.loginButton}
+              textStyle={styles.loginText}
             >
-              验证码
-            </CodeButton>
+              完成注册
+            </Button>
           </View>
-          <Button
-            onPress={this.register}
-            style={styles.loginButton}
-            textStyle={styles.loginText}
-          >
-            完成注册
-          </Button>
         </View>
-      </View>
+      </Page>
     );
   }
 }

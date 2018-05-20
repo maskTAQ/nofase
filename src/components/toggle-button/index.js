@@ -29,8 +29,8 @@ export default class ToggleButton extends Component {
       packUp: "180deg"
     };
     const bottom = {
-      unfold: -12,
-      packUp: -60
+      unfold: 0,
+      packUp: -58
     };
     const { status } = this.state;
     return (
@@ -50,7 +50,7 @@ export default class ToggleButton extends Component {
           </Button>
           <View style={styles.buttonGroup}>
             <Button style={styles.buttonLeft} onPress={() => this.go("User")}>
-              <Icon size={30} source={require("./img/user.png")} />
+              <Icon size={36} source={require("./img/user.png")} />
             </Button>
             <Button style={styles.buttonCenter} onPress={() => this.go("Pay")}>
               <Icon size={50} source={require("./img/code.png")} />
@@ -59,7 +59,7 @@ export default class ToggleButton extends Component {
               style={styles.buttonRight}
               onPress={() => this.go("Activity")}
             >
-              <Icon size={30} source={require("./img/run.png")} />
+              <Icon size={36} source={require("./img/run.png")} />
             </Button>
           </View>
         </View>

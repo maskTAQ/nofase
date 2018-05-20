@@ -13,7 +13,7 @@ export default {
   },
   bgTop: {
     height: 160,
-    backgroundColor: "#278be1"
+    backgroundColor: "#1b9de6"
   },
   bgBottom: {
     flex: 1,
@@ -49,6 +49,9 @@ export default {
     flexDirection: "row",
     width: 50,
     justifyContent: "flex-end"
+  },
+  noData: {
+    alignItems: "center"
   },
 
   shareBar: {

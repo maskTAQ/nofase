@@ -25,6 +25,13 @@ export default class Transacion extends Component {
   };
   componentWillMount() {
     this.getUserPaysToday();
+    this.props.navigation.dispatch({
+      type: "userInfo",
+      api: () => {
+        return api.getUserInfo();
+      },
+      promise: true
+    });
   }
   back = () => {
     this.props.navigation.dispatch(action.navigate.back());
@@ -85,31 +92,42 @@ export default class Transacion extends Component {
     const { PaysMoney } = this.state;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.bgContainer}>
-          <Image source={require("./img/u3.png")} style={styles.bjimgs} />
-        </View>
-        <Page
-          title="交易管理"
-          LeftComponent={
-            <Button onPress={this.back}>
-              <Icon size={20} source={require("./img/u326.png")} />
-            </Button>
-          }
-          headerStyle={{ backgroundColor: "#fff" }}
-          titleStyle={{ color: "#1ba0ea" }}
-        >
-          <Text style={styles.Balance}>{Number(Money).toFixed(2)}</Text>
-          <Text style={styles.titBalance}>(余额)</Text>
-          <View style={styles.containers}>
-            <View style={styles.consume}>
-              <Text style={styles.consumeLabel}>今日消费</Text>
-              <Text style={styles.consumeValue}>{PaysMoney}元</Text>
-            </View>
-            {this.renderList()}
+      <Page
+        title="交易管理"
+        LeftComponent={
+          <Button onPress={this.back}>
+            <Icon size={20} source={require("./img/u326.png")} />
+          </Button>
+        }
+        headerStyle={{ backgroundColor: "#fff" }}
+        titleStyle={{ color: "#1ba0ea" }}
+      >
+        <View style={styles.container}>
+          <View style={styles.bgContainer}>
+            <Image
+              source={require("./img/u3.png")}
+              style={styles.bgImg}
+              resizeMode="stretch"
+            />
           </View>
-        </Page>
-      </View>
+
+          <View style={styles.content}>
+            <View style={styles.BalanceWrapper}>
+              <Text style={styles.balanceLabel}>
+                {Number(Money).toFixed(2)}
+              </Text>
+              <Text style={styles.balanceValue}>(余额)</Text>
+            </View>
+            <View style={styles.list}>
+              <View style={styles.consume}>
+                <Text style={styles.consumeLabel}>今日消费</Text>
+                <Text style={styles.consumeValue}>{PaysMoney}元</Text>
+              </View>
+              {this.renderList()}
+            </View>
+          </View>
+        </View>
+      </Page>
     );
   }
 }
