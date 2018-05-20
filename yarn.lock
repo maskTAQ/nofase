@@ -4250,6 +4250,10 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-baidu-map@^0.6.0:
+  version "0.6.0"
+  resolved "http://npm.hengxifintech.com/react-native-baidu-map/-/react-native-baidu-map-0.6.0.tgz#cb4937181e8e0cd2125d347a5b87ca13971647dd"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "http://npm.hengxifintech.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"

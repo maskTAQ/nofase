@@ -18,7 +18,7 @@ export default {
     });
   },
   login({ Tel, ExCode }) {
-    return post("/User/UserLoginTest", { Tel, ExCode });
+    return post("/User/UserLoginTest", { Tel: "15048921980", ExCode });
   },
   rememberLogin({ Tel }) {
     return post("/User/UserLoginTest", { Tel });

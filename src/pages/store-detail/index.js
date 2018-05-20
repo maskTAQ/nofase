@@ -97,8 +97,15 @@ export default class StoreDetail extends Component {
               break;
           }
           return label.split("至").map((item, i) => (
-            <View style={{ alignItems: "center" }} key={i}>
-              <Text style={{ fontSize: 12, color: "#1a97df" }}>{item}</Text>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+              key={i}
+            >
+              <Text style={{ fontSize: 10, color: "#1a97df" }}>{item}</Text>
             </View>
           ));
         }
@@ -368,10 +375,10 @@ export default class StoreDetail extends Component {
           style={{ paddingLeft: 10, paddingRight: 10 }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
+          <Text style={{ fontSize: 12, color: "#fff" }}>
             可容纳线上{PeopleNum}人位
           </Text>
-          <Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>
+          <Text style={{ fontSize: 12, color: "#fff" }}>
             当前剩余{PeopleNum - NowPeopleNum}人位
           </Text>
         </View>
@@ -402,7 +409,7 @@ export default class StoreDetail extends Component {
           <StarScore
             operable={false}
             currentScore={StoreScore}
-            //style={{ flex: 1, paddingLeft: 6 }}
+            style={{ paddingTop: 2 }}
           />
           <Text style={styles.starScoreValue}>{StoreScore.toFixed(2)}</Text>
         </View>
@@ -433,8 +440,8 @@ export default class StoreDetail extends Component {
     const data = [
       { label: "淋浴", hasKey: Bath },
       { label: "储物", hasKey: Storage },
-      { label: "有氧器", hasKey: IsAerobic, valueKey: Aerobic },
-      { label: "力量器", hasKey: IsPower, valueKey: Power },
+      { label: "有氧器材", hasKey: IsAerobic, valueKey: Aerobic },
+      { label: "力量器材", hasKey: IsPower, valueKey: Power },
       { label: "康体设备", hasKey: IsHealthCare, valueKey: HealthCare }
     ];
     return (
@@ -567,12 +574,8 @@ export default class StoreDetail extends Component {
             }}
             style={{ paddingLeft: 6, alignItems: "center" }}
           >
-            <Icon size={16} source={require("./img/u204.png")} />
-            <Text
-              style={{ fontSize: 12, color: "#1a97df", fontWeight: "bold" }}
-            >
-              电话咨询
-            </Text>
+            <Icon size={20} source={require("./img/u204.png")} />
+            <Text style={{ fontSize: 10, color: "#1a97df" }}>电话咨询</Text>
           </Button>
           <Button
             style={{

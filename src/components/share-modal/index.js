@@ -97,8 +97,14 @@ const ShareModal = ({
                     在线人数：{onlinePeople}人
                   </Text>
                   <Button style={styles.lession} onPress={goStoreDetail}>
-                    <Text style={styles.lessionText}>课程:{NowCurriculum}</Text>
-                    <Icon size={14} source={require("./img/u79.png")} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.lessionText} numberOfLines={1}>
+                        课程:{NowCurriculum}
+                      </Text>
+                    </View>
+                    <View style={{ width: 14 }}>
+                      <Icon size={14} source={require("./img/u79.png")} />
+                    </View>
                   </Button>
                 </View>
                 <View style={styles.storeInfoBottom}>

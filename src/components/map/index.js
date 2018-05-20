@@ -126,7 +126,7 @@ export default class Map extends Component {
       window.postMessage = patchedPostMessage;
     };
     const { userLng, userLat } = this.props.location;
-
+    console.log(this.props);
     const patchPostMessageJsCode =
       "(" + String(patchPostMessageFunction) + ")();";
 

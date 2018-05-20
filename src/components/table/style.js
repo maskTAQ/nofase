@@ -4,26 +4,26 @@ export default {
     backgroundColor: "#fff",
     margin: 6,
     borderTopWidth: 1.5,
-    borderColor: "#1a97df"
+    borderColor: "#efeded"
   },
   headerContainer: {
     height: 35,
     flexDirection: "row",
     borderLeftWidth: 1.5,
     borderBottomWidth: 1.5,
-    borderColor: "#1a97df"
+    borderColor: "#efeded"
   },
   th: {
     flex: 1,
     justifyContent: "center",
     paddingLeft: 4,
     borderRightWidth: 1.5,
-    borderColor: "#1a97df"
+    borderColor: "#efeded"
   },
   thText: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#1a97df"
+    color: "#efeded"
   },
   tbody: {},
   row: {
@@ -31,18 +31,18 @@ export default {
     flexDirection: "row",
     borderBottomWidth: 1.5,
     borderLeftWidth: 1.5,
-    borderColor: "#1a97df"
+    borderColor: "#efeded"
   },
   td: {
     flex: 1,
     justifyContent: "center",
     paddingLeft: 4,
     borderRightWidth: 1.5,
-    borderColor: "#1a97df"
+    borderColor: "#efeded"
   },
   tdText: {
-    fontSize: 14,
-    color: bmTextNormal
+    fontSize: 8,
+    color: "#6f6e6e"
   },
   border: {
     height: 1

@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 export default {
   layer: {
     flex: 1,
@@ -48,7 +49,10 @@ export default {
   },
   userLvWrapper: {
     position: "absolute",
-    top: 11,
+    top: Platform.select({
+      ios: 11,
+      android: 10
+    }),
     right: 8
   },
   userLv: {
@@ -60,8 +64,8 @@ export default {
     alignItems: "center"
   },
   centerContainer: {
-    marginTop: 25,
-    marginBottom: 25,
+    marginTop: 35,
+    marginBottom: 35,
     flexDirection: "row",
     alignItems: "center"
   },
@@ -165,6 +169,7 @@ export default {
   lession: {
     flexDirection: "row",
     alignItems: "center",
+    flex: 1,
     height: 22,
     paddingLeft: 8,
     paddingRight: 8,

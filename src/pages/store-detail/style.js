@@ -41,8 +41,7 @@ export default {
     alignItems: "center"
   },
   navgationText: {
-    fontSize: 10,
-    fontWeight: "bold",
+    fontSize: 8,
     color: "#fff"
   },
   shareBar: {
@@ -123,8 +122,9 @@ export default {
     backgroundColor: "#fff"
   },
   remarksLabelWrapper: {
-    height: 36,
+    height: 30,
     paddingLeft: 6,
+
     justifyContent: "center",
     borderBottomWidth: 0.6,
     borderColor: "#bfbfbf"
@@ -136,7 +136,7 @@ export default {
     fontWeight: "bold"
   },
   remarksValue: {
-    fontSize: 12,
+    fontSize: 10,
     paddingLeft: 6,
     lineHeight: 30,
     color: "#bfbfbf"

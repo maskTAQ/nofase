@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, Platform, Linking } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Geolocation } from "react-native-baidu-map";
 
 import api from "src/api";
 import action from "src/action";
@@ -21,7 +22,7 @@ import {
   CheckBox,
   Map
 } from "src/components";
-const Geolocation = require("Geolocation");
+
 const Height = () => <View style={{ height: 10 }} />;
 
 const StoreImgIcon = <Icon size={82} source={require("./img/logo.png")} />;
@@ -50,7 +51,7 @@ export default class Home extends Component {
     appUpdateInfo: {}
   };
   componentWillMount() {
-    this.getLocation();
+    //this.getLocation();
     this.getNewApp();
     //this.configPush();
   }
@@ -135,6 +136,7 @@ export default class Home extends Component {
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
     this.location = location;
+    //console.log(location,'location')
     const {
       distanceValue,
       tabActiveIndex,
@@ -190,22 +192,19 @@ export default class Home extends Component {
     });
   };
   getCurrentPosition() {
-    return new Promise((resolve, reject) => {
-      Geolocation.getCurrentPosition(
-        location => {
-          resolve({
-            userLng: location.coords.longitude,
-            userLat: location.coords.latitude
-          });
-        },
-        error => {
-          resolve({
-            userLng: "",
-            userLat: ""
-          });
-        }
-      );
-    });
+    return Geolocation.getCurrentPosition()
+      .then(({ latitude, longitude }) => {
+        return Promise.resolve({
+          userLat: latitude,
+          userLng: longitude
+        });
+      })
+      .catch(e => {
+        return Promise.resolve({
+          userLat: "",
+          userLng: ""
+        });
+      });
   }
   togglePattern(nextPattern) {
     const { pattern } = this.state;
@@ -227,10 +226,11 @@ export default class Home extends Component {
   };
   navgation = data => {
     const { Lat, Lng } = data;
+    const { userLat, userLng } = this.location;
     this.props.navigation.dispatch(
       action.navigate.go({
         routeName: "Navigation",
-        params: { Lat, Lng }
+        params: { Lat, Lng, userLat, userLng }
       })
     );
   };
