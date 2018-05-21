@@ -23,7 +23,7 @@ export default {
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#fff",
-    backgroundColor: "#2fc2d9",
+    backgroundColor: "#f8b94a",
     zIndex: 9
   },
   bar: {
@@ -33,7 +33,7 @@ export default {
     borderColor: "#fff",
     zIndex: 1,
     borderRadius: 8,
-    backgroundColor: "#2fc2d9"
+    backgroundColor: "#f8b94a"
   },
   label: {
     flexDirection: "row"
@@ -41,7 +41,7 @@ export default {
   labelItem: {
     flex: 1,
     fontSize: 12,
-    color: "#fff",
-    fontWeight: "bold"
+    color: "#fff"
+    //fontWeight: "bold"
   }
 };

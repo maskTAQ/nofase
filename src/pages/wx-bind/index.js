@@ -45,8 +45,12 @@ export default class WxBind extends Component {
         WxSex: userGender === "m" ? 1 : 2
       })
       .then(res => {
-        Tip.success("绑定成功");
-        this.props.navigation.dispatch(action.navigate.back());
+        // Tip.success("绑定成功");
+        // this.props.navigation.dispatch(action.navigate.back());
+        this.props.navigation.dispatch(action.login(res));
+        this.props.navigation.dispatch(
+          action.navigate.go({ routeName: "Home" })
+        );
       })
       .catch(e => {
         Tip.fail(e);

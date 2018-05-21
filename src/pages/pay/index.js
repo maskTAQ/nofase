@@ -339,7 +339,7 @@ export default class Pay extends Component {
         {OrderType === 1 && (
           <Text style={styles.timeCount}>使用时长:{tickts}</Text>
         )}
-        <View style={styles.itemBorder}>
+        <View style={[styles.itemBorder, { marginTop: 10 }]}>
           <Image
             source={require("./img/u14_line.png")}
             style={styles.itemBorderIcon}

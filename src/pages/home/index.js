@@ -136,7 +136,7 @@ export default class Home extends Component {
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
     this.location = location;
-    //console.log(location,'location')
+    console.log(location, "location");
     const {
       distanceValue,
       tabActiveIndex,
@@ -194,12 +194,14 @@ export default class Home extends Component {
   getCurrentPosition() {
     return Geolocation.getCurrentPosition()
       .then(({ latitude, longitude }) => {
+        console.log(latitude, "=-");
         return Promise.resolve({
           userLat: latitude,
           userLng: longitude
         });
       })
       .catch(e => {
+        console.log(e, "=-");
         return Promise.resolve({
           userLat: "",
           userLng: ""
@@ -542,8 +544,10 @@ export default class Home extends Component {
           {icon}
 
           <View style={styles.itemDetail}>
-            <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
-            <View style={styles.itemDetailCenter}>
+            <View style={styles.itemDetailTop}>
+              <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
+            </View>
+            <View style={[styles.itemDetailCenter]}>
               <Text style={styles.itemDistance}>
                 距离{Distance.toFixed(2)}Km
               </Text>
@@ -554,7 +558,7 @@ export default class Home extends Component {
                 <Icon size={20} source={require("./img/right.png")} />
               </View>
             </View>
-            <View style={styles.itemDetailBottom}>
+            <View style={[styles.itemDetailBottom]}>
               <Text style={styles.itemAddr} numberOfLines={2}>
                 {String(Address || "") + String(storeAddrDes || "") ||
                   "暂无地址"}

@@ -36,7 +36,7 @@ export default {
   rightIconWrapepr: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end"
+    justifyContent: "center"
   },
   headerItemWrapper: {
     flex: 1,
@@ -44,6 +44,7 @@ export default {
     paddingLeft: 4
   },
   headerItemRight: {
+    paddingRight: 6,
     alignItems: "flex-end"
   },
   headerItemLabel: {

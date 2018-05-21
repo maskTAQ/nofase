@@ -10,7 +10,7 @@ export default {
   },
   tab: {
     flex: 1,
-    height: 30,
+    height: 26,
     justifyContent: "center",
     alignItems: "center",
     borderTopLeftRadius: 8,
@@ -18,18 +18,18 @@ export default {
     borderTopWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    borderColor: "#fff",
+    borderColor: "#f8b94a",
     backgroundColor: "#f8b94a"
   },
   tabActive: {
+    borderColor: "#fff",
     backgroundColor: "#fff"
   },
   tabLabel: {
-    fontWeight: "bold",
     color: "#fff"
   },
   tabLabelActive: {
-    color: "#2fc2d9"
+    color: "#f8b94a"
   },
   searchContainer: {
     flexDirection: "row",
@@ -49,7 +49,8 @@ export default {
     paddingLeft: 10
   },
   searchInput: {
-    flex: 1
+    flex: 1,
+    paddingLeft: 4
   },
   search: {
     width: 90,
@@ -110,6 +111,7 @@ export default {
     backgroundColor: "#ccc"
   },
   chooseItemText: {
+    marginRight: 4,
     fontSize: 12,
     color: "#666"
   },
@@ -146,7 +148,7 @@ export default {
     left: 4,
     paddingLeft: 4,
     paddingRight: 4,
-    backgroundColor: "#f3842f"
+    backgroundColor: "#f8b94a"
   },
   tagText: {
     fontSize: 12,
@@ -157,19 +159,24 @@ export default {
     flex: 1,
     padding: 4
   },
+  itemDetailTop: {
+    height: 24,
+    justifyContent: "center"
+  },
   itemName: {
     fontSize: 14,
     fontWeight: "bold",
     color: "#666"
   },
   itemDetailCenter: {
+    flex: 1,
     flexDirection: "row",
-    height: 30,
     alignItems: "center",
     justifyContent: "space-between"
   },
   itemDetailBottom: {
     flexDirection: "row",
+
     alignItems: "center"
   },
   lessionButton: {
@@ -177,7 +184,7 @@ export default {
     alignItems: "center",
     paddingLeft: 10,
     height: 20,
-    backgroundColor: "#4bc262",
+    backgroundColor: "#f8b94a",
     borderRadius: 20
   },
   lessionText: {
@@ -200,7 +207,7 @@ export default {
     alignItems: "center"
   },
   navgationText: {
-    fontSize: 12,
+    fontSize: 10,
     //fontWeight: "bold",
     color: "#1296DB"
   },

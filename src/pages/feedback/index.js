@@ -6,8 +6,7 @@ import {
   Modal,
   Linking,
   ScrollView,
-  Image,
-  TouchableWithoutFeedback
+  Image
 } from "react-native";
 import action from "src/action";
 import PropTypes from "prop-types";
@@ -27,42 +26,41 @@ const QAModal = ({ QA, isVisible, onRequestClose }) => {
       transparent={true}
       visible={isVisible}
     >
-      <TouchableWithoutFeedback onPress={onRequestClose}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>{q}</Text>
-              <Button onPress={onRequestClose}>
-                <Icon size={20} source={require("./img/u284.png")} />
-              </Button>
-            </View>
-            <View style={styles.modalLine} />
+      <View style={styles.modalContainer}>
+        <Button style={{ flex: 1 }} onPress={onRequestClose} />
+        <View style={styles.modalContent}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>{q}</Text>
+            <Button onPress={onRequestClose}>
+              <Icon size={20} source={require("./img/u284.png")} />
+            </Button>
+          </View>
+          <View style={styles.modalLine} />
 
-            <View style={styles.modalDetailsWrapper}>
-              <ScrollView>
-                {a.split(/\n/).map(item => {
-                  if (item.includes("source")) {
-                    return (
-                      <Image
-                        resizeMode="stretch"
-                        style={styles.modalImg}
-                        source={/source:([0-9]+)/.exec(item)[1]}
-                        key={item}
-                      />
-                    );
-                  } else {
-                    return (
-                      <Text style={styles.modalDetails} key={item}>
-                        {item}
-                      </Text>
-                    );
-                  }
-                })}
-              </ScrollView>
-            </View>
+          <View style={styles.modalDetailsWrapper}>
+            <ScrollView>
+              {a.split(/\n/).map(item => {
+                if (item.includes("source")) {
+                  return (
+                    <Image
+                      resizeMode="stretch"
+                      style={styles.modalImg}
+                      source={/source:([0-9]+)/.exec(item)[1]}
+                      key={item}
+                    />
+                  );
+                } else {
+                  return (
+                    <Text style={styles.modalDetails} key={item}>
+                      {item}
+                    </Text>
+                  );
+                }
+              })}
+            </ScrollView>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </View>
     </Modal>
   );
 };
@@ -169,11 +167,11 @@ export default class Feedback extends Component {
                 </View>
                 <Button
                   onPress={() => {
-                    this.call("075521044375");
+                    this.call("075521034275");
                   }}
                   style={styles.call}
                 >
-                  <Text style={styles.callText}>0755-2104-4375</Text>
+                  <Text style={styles.callText}>0755-2103-4275</Text>
                   <Icon size={20} source={require("./img/u204.png")} />
                 </Button>
               </View>

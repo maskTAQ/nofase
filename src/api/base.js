@@ -80,7 +80,7 @@ const post = (
         console.log("------ end -------");
         loading && Tip.dismiss();
         if (handleCatch) {
-          Tip.fail(`error:${String(e)}`);
+          Tip.fail(`error:${String(e).replace("Network Error", "当前无网络")}`);
         }
         return reject(String(e));
       });

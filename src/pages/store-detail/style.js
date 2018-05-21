@@ -94,6 +94,7 @@ export default {
   },
   portraitWrapper: {
     flex: 1,
+    flexDirection: "row",
     alignItems: "flex-end"
   },
   propsWrapper: {
@@ -136,9 +137,9 @@ export default {
     fontWeight: "bold"
   },
   remarksValue: {
-    fontSize: 10,
+    fontSize: 12,
     paddingLeft: 6,
-    lineHeight: 30,
+    lineHeight: 20,
     color: "#bfbfbf"
   },
   timetableTitle: {

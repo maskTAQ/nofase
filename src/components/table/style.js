@@ -16,7 +16,7 @@ export default {
   th: {
     flex: 1,
     justifyContent: "center",
-    paddingLeft: 4,
+    paddingLeft: 1.5,
     borderRightWidth: 1.5,
     borderColor: "#efeded"
   },
@@ -41,7 +41,7 @@ export default {
     borderColor: "#efeded"
   },
   tdText: {
-    fontSize: 8,
+    fontSize: 10,
     color: "#6f6e6e"
   },
   border: {

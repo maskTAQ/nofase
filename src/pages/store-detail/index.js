@@ -356,7 +356,7 @@ export default class StoreDetail extends Component {
                 </View>
                 <Button onPress={this.navgation} style={styles.navgation}>
                   <Icon size={20} source={require("./img/u101.png")} />
-                  <Text style={styles.navgationText}>每一小时计费一次</Text>
+                  <Text style={styles.navgationText}>按小时计费</Text>
                 </Button>
               </View>
             </View>

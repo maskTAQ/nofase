@@ -169,7 +169,7 @@ export default {
   lession: {
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
+    //flex: 1,
     height: 22,
     paddingLeft: 8,
     paddingRight: 8,
