@@ -43,7 +43,8 @@ export default {
   },
   searchInputWrapper: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "center"
   },
   searchInputIcon: {
     paddingLeft: 10
