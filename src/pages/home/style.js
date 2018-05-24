@@ -118,9 +118,9 @@ export default {
   },
   list: {
     flex: 1,
-    paddingTop: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingBottom: 30,
     backgroundColor: "#a9daef"
   },

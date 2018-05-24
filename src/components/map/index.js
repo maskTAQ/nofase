@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { WebView } from "react-native";
+import { WebView, Platform } from "react-native";
 
 // const html = `
 // <!doctype html>
@@ -126,17 +126,16 @@ export default class Map extends Component {
       window.postMessage = patchedPostMessage;
     };
     const { userLng, userLat } = this.props.location;
-    console.log(this.props);
+
     const patchPostMessageJsCode =
       "(" + String(patchPostMessageFunction) + ")();";
 
-    console.log(
-      `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}`
-    );
     return (
       <WebView
         source={{
-          uri: `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}`
+          uri: `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}&platform=${
+            Platform.OS
+          }`
         }}
         ref={w => (this.webview = w)}
         style={{ flex: 1 }}

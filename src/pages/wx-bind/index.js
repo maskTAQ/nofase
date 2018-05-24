@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, StatusBar } from "react-native";
+import { View, Image, StatusBar } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -76,7 +76,6 @@ export default class WxBind extends Component {
             source={require("src/images/login/logo.png")}
             style={styles.logoImg}
           />
-          <Text style={styles.logoLabel}>GYM</Text>
         </View>
         <View style={styles.form}>
           <View style={styles.formItem}>
@@ -90,7 +89,7 @@ export default class WxBind extends Component {
                 this.handleValueChange("phone", v);
               }}
               style={styles.formItemInput}
-              placeholder="已注册手机号"
+              placeholder="首次请先绑定手机号"
               placeholderTextColor="#fff"
             />
           </View>

@@ -98,7 +98,10 @@ const ShareModal = ({
                   </Text>
                   <Button style={styles.lession} onPress={goStoreDetail}>
                     <Text style={styles.lessionText} numberOfLines={1}>
-                      课程:{NowCurriculum}
+                      课程:{(NowCurriculum || "").replace(
+                        /([\s\S]{5})[\s\S]+/,
+                        "$1..."
+                      )}
                     </Text>
                     <View style={{ width: 14 }}>
                       <Icon size={14} source={require("./img/u79.png")} />

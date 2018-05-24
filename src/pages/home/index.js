@@ -73,10 +73,6 @@ export default class Home extends Component {
         }
       });
   }
-  getLocation = async () => {
-    const location = await this.getCurrentPosition();
-    this.location = location;
-  };
   store = {
     chooseType: [
       //{ label: "默认", value: 0 },
@@ -114,7 +110,7 @@ export default class Home extends Component {
     const { appUrl } = this.state.appUpdateInfo;
     let url = "";
     if (Platform.OS === "ios") {
-      url = `itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?mt=8&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&id=${appUrl}`;
+      url = `https://itunes.apple.com/cn/app/%E6%B2%A1%E8%84%B8%E8%BF%90%E5%8A%A8-%E5%95%86%E5%AE%B6%E7%AB%AF/id${appUrl}`;
     } else {
       url = appUrl;
     }
@@ -136,7 +132,6 @@ export default class Home extends Component {
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
     this.location = location;
-    console.log(location, "location");
     const {
       distanceValue,
       tabActiveIndex,
@@ -192,16 +187,34 @@ export default class Home extends Component {
     });
   };
   getCurrentPosition() {
+    if (Platform.OS === "ios") {
+      return new Promise(resolve => {
+        navigator.geolocation.getCurrentPosition(
+          location => {
+            resolve({
+              userLat: location.coords.latitude,
+              userLng: location.coords.longitude
+            });
+          },
+          error => {
+            resolve({
+              userLat: "",
+              userLng: ""
+            });
+          },
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000000 }
+        );
+      });
+    }
+    // console.log(Geolocation.getCurrentPosition())
     return Geolocation.getCurrentPosition()
       .then(({ latitude, longitude }) => {
-        console.log(latitude, "=-");
         return Promise.resolve({
           userLat: latitude,
           userLng: longitude
         });
       })
       .catch(e => {
-        console.log(e, "=-");
         return Promise.resolve({
           userLat: "",
           userLng: ""
@@ -532,6 +545,7 @@ export default class Home extends Component {
       StoreImg,
       PeopleNum
     } = row;
+    console.log(row);
     const icon = (StoreImg || "").includes("https") ? (
       <Icon size={82} source={{ uri: StoreImg }} />
     ) : (

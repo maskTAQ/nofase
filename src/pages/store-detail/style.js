@@ -81,7 +81,8 @@ export default {
     backgroundColor: "#fff"
   },
   starScorContent: {
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "center"
   },
   starScoreLabel: {
     fontSize: 14,
@@ -95,7 +96,8 @@ export default {
   portraitWrapper: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-end"
+    justifyContent: "flex-end"
+    //alignItems: "flex-end"
   },
   propsWrapper: {
     marginTop: 4,
@@ -123,7 +125,7 @@ export default {
     backgroundColor: "#fff"
   },
   remarksLabelWrapper: {
-    height: 30,
+    height: 24,
     paddingLeft: 6,
 
     justifyContent: "center",
@@ -131,7 +133,7 @@ export default {
     borderColor: "#bfbfbf"
   },
   remarksLabel: {
-    marginBottom: 6,
+    //marginBottom: 6,
     fontSize: 14,
     color: "#bfbfbf",
     fontWeight: "bold"

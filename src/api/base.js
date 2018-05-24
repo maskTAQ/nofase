@@ -67,7 +67,7 @@ const post = (
           console.log("参数:", params);
           console.log("------ end -------");
           if (handleCatch) {
-            Tip.fail(`error:${message}`);
+            Tip.fail(`${message}`);
           }
           return reject(message);
         }
@@ -80,7 +80,7 @@ const post = (
         console.log("------ end -------");
         loading && Tip.dismiss();
         if (handleCatch) {
-          Tip.fail(`error:${String(e).replace("Network Error", "当前无网络")}`);
+          Tip.fail(`${String(e).replace("Network Error", "当前无网络")}`);
         }
         return reject(String(e));
       });

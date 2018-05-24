@@ -117,7 +117,7 @@ export default class Login extends Component {
                 }}
                 style={styles.formItemInput}
                 keyboardType="numeric"
-                placeholder="首次请先绑定手机号"
+                placeholder="已注册手机号"
                 placeholderTextColor="#fff"
               />
             </View>

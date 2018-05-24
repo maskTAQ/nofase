@@ -138,7 +138,6 @@ export default class StoreDetail extends Component {
     return api
       .getScoreUserPortrait(Id)
       .then(res => {
-        console.log(res);
         return {
           portrait: res
         };
@@ -406,11 +405,7 @@ export default class StoreDetail extends Component {
       <View style={styles.starScoreWrapper}>
         <View style={styles.starScorContent}>
           <Text style={styles.starScoreLabel}>评分:</Text>
-          <StarScore
-            operable={false}
-            currentScore={StoreScore}
-            style={{ paddingTop: 2 }}
-          />
+          <StarScore operable={false} currentScore={StoreScore} />
           <Text style={styles.starScoreValue}>{StoreScore.toFixed(2)}</Text>
         </View>
         <View style={styles.portraitWrapper}>

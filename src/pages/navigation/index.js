@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, WebView } from "react-native";
+import { View, WebView, Platform } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -18,7 +18,7 @@ export default class Navigation extends Component {
   };
   state = {};
   render() {
-    const { Lat, Lng } = this.props.navigation.state.params;
+    const { Lat, Lng, userLat, userLng } = this.props.navigation.state.params;
     return (
       <Page title="导航">
         <View style={{ flex: 1 }}>
@@ -27,7 +27,10 @@ export default class Navigation extends Component {
               uri: `https://vmslq.cn/webview/navigation?params=${JSON.stringify(
                 {
                   Lat,
-                  Lng
+                  Lng,
+                  userLat,
+                  userLng,
+                  platform: Platform.OS
                 }
               )}&timestamp=${Date.now}`
             }}

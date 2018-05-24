@@ -177,7 +177,7 @@ export default {
     backgroundColor: "#f8b84a"
   },
   lessionText: {
-    fontSize: 12,
+    fontSize: 10,
     color: "#fff"
   },
   share: {

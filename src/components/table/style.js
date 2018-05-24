@@ -16,8 +16,10 @@ export default {
   th: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     paddingLeft: 1.5,
     borderRightWidth: 1.5,
+
     borderColor: "#efeded"
   },
   thText: {
@@ -36,7 +38,7 @@ export default {
   td: {
     flex: 1,
     justifyContent: "center",
-    paddingLeft: 4,
+    paddingLeft: 3,
     borderRightWidth: 1.5,
     borderColor: "#efeded"
   },
