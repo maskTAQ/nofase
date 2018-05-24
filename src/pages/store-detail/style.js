@@ -37,11 +37,11 @@ export default {
     fontWeight: "bold"
   },
   navgation: {
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center"
   },
   navgationText: {
-    fontSize: 8,
+    fontSize: 10,
     color: "#fff"
   },
   shareBar: {
@@ -128,9 +128,9 @@ export default {
     height: 24,
     paddingLeft: 6,
 
-    justifyContent: "center",
-    borderBottomWidth: 0.6,
-    borderColor: "#bfbfbf"
+    justifyContent: "center"
+    // borderBottomWidth: 0.6,
+    // borderColor: "#bfbfbf"
   },
   remarksLabel: {
     //marginBottom: 6,
@@ -147,7 +147,7 @@ export default {
   timetableTitle: {
     height: 36,
     justifyContent: "center",
-    paddingLeft: 12,
+    paddingLeft: 6,
     backgroundColor: "#fff"
   },
   timetableTitleText: {

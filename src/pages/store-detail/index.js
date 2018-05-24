@@ -96,18 +96,31 @@ export default class StoreDetail extends Component {
               label = "?至?";
               break;
           }
-          return label.split("至").map((item, i) => (
+          const c = label.split("至");
+          c.splice(1, 0, "——");
+
+          return (
             <View
               style={{
                 flex: 1,
                 alignItems: "center",
                 justifyContent: "center"
               }}
-              key={i}
             >
-              <Text style={{ fontSize: 10, color: "#1a97df" }}>{item}</Text>
+              {c.map((item, i) => {
+                return (
+                  <Text
+                    key={i}
+                    style={[
+                      { fontSize: item === "——" ? 6 : 10, color: "#1a97df" }
+                    ]}
+                  >
+                    {item}
+                  </Text>
+                );
+              })}
             </View>
-          ));
+          );
         }
       },
       { title: "周一", dataIndex: "Week1" },
@@ -355,7 +368,7 @@ export default class StoreDetail extends Component {
                 </View>
                 <Button onPress={this.navgation} style={styles.navgation}>
                   <Icon size={20} source={require("./img/u101.png")} />
-                  <Text style={styles.navgationText}>按小时计费</Text>
+                  <Text style={styles.navgationText}>导航</Text>
                 </Button>
               </View>
             </View>
