@@ -130,12 +130,13 @@ export default class Map extends Component {
 
     const patchPostMessageJsCode =
       "(" + String(patchPostMessageFunction) + ")();";
+
     return (
       <WebView
         source={{
           uri: `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}&platform=${
             Platform.OS
-          }&left=${(42 - 16) / width * 100}%`
+          }&right=${(42 - 16 - 12) / width * 100}%`
         }}
         ref={w => (this.webview = w)}
         style={{ flex: 1 }}
