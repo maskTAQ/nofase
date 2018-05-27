@@ -88,7 +88,8 @@ export default class Fitnessrecord extends Component {
     );
   }
   renderShareBar() {
-    const { isShareBarVisible, UserName } = this.state;
+    const { isShareBarVisible } = this.state;
+    const { UserName } = this.state.currentOrder;
     const data = [
       {
         icon: require("./img/u227.png"),

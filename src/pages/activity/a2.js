@@ -105,7 +105,7 @@ export default class A2 extends Component {
                 <Image
                   style={styles.topImg}
                   resizeMode="stretch"
-                  source={require("./img/内页邀请.png")}
+                  source={require("./img/内页邀请1.png")}
                 />
                 <Image
                   style={styles.descTextImg}
