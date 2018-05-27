@@ -88,7 +88,7 @@ export default class Fitnessrecord extends Component {
     );
   }
   renderShareBar() {
-    const { isShareBarVisible } = this.state;
+    const { isShareBarVisible, UserName } = this.state;
     const data = [
       {
         icon: require("./img/u227.png"),
@@ -136,10 +136,10 @@ export default class Fitnessrecord extends Component {
                   StoreImg
                 } = this.state.currentOrder;
                 share({
-                  title: "健身记录",
-                  content: `我在${StoreName}中锻炼了${this.getTimeByMinutes(
+                  title: "NoFace没脸运动 记录好身材！",
+                  content: `${UserName}在共享运动联盟店${StoreName}中锻炼了${this.getTimeByMinutes(
                     TimeLong
-                  )}`,
+                  )}并爱上了流汗的滋味。`,
                   url: "https://vmslq.cn/",
                   imgSrc: StoreImg,
                   platform

@@ -110,7 +110,7 @@ export default {
     color: mainColor
   },
   starScore: {
-    padding: 40,
+    padding: 8,
     paddingTop: 0,
     paddingBottom: 0
   },

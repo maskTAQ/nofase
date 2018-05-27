@@ -117,7 +117,13 @@ export default class A1 extends Component {
               <View style={styles.top}>
                 <Image
                   style={styles.topImg}
-                  source={require("./img/top.png")}
+                  resizeMode="stretch"
+                  source={require("./img/内页拼团.png")}
+                />
+                <Image
+                  style={styles.descTextImg}
+                  resizeMode="stretch"
+                  source={require("./img/没脸在一起火拼好身材.png")}
                 />
                 <Button
                   onPress={() => {
@@ -135,7 +141,7 @@ export default class A1 extends Component {
                 <Image
                   resizeMode="stretch"
                   style={styles.text}
-                  source={require("./img/fenxiang.png")}
+                  source={require("./img/组7.png")}
                 />
               </View>
             </View>

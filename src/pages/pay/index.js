@@ -29,8 +29,8 @@ import styles from "./style";
 
 const { width } = Dimensions.get("window");
 @connect(state => {
-  const { userInfo, auth: { UserId } } = state;
-  return { userInfo, UserId };
+  const { userInfo, auth: { UserId, UserName } } = state;
+  return { userInfo, UserId, UserName };
 })
 export default class Pay extends Component {
   static defaultProps = {};
@@ -88,9 +88,8 @@ export default class Pay extends Component {
 
     WebSocket.addEventListenter(data => {
       const { Type, MinMoney } = data;
-      console.log(data, "data");
+      console.log(data, "pasdas ");
       if (Type === 3 && this.state.Type !== 3) {
-        console.log(this.state);
         this.setState({
           isShareModalVisible: true
         });
@@ -207,7 +206,6 @@ export default class Pay extends Component {
     api
       .getQrCodeUrl(this.props.UserId, this.state.CardId)
       .then(res => {
-        console.log(res);
         this.setState({
           Qr: {
             status: "success",
@@ -229,7 +227,6 @@ export default class Pay extends Component {
     return api
       .getOrderStatus()
       .then(data => {
-        console.log(data);
         const TimeStamp = data.TimeStamp * 1000;
         this.tickts(false, TimeStamp);
         this.setState({
@@ -295,11 +292,11 @@ export default class Pay extends Component {
     }
   };
   submit = () => {
-    const { OrderId, currentScore } = this.state;
+    const { OrderId, currentScore, StoreId } = this.state;
     api
-      .completeOrder({ OrderId, Score: currentScore })
+      .completeOrder({ OrderId, Score: currentScore, StoreId })
       .then(res => {
-        Tip.fail("评价成功");
+        Tip.success("评价成功");
         setTimeout(() => {
           this.props.dispatch(action.navigate.back());
         }, 1500);
@@ -308,6 +305,21 @@ export default class Pay extends Component {
         Tip.fail("评价失败");
       });
   };
+  getTimeByMinutes(minutes) {
+    const pad = s => {
+      if (String(s).length === 1) {
+        return "0" + s;
+      } else {
+        return s;
+      }
+    };
+    const t = minutes * 60 / 1000;
+    const d = Math.floor(t / (24 * 3600));
+    const h = Math.floor((t - 24 * 3600 * d) / 3600);
+    const m = Math.floor((t - 24 * 3600 * d - h * 3600) / 60);
+    //const s = Math.floor(t - 24 * 3600 * d - h * 3600 - m * 60);
+    return `${pad(h)}:${pad(m)}`;
+  }
   renderHeader() {
     const { OrderType, SDate, EDate, tickts } = this.state;
     const noTimeStr = "--/--";
@@ -497,7 +509,7 @@ export default class Pay extends Component {
             {this.renderHeader()}
             {this.renderCommon([
               ["Per hour", "每一小时"],
-              ["Cost", `￥:${Charge}元`]
+              ["Cost", `￥:${(+Charge).toFixed(1)}元`]
             ])}
             {this.renderCommon([
               ["Discount", "优惠选择"],
@@ -520,7 +532,7 @@ export default class Pay extends Component {
                 {this.renderHeader()}
                 {this.renderCommon([
                   ["Per hour", "每一小时"],
-                  ["Cost", `￥:${Charge}元`]
+                  ["Cost", `￥:(+Charge).toFixed(1)}元`]
                 ])}
                 {this.renderCommon([
                   ["Charge", "收费"],
@@ -559,7 +571,8 @@ export default class Pay extends Component {
     }
   }
   renderShareBar() {
-    const { isShareBarVisible } = this.state;
+    const { UserName } = this.props.userInfo;
+    const { isShareBarVisible, StoreName, TimeLong } = this.state;
     const data = [
       {
         icon: require("./img/u227.png"),
@@ -602,8 +615,10 @@ export default class Pay extends Component {
             <Button
               onPress={() => {
                 share({
-                  title: "title",
-                  content: "xx",
+                  title: "NoFace没脸运动 记录好身材！",
+                  content: `${UserName}在共享运动联盟店${StoreName}中锻炼了${this.getTimeByMinutes(
+                    TimeLong
+                  )}并爱上了流汗的滋味。`,
                   url: "https://www.baidu.com/img/bd_logo1.png",
                   imgSrc: "https://www.baidu.com/img/bd_logo1.png",
                   platform
@@ -660,7 +675,6 @@ export default class Pay extends Component {
       StoreName,
       StoreAddress,
       NowInPeopel,
-      PeopleNum,
       discountList,
       discountLabel,
       CardId,
@@ -730,7 +744,7 @@ export default class Pay extends Component {
         <ShareModal
           isVisible={isShareModalVisible}
           portrait={UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")}
-          people={Number(PeopleNum) - NowInPeopel}
+          //people={Number(PeopleNum) - NowInPeopel}
           storeImg={
             StorePhoto ? { uri: StorePhoto } : require("./img/logo.png")
           }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { WebView, Platform } from "react-native";
+import { WebView, Platform, Dimensions } from "react-native";
 
+const { width } = Dimensions.get("window");
 // const html = `
 // <!doctype html>
 //   <head>
@@ -129,13 +130,12 @@ export default class Map extends Component {
 
     const patchPostMessageJsCode =
       "(" + String(patchPostMessageFunction) + ")();";
-
     return (
       <WebView
         source={{
           uri: `https://vmslq.cn/webview/map/index.html?userLng=${userLng}&userLat=${userLat}&platform=${
             Platform.OS
-          }`
+          }&left=${(42 - 16) / width * 100}%`
         }}
         ref={w => (this.webview = w)}
         style={{ flex: 1 }}

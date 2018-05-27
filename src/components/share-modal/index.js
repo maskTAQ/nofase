@@ -76,8 +76,12 @@ const ShareModal = ({
               <View style={styles.centerBorder} />
               <View style={styles.centerItem}>
                 <View style={styles.centerItemValueWrapper}>
-                  <Text style={styles.centerItemValue}>{money}</Text>
-                  <Text style={styles.Discount}>折扣{discount}元</Text>
+                  <Text style={styles.centerItemValue}>
+                    {(+money).toFixed(2)}
+                  </Text>
+                  <Text style={styles.Discount}>
+                    折扣{(+discount).toFixed(2)}元
+                  </Text>
                 </View>
                 <Text style={styles.centerItemLabel}>消费金额</Text>
               </View>
@@ -85,9 +89,11 @@ const ShareModal = ({
             <View style={styles.storeInfo}>
               <View style={styles.storeImgWrapper}>
                 <Icon size={70} source={storeImg} />
-                <View style={styles.storePeople}>
-                  <Text style={styles.storePeopleText}>剩{people}位</Text>
-                </View>
+                {people && (
+                  <View style={styles.storePeople}>
+                    <Text style={styles.storePeopleText}>剩{people}位</Text>
+                  </View>
+                )}
               </View>
 
               <View style={styles.storeInfoWrapper}>

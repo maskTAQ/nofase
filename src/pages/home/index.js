@@ -545,7 +545,6 @@ export default class Home extends Component {
       StoreImg,
       PeopleNum
     } = row;
-    console.log(row);
     const icon = (StoreImg || "").includes("https") ? (
       <Icon size={82} source={{ uri: StoreImg }} />
     ) : (

@@ -62,9 +62,9 @@ export default class A2 extends Component {
             <Button
               onPress={() => {
                 share({
-                  title: "好友邀请你来一起没脸共享运动吧！",
+                  title: "好友邀请你一起来深圳百余家共享运动场所！",
                   content:
-                    "全城运动场所按时共享计费，不办卡最低4.9元/小时起参与。",
+                    "免办卡按小时计费 用零钱健身9.9/小时起，更有首免1小时打折优惠券等你探索。",
                   url: `https://vmslq.cn/Share/Guide?UserId=${UserId}`,
                   imgSrc: "http://vmslq.com/wxicon/2.jpg",
                   platform
@@ -102,14 +102,16 @@ export default class A2 extends Component {
           <View style={styles.container}>
             <View style={styles.container}>
               <View style={styles.top}>
-                <Image style={styles.topImg} source={require("./img/4.png")} />
-                <View style={styles.invitationBox}>
-                  <Image
-                    resizeMode="stretch"
-                    style={styles.invitation}
-                    source={require("./img/text.png")}
-                  />
-                </View>
+                <Image
+                  style={styles.topImg}
+                  resizeMode="stretch"
+                  source={require("./img/内页邀请.png")}
+                />
+                <Image
+                  style={styles.descTextImg}
+                  resizeMode="stretch"
+                  source={require("./img/没脸邀请共享健康.png")}
+                />
                 <Button
                   onPress={() => {
                     this.setState({
@@ -126,7 +128,7 @@ export default class A2 extends Component {
                 <Image
                   resizeMode="stretch"
                   style={styles.text}
-                  source={require("./img/fenxiang.png")}
+                  source={require("./img/组6.png")}
                 />
               </View>
             </View>

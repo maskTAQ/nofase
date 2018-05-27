@@ -18,6 +18,7 @@ export default {
     borderTopWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
+    overflow: "hidden",
     borderColor: "#f8b94a",
     backgroundColor: "#f8b94a"
   },

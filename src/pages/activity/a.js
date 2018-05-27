@@ -4,10 +4,19 @@ export default {
     backgroundColor: "#a9daf6",
     justifyContent: "space-between"
   },
+  top: {
+    alignItems: "center"
+  },
   topImg: {
     marginTop: 20,
     width: "100%",
     height: 160
+  },
+  descTextImg: {
+    marginTop: 30,
+    marginBottom: 20,
+    width: 150,
+    height: 14
   },
   invitationBox: {
     marginTop: 15,
@@ -20,9 +29,7 @@ export default {
     height: 20
   },
   button: {
-    marginTop: 20,
-    marginLeft: 5,
-    marginRight: 5,
+    width: "90%",
     height: 40,
     borderRadius: 6,
     justifyContent: "center",
@@ -31,7 +38,7 @@ export default {
   },
   text: {
     width: "100%",
-    height: 160
+    height: 130
   },
   bottom: {
     padding: 10

@@ -62,7 +62,7 @@ export default class A2 extends Component {
             <Button
               onPress={() => {
                 share({
-                  title: "好友邀请你来一起没脸共享运动吧！",
+                  title: "NoFace没脸运动 记录好身材！",
                   content:
                     "全城运动场所按时共享计费，不办卡最低4.9元/小时起参与。",
                   url: `https://vmslq.cn/Share/Guide?UserId=${UserId}`,
@@ -102,24 +102,27 @@ export default class A2 extends Component {
           <View style={styles.container}>
             <View style={styles.container}>
               <View style={styles.top}>
-                <Image style={styles.topImg} source={require("./img/13.png")} />
-                <View style={styles.invitationBox}>
-                  <Image
-                    resizeMode="stretch"
-                    style={styles.invitation}
-                    source={require("./img/text.png")}
-                  />
-                </View>
+                <Image
+                  style={styles.topImg}
+                  resizeMode="stretch"
+                  source={require("./img/13.png")}
+                />
+                <Image
+                  style={styles.descTextImg}
+                  resizeMode="stretch"
+                  source={require("./img/运动分享没脸长脸.png")}
+                />
                 <Button
                   onPress={() => {
                     this.setState({
                       isShareBarVisible: !this.state.isShareBarVisible
                     });
                   }}
+                  disabled={true}
                   style={styles.button}
                   textStyle={styles.buttonText}
                 >
-                  立即邀请
+                  每次运动后记得分享哦
                 </Button>
               </View>
               <View style={styles.bottom}>
