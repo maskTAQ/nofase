@@ -136,6 +136,7 @@ class App extends Component {
       })
     } else {
       JPushModule.setupPush();
+      
     }
     /**
        * 请注意这个接口要传一个数组过去，这里只是个简单的示范

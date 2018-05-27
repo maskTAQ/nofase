@@ -2,7 +2,7 @@ export default {
   container: {
     flex: 1,
     position: "relative",
-    backgroundColor: "transparent"
+    backgroundColor: "#fff"
   },
 
   bgContainer: {
@@ -16,6 +16,7 @@ export default {
   bgImg: {
     width: "100%",
     height: 105,
+    marginTop: -1,
     transform: [{ rotate: "180deg" }]
   },
   content: {

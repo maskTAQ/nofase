@@ -512,7 +512,10 @@ export default class Home extends Component {
             <Icon
               size={20}
               source={require("./img/search_list.png")}
-              style={styles.searchInputIcon}
+              style={[
+                styles.searchInputIcon,
+                Platform.OS === "android" && { paddingTop: 4 }
+              ]}
             />
             <Input
               value={StoreName}

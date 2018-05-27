@@ -193,7 +193,7 @@ export default class Fitnessrecord extends Component {
           </View>
           <View style={styles.content}>
             <Image
-              source={require("./img/banner.png")}
+              source={require("./img/_运动记录.png")}
               style={styles.banner}
               resizeMode="stretch"
             />
