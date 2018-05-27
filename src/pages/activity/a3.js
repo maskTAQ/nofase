@@ -91,7 +91,7 @@ export default class A2 extends Component {
   }
   render() {
     return (
-      <Page title="邀请好友">
+      <Page title="运动分享">
         <TouchableWithoutFeedback
           onPress={() => {
             this.setState({

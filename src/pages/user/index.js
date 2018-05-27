@@ -573,7 +573,7 @@ export default class User extends Component {
               <Button
                 onPress={() => {
                   this.props.navigation.dispatch(
-                    action.navigate.go({ routeName: "A3" })
+                    action.navigate.go({ routeName: "A2" })
                   );
                 }}
                 style={styles.accountItem}

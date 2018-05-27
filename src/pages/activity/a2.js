@@ -91,7 +91,20 @@ export default class A2 extends Component {
   }
   render() {
     return (
-      <Page title="邀请好友">
+      <Page
+        title="邀请好友"
+        RightComponent={
+          <Button
+            onPress={() => {
+              this.setState({
+                isShareBarVisible: !this.state.isShareBarVisible
+              });
+            }}
+          >
+            <Icon size={20} source={require("./img/share.png")} />
+          </Button>
+        }
+      >
         <TouchableWithoutFeedback
           onPress={() => {
             this.setState({
@@ -105,7 +118,7 @@ export default class A2 extends Component {
                 <Image
                   style={styles.topImg}
                   resizeMode="stretch"
-                  source={require("./img/内页邀请1.png")}
+                  source={require("./img/t.png")}
                 />
                 <Image
                   style={styles.descTextImg}
