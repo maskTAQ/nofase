@@ -17,10 +17,13 @@ const QRWebsocket = UserId => {
     };
   });
 };
-
+let ws = null;
 const uniqueLoginWebsocket = (UserId, logout) => {
+  if (!ws) {
+    return Promise.resolve(ws);
+  }
   return new Promise((resolve, reject) => {
-    const ws = new WebSocket("wss://vmslq.cn/UserStateHandler.ashx");
+    ws = new WebSocket("wss://vmslq.cn/UserStateHandler.ashx");
     ws.onopen = () => {
       console.log(UserId, "发送");
       ws.send(String(UserId)); // 注册服务

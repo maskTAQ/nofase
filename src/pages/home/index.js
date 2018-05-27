@@ -131,12 +131,7 @@ export default class Home extends Component {
   }
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
-    console.log(
-      location,
-      "adasa",
-      (location.userLat > 0 && location.userLat < 200) || !this.location,
-      this.location
-    );
+    console.log(location);
     if (location.userLat > 0 && location.userLat < 200 && !this.location) {
       this.location = location;
     }
