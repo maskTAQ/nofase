@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, Platform } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import JPushModule from "jpush-react-native";
 
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
@@ -24,6 +25,10 @@ export default class Transacion extends Component {
     PaysMoney: 0
   };
   componentWillMount() {
+    if (Platform.OS === "ios") {
+      JPushModule.setBadge(0, success => {});
+    }
+
     this.getUserPaysToday();
     this.props.navigation.dispatch({
       type: "userInfo",

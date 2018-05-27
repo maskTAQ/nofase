@@ -7,6 +7,7 @@ import { baseURL } from "src/config";
 Axios.interceptors.response.use(
   response => response,
   err => {
+    console.log(err.message);
     // 这里是返回状态码不为200时候的错误处理
     if (err && err.response) {
       switch (err.response.status) {
@@ -57,7 +58,11 @@ Axios.interceptors.response.use(
         default:
       }
     }
-
+    err.message = err.message.replace("Network Error", "网络错误");
+    err.message = err.message.replace(
+      /timeout of ([\d]+)ms exceeded/,
+      "请求超时"
+    );
     return Promise.reject(err);
   }
 );
@@ -98,7 +103,7 @@ const requestWrapper = (url, param = {}) => {
     baseURL: baseURL,
     url,
     method: "post",
-    timeout: 60000,
+    timeout: 6000,
     data: Object.assign(param, { UserId })
   });
 };
@@ -126,7 +131,7 @@ const post = (
           console.log("参数:", params);
           console.log("------ end -------");
           if (handleCatch) {
-            Tip.fail(`${message}`);
+            Tip.fail(`${message || "未知错误"}`);
           }
           return reject(message);
         }
@@ -139,9 +144,14 @@ const post = (
         console.log("------ end -------");
         loading && Tip.dismiss();
         if (handleCatch) {
-          Tip.fail(`${String(e).replace("Network Error", "当前无网络")}`);
+          Tip.fail(
+            `${String((e && e.message) || "未知错误").replace(
+              "Network Error",
+              "当前无网络"
+            )}`
+          );
         }
-        return reject(String(e));
+        return reject(String(e || "未知错误"));
       });
   });
 };
