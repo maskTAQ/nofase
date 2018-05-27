@@ -107,7 +107,7 @@ export default class Login extends Component {
           <View style={styles.form}>
             <View style={styles.formItem}>
               <Image
-                source={require("src/images/login/username.png")}
+                source={require("src/images/login/phone.png")}
                 style={styles.formItemImg}
               />
               <Input

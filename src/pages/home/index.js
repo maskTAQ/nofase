@@ -131,7 +131,10 @@ export default class Home extends Component {
   }
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
-    this.location = location;
+    if ((location.userLat > 0 && location.userLat < 200) || !location) {
+      this.location = location;
+    }
+
     const {
       distanceValue,
       tabActiveIndex,
@@ -149,7 +152,7 @@ export default class Home extends Component {
         PageIndex,
         PageNum: 20,
         StoreOrder: chooseTypeValue,
-        ...location
+        ...this.location
       });
     } else {
       const { startDay, endDay } = this.store.daysInfo;
