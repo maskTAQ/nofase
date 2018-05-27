@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import api from "src/api";
+import { uniqueLoginWebsocket } from "../../common/websocket";
 import {
   Button,
   Icon,
@@ -373,6 +374,9 @@ export default class User extends Component {
   };
   logout = () => {
     this.props.navigation.dispatch(action.logout());
+    uniqueLoginWebsocket().then(ws => {
+      ws.send(this.props.UserId + "#out");
+    });
     this.props.navigation.dispatch({
       type: "userInfo_reset"
     });
