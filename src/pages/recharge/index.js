@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 
+import { computeSize } from "src/common";
 import styles from "./style";
 import { Tip, Wxpay, Alipay } from "src/common";
 import { Input, Icon, CheckBox, Page, Button } from "src/components";
@@ -146,7 +147,7 @@ export default class Recharge extends Component {
   renderLabel(source, title, subtitle) {
     return (
       <View style={styles.itemLabelWraper}>
-        <Icon size={30} source={source} style={styles.itemIcon} />
+        <Icon size={computeSize(30)} source={source} style={styles.itemIcon} />
         <View style={styles.titleWrapper}>
           <Text style={styles.itemTitle}>{title}</Text>
           <Text style={styles.itemSubtitle}>{subtitle}</Text>

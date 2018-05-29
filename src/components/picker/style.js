@@ -1,20 +1,21 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.4)",
-    padding: 10
+    padding: computeSize(10)
   },
   content: {
     flex: 1,
     justifyContent: "flex-end"
   },
   list: {
-    marginBottom: 15,
-    borderRadius: 6,
+    marginBottom: computeSize(15),
+    borderRadius: computeSize(6),
     backgroundColor: "#fff"
   },
   item: {
-    height: 40,
+    height: computeSize(40),
     justifyContent: "center",
     alignItems: "center"
   },
@@ -26,10 +27,10 @@ export default {
     backgroundColor: "#ccc"
   },
   cancel: {
-    height: 40,
+    height: computeSize(40),
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 6,
+    borderRadius: computeSize(6),
     backgroundColor: "#fff"
   }
 };

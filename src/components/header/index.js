@@ -3,13 +3,14 @@ import { View, Text, StatusBar, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import { computeSize } from "src/common";
 import action from "src/action";
 import { Icon } from "src/components";
 import styles from "./style";
 
 const Left = onPress => (
   <TouchableOpacity onPress={onPress}>
-    <Icon size={20} source={require("./img/return.png")} />
+    <Icon size={computeSize(20)} source={require("./img/return.png")} />
   </TouchableOpacity>
 );
 Left.propTypes = {

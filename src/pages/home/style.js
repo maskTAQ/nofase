@@ -1,8 +1,10 @@
+import { computeSize } from "src/common";
+
 export default {
   header: {
-    height: 70,
-    paddingLeft: 10,
-    paddingRight: 10,
+    height: computeSize(70),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
     backgroundColor: "#1b9de6"
   },
   tabContainer: {
@@ -10,11 +12,11 @@ export default {
   },
   tab: {
     flex: 1,
-    height: 26,
+    height: computeSize(26),
     justifyContent: "center",
     alignItems: "center",
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    borderTopLeftRadius: computeSize(8),
+    borderTopRightRadius: computeSize(8),
     borderTopWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
@@ -27,15 +29,16 @@ export default {
     backgroundColor: "#fff"
   },
   tabLabel: {
-    color: "#fff"
+    color: "#fff",
+    fontSize: computeSize(14)
   },
   tabLabelActive: {
     color: "#f8b94a"
   },
   searchContainer: {
     flexDirection: "row",
-    height: 30,
-    borderRadius: 8,
+    height: computeSize(30),
+    borderRadius: computeSize(8),
     borderTopLeftRadius: 0,
     alignItems: "center",
     justifyContent: "center",
@@ -48,34 +51,35 @@ export default {
     justifyContent: "center"
   },
   searchInputIcon: {
-    paddingLeft: 10
+    paddingLeft: computeSize(10)
   },
   searchInput: {
     flex: 1,
-    paddingLeft: 4
+    fontSize: computeSize(14),
+    paddingLeft: computeSize(4)
   },
   search: {
-    width: 90,
+    width: computeSize(90),
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "#fff",
     backgroundColor: "#f8b94a",
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 8
+    borderTopRightRadius: computeSize(8),
+    borderBottomRightRadius: computeSize(8)
   },
   searchLabel: {
     color: "#fff",
     fontWeight: "bold",
-    fontSize: 16
+    fontSize: computeSize(14)
   },
   chooseWrapper: {
     flexDirection: "row",
-    height: 24,
+    height: computeSize(24),
     backgroundColor: "#1b9de6",
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8
+    borderBottomLeftRadius: computeSize(8),
+    borderBottomRightRadius: computeSize(8)
   },
   chooseModal: {
     position: "absolute",
@@ -84,7 +88,7 @@ export default {
     backgroundColor: "#fff"
   },
   checkboxItem: {
-    height: 26,
+    height: computeSize(26),
     justifyContent: "center",
     alignItems: "center",
     position: "relative"
@@ -93,12 +97,12 @@ export default {
     backgroundColor: "#f2f2f2"
   },
   checkboxItemLabel: {
-    color: "rgb(102, 102, 102)"
+    color: "rgb(computeSize(102), computeSize(102), 102)"
   },
   checkboxItemIcon: {
     position: "absolute",
-    top: 3,
-    right: 10
+    top: computeSize(3),
+    right: computeSize(10)
   },
   chooseItemButton: {
     flex: 1,
@@ -113,16 +117,16 @@ export default {
     backgroundColor: "#ccc"
   },
   chooseItemText: {
-    marginRight: 4,
-    fontSize: 12,
+    marginRight: computeSize(4),
+    fontSize: computeSize(12),
     color: "#666"
   },
   list: {
     flex: 1,
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
+    paddingTop: computeSize(2),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
+    paddingBottom: computeSize(30),
     backgroundColor: "#a9daef"
   },
   item: {
@@ -130,43 +134,43 @@ export default {
   },
   itemTop: {
     flexDirection: "row",
-    padding: 4,
-    borderRadius: 6,
+    padding: computeSize(4),
+    borderRadius: computeSize(6),
     backgroundColor: "#fff"
   },
   itemBottom: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 6,
-    paddingLeft: 4,
-    paddingRight: 10,
+    marginTop: computeSize(6),
+    paddingLeft: computeSize(4),
+    paddingRight: computeSize(10),
     backgroundColor: "#fff",
-    borderRadius: 6,
-    height: 30
+    borderRadius: computeSize(6),
+    height: computeSize(30)
   },
   tagWrapper: {
     position: "absolute",
-    top: 4,
-    left: 4,
-    paddingLeft: 4,
-    paddingRight: 4,
+    top: computeSize(4),
+    left: computeSize(4),
+    paddingLeft: computeSize(4),
+    paddingRight: computeSize(4),
     backgroundColor: "#f8b94a"
   },
   tagText: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     fontWeight: "bold",
     color: "#fff"
   },
   itemDetail: {
     flex: 1,
-    padding: 4
+    padding: computeSize(4)
   },
   itemDetailTop: {
-    height: 24,
+    height: computeSize(24),
     justifyContent: "center"
   },
   itemName: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#666"
   },
@@ -184,46 +188,46 @@ export default {
   lessionButton: {
     flexDirection: "row",
     alignItems: "center",
-    paddingLeft: 10,
-    height: 20,
+    paddingLeft: computeSize(10),
+    height: computeSize(20),
     backgroundColor: "#f8b94a",
-    borderRadius: 20
+    borderRadius: computeSize(20)
   },
   lessionText: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     color: "#fff"
   },
 
   itemDistance: {
-    lineHeight: 20,
-    fontSize: 12,
+    lineHeight: computeSize(20),
+    fontSize: computeSize(12),
     color: "#999"
   },
 
   itemAddr: {
     flex: 1,
-    fontSize: 12,
+    fontSize: computeSize(12),
     color: "#999"
   },
   navgationButton: {
     alignItems: "center"
   },
   navgationText: {
-    fontSize: 10,
+    fontSize: computeSize(10),
     //fontWeight: "bold",
     color: "#1296DB"
   },
   evaluateLabel: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     color: "#666"
   },
   evaluateValue: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     fontWeight: "bold",
     color: "#1296DB"
   },
   price: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#1296DB"
   }

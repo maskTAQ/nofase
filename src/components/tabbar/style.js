@@ -1,11 +1,12 @@
 import { Dimensions } from "react-native";
+import { computeSize } from "src/common";
 export default {
   tabBarWrapper: {
     position: "relative"
   },
   tabBar: {
     flexDirection: "row",
-    height: 50,
+    height: computeSize(50),
     backgroundColor: "#1b9be4"
   },
   tabBarItem: {
@@ -14,23 +15,23 @@ export default {
     alignItems: "center"
   },
   tabBarItemLabel: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     color: "#fff"
   },
   tabBarScanQRWrapper: {
     position: "relative",
-    zIndex: 9,
-    width: 70,
-    height: 50
+    zIndex: computeSize(9),
+    width: computeSize(70),
+    height: computeSize(50)
   },
   tabBarScanQR: {
     position: "absolute",
-    zIndex: 9,
+    zIndex: computeSize(9),
     bottom: 0,
-    left: (Dimensions.get("window").width - 70) / 2,
-    borderRadius: 70,
-    width: 70,
-    height: 70,
+    left: computeSize((Dimensions.get("window").width - 70) / 2),
+    borderRadius: computeSize(70),
+    width: computeSize(70),
+    height: computeSize(70),
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",

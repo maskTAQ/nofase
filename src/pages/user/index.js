@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import api from "src/api";
+import { computeSize } from "src/common";
 import { uniqueLoginWebsocket } from "../../common/websocket";
 import {
   Button,
@@ -225,7 +226,7 @@ class ModifMobile extends Component {
       <AlertModal isVisible={isVisible} close={close}>
         <View style={styles.modalContianer}>
           <View style={styles.modalItemWrapper}>
-            <Icon size={24} source={require("./img/u16.png")} />
+            <Icon size={computeSize(24)} source={require("./img/u16.png")} />
             <Input
               value={currentMobile}
               onChangeText={v => {
@@ -238,7 +239,7 @@ class ModifMobile extends Component {
             />
           </View>
           <View style={[styles.modalItemWrapper, { marginTop: 10 }]}>
-            <Icon size={24} source={require("./img/u36.png")} />
+            <Icon size={computeSize(24)} source={require("./img/u36.png")} />
             <Input
               value={code}
               onChangeText={v => {
@@ -252,7 +253,7 @@ class ModifMobile extends Component {
               ref={e => (this.codeButton = e)}
               phone={currentMobile}
               type="modal"
-              time={10}
+              time={computeSize(10)}
             >
               验证码
             </CodeButton>
@@ -401,7 +402,7 @@ export default class User extends Component {
         <View style={styles.headerWrapper}>
           <View style={styles.closeWrapper}>
             <Button onPress={this.back}>
-              <Icon size={25} source={closeSource} />
+              <Icon size={computeSize(25)} source={closeSource} />
             </Button>
           </View>
           <View style={styles.headerContent}>
@@ -414,7 +415,7 @@ export default class User extends Component {
               }}
             >
               <Icon
-                size={60}
+                size={computeSize(60)}
                 source={Photo ? { uri: Photo } : portraitSource}
               />
             </Button>
@@ -429,7 +430,7 @@ export default class User extends Component {
                   }}
                   style={styles.editIconButton}
                 >
-                  <Icon size={16} source={editSource} />
+                  <Icon size={computeSize(16)} source={editSource} />
                 </Button>
                 <View style={styles.lvWrapper}>
                   <Image
@@ -448,7 +449,11 @@ export default class User extends Component {
           <View
             style={[
               styles.border,
-              { margin: 6, marginTop: 20, marginBottom: 0 }
+              {
+                margin: computeSize(6),
+                marginTop: computeSize(20),
+                marginBottom: 0
+              }
             ]}
           />
         </View>
@@ -521,8 +526,13 @@ export default class User extends Component {
         <View style={styles.accountTitleWrapper}>
           <Text style={styles.accountTitle}>账号绑定</Text>
         </View>
-        <View style={[styles.border, { marginTop: 10, marginBottom: 10 }]} />
-        <View style={[styles.accountItem, { paddingLeft: 20 }]}>
+        <View
+          style={[
+            styles.border,
+            { marginTop: computeSize(10), marginBottom: computeSize(10) }
+          ]}
+        />
+        <View style={[styles.accountItem, { paddingLeft: computeSize(20) }]}>
           <Text style={styles.accountItemText}>手机号码:{UserName}</Text>
           <View style={styles.accountItemRight}>
             <Button
@@ -572,7 +582,10 @@ export default class User extends Component {
                 用户反馈
               </Button>
               <View
-                style={[styles.border, { marginTop: 10, marginBottom: 10 }]}
+                style={[
+                  styles.border,
+                  { marginTop: computeSize(10), marginBottom: computeSize(10) }
+                ]}
               />
               <Button
                 onPress={() => {

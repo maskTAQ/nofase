@@ -1,10 +1,11 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
-    height: 88,
+    height: computeSize(88),
     paddingTop: 0
   },
   bg: {
@@ -24,7 +25,7 @@ export default {
     flexDirection: "row"
   },
   buttonLeft: {
-    width: 56,
+    width: computeSize(56),
     justifyContent: "center",
     alignItems: "center"
   },
@@ -34,7 +35,7 @@ export default {
     alignItems: "center"
   },
   buttonRight: {
-    width: 56,
+    width: computeSize(56),
     justifyContent: "center",
     alignItems: "center"
   }

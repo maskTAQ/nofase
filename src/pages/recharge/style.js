@@ -1,26 +1,27 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
     backgroundColor: "#f9f9f9"
   },
   paddingContainer: {
-    paddingLeft: 15,
-    paddingRight: 15
+    paddingLeft: computeSize(15),
+    paddingRight: computeSize(15)
   },
   rechargeLabel: {
-    lineHeight: 70,
+    lineHeight: computeSize(70),
     color: "#333"
   },
   inputContainer: {
     flexDirection: "row",
-    height: 60,
-    paddingTop: 10,
-    paddingBottom: 10,
+    height: computeSize(60),
+    paddingTop: computeSize(10),
+    paddingBottom: computeSize(10),
     borderColor: "#1e89e4",
     borderWidth: 1,
-    borderRadius: 5
+    borderRadius: computeSize(5)
   },
   input: {
     width: "80%",
@@ -37,47 +38,49 @@ export default {
     backgroundColor: "#1a98e0"
   },
   inputLabel: {
-    fontSize: 16,
+    fontSize: computeSize(16),
     color: "#039DEB",
     fontWeight: "600"
   },
   balanceWrapper: {
     flexDirection: "row-reverse",
-    height: 70,
+    height: computeSize(70),
     alignItems: "center"
   },
   checkbox: {
-    marginTop: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
+    marginTop: computeSize(20),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
     backgroundColor: "#fff"
   },
   itemLabelWraper: {
     flex: 1,
     flexDirection: "row",
-    height: 60,
+    height: computeSize(60),
     alignItems: "center"
   },
   itemIcon: {
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10)
   },
   itemTitle: {
     color: "#333333",
-    lineHeight: 20
+    fontSize: computeSize(12),
+    lineHeight: computeSize(20)
   },
   itemSubtitle: {
+    fontSize: computeSize(12),
     color: "#999999"
   },
   //充值成功
   wrapper: {
-    marginTop: 6,
-    paddingTop: 30,
+    marginTop: computeSize(6),
+    paddingTop: computeSize(30),
     alignItems: "center",
     backgroundColor: "#fff"
   },
   notTitlewrapper: {
-    height: 60,
+    height: computeSize(60),
     justifyContent: "center",
     alignItems: "center"
   },
@@ -88,16 +91,16 @@ export default {
   },
   itemLabel: {
     color: "#333333",
-    lineHeight: 35
+    lineHeight: computeSize(35)
   },
   itemValue: {
     color: "#333333",
-    lineHeight: 35
+    lineHeight: computeSize(35)
   },
   rechargeButton: {
-    marginTop: 15,
-    height: 40,
-    borderRadius: 6,
+    marginTop: computeSize(15),
+    height: computeSize(40),
+    borderRadius: computeSize(6),
     backgroundColor: "#1b9de6",
     justifyContent: "center",
     alignItems: "center"

@@ -7,3 +7,4 @@ export { default as push } from "./push";
 //export { default as localPush } from "./localPush";
 export { default as Wxpay } from "./wxpay";
 export { default as Alipay } from "./alipay";
+export { default as computeSize } from "./size";

@@ -1,7 +1,8 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: computeSize(80),
     position: "relative",
     alignItems: "center",
     backgroundColor: "#1b9de6"
@@ -14,7 +15,7 @@ export default {
     bottom: 0
   },
   logoWrapper: {
-    borderRadius: 80,
+    borderRadius: computeSize(80),
     overflow: "hidden"
   },
   logo: {
@@ -22,84 +23,84 @@ export default {
   },
   logoLabel: {
     color: "#fff",
-    fontSize: 18,
-    lineHeight: 30,
+    fontSize: computeSize(18),
+    lineHeight: computeSize(30),
     fontWeight: "bold"
   },
   form: {
-    marginTop: 40,
+    marginTop: computeSize(40),
     width: "100%",
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: computeSize(20),
+    paddingRight: computeSize(20)
   },
   formItem: {
-    marginTop: 12,
+    marginTop: computeSize(12),
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    height: 34,
+    height: computeSize(34),
     borderBottomWidth: 1,
     borderColor: "#fff"
   },
   formItemImg: {
-    marginLeft: 12,
-    marginRight: 12,
-    width: 24,
-    height: 24
+    marginLeft: computeSize(12),
+    marginRight: computeSize(12),
+    width: computeSize(24),
+    height: computeSize(24)
   },
   formItemInput: {
     flex: 1,
     color: "#fff",
-    fontSize: 14
+    fontSize: computeSize(14)
   },
   loginButton: {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-    height: 36,
-    marginTop: 20,
-    borderRadius: 25
+    height: computeSize(36),
+    marginTop: computeSize(20),
+    borderRadius: computeSize(25)
   },
   loginText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#1a98e0"
   },
   code: {
-    width: 70,
+    width: computeSize(70),
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff"
   },
   codeText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#1a98e0"
   },
   register: {
     alignItems: "flex-end",
-    height: 70,
+    height: computeSize(70),
     justifyContent: "center"
   },
   registerText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#fff"
   },
   relevancechar: {
     position: "absolute",
-    bottom: 30,
+    bottom: computeSize(30),
     alignItems: "center"
   },
   relevanceText: {
     color: "#ccc",
-    height: 35,
-    fontSize: 16,
+    height: computeSize(35),
+    fontSize: computeSize(16),
     fontWeight: "bold",
     justifyContent: "center"
   },
   charImg: {
-    height: 40,
-    width: 40
+    height: computeSize(40),
+    width: computeSize(40)
   }
 };

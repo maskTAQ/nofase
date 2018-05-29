@@ -1,15 +1,16 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     flex: 1
   },
   footerWrapper: {
-    height: 40,
+    height: computeSize(40),
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"
   },
   text: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#333"
   },
   ListEmptyComponent: {
@@ -17,7 +18,7 @@ export default {
     alignItems: "center"
   },
   ListEmptyComponentText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#333"
   }
 };

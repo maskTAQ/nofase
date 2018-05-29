@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, ScrollView, RefreshControl } from "react-native";
 import PropTypes from "prop-types";
 
+import { computeSize } from "src/common";
 import styles from "./style";
 import api from "src/api";
 import { Tip } from "src/common";
@@ -59,9 +60,15 @@ export default class PayResult extends Component {
           <View style={styles.container}>
             <View style={styles.wrapper}>
               {Flag === 2 ? (
-                <Icon size={60} source={require("./img/success.png")} />
+                <Icon
+                  size={computeSize(60)}
+                  source={require("./img/success.png")}
+                />
               ) : (
-                <Icon size={60} source={require("./img/error.png")} />
+                <Icon
+                  size={computeSize(60)}
+                  source={require("./img/error.png")}
+                />
               )}
               <View style={styles.notTitlewrapper}>
                 <Text style={styles.checklabel}>{flagMap[Flag]}</Text>

@@ -8,6 +8,7 @@ import api from "src/api";
 import { Tip } from "src/common";
 import action from "src/action";
 import styles from "../login/style";
+import { computeSize } from "src/common";
 const logoSource = require("src/images/login/logo.png");
 @connect()
 export default class Register extends Component {
@@ -43,10 +44,10 @@ export default class Register extends Component {
     const { NickName, ExCode, Tel } = this.state;
     return (
       <Page title="登录">
-        <View style={[styles.container, { paddingTop: 20 }]}>
+        <View style={[styles.container, { paddingTop: computeSize(20) }]}>
           <View style={styles.logo}>
             <View style={styles.logoWrapper}>
-              <Icon source={logoSource} size={80} />
+              <Icon source={logoSource} size={computeSize(80)} />
             </View>
           </View>
           <View style={styles.form}>

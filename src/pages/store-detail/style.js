@@ -1,3 +1,4 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     position: "relative",
@@ -12,7 +13,7 @@ export default {
   },
   header: {
     position: "relative",
-    height: 220,
+    height: computeSize(220),
     justifyContent: "flex-end"
   },
   headerBg: {
@@ -25,14 +26,14 @@ export default {
   },
   introTitleBox: {
     flexDirection: "row",
-    padding: 4,
-    paddingLeft: 12,
-    paddingRight: 12
+    padding: computeSize(4),
+    paddingLeft: computeSize(12),
+    paddingRight: computeSize(12)
   },
-  storeName: { fontSize: 16, color: "#fff", fontWeight: "bold" },
+  storeName: { fontSize: computeSize(16), color: "#fff", fontWeight: "bold" },
   storeAddr: {
-    marginTop: 4,
-    fontSize: 12,
+    marginTop: computeSize(4),
+    fontSize: computeSize(12),
     color: "#fff",
     fontWeight: "bold"
   },
@@ -41,7 +42,7 @@ export default {
     alignItems: "center"
   },
   navgationText: {
-    fontSize: 10,
+    fontSize: computeSize(10),
     color: "#fff"
   },
   shareBar: {
@@ -49,17 +50,17 @@ export default {
     bottom: 0,
     left: 0,
     right: 0,
-    zIndex: 999,
+    zIndex: computeSize(999),
     flexDirection: "row",
     width: "100%",
-    height: 70,
+    height: computeSize(70),
     backgroundColor: "#fff"
   },
   priceWrapper: {
-    marginTop: 4,
-    marginBottom: 4,
+    marginTop: computeSize(4),
+    marginBottom: computeSize(4),
     flexDirection: "row",
-    padding: 6,
+    padding: computeSize(6),
     backgroundColor: "#666",
     alignContent: "center"
   },
@@ -69,14 +70,14 @@ export default {
     alignItems: "center"
   },
   shareBarItemLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#1a9bfc"
   },
   starScoreWrapper: {
     flexDirection: "row",
-    paddingLeft: 6,
-    paddingRight: 6,
-    height: 40,
+    paddingLeft: computeSize(6),
+    paddingRight: computeSize(6),
+    height: computeSize(40),
     alignItems: "center",
     backgroundColor: "#fff"
   },
@@ -85,12 +86,12 @@ export default {
     justifyContent: "center"
   },
   starScoreLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#898989"
   },
   starScoreValue: {
-    paddingLeft: 4,
-    fontSize: 12,
+    paddingLeft: computeSize(4),
+    fontSize: computeSize(12),
     color: "#1a97df"
   },
   portraitWrapper: {
@@ -100,59 +101,59 @@ export default {
     //alignItems: "flex-end"
   },
   propsWrapper: {
-    marginTop: 4,
-    marginBottom: 4,
+    marginTop: computeSize(4),
+    marginBottom: computeSize(4),
     flexDirection: "row",
     justifyContent: "space-around",
-    height: 40,
+    height: computeSize(40),
     alignItems: "center",
-    paddingLeft: 6,
-    paddingRight: 6,
+    paddingLeft: computeSize(6),
+    paddingRight: computeSize(6),
     backgroundColor: "#fff"
   },
   hourSwapper: {
-    marginBottom: 4,
+    marginBottom: computeSize(4),
     flexDirection: "row",
-    height: 40,
+    height: computeSize(40),
     alignItems: "center",
-    paddingLeft: 6,
-    paddingRight: 6,
+    paddingLeft: computeSize(6),
+    paddingRight: computeSize(6),
     backgroundColor: "#fff"
   },
   remarksWrapper: {
-    marginBottom: 4,
+    marginBottom: computeSize(4),
 
     backgroundColor: "#fff"
   },
   remarksLabelWrapper: {
-    height: 24,
-    paddingLeft: 6,
+    height: computeSize(24),
+    paddingLeft: computeSize(6),
 
     justifyContent: "center"
-    // borderBottomWidth: 0.6,
+    // borderBottomWidth: 0.computeSize(6),
     // borderColor: "#bfbfbf"
   },
   remarksLabel: {
-    //marginBottom: 6,
-    fontSize: 14,
+    //marginBottom: computeSize(6),
+    fontSize: computeSize(14),
     color: "#bfbfbf",
     fontWeight: "bold"
   },
   remarksValue: {
-    fontSize: 12,
-    paddingLeft: 6,
-    lineHeight: 20,
+    fontSize: computeSize(12),
+    paddingLeft: computeSize(6),
+    lineHeight: computeSize(20),
     color: "#bfbfbf"
   },
   timetableTitle: {
-    height: 36,
+    height: computeSize(36),
     justifyContent: "center",
-    paddingLeft: 6,
+    paddingLeft: computeSize(6),
     backgroundColor: "#fff"
   },
   timetableTitleText: {
-    fontSize: 14,
-    //lineHeight:20,
+    fontSize: computeSize(14),
+    //lineHeight:computeSize(20),
     color: "#bfbfbf"
   },
 
@@ -164,7 +165,7 @@ export default {
       color: "#fff"
     },
     tdText: {
-      fontSize: 10,
+      fontSize: computeSize(10),
       color: "red"
     }
   }

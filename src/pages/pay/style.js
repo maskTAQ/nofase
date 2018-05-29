@@ -1,3 +1,4 @@
+import { computeSize } from "src/common";
 const mainColor = "#1a9bfc";
 export default {
   container: {
@@ -7,27 +8,27 @@ export default {
   },
   box: {
     flex: 1,
-    padding: 20,
-    paddingBottom: 50
+    padding: computeSize(20),
+    paddingBottom: computeSize(50)
   },
   content: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: computeSize(15),
+    paddingRight: computeSize(15),
     backgroundColor: "#fff",
-    borderRadius: 12
+    borderRadius: computeSize(12)
   },
   chunk: {
-    marginLeft: 12,
-    marginRight: 12,
-    height: 14,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    marginLeft: computeSize(12),
+    marginRight: computeSize(12),
+    height: computeSize(14),
+    borderBottomLeftRadius: computeSize(10),
+    borderBottomRightRadius: computeSize(10),
     backgroundColor: "#8dcffc"
   },
   headerWrapper: {
-    //paddingTop: 50,
-    padding: 4,
+    //paddingTop: computeSize(50),
+    padding: computeSize(4),
     paddingBottom: 0
   },
   header: {
@@ -40,129 +41,129 @@ export default {
   },
   headerItemWrapper: {
     flex: 1,
-    paddingTop: 12,
-    paddingLeft: 4
+    paddingTop: computeSize(12),
+    paddingLeft: computeSize(4)
   },
   headerItemRight: {
-    paddingRight: 6,
+    paddingRight: computeSize(6),
     alignItems: "flex-end"
   },
   headerItemLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   headerItemValue: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: mainColor
   },
   storeInfoWrapper: {
-    height: 40
+    height: computeSize(40)
   },
   storeInfo: {
     flex: 1,
-    paddingLeft: 8,
-    paddingRight: 8,
+    paddingLeft: computeSize(8),
+    paddingRight: computeSize(8),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between"
   },
   storeName: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   timeCount: {
-    height: 26,
-    lineHeight: 26,
+    height: computeSize(26),
+    lineHeight: computeSize(26),
     justifyContent: "center",
-    paddingLeft: 4,
-    fontSize: 14,
+    paddingLeft: computeSize(4),
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   tWrapper: {
-    padding: 4,
-    paddingTop: 10,
+    padding: computeSize(4),
+    paddingTop: computeSize(10),
     paddingBottom: 1
   },
   t: {
     flexDirection: "row",
-    paddingLeft: 4,
-    paddingRight: 4
+    paddingLeft: computeSize(4),
+    paddingRight: computeSize(4)
   },
   tItem: {
     flex: 1
   },
   tItemLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   tItemValueWrapper: {
     //flexDirection:'row',
-    height: 40,
+    height: computeSize(40),
     justifyContent: "center"
   },
   tItemValue: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   starScore: {
-    padding: 8,
+    padding: computeSize(8),
     paddingTop: 0,
     paddingBottom: 0
   },
   starScoreTitle: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   starScoreBox: {
-    height: 40,
+    height: computeSize(40),
     flexDirection: "row",
     alignItems: "center",
 
     justifyContent: "space-between"
   },
   submit: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    height: 22,
-    borderRadius: 6,
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
+    height: computeSize(22),
+    borderRadius: computeSize(6),
     justifyContent: "center",
     backgroundColor: mainColor
   },
   submitText: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     fontWeight: "bold",
     color: "#fff"
   },
   starScoreEvaluate: {
-    fontSize: 12,
+    fontSize: computeSize(12),
     fontWeight: "bold",
     color: mainColor
   },
   starScoreExpend: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: mainColor
   },
   QR: {
     flex: 1,
-    marginTop: 13,
-    marginBottom: 10,
+    marginTop: computeSize(13),
+    marginBottom: computeSize(10),
     justifyContent: "center",
     alignItems: "center"
   },
   QRImg: {
-    width: 100,
-    height: 100
+    width: computeSize(100),
+    height: computeSize(100)
   },
   itemBorder: {
-    paddingLeft: 6,
-    paddingRight: 6
+    paddingLeft: computeSize(6),
+    paddingRight: computeSize(6)
   },
   itemBorderIcon: {
     width: "100%"
@@ -174,7 +175,7 @@ export default {
     right: 0,
     flexDirection: "row",
     width: "100%",
-    height: 70,
+    height: computeSize(70),
     backgroundColor: "#fff"
   },
   shareBarItem: {
@@ -183,18 +184,18 @@ export default {
     alignItems: "center"
   },
   shareBarItemLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#1a9bfc"
   },
 
   notif: {
-    height: 24,
+    height: computeSize(24),
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#f8b84a"
   },
   notifText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#fff"
   }
 };

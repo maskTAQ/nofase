@@ -3,50 +3,51 @@ import PropTypes from "prop-types";
 import { View, Text } from "react-native";
 import { connect } from "react-redux";
 
+import { computeSize } from "src/common";
 import { Alert, Icon, Button } from "../index";
 
 const UpdateModal = ({ close, isVisible, appUpdateInfo, ok }) => {
   const styles = {
     container: {
-      padding: 10,
+      padding: computeSize(10),
       borderWidth: 1,
       borderColor: "#1a98e0",
-      borderRadius: 6,
+      borderRadius: computeSize(6),
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "#fff"
     },
     version: {
-      lineHeight: 30,
+      lineHeight: computeSize(30),
       color: "#737373"
     },
     fileSize: {
-      lineHeight: 30,
+      lineHeight: computeSize(30),
       color: "#737373"
     },
     buttonGroup: {
       width: "100%",
-      paddingLeft: 20,
-      paddingRight: 20,
+      paddingLeft: computeSize(20),
+      paddingRight: computeSize(20),
       flexDirection: "row",
       justifyContent: "space-between"
     },
     button: {
-      width: 110,
-      height: 35,
+      width: computeSize(110),
+      height: computeSize(35),
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: 10,
+      borderRadius: computeSize(10),
       borderWidth: 1,
       borderColor: "#1a98e0",
       backgroundColor: "#1a98e0"
     },
     buttonText: {
-      fontSize: 14,
+      fontSize: computeSize(14),
       color: "#fff"
     },
     cancelButtonText: {
-      fontSize: 14,
+      fontSize: computeSize(14),
       color: "#1a98e0"
     }
   };
@@ -54,7 +55,7 @@ const UpdateModal = ({ close, isVisible, appUpdateInfo, ok }) => {
   return (
     <Alert isVisible={isVisible} close={close}>
       <View style={styles.container}>
-        <Icon size={45} source={require("./img/hint.png")} />
+        <Icon size={computeSize(45)} source={require("./img/hint.png")} />
         <Text style={styles.version}>软件版本: {appVersion}</Text>
         <Text style={styles.fileSize}>文件大小:{appSize}M</Text>
         <View style={styles.buttonGroup}>

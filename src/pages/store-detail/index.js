@@ -11,6 +11,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import { computeSize } from "src/common";
 import styles from "./style";
 import { Table, Header, Button, Icon, StarScore } from "src/components";
 import api from "src/api";
@@ -112,7 +113,10 @@ export default class StoreDetail extends Component {
                   <Text
                     key={i}
                     style={[
-                      { fontSize: item === "——" ? 6 : 10, color: "#1a97df" }
+                      {
+                        fontSize: item === "——" ? 6 : computeSize(10),
+                        color: "#1a97df"
+                      }
                     ]}
                   >
                     {item}
@@ -296,7 +300,7 @@ export default class StoreDetail extends Component {
               style={styles.shareBarItem}
               key={label}
             >
-              <Icon size={40} source={icon} />
+              <Icon size={computeSize(40)} source={icon} />
               <Text style={styles.shareBarItemLabel}>{label}</Text>
             </Button>
           );
@@ -367,7 +371,10 @@ export default class StoreDetail extends Component {
                   </Text>
                 </View>
                 <Button onPress={this.navgation} style={styles.navgation}>
-                  <Icon size={20} source={require("./img/u101.png")} />
+                  <Icon
+                    size={computeSize(20)}
+                    source={require("./img/u101.png")}
+                  />
                   <Text style={styles.navgationText}>导航</Text>
                 </Button>
               </View>
@@ -382,29 +389,38 @@ export default class StoreDetail extends Component {
     return (
       <View style={styles.priceWrapper}>
         <Icon
-          size={26}
+          size={computeSize(26)}
           source={require("./img/u177.png")}
-          style={{ paddingLeft: 10, paddingRight: 10 }}
+          style={{
+            paddingLeft: computeSize(10),
+            paddingRight: computeSize(10)
+          }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 12, color: "#fff" }}>
+          <Text style={{ fontSize: computeSize(12), color: "#fff" }}>
             可容纳线上{PeopleNum}人位
           </Text>
-          <Text style={{ fontSize: 12, color: "#fff" }}>
+          <Text style={{ fontSize: computeSize(12), color: "#fff" }}>
             当前剩余{PeopleNum - NowPeopleNum}人位
           </Text>
         </View>
         <View
           style={{
-            paddingLeft: 20,
-            paddingRight: 20,
-            height: 30,
+            paddingLeft: computeSize(20),
+            paddingRight: computeSize(20),
+            height: computeSize(30),
             justifyContent: "center",
             backgroundColor: "#1a97df",
             borderRadius: 4
           }}
         >
-          <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>
+          <Text
+            style={{
+              fontSize: computeSize(16),
+              color: "#fff",
+              fontWeight: "bold"
+            }}
+          >
             {Charge}元 / 小时
           </Text>
         </View>
@@ -424,7 +440,7 @@ export default class StoreDetail extends Component {
         <View style={styles.portraitWrapper}>
           {portrait.map((item, i) => (
             <Icon
-              size={20}
+              size={computeSize(20)}
               source={{ uri: item.UserPhoto }}
               key={i}
               style={{ marginLeft: 4 }}
@@ -459,9 +475,9 @@ export default class StoreDetail extends Component {
             <View
               style={[
                 {
-                  paddingLeft: 4,
-                  paddingRight: 4,
-                  height: 24,
+                  paddingLeft: computeSize(4),
+                  paddingRight: computeSize(4),
+                  height: computeSize(24),
                   justifyContent: "center",
                   borderWidth: 1,
                   borderColor: "#a1a1a1",
@@ -473,7 +489,7 @@ export default class StoreDetail extends Component {
             >
               <Text
                 style={[
-                  { fontSize: 12, color: "#a1a1a1" },
+                  { fontSize: computeSize(12), color: "#a1a1a1" },
                   hasKey && { color: "#1a97df" }
                 ]}
               >
@@ -503,7 +519,13 @@ export default class StoreDetail extends Component {
       : "暂无";
     return (
       <View style={styles.hourSwapper}>
-        <Text style={{ fontSize: 14, color: "#bfbfbf", fontWeight: "bold" }}>
+        <Text
+          style={{
+            fontSize: computeSize(14),
+            color: "#bfbfbf",
+            fontWeight: "bold"
+          }}
+        >
           营业时间：
         </Text>
         <Text style={{ color: "#a1a1a1" }}>
@@ -541,7 +563,7 @@ export default class StoreDetail extends Component {
                 });
               }}
             >
-              <Icon size={22} source={require("./img/u141.png")} />
+              <Icon size={computeSize(22)} source={require("./img/u141.png")} />
             </Button>
           }
           onLeftPress={() => {
@@ -570,7 +592,7 @@ export default class StoreDetail extends Component {
         <View
           style={{
             flexDirection: "row",
-            height: 40,
+            height: computeSize(40),
             backgroundColor: "#fff",
             justifyContent: "space-between",
             alignItems: "center"
@@ -582,16 +604,18 @@ export default class StoreDetail extends Component {
             }}
             style={{ paddingLeft: 6, alignItems: "center" }}
           >
-            <Icon size={20} source={require("./img/u204.png")} />
-            <Text style={{ fontSize: 10, color: "#1a97df" }}>电话咨询</Text>
+            <Icon size={computeSize(20)} source={require("./img/u204.png")} />
+            <Text style={{ fontSize: computeSize(10), color: "#1a97df" }}>
+              电话咨询
+            </Text>
           </Button>
           <Button
             style={{
               backgroundColor: "#1a97df",
               height: "100%",
               justifyContent: "center",
-              paddingLeft: 15,
-              paddingRight: 15
+              paddingLeft: computeSize(15),
+              paddingRight: computeSize(15)
             }}
             onPress={() => {
               this.props.navigation.dispatch(
@@ -600,8 +624,8 @@ export default class StoreDetail extends Component {
             }}
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>
-              <Text style={{ fontSize: 16 }}>开始健身</Text>
-              <Text style={{ fontSize: 12, marginLeft: 4 }}>
+              <Text style={{ fontSize: 16 }}>开始运动</Text>
+              <Text style={{ fontSize: computeSize(12), marginLeft: 4 }}>
                 {Charge}元/小时
               </Text>
             </Text>

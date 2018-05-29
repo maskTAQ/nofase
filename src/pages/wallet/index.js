@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import moment from "moment";
 
+import { computeSize } from "src/common";
 import api from "src/api";
 import { Page, Icon, Button, DataView } from "src/components";
 import styles from "./style";
@@ -74,7 +75,9 @@ export default class Wallet extends Component {
             style={styles.list}
             getData={this.getUserOrderList}
             ListEmptyComponent={<Text>暂时没有数据哦</Text>}
-            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            ItemSeparatorComponent={() => (
+              <View style={{ height: computeSize(10) }} />
+            )}
             renderItem={({ item }) => this.renderItem(item)}
           />
         </View>
@@ -87,7 +90,9 @@ export default class Wallet extends Component {
             style={styles.list}
             getData={this.getRechargeList}
             ListEmptyComponent={<Text>暂时没有数据哦</Text>}
-            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            ItemSeparatorComponent={() => (
+              <View style={{ height: computeSize(10) }} />
+            )}
             renderItem={({ item }) => this.renderItem(item)}
           />
         </View>

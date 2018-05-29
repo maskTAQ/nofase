@@ -1,15 +1,16 @@
+import { computeSize } from "src/common";
 export default {
   container: {
-    height: 70,
+    height: computeSize(70),
     backgroundColor: "#1b9de6"
   },
   navigationContainer: {
-    marginTop: 20,
-    height: 50,
+    marginTop: computeSize(20),
+    height: computeSize(50),
     flexDirection: "row"
   },
   item: {
-    width: 42,
+    width: computeSize(42),
     justifyContent: "center",
     alignItems: "center"
   },
@@ -19,7 +20,7 @@ export default {
     alignItems: "center"
   },
   titleText: {
-    fontSize: 16,
+    fontSize: computeSize(16),
     fontWeight: "bold",
     color: "#fff"
   }

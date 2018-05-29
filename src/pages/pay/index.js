@@ -13,6 +13,7 @@ import {
 import PropTypes from "prop-types";
 import moment from "moment";
 
+import { computeSize } from "src/common";
 import { WebSocket, Tip, share } from "src/common";
 import api from "src/api";
 import {
@@ -333,17 +334,17 @@ export default class Pay extends Component {
           <View style={styles.headerItemWrapper}>
             <View style={styles.headerItem}>
               <Text style={styles.headerItemLabel}>开始时间</Text>
-              <View style={{ height: 10 }} />
+              <View style={{ height: computeSize(10) }} />
               <Text style={styles.headerItemValue}>{data[OrderType][0]}</Text>
             </View>
           </View>
           <View style={styles.rightIconWrapepr}>
-            <Icon size={30} source={require("./img/u17.png")} />
+            <Icon size={computeSize(30)} source={require("./img/u17.png")} />
           </View>
           <View style={styles.headerItemWrapper}>
             <View style={[styles.headerItem, styles.headerItemRight]}>
               <Text style={styles.headerItemLabel}>结束时间</Text>
-              <View style={{ height: 10 }} />
+              <View style={{ height: computeSize(10) }} />
               <Text style={styles.headerItemValue}>{data[OrderType][1]}</Text>
             </View>
           </View>
@@ -351,7 +352,7 @@ export default class Pay extends Component {
         {OrderType === 1 && (
           <Text style={styles.timeCount}>使用时长:{tickts}</Text>
         )}
-        <View style={[styles.itemBorder, { marginTop: 10 }]}>
+        <View style={[styles.itemBorder, { marginTop: computeSize(10) }]}>
           <Image
             source={require("./img/u14_line.png")}
             style={styles.itemBorderIcon}
@@ -411,7 +412,11 @@ export default class Pay extends Component {
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={styles.tItemValue}>{data[1][1]}</Text>
                 <Image
-                  style={{ width: 16, height: 9, marginLeft: 4 }}
+                  style={{
+                    width: computeSize(16),
+                    height: computeSize(9),
+                    marginLeft: computeSize(4)
+                  }}
                   source={require("./img/arrow-bottom.png")}
                 />
               </View>
@@ -438,7 +443,7 @@ export default class Pay extends Component {
               Linking.openURL(`tel:${StoreCsTel}`);
             }}
           >
-            <Icon size={15} source={require("./img/u204.png")} />
+            <Icon size={computeSize(15)} source={require("./img/u204.png")} />
           </Button>
         </View>
         <View style={styles.itemBorder}>
@@ -466,7 +471,7 @@ export default class Pay extends Component {
               source={{
                 uri: src
               }}
-              size={width - 50 * 2}
+              size={width - computeSize(50) * 2}
             />
           </View>
         );
@@ -635,7 +640,7 @@ export default class Pay extends Component {
               style={styles.shareBarItem}
               key={label}
             >
-              <Icon size={40} source={icon} />
+              <Icon size={computeSize(40)} source={icon} />
               <Text style={styles.shareBarItemLabel}>{label}</Text>
             </Button>
           );

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import JPushModule from "jpush-react-native";
 
+import { computeSize } from "src/common";
 import { Page, Button, Icon } from "src/components";
 import styles from "./style";
 import api from "src/api";
@@ -52,7 +53,9 @@ export default class Transacion extends Component {
     return (
       <Button onPress={onPress}>
         <View style={styles.item}>
-          <Text style={{ color: "#0399e7", fontSize: 15 }}>{type}</Text>
+          <Text style={{ color: "#0399e7", fontSize: computeSize(15) }}>
+            {type}
+          </Text>
         </View>
       </Button>
     );
@@ -85,7 +88,9 @@ export default class Transacion extends Component {
     return (
       <FlatList
         style={styles.list}
-        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        ItemSeparatorComponent={() => (
+          <View style={{ height: computeSize(10) }} />
+        )}
         keyExtractor={(item, index) => index}
         data={data}
         renderItem={({ item }) => this.renderItem(item)}
@@ -101,7 +106,7 @@ export default class Transacion extends Component {
         title="交易管理"
         LeftComponent={
           <Button onPress={this.back}>
-            <Icon size={20} source={require("./img/u326.png")} />
+            <Icon size={computeSize(20)} source={require("./img/u326.png")} />
           </Button>
         }
         headerStyle={{ backgroundColor: "#fff" }}

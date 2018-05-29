@@ -35,7 +35,6 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* nofaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nofaseTests.m */; };
-		5C14752E20B70A0300020AF7 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C14752D20B70A0300020AF7 /* index.ios.jsbundle */; };
 		5C3C2B45208CB8660055BA88 /* UMPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B1E208CB8660055BA88 /* UMPush.framework */; };
 		5C3C2B50208CBBDF0055BA88 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */; };
 		5C3C2B52208CBC9B0055BA88 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */; };
@@ -60,7 +59,6 @@
 		5CB4B842206D1E8F00245B9A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B841206D1E8F00245B9A /* CoreMotion.framework */; };
 		5CB4B87B206D279F00245B9A /* AlipayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4B87A206D279F00245B9A /* AlipayModule.m */; };
 		5CB4B8B0206D2AC900245B9A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B8AF206D2AC800245B9A /* AlipaySDK.framework */; };
-		5CE55EE820B3FD1D003C853F /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5CE55EE720B3FD1D003C853F /* assets */; };
 		5CF5564B206BEB9300BC2461 /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5CF5562D206BEB9300BC2461 /* UMSocialSDKResources.bundle */; };
 		5CF5564C206BEB9300BC2461 /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF5562E206BEB9300BC2461 /* UShareUI.framework */; };
 		5CF5564D206BEB9300BC2461 /* UMSocialNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF55630206BEB9300BC2461 /* UMSocialNetwork.framework */; };
@@ -78,6 +76,8 @@
 		5CF55659206BEB9300BC2461 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF55648206BEB9300BC2461 /* libSocialQQ.a */; };
 		5CF5565A206BEB9300BC2461 /* libUMSocialLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF5564A206BEB9300BC2461 /* libUMSocialLog.a */; };
 		5CF5565D206BEC6800BC2461 /* sharemodule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5565C206BEC6800BC2461 /* sharemodule.m */; };
+		5CFEC0C620BB900A00C12AD8 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEC0C520BB900A00C12AD8 /* assets */; };
+		5CFEC10120BBD0CB00C12AD8 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEC10020BBD0CB00C12AD8 /* index.ios.jsbundle */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6B7ED8C929854B41BCC9057B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF30546283147EE8A829544 /* Security.framework */; };
 		6F2FE02BCFF44F90BAD891B6 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 484B635DFEBB421FB8CA95DC /* libRCTJPushModule.a */; };
@@ -403,7 +403,6 @@
 		463168D967AC429087755B36 /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJCoreModule.xcodeproj; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; };
 		484B635DFEBB421FB8CA95DC /* libRCTJPushModule.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTJPushModule.a; sourceTree = "<group>"; };
 		4D4525E42C2945379349E8DB /* libresolv.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		5C14752D20B70A0300020AF7 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5C3C2B1E208CB8660055BA88 /* UMPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMPush.framework; path = UMPush/UMPush.framework; sourceTree = "<group>"; };
 		5C3C2B4F208CBBDF0055BA88 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = UMPush/UMCommon.framework; sourceTree = "<group>"; };
 		5C3C2B51208CBC9B0055BA88 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = UMPush/UMAnalytics.framework; sourceTree = "<group>"; };
@@ -435,7 +434,6 @@
 		5CB4B879206D279800245B9A /* AlipayModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlipayModule.h; sourceTree = "<group>"; };
 		5CB4B87A206D279F00245B9A /* AlipayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayModule.m; sourceTree = "<group>"; };
 		5CB4B8AF206D2AC800245B9A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
-		5CE55EE720B3FD1D003C853F /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
 		5CF5562D206BEB9300BC2461 /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
 		5CF5562E206BEB9300BC2461 /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
 		5CF55630206BEB9300BC2461 /* UMSocialNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMSocialNetwork.framework; sourceTree = "<group>"; };
@@ -460,6 +458,8 @@
 		5CF5564A206BEB9300BC2461 /* libUMSocialLog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocialLog.a; sourceTree = "<group>"; };
 		5CF5565B206BEC6200BC2461 /* sharemodule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sharemodule.h; sourceTree = "<group>"; };
 		5CF5565C206BEC6800BC2461 /* sharemodule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sharemodule.m; sourceTree = "<group>"; };
+		5CFEC0C520BB900A00C12AD8 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		5CFEC10020BBD0CB00C12AD8 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6EF30546283147EE8A829544 /* Security.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -646,8 +646,8 @@
 		13B07FAE1A68108700A75B9A /* nofase */ = {
 			isa = PBXGroup;
 			children = (
-				5C14752D20B70A0300020AF7 /* index.ios.jsbundle */,
-				5CE55EE720B3FD1D003C853F /* assets */,
+				5CFEC10020BBD0CB00C12AD8 /* index.ios.jsbundle */,
+				5CFEC0C520BB900A00C12AD8 /* assets */,
 				5CB2737720A08D5200E076EB /* AlipaySDK.bundle */,
 				5C7478AB208DACBA002666A0 /* Wxapi */,
 				5C3C2B59208CBF3E0055BA88 /* nofase.entitlements */,
@@ -1433,9 +1433,9 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				5CB2737820A08D5200E076EB /* AlipaySDK.bundle in Resources */,
-				5CE55EE820B3FD1D003C853F /* assets in Resources */,
+				5CFEC0C620BB900A00C12AD8 /* assets in Resources */,
 				5CF5564B206BEB9300BC2461 /* UMSocialSDKResources.bundle in Resources */,
-				5C14752E20B70A0300020AF7 /* index.ios.jsbundle in Resources */,
+				5CFEC10120BBD0CB00C12AD8 /* index.ios.jsbundle in Resources */,
 				5CF5564E206BEB9300BC2461 /* UMSocialSDKPromptResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

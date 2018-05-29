@@ -3,11 +3,14 @@ import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 import moment from "moment";
 
+import { computeSize } from "src/common";
 import { Page, Button, Icon, DataView } from "src/components";
 import styles from "./style";
 import api from "src/api";
 import action from "src/action";
-const itemIcon = <Icon source={require("./img/u35.png")} size={24} />;
+const itemIcon = (
+  <Icon source={require("./img/u35.png")} size={computeSize(24)} />
+);
 export default class Transacion extends Component {
   static propTypes = {
     navigation: PropTypes.object
@@ -63,7 +66,9 @@ export default class Transacion extends Component {
             </View>
           }
           getData={this.getDiscountList}
-          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: computeSize(10) }} />
+          )}
           renderItem={({ item }) => this.renderItem(item)}
         />
       </View>
@@ -78,7 +83,9 @@ export default class Transacion extends Component {
         </View>
         <View style={styles.headerRight}>
           <Text style={styles.headerRightText}>即点即送</Text>
-          <Button style={styles.lookButton}>立即查看</Button>
+          {/*
+            <Button style={styles.lookButton}>立即查看</Button>
+            */}
         </View>
       </View>
     );
@@ -123,7 +130,7 @@ export default class Transacion extends Component {
         title="优惠卡包"
         LeftComponent={
           <Button onPress={this.back}>
-            <Icon size={20} source={require("./img/u6.png")} />
+            <Icon size={computeSize(20)} source={require("./img/u6.png")} />
           </Button>
         }
         headerStyle={{ backgroundColor: "#039deb" }}

@@ -1,3 +1,4 @@
+import { computeSize } from "src/common";
 export default {
   contianer: {
     flex: 1,
@@ -12,7 +13,7 @@ export default {
     height: "100%"
   },
   bgTop: {
-    height: 160,
+    height: computeSize(160),
     backgroundColor: "#1b9de6"
   },
   bgBottom: {
@@ -21,21 +22,21 @@ export default {
   },
   content: {
     flex: 1,
-    paddingLeft: 12,
-    paddingRight: 12,
-    paddingTop: 20
+    paddingLeft: computeSize(12),
+    paddingRight: computeSize(12),
+    paddingTop: computeSize(20)
   },
 
   banner: {
     width: "100%",
-    height: 180,
-    zIndex: 999,
-    marginBottom: 15
+    height: computeSize(180),
+    zIndex: computeSize(999),
+    marginBottom: computeSize(15)
   },
   item: {
-    height: 90,
-    paddingLeft: 12,
-    paddingRight: 12,
+    height: computeSize(90),
+    paddingLeft: computeSize(12),
+    paddingRight: computeSize(12),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -43,11 +44,11 @@ export default {
     borderRadius: 6
   },
   itemLeft: {},
-  itemTime: { color: "#777", fontSize: 14, lineHeight: 30 },
-  itemDetail: { color: "#777", fontSize: 14, lineHeight: 30 },
+  itemTime: { color: "#777", fontSize: computeSize(14), lineHeight: 30 },
+  itemDetail: { color: "#777", fontSize: computeSize(14), lineHeight: 30 },
   rightimg: {
     flexDirection: "row",
-    width: 50,
+    width: computeSize(50),
     justifyContent: "flex-end"
   },
   noData: {
@@ -61,7 +62,7 @@ export default {
     right: 0,
     flexDirection: "row",
     width: "100%",
-    height: 70,
+    height: computeSize(70),
     backgroundColor: "#fff"
   },
   shareBarItem: {
@@ -70,7 +71,7 @@ export default {
     alignItems: "center"
   },
   shareBarItemLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#1a9bfc"
   }
 };

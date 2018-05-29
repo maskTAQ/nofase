@@ -1,3 +1,4 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     flex: 1,
@@ -15,7 +16,7 @@ export default {
   },
   bgImg: {
     width: "100%",
-    height: 105,
+    height: computeSize(105),
     marginTop: -1,
     transform: [{ rotate: "180deg" }]
   },
@@ -28,39 +29,39 @@ export default {
     height: "100%"
   },
   BalanceWrapper: {
-    height: 100,
+    height: computeSize(100),
     justifyContent: "center",
     alignItems: "center"
   },
   balanceValue: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize: computeSize(16),
     color: "#0399e7"
   },
   balanceLabel: {
     textAlign: "center",
     width: "100%",
-    lineHeight: 45,
-    fontSize: 30,
+    lineHeight: computeSize(45),
+    fontSize: computeSize(30),
     color: "#0399e7"
   },
   consume: {
-    height: 60,
+    height: computeSize(60),
     backgroundColor: "#fff",
-    margin: 10,
-    padding: 40,
-    borderRadius: 10,
+    margin: computeSize(10),
+    padding: computeSize(40),
+    borderRadius: computeSize(10),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center"
   },
   consumeLabel: {
     color: "#0399e7",
-    fontSize: 20
+    fontSize: computeSize(20)
   },
   consumeValue: {
     color: "#0399e7",
-    fontSize: 20
+    fontSize: computeSize(20)
   },
   tabItemBorder: {
     width: 1,
@@ -70,7 +71,7 @@ export default {
   tabItemActiveBorder: {
     position: "absolute",
     width: "50%",
-    height: 3,
+    height: computeSize(3),
     backgroundColor: "#0a9ae4",
     bottom: 0
   },
@@ -81,15 +82,15 @@ export default {
   },
   list: {
     flex: 1,
-    padding: 10,
+    padding: computeSize(10),
     paddingBottom: 0
   },
   item: {
     justifyContent: "center",
     backgroundColor: "#fff",
-    height: 80,
-    padding: 10,
-    borderRadius: 10
+    height: computeSize(80),
+    padding: computeSize(10),
+    borderRadius: computeSize(10)
   },
   itemBottom: {
     flexDirection: "row",

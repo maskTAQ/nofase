@@ -1,4 +1,5 @@
 import { Platform } from "react-native";
+import { computeSize } from "src/common";
 const color = "#1b9cee";
 
 export default {
@@ -8,8 +9,8 @@ export default {
   },
   content: {
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10)
   },
   contentBg: {
     position: "absolute",
@@ -30,25 +31,25 @@ export default {
     height: "100%"
   },
   headerWrapper: {
-    paddingTop: 44,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 40
+    paddingTop: computeSize(44),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
+    paddingBottom: computeSize(40)
   },
   headerContent: {
     flexDirection: "row",
     alignItems: "flex-end"
   },
   portraitWrapper: {
-    borderRadius: 60,
-    marginRight: 16,
+    borderRadius: computeSize(60),
+    marginRight: computeSize(16),
     overflow: "hidden"
   },
   closeWrapper: {
     alignItems: "flex-end"
   },
   editIconButton: {
-    marginLeft: 8,
+    marginLeft: computeSize(8),
     justifyContent: "center"
   },
   headerContentRight: {
@@ -57,20 +58,20 @@ export default {
   },
   usernameWrapper: {
     flexDirection: "row",
-    height: 26,
+    height: computeSize(26),
     alignItems: "center"
   },
   username: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#fff"
   },
   userIdWrapper: {
     flexDirection: "row",
-    height: 20,
+    height: computeSize(20),
     alignItems: "center"
   },
   userId: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#fff"
   },
   lvWrapper: {
@@ -79,28 +80,28 @@ export default {
     position: "relative"
   },
   lvImg: {
-    marginLeft: 4,
-    width: 40,
+    marginLeft: computeSize(4),
+    width: computeSize(40),
     height: "100%"
   },
   lvLabel: {
     position: "absolute",
-    top: Platform.select({ ios: 8, android: 7 }),
-    left: 26,
-    fontSize: 12,
+    top: Platform.select({ ios: computeSize(8), android: 7 }),
+    left: computeSize(26),
+    fontSize: computeSize(12),
     fontWeight: "bold",
     color: "#fff"
   },
   list: {
-    marginTop: 24,
-    marginBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderRadius: 12,
+    marginTop: computeSize(24),
+    marginBottom: computeSize(10),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
+    borderRadius: computeSize(12),
     backgroundColor: "#46b6ec"
   },
   item: {
-    height: 40,
+    height: computeSize(40),
     justifyContent: "center",
     borderBottomWidth: 0.4,
     borderColor: "#fff"
@@ -112,26 +113,26 @@ export default {
     borderBottomWidth: 0
   },
   itemLabel: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color: "#fff"
   },
   accountContianer: {
-    marginTop: 10,
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 10,
+    marginTop: computeSize(10),
+    padding: computeSize(10),
+    marginBottom: computeSize(10),
+    borderRadius: computeSize(10),
     backgroundColor: "#fff"
   },
   accountTitleWrapper: {
-    height: 25,
+    height: computeSize(25),
     justifyContent: "center"
   },
   accountTitle: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     color
   },
   accountItem: {
-    height: 25,
+    height: computeSize(25),
     flexDirection: "row",
     alignItems: "center"
     //backgroundColor:'red'
@@ -142,18 +143,20 @@ export default {
     justifyContent: "flex-end"
   },
   itemButtonText: {
+    fontSize: computeSize(12),
     color: "#f8b84a"
   },
   accountItemText: {
-    marginRight: 10,
+    fontSize: computeSize(12),
+    marginRight: computeSize(10),
     color
   },
   button: {
-    marginTop: 12,
-    marginBottom: 41,
+    marginTop: computeSize(12),
+    marginBottom: computeSize(41),
     width: "100%",
-    height: 40,
-    borderRadius: 8,
+    height: computeSize(40),
+    borderRadius: computeSize(8),
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#4cb6ed"
@@ -170,14 +173,14 @@ export default {
   modalContianer: {
     width: "100%",
     borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
+    borderRadius: computeSize(8),
+    padding: computeSize(10),
 
     borderColor: "#157ffb",
     backgroundColor: "#fff"
   },
   modalItemWrapper: {
-    height: 36,
+    height: computeSize(36),
     alignItems: "center",
 
     flexDirection: "row",
@@ -187,7 +190,7 @@ export default {
   modalItemInput: {
     flex: 1,
     height: "100%",
-    paddingLeft: 15,
+    paddingLeft: computeSize(15),
     color: "#1b9cfe"
   },
   codeButotn: {
@@ -197,65 +200,65 @@ export default {
     backgroundColor: "#1b9cfe"
   },
   codeButotnText: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    fontSize: 14,
+    paddingLeft: computeSize(15),
+    paddingRight: computeSize(15),
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#fff"
   },
   sumbit: {
-    height: 40,
+    height: computeSize(40),
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
-    borderRadius: 8,
+    marginTop: computeSize(30),
+    borderRadius: computeSize(8),
     backgroundColor: "#1a9af7"
   },
   sumbitText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#fff"
   },
 
   modalTitle: {
-    fontSize: 18,
+    fontSize: computeSize(18),
     fontWeight: "bold",
     textAlign: "center",
     color: "#1b9cf0"
   },
   modalSubTitle: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: computeSize(14),
+    lineHeight: computeSize(20),
     color: "#ccc",
     textAlign: "center"
   },
   modalInputWrapper: {
-    height: 60,
-    padding: 10,
-    paddingLeft: 15,
-    paddingRight: 15
+    height: computeSize(60),
+    padding: computeSize(10),
+    paddingLeft: computeSize(15),
+    paddingRight: computeSize(15)
   },
   modalInput: {
     flex: 1,
     borderWidth: 1,
     borderColor: "#1b9cf0",
-    borderRadius: 6,
+    borderRadius: computeSize(6),
     color: "#333",
-    paddingLeft: 10
+    paddingLeft: computeSize(10)
   },
   modalButtonGroupWrapper: {
-    height: 76,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
-    paddingBottom: 20
+    height: computeSize(76),
+    paddingLeft: computeSize(20),
+    paddingRight: computeSize(20),
+    paddingTop: computeSize(10),
+    paddingBottom: computeSize(20)
   },
   modalButtonGroup: {
     flexDirection: "row",
     flex: 1,
     borderWidth: 1,
     borderColor: "#1b9cf0",
-    borderRadius: 12,
+    borderRadius: computeSize(12),
     overflow: "hidden"
   },
   modalCancelButton: {
@@ -264,13 +267,13 @@ export default {
     alignItems: "center"
   },
   modalCompleteButton: {
-    flex: 3,
+    flex: computeSize(3),
     backgroundColor: "#1b9cf0",
     justifyContent: "center",
     alignItems: "center"
   },
   modalButtonText: {
-    fontSize: 16,
+    fontSize: computeSize(16),
     fontWeight: "bold"
   }
 };

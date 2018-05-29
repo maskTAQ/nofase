@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import styles from "./style";
+import { computeSize } from "src/common";
 import { Button, Icon } from "src/components";
 import action from "src/action";
 
@@ -30,7 +31,7 @@ export default class ToggleButton extends Component {
     };
     const bottom = {
       unfold: 0,
-      packUp: -58
+      packUp: computeSize(-58)
     };
     const { status } = this.state;
     return (
@@ -43,23 +44,23 @@ export default class ToggleButton extends Component {
         <View style={styles.wrapper}>
           <Button onPress={this.toggle} style={styles.toggleButton}>
             <Icon
-              size={30}
+              size={computeSize(30)}
               source={require("./img/arrow.png")}
               style={{ transform: [{ rotate: arrow[status] }] }}
             />
           </Button>
           <View style={styles.buttonGroup}>
             <Button style={styles.buttonLeft} onPress={() => this.go("User")}>
-              <Icon size={36} source={require("./img/user.png")} />
+              <Icon size={computeSize(36)} source={require("./img/user.png")} />
             </Button>
             <Button style={styles.buttonCenter} onPress={() => this.go("Pay")}>
-              <Icon size={50} source={require("./img/code.png")} />
+              <Icon size={computeSize(50)} source={require("./img/code.png")} />
             </Button>
             <Button
               style={styles.buttonRight}
               onPress={() => this.go("Activity")}
             >
-              <Icon size={36} source={require("./img/run.png")} />
+              <Icon size={computeSize(36)} source={require("./img/run.png")} />
             </Button>
           </View>
         </View>

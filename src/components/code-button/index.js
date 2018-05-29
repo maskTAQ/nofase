@@ -2,27 +2,28 @@ import React, { Component } from "react";
 import { View, ActivityIndicator } from "react-native";
 import PropTypes from "prop-types";
 
+import { computeSize } from "src/common";
 import { Button } from "src/components";
 import { Tip } from "src/common";
 import api from "src/api";
 
 const styles = {
   codeButton: {
-    width: 100,
+    width: computeSize(100),
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4
+    borderTopLeftRadius: computeSize(4),
+    borderTopRightRadius: computeSize(4)
   },
   codeButtonText: {
-    fontSize: 14,
+    fontSize: computeSize(14),
     fontWeight: "bold",
     color: "#1a98e0"
   },
   loading: {
-    width: 90
+    width: computeSize(90)
   }
 };
 export default class CodeButton extends Component {

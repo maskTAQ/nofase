@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 
+import { computeSize } from "src/common";
 import { Alert, Icon, Button } from "src/components";
 import action from "src/action";
 import styles from "./style";
@@ -45,13 +46,13 @@ const ShareModal = ({
               <View style={styles.userInfoWrapper}>
                 <View
                   style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 60,
+                    width: computeSize(60),
+                    height: computeSize(60),
+                    borderRadius: computeSize(60),
                     overflow: "hidden"
                   }}
                 >
-                  <Icon size={60} source={portrait} />
+                  <Icon size={computeSize(60)} source={portrait} />
                 </View>
                 <View style={styles.usernameWrapper}>
                   <Text style={styles.username}>{username}</Text>
@@ -65,7 +66,10 @@ const ShareModal = ({
                 </View>
               </View>
               <Button onPress={close} style={styles.closeWrapper}>
-                <Icon size={28} source={require("./img/u78.png")} />
+                <Icon
+                  size={computeSize(28)}
+                  source={require("./img/u78.png")}
+                />
               </Button>
             </View>
             <View style={styles.centerContainer}>
@@ -88,7 +92,7 @@ const ShareModal = ({
             </View>
             <View style={styles.storeInfo}>
               <View style={styles.storeImgWrapper}>
-                <Icon size={70} source={storeImg} />
+                <Icon size={computeSize(70)} source={storeImg} />
                 {people && (
                   <View style={styles.storePeople}>
                     <Text style={styles.storePeopleText}>剩{people}位</Text>
@@ -109,8 +113,11 @@ const ShareModal = ({
                         "$1..."
                       )}
                     </Text>
-                    <View style={{ width: 14 }}>
-                      <Icon size={14} source={require("./img/u79.png")} />
+                    <View style={{ width: computeSize(14) }}>
+                      <Icon
+                        size={computeSize(14)}
+                        source={require("./img/u79.png")}
+                      />
                     </View>
                   </Button>
                 </View>
@@ -128,7 +135,10 @@ const ShareModal = ({
                       }}
                       style={styles.navgation}
                     >
-                      <Icon size={18} source={require("./img/nav.png")} />
+                      <Icon
+                        size={computeSize(18)}
+                        source={require("./img/nav.png")}
+                      />
                       <Text style={styles.navgationText}>导航</Text>
                     </Button>
                   )}

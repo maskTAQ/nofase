@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import styles from "./style";
 import { Icon } from "src/components";
+import { computeSize } from "src/common";
 
 const selectedImg = require("./img/selected.png");
 const unSelectImg = require("./img/unSelect.png");
@@ -65,7 +66,7 @@ const CheckBox = ({
               )
             ) : (
               <Icon
-                size={20}
+                size={computeSize(20)}
                 source={isActive ? selectedImg : unSelectImg}
                 style={[styles.icon, iconStyle]}
               />

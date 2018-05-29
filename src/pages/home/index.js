@@ -7,6 +7,7 @@ import { Geolocation } from "react-native-baidu-map";
 import api from "src/api";
 import action from "src/action";
 import { version } from "src/config";
+import { computeSize } from "src/common";
 import { UpdateModal } from "src/components";
 import styles from "./style";
 
@@ -25,7 +26,9 @@ import {
 
 const Height = () => <View style={{ height: 10 }} />;
 
-const StoreImgIcon = <Icon size={82} source={require("./img/logo.png")} />;
+const StoreImgIcon = (
+  <Icon size={computeSize(82)} source={require("./img/logo.png")} />
+);
 @connect(state => {
   const { auth: { UserId } } = state;
   return { UserId };
@@ -263,7 +266,7 @@ export default class Home extends Component {
               this.togglePattern("list");
             }}
           >
-            <Icon size={20} source={require("./img/list.png")} />
+            <Icon size={computeSize(20)} source={require("./img/list.png")} />
           </Button>
         }
         RightComponent={
@@ -272,7 +275,7 @@ export default class Home extends Component {
               this.togglePattern("list");
             }}
           >
-            <Icon size={16} source={require("./img/search.png")} />
+            <Icon size={computeSize(16)} source={require("./img/search.png")} />
           </Button>
         }
       >
@@ -332,7 +335,7 @@ export default class Home extends Component {
                 labelStyle={styles.checkboxItemLabel}
                 selectedComponent={
                   <Icon
-                    size={20}
+                    size={computeSize(20)}
                     source={require("./img/selected.png")}
                     style={styles.checkboxItemIcon}
                   />
@@ -367,7 +370,7 @@ export default class Home extends Component {
                 labelStyle={styles.checkboxItemLabel}
                 selectedComponent={
                   <Icon
-                    size={20}
+                    size={computeSize(20)}
                     source={require("./img/selected.png")}
                     style={styles.checkboxItemIcon}
                   />
@@ -399,7 +402,7 @@ export default class Home extends Component {
               labelStyle={styles.checkboxItemLabel}
               selectedComponent={
                 <Icon
-                  size={20}
+                  size={computeSize(20)}
                   source={require("./img/selected.png")}
                   style={styles.checkboxItemIcon}
                 />
@@ -470,7 +473,7 @@ export default class Home extends Component {
             >
               <Text style={styles.chooseItemText}>{label}</Text>
               <Icon
-                size={10}
+                size={computeSize(10)}
                 source={iconSource}
                 iconStyle={{
                   transform: [{ rotate: isActive ? "90deg" : "270deg" }]
@@ -511,7 +514,7 @@ export default class Home extends Component {
         <View style={styles.searchContainer}>
           <View style={styles.searchInputWrapper}>
             <Icon
-              size={20}
+              size={computeSize(20)}
               source={require("./img/search_list.png")}
               style={[
                 styles.searchInputIcon,
@@ -553,7 +556,7 @@ export default class Home extends Component {
       PeopleNum
     } = row;
     const icon = (StoreImg || "").includes("https") ? (
-      <Icon size={82} source={{ uri: StoreImg }} />
+      <Icon size={computeSize(82)} source={{ uri: StoreImg }} />
     ) : (
       StoreImgIcon
     );
@@ -575,7 +578,10 @@ export default class Home extends Component {
                 <Text style={styles.lessionText}>
                   课程:{NowCurriculum || "暂无"}
                 </Text>
-                <Icon size={20} source={require("./img/right.png")} />
+                <Icon
+                  size={computeSize(20)}
+                  source={require("./img/right.png")}
+                />
               </View>
             </View>
             <View style={[styles.itemDetailBottom]}>
@@ -587,7 +593,10 @@ export default class Home extends Component {
                 onPress={() => this.navgation(row)}
                 style={styles.navgationButton}
               >
-                <Icon size={16} source={require("./img/natvgation.png")} />
+                <Icon
+                  size={computeSize(16)}
+                  source={require("./img/natvgation.png")}
+                />
                 <Text style={styles.navgationText}>导航</Text>
               </Button>
             </View>
@@ -634,7 +643,7 @@ export default class Home extends Component {
               this.togglePattern("map");
             }}
           >
-            <Icon size={20} source={require("./img/map.png")} />
+            <Icon size={computeSize(20)} source={require("./img/map.png")} />
           </Button>
         }
         // RightComponent={

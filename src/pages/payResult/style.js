@@ -1,18 +1,19 @@
+import { computeSize } from "src/common";
 export default {
   container: {
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
     backgroundColor: "#f9f9f9"
   },
   wrapper: {
-    marginTop: 6,
-    paddingTop: 30,
+    marginTop: computeSize(6),
+    paddingTop: computeSize(30),
     alignItems: "center",
     backgroundColor: "#fff"
   },
   notTitlewrapper: {
-    height: 60,
+    height: computeSize(60),
     justifyContent: "center",
     alignItems: "center"
   },
@@ -27,6 +28,6 @@ export default {
   },
   itemValue: {
     color: "#333333",
-    lineHeight: 35
+    lineHeight: computeSize(35)
   }
 };

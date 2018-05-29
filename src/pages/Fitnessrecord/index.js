@@ -9,7 +9,8 @@ import api from "src/api";
 import action from "src/action";
 import { Button, Icon, Page, ShareModal, DataView } from "src/components";
 import styles from "./style";
-("");
+import { computeSize } from "src/common";
+
 @connect()
 export default class Fitnessrecord extends Component {
   static propTypes = {
@@ -64,7 +65,7 @@ export default class Fitnessrecord extends Component {
         </View>
         <View style={styles.itemRight}>
           <Icon
-            size={20}
+            size={computeSize(20)}
             source={require("./img/jiantou.png")}
             style={styles.rightimg}
           />
@@ -82,7 +83,9 @@ export default class Fitnessrecord extends Component {
             <Text>您还没有运动记录</Text>
           </View>
         }
-        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        ItemSeparatorComponent={() => (
+          <View style={{ height: computeSize(10) }} />
+        )}
         renderItem={({ item }) => this.renderItem(item)}
       />
     );
@@ -157,7 +160,7 @@ export default class Fitnessrecord extends Component {
               style={styles.shareBarItem}
               key={label}
             >
-              <Icon size={40} source={icon} />
+              <Icon size={computeSize(40)} source={icon} />
               <Text style={styles.shareBarItemLabel}>{label}</Text>
             </Button>
           );
@@ -206,7 +209,7 @@ export default class Fitnessrecord extends Component {
               Lat={Lat}
               Lng={Lng}
               username={NickName}
-              people={Number(PeopleNum) - NowInPeopel}
+              people={String(Number(PeopleNum) - NowInPeopel)}
               portrait={
                 UserPhoto ? { uri: UserPhoto } : require("./img/logo.png")
               }

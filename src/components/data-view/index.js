@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import PropTypes from "prop-types";
 
+import { computeSize } from "src/common";
 import styles from "./style";
 export default class DataView extends Component {
   static defaultProps = {
@@ -194,7 +195,10 @@ export default class DataView extends Component {
             size="small"
             key="ActivityIndicator"
           />,
-          <Text key="label" style={[styles.text, { marginLeft: 6 }]}>
+          <Text
+            key="label"
+            style={[styles.text, { marginLeft: computeSize(6) }]}
+          >
             正在加载数据中...
           </Text>
         ];
