@@ -340,6 +340,7 @@ export default class User extends Component {
               api
                 .setUserInfo({ Photo: content })
                 .then(res => {
+                  this.getUserInfo();
                   this.setState({
                     Photo: "data:image/png;base64," + content
                   });
