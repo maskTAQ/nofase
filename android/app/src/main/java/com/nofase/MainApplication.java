@@ -3,6 +3,8 @@ package com.nofase;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
+import com.rnfs.RNFSPackage;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -49,7 +51,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new SharePackage(), new AlipayPackage(),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new ImagePickerPackage(),
+            new RNFSPackage(), new SharePackage(), new AlipayPackage(),
           new RNWebViewPackage(), new WxpayPackage(), new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),new BaiduMapPackage(getApplicationContext()));
     }
 

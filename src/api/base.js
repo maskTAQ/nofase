@@ -103,7 +103,7 @@ const requestWrapper = (url, param = {}) => {
     baseURL: baseURL,
     url,
     method: "post",
-    timeout: 6000,
+    timeout: 60000,
     data: Object.assign(param, { UserId })
   });
 };

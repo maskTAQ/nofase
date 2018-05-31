@@ -11,10 +11,12 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import ImagePicker from "react-native-image-picker";
+import RNFS from "react-native-fs";
 
 import api from "src/api";
-import { computeSize } from "src/common";
-import { uniqueLoginWebsocket } from "../../common/websocket";
+import { computeSize, WebSocket } from "src/common";
+
 import {
   Button,
   Icon,
@@ -302,7 +304,8 @@ export default class User extends Component {
   state = {
     isModifMobileVisible: false,
     isModifUserNameVisible: false,
-    verifySetp: 0
+    verifySetp: 0,
+    Photo: ""
   };
   componentWillMount = async () => {
     const { hasData } = this.props.userInfo;
@@ -312,6 +315,48 @@ export default class User extends Component {
     const isRemind = await this.getRemind();
     this.setState({
       isRemind
+    });
+  };
+  upPortrait = () => {
+    const options = {
+      title: "选择头像",
+      cancelButtonTitle: "取消",
+      takePhotoButtonTitle: "拍照",
+      chooseFromLibraryButtonTitle: "从相册选取",
+      mediaType: "photo",
+      quality: 0.1
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      const { didCancel, error, uri } = response;
+      switch (true) {
+        case !!error:
+          Tip.fail(error);
+          break;
+        case !!uri:
+          Tip.loading("图片解码中");
+          RNFS.readFile(uri, "base64")
+            .then(content => {
+              api
+                .setUserInfo({ Photo: content })
+                .then(res => {
+                  this.setState({
+                    Photo: "data:image/png;base64," + content
+                  });
+                })
+                .catch(err => {
+                  Tip.fail(`头像上传失败:${err}`);
+                });
+            })
+            .catch(err => {
+              Tip.fail(`头像上传失败:${err}`);
+            });
+          this.setState({ portraitSource: { uri } });
+          break;
+        case !!didCancel:
+        default:
+          break;
+      }
     });
   };
   getRemind = async () => {
@@ -375,7 +420,7 @@ export default class User extends Component {
   };
   logout = () => {
     this.props.navigation.dispatch(action.logout());
-    uniqueLoginWebsocket().then(ws => {
+    WebSocket.uniqueLoginWebsocket().then(ws => {
       ws.send(this.props.UserId + "#out");
     });
     this.props.navigation.dispatch({
@@ -391,7 +436,8 @@ export default class User extends Component {
       Level = "-",
       Photo
     } = this.props.userInfo;
-
+    const { Photo: newPhoto } = this.state;
+    const usedPhotoUri = newPhoto || Photo;
     return (
       <View style={styles.header}>
         <Image
@@ -406,17 +452,11 @@ export default class User extends Component {
             </Button>
           </View>
           <View style={styles.headerContent}>
-            <Button
-              style={styles.portraitWrapper}
-              onPress={() => {
-                this.props.navigation.dispatch(
-                  action.navigate.go({ routeName: "UpPortrait" })
-                );
-              }}
-            >
+            <Button style={styles.portraitWrapper} onPress={this.upPortrait}>
               <Icon
                 size={computeSize(60)}
-                source={Photo ? { uri: Photo } : portraitSource}
+                key={usedPhotoUri || portraitSource}
+                source={usedPhotoUri ? { uri: usedPhotoUri } : portraitSource}
               />
             </Button>
             <View style={styles.headerContentRight}>
