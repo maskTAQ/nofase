@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image, StatusBar } from "react-native";
+import { View, Image, StatusBar, AsyncStorage } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -47,6 +47,7 @@ export default class WxBind extends Component {
       .then(res => {
         // Tip.success("绑定成功");
         // this.props.navigation.dispatch(action.navigate.back());
+        AsyncStorage.setItem("mobile", res.Tel);
         this.props.navigation.dispatch(action.login(res));
         this.props.navigation.dispatch(
           action.navigate.go({ routeName: "Home" })

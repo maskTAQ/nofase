@@ -126,7 +126,7 @@ export default {
     backgroundColor: "#fff"
   },
   remarksLabelWrapper: {
-    height: computeSize(24),
+    height: computeSize(40),
     paddingLeft: computeSize(6),
 
     justifyContent: "center"
@@ -140,7 +140,7 @@ export default {
     fontWeight: "bold"
   },
   remarksValue: {
-    fontSize: computeSize(12),
+    fontSize: computeSize(14),
     paddingLeft: computeSize(6),
     lineHeight: computeSize(20),
     color: "#bfbfbf"

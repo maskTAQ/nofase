@@ -29,7 +29,11 @@ const styles = {
 export default class CodeButton extends Component {
   static propTypes = {
     phone: PropTypes.string,
-    isLogin: PropTypes.bool
+    isLogin: PropTypes.bool,
+    requestCodeFail: PropTypes.func
+  };
+  static defaultProps = {
+    requestCodeFail: () => {}
   };
   state = {
     isRequestSmscode: false,
@@ -75,7 +79,7 @@ export default class CodeButton extends Component {
   getCode = () => {
     const { isCan } = this.state;
     const { phone, isLogin = false } = this.props;
-    if (isCan && /^1[3|4|5|7/8/9][0-9]\d{4,8}$/.test(phone)) {
+    if (isCan && phone.length === 11) {
       this.setState({ isRequestSmscode: true });
       api
         .sendCode(phone, isLogin)
@@ -92,11 +96,12 @@ export default class CodeButton extends Component {
           this.isGetCode = true;
         })
         .catch(e => {
+          this.props.requestCodeFail(e);
           this.setState({ isRequestSmscode: false });
           Tip.fail(`验证码发送失败:${e}`);
         });
     } else {
-      if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone)) {
+      if (phone.length !== 11) {
         Tip.fail("请输入正确的手机号");
       } else if (!phone) {
         Tip.fail("请输入手机号");

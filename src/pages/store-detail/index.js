@@ -19,13 +19,14 @@ import action from "src/action";
 import { Tip, share } from "src/common";
 
 @connect(state => {
-  const { auth: { UserId } } = state;
-  return { UserId };
+  const { auth: { UserId }, location } = state;
+  return { UserId, location };
 })
 export default class StoreDetail extends Component {
   static propTypes = {
     navigation: PropTypes.object,
-    UserId: PropTypes.number
+    UserId: PropTypes.number,
+    location: PropTypes.object
   };
   state = {
     isLoadingStoreImg: true,
@@ -236,12 +237,20 @@ export default class StoreDetail extends Component {
   };
   navgation = () => {
     const { Lat, Lng } = this.state;
-    this.props.navigation.dispatch(
-      action.navigate.go({
-        routeName: "Navigation",
-        params: { Lat, Lng }
-      })
+    const { userLat, userLng } = this.props.location;
+    console.log(
+      `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
     );
+    Linking.openURL(
+      `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
+    ).catch(e => {
+      this.props.navigation.dispatch(
+        action.navigate.go({
+          routeName: "Navigation",
+          params: { Lat, Lng, userLat, userLng }
+        })
+      );
+    });
   };
   renderShareBar() {
     const { isShareBarVisible } = this.state;

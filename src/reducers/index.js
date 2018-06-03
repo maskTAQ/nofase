@@ -7,10 +7,10 @@ const appReducer = combineReducers({
   auth: (state = {}, action) => {
     const { type, payload } = action;
     if (type === actionMap.LOGIN) {
-      AsyncStorage.removeItem("mobile");
       return { ...state, isLogin: true, ...payload };
     }
     if (type === actionMap.LOGOUT) {
+      AsyncStorage.removeItem("mobile");
       return { ...state, isLogin: false, ...payload };
     }
     return state;
@@ -24,6 +24,13 @@ const appReducer = combineReducers({
 
     if (type === "userInfo_reset") {
       return { hasData: false };
+    }
+    return state;
+  },
+  location: (state = {}, action) => {
+    const { type, payload } = action;
+    if (type === "location") {
+      return { ...payload };
     }
     return state;
   }

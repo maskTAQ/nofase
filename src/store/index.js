@@ -17,7 +17,8 @@ const initStore = {
   },
   userInfo: {
     hasData: false
-  }
+  },
+  location: {}
 };
 
 const asyncDispetch = store => next => action => {

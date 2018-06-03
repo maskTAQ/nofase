@@ -39,6 +39,7 @@ export default class Login extends Component {
     // if (!this.codeRef.isGetCode) {
     //   return Tip.fail("请先获取验证码");
     // }
+
     api
       .login({ Tel: phone, ExCode: code })
       .then(res => {
@@ -49,12 +50,7 @@ export default class Login extends Component {
         AsyncStorage.setItem("mobile", phone);
       })
       .catch(e => {
-        if (e === "用户未注册") {
-          this.props.navigation.dispatch(
-            action.navigate.go({ routeName: "Register" })
-          );
-        }
-        Tip.fail(e);
+        console.log(e);
       });
   };
 
@@ -69,6 +65,7 @@ export default class Login extends Component {
         api
           .WxLogin(res.userId)
           .then(res => {
+            console.log(res, "addad");
             AsyncStorage.setItem("mobile", res.Tel || "");
             this.props.navigation.dispatch(action.login(res));
             this.props.navigation.dispatch(
@@ -76,13 +73,7 @@ export default class Login extends Component {
             );
           })
           .catch(e => {
-            if (e === "用户未注册") {
-              this.props.navigation.dispatch(
-                action.navigate.go({ routeName: "WxBind", params: res })
-              );
-            } else {
-              Tip.fail(e);
-            }
+            Tip.fail(e);
           });
       })
       .catch(e => {
@@ -142,6 +133,13 @@ export default class Login extends Component {
                 isLogin={true}
                 phone={phone}
                 loading={false}
+                requestCodeFail={e => {
+                  if (e === "用户未注册") {
+                    this.props.navigation.dispatch(
+                      action.navigate.go({ routeName: "Register" })
+                    );
+                  }
+                }}
               >
                 验证码
               </CodeButton>

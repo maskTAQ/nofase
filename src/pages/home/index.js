@@ -134,9 +134,12 @@ export default class Home extends Component {
   }
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
-    console.log(location);
     if (location.userLat > 0 && location.userLat < 200 && !this.location) {
       this.location = location;
+      this.props.navigation.dispatch({
+        type: "location",
+        payload: location
+      });
     }
 
     const {
@@ -249,12 +252,16 @@ export default class Home extends Component {
   navgation = data => {
     const { Lat, Lng } = data;
     const { userLat, userLng } = this.location;
-    this.props.navigation.dispatch(
-      action.navigate.go({
-        routeName: "Navigation",
-        params: { Lat, Lng, userLat, userLng }
-      })
-    );
+    Linking.openURL(
+      `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
+    ).catch(e => {
+      this.props.navigation.dispatch(
+        action.navigate.go({
+          routeName: "Navigation",
+          params: { Lat, Lng, userLat, userLng }
+        })
+      );
+    });
   };
   renderMapPattern = () => {
     return (

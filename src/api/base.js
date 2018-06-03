@@ -133,6 +133,7 @@ const post = (
           if (handleCatch) {
             Tip.fail(`${message || "未知错误"}`);
           }
+          console.log(message, "message");
           return reject(message);
         }
       })
@@ -151,7 +152,7 @@ const post = (
             )}`
           );
         }
-        return reject(String(e || "未知错误"));
+        return reject(String(e.message || "未知错误"));
       });
   });
 };

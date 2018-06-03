@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Linking } from "react-native";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import { computeSize } from "src/common";
 import { Alert, Icon, Button } from "src/components";
 import action from "src/action";
 import styles from "./style";
+
 const ShareModal = ({
   close,
   portraitSource = require("./img/u196.png"),
@@ -27,7 +29,8 @@ const ShareModal = ({
   goStoreDetail,
   Lat,
   Lng,
-  people
+  people,
+  location
 }) => {
   return (
     <Alert style={{ flex: 1 }} isVisible={isVisible} close={close}>
@@ -126,6 +129,17 @@ const ShareModal = ({
                   {Lat && (
                     <Button
                       onPress={() => {
+                        const { userLat, userLng } = this.props.location;
+                        Linking.openURL(
+                          `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
+                        ).catch(e => {
+                          this.props.navigation.dispatch(
+                            action.navigate.go({
+                              routeName: "Navigation",
+                              params: { Lat, Lng, userLat, userLng }
+                            })
+                          );
+                        });
                         this.props.navigation.dispatch(
                           action.navigate.go({
                             routeName: "Navigation",
@@ -181,6 +195,7 @@ ShareModal.propTypes = {
   goStoreDetail: PropTypes.func,
   Lat: PropTypes.number,
   Lng: PropTypes.number,
-  people: PropTypes.number
+  people: PropTypes.number,
+  location: PropTypes.object
 };
-export default ShareModal;
+export default connect(({ location }) => ({ location }))(ShareModal);
