@@ -7,7 +7,7 @@ import { Geolocation } from "react-native-baidu-map";
 import api from "src/api";
 import action from "src/action";
 import { version } from "src/config";
-import { computeSize } from "src/common";
+import { computeSize, Tip } from "src/common";
 import { UpdateModal } from "src/components";
 import styles from "./style";
 
@@ -58,6 +58,7 @@ export default class Home extends Component {
     this.getNewApp();
     //this.configPush();
   }
+  location = {};
   getNewApp() {
     api
       .getNewApp({
@@ -140,6 +141,10 @@ export default class Home extends Component {
         type: "location",
         payload: location
       });
+    } else {
+      this.getCurrentPosition().then(l => {
+        this.location = l;
+      });
     }
 
     const {
@@ -176,7 +181,7 @@ export default class Home extends Component {
         ...location
       });
     }
-
+    console.log(params);
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
@@ -225,6 +230,7 @@ export default class Home extends Component {
         });
       })
       .catch(e => {
+        Tip.fail("获取位置失败,请确保已于app定位权限");
         return Promise.resolve({
           userLat: "",
           userLng: ""
@@ -648,7 +654,11 @@ export default class Home extends Component {
         LeftComponent={
           <Button
             onPress={() => {
-              this.togglePattern("map");
+              if (this.location.userLat) {
+                this.togglePattern("map");
+              } else {
+                Tip.fail("请稍后查看哦，正在获取位置");
+              }
             }}
           >
             <Icon size={computeSize(20)} source={require("./img/map.png")} />

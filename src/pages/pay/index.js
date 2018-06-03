@@ -537,7 +537,7 @@ export default class Pay extends Component {
                 {this.renderHeader()}
                 {this.renderCommon([
                   ["Per hour", "每一小时"],
-                  ["Cost", `￥:(+Charge).toFixed(1)}元`]
+                  ["Cost", `￥:${(+Charge).toFixed(1)}元`]
                 ])}
                 {this.renderCommon([
                   ["Charge", "收费"],

@@ -26,20 +26,21 @@ export default class Fitnessrecord extends Component {
   getUserOrderList(PageIndex) {
     return api.getUserOrderList({ PageIndex, PageNum: 20 });
   }
-  getTimeByMinutes(minutes) {
-    const pad = s => {
-      if (String(s).length === 1) {
-        return "0" + s;
-      } else {
-        return s;
-      }
-    };
-    const t = minutes * 60 / 1000;
+
+  getDateByMinute(minute) {
+    // const pad = s => {
+    //   if (String(s).length === 1) {
+    //     return "0" + s;
+    //   } else {
+    //     return s;
+    //   }
+    // };
+    const t = minute * 60;
     const d = Math.floor(t / (24 * 3600));
     const h = Math.floor((t - 24 * 3600 * d) / 3600);
     const m = Math.floor((t - 24 * 3600 * d - h * 3600) / 60);
     //const s = Math.floor(t - 24 * 3600 * d - h * 3600 - m * 60);
-    return `${pad(h)}:${pad(m)}`;
+    return `${h}小时${m}分钟`;
   }
   renderItem(row) {
     const { StoreName, Amont = 0, SDate } = row;
@@ -141,7 +142,7 @@ export default class Fitnessrecord extends Component {
                 } = this.state.currentOrder;
                 share({
                   title: "NoFace没脸运动 记录好身材！",
-                  content: `${UserName}在共享运动联盟店${StoreName}中锻炼了${this.getTimeByMinutes(
+                  content: `${UserName}在共享运动联盟店${StoreName}中锻炼了${this.getDateByMinute(
                     TimeLong
                   )}并爱上了流汗的滋味。`,
                   url: "https://vmslq.cn/",
@@ -217,7 +218,7 @@ export default class Fitnessrecord extends Component {
                 StoreImg ? { uri: StoreImg } : require("./img/logo.png")
               }
               level={Level}
-              time={this.getTimeByMinutes(TimeLong)}
+              time={this.getDateByMinute(TimeLong)}
               money={Amont}
               discount={Amont - SaleAmont}
               storeName={StoreName}
