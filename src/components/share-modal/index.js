@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, Linking } from "react-native";
+import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -130,20 +130,15 @@ const ShareModal = ({
                     <Button
                       onPress={() => {
                         const { userLat, userLng } = this.props.location;
-                        Linking.openURL(
-                          `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-                        ).catch(e => {
-                          this.props.navigation.dispatch(
-                            action.navigate.go({
-                              routeName: "Navigation",
-                              params: { Lat, Lng, userLat, userLng }
-                            })
-                          );
-                        });
+                        // Linking.openURL(
+                        //   `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
+                        // ).catch(e => {
+
+                        // });
                         this.props.navigation.dispatch(
                           action.navigate.go({
                             routeName: "Navigation",
-                            params: { Lat, Lng }
+                            params: { Lat, Lng, userLat, userLng }
                           })
                         );
                       }}

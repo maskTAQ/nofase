@@ -14,11 +14,18 @@ export default class LoadingImage extends Component {
     pending: true,
     status: "" //emua {'success','error'}
   };
+
   shouldComponentUpdate(nextProps, nextState) {
     const { status } = this.state;
+    const { successTimes, errorTimes } = this.store;
     const { status: nextStatus } = nextState;
-    return status !== nextStatus;
+
+    return status !== nextStatus && successTimes < 2 && errorTimes < 2;
   }
+  store = {
+    successTimes: 0,
+    errorTimes: 0
+  };
   renderImageIcon() {
     const { style, source } = this.props;
     const { pending, status } = this.state;
@@ -36,12 +43,14 @@ export default class LoadingImage extends Component {
           style={[styles.imageIcon, style]}
           resizeMode="stretch"
           onError={() => {
+            this.store.errorTimes = this.store.errorTimes + 1;
             this.setState({
               pending: false,
               status: "error"
             });
           }}
           onLoad={() => {
+            this.store.successTimes = this.store.successTimes + 1;
             this.setState({
               pending: false,
               status: "success"

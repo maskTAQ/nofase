@@ -252,16 +252,17 @@ export default class Home extends Component {
   navgation = data => {
     const { Lat, Lng } = data;
     const { userLat, userLng } = this.location;
-    Linking.openURL(
-      `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-    ).catch(e => {
-      this.props.navigation.dispatch(
-        action.navigate.go({
-          routeName: "Navigation",
-          params: { Lat, Lng, userLat, userLng }
-        })
-      );
-    });
+    // Linking.openURL(
+    //   `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
+    // ).catch(e => {
+
+    // });
+    this.props.navigation.dispatch(
+      action.navigate.go({
+        routeName: "Navigation",
+        params: { Lat, Lng, userLat, userLng }
+      })
+    );
   };
   renderMapPattern = () => {
     return (

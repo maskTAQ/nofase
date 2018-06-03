@@ -1,10 +1,11 @@
 <manifest 
-    xmlns:android="http://schemas.android.com/apk/res/android" package="com.nofase" android:versionCode="1.7.7" android:versionName="1.7.7">
+    xmlns:android="http://schemas.android.com/apk/res/android" package="com.nofase" android:versionCode="1.7.8" android:versionName="1.7.8">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -25,6 +26,8 @@
     <meta-data
         android:name="JPUSH_APPKEY"
         android:value="${JPUSH_APPKEY}" />
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="YRq23QwHgkOUbGeSxYwH9IOkSHG5QgMo"/>
+
     <meta-data
         android:name="JPUSH_CHANNEL"
         android:value="${APP_CHANNEL}" />

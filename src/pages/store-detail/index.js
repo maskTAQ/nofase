@@ -241,16 +241,17 @@ export default class StoreDetail extends Component {
     console.log(
       `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
     );
-    Linking.openURL(
-      `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-    ).catch(e => {
-      this.props.navigation.dispatch(
-        action.navigate.go({
-          routeName: "Navigation",
-          params: { Lat, Lng, userLat, userLng }
-        })
-      );
-    });
+    // Linking.openURL(
+    //   `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
+    // ).catch(e => {
+
+    // });
+    this.props.navigation.dispatch(
+      action.navigate.go({
+        routeName: "Navigation",
+        params: { Lat, Lng, userLat, userLng }
+      })
+    );
   };
   renderShareBar() {
     const { isShareBarVisible } = this.state;
