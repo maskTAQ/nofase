@@ -70,7 +70,7 @@ export default class Header extends Component {
           barStyle={barStyleObj.barStyle}
         />
         <View style={styles.navigationContainer}>
-          <View style={styles.item}>
+          <View style={[styles.item, styles.leftItem]}>
             {LeftComponent ||
               Left(function() {
                 if (onLeftPress) {
@@ -83,7 +83,7 @@ export default class Header extends Component {
           <View style={styles.title}>
             {titleComponent || renderTitle(title, titleStyle)}
           </View>
-          <View style={styles.item}>{RightComponent}</View>
+          <View style={[styles.item, styles.rightItem]}>{RightComponent}</View>
         </View>
       </View>
     );

@@ -10,9 +10,16 @@ export default {
     flexDirection: "row"
   },
   item: {
-    width: computeSize(42),
-    justifyContent: "center",
-    alignItems: "center"
+    width: 80,
+    justifyContent: "center"
+  },
+  leftItem: {
+    alignItems: "flex-start",
+    paddingLeft: 10
+  },
+  rightItem: {
+    alignItems: "flex-end",
+    paddingRight: 10
   },
   title: {
     flex: 1,

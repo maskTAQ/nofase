@@ -12,7 +12,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ImagePicker from "react-native-image-picker";
-import RNFS from "react-native-fs";
+//import RNFS from "react-native-fs";
 
 import api from "src/api";
 import { computeSize, WebSocket } from "src/common";
@@ -27,6 +27,7 @@ import {
 import { Tip } from "src/common";
 import styles from "./style";
 import action from "src/action";
+const RNFS = {};
 const portraitSource = require("./img/u128.png"),
   closeSource = require("./img/u78.png"),
   lvSource = require("./img/lv.png"),
