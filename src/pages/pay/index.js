@@ -247,7 +247,7 @@ export default class Pay extends Component {
     api
       .getDiscountList()
       .then(res => {
-        const discountList = res.filter(({ isUse }) => isUse).map(item => {
+        const discountList = res.filter(({ CanUse }) => CanUse).map(item => {
           const { CardName, Id } = item;
           return {
             value: Id,

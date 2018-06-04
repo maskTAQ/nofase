@@ -144,6 +144,10 @@ export default class Home extends Component {
     } else {
       this.getCurrentPosition().then(l => {
         this.location = l;
+        this.props.navigation.dispatch({
+          type: "location",
+          payload: l
+        });
       });
     }
 
@@ -202,6 +206,7 @@ export default class Home extends Component {
     });
   };
   getCurrentPosition() {
+    this.getCurrentPositionStatus = "loading";
     if (Platform.OS === "ios") {
       return new Promise(resolve => {
         navigator.geolocation.getCurrentPosition(
@@ -210,8 +215,11 @@ export default class Home extends Component {
               userLat: location.coords.latitude,
               userLng: location.coords.longitude
             });
+            this.getCurrentPositionStatus = "success";
           },
           error => {
+            this.getCurrentPositionStatus === "loading" &&
+              (this.getCurrentPositionStatus = "error");
             resolve({
               userLat: "",
               userLng: ""
@@ -220,22 +228,24 @@ export default class Home extends Component {
           { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000000 }
         );
       });
+    } else {
+      return Geolocation.getCurrentPosition()
+        .then(({ latitude, longitude }) => {
+          this.getCurrentPositionStatus = "success";
+          return Promise.resolve({
+            userLat: latitude,
+            userLng: longitude
+          });
+        })
+        .catch(e => {
+          this.getCurrentPositionStatus === "loading" &&
+            (this.getCurrentPositionStatus = "error");
+          return Promise.resolve({
+            userLat: "",
+            userLng: ""
+          });
+        });
     }
-    // console.log(Geolocation.getCurrentPosition())
-    return Geolocation.getCurrentPosition()
-      .then(({ latitude, longitude }) => {
-        return Promise.resolve({
-          userLat: latitude,
-          userLng: longitude
-        });
-      })
-      .catch(e => {
-        Tip.fail("获取位置失败,请确保已于app定位权限");
-        return Promise.resolve({
-          userLat: "",
-          userLng: ""
-        });
-      });
   }
   togglePattern(nextPattern) {
     const { pattern } = this.state;
@@ -654,10 +664,14 @@ export default class Home extends Component {
         LeftComponent={
           <Button
             onPress={() => {
-              if (this.location.userLat) {
+              if (this.getCurrentPositionStatus === "success") {
                 this.togglePattern("map");
               } else {
-                Tip.fail("请稍后查看哦，正在获取位置");
+                const m =
+                  this.getCurrentPositionStatus === "error"
+                    ? "正在获取位置,请稍后"
+                    : "获取定位失败,请确保给予权限并重启app";
+                Tip.fail(m);
               }
             }}
           >
