@@ -7,7 +7,14 @@ import { connect } from "react-redux";
 import { share } from "src/common";
 import api from "src/api";
 import action from "src/action";
-import { Button, Icon, Page, ShareModal, DataView } from "src/components";
+import {
+  Button,
+  Icon,
+  Page,
+  ShareModal,
+  DataView,
+  ShareBar
+} from "src/components";
 import styles from "./style";
 import { computeSize } from "src/common";
 
@@ -45,7 +52,6 @@ export default class Fitnessrecord extends Component {
   renderItem(row) {
     const { StoreName, Amont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
-    console.log(row);
     return (
       <Button
         onPress={() => {
@@ -91,83 +97,26 @@ export default class Fitnessrecord extends Component {
       />
     );
   }
-  renderShareBar() {
-    const { isShareBarVisible } = this.state;
+  share(platform) {
     const { UserName } = this.state.currentOrder;
-    const data = [
-      {
-        icon: require("./img/u227.png"),
-        label: "微信",
-        platform: "WECHAT",
-        onPress: () => {}
-      },
-      {
-        icon: require("./img/u231.png"),
-        label: "朋友圈",
-        platform: "WECHATMOMENT",
-        onPress: () => {}
-      },
-      {
-        icon: require("./img/u229.png"),
-        label: "QQ",
-        platform: "QQ",
-        onPress: () => {}
-      },
-      {
-        icon: require("./img/u233.png"),
-        label: "QQ空间",
-        platform: "QQZONE",
-        onPress: () => {}
-      },
-      {
-        icon: require("./img/u235.png"),
-        label: "新浪微博",
-        platform: "SINA",
-        onPress: () => {}
-      }
-    ];
-    if (!isShareBarVisible) {
-      return null;
-    }
-    return (
-      <View style={styles.shareBar}>
-        {data.map(({ icon, label, platform }) => {
-          return (
-            <Button
-              onPress={() => {
-                const {
-                  StoreName,
-                  TimeLong,
-                  StoreImg
-                } = this.state.currentOrder;
-                share({
-                  title: "NoFace没脸运动 记录好身材！",
-                  content: `${UserName}在共享运动联盟店${StoreName}中锻炼了${this.getDateByMinute(
-                    TimeLong
-                  )}并爱上了流汗的滋味。`,
-                  url: "https://vmslq.cn/",
-                  imgSrc: StoreImg,
-                  platform
-                })
-                  .then(res => {
-                    this.setState({ isShareBarVisible: false });
-                  })
-                  .catch(e => {
-                    this.setState({ isShareBarVisible: false }, () => {
-                      this.props.navigation.dispatch(action.navigate.back());
-                    });
-                  });
-              }}
-              style={styles.shareBarItem}
-              key={label}
-            >
-              <Icon size={computeSize(40)} source={icon} />
-              <Text style={styles.shareBarItemLabel}>{label}</Text>
-            </Button>
-          );
-        })}
-      </View>
-    );
+    const { StoreName, TimeLong, StoreImg } = this.state.currentOrder;
+    share({
+      title: "NoFace没脸运动 记录好身材！",
+      content: `${UserName}在共享运动联盟店${StoreName}中锻炼了${this.getDateByMinute(
+        TimeLong
+      )}并爱上了流汗的滋味。`,
+      url: "https://vmslq.cn/",
+      imgSrc: StoreImg,
+      platform
+    })
+      .then(res => {
+        this.setState({ isShareBarVisible: false });
+      })
+      .catch(e => {
+        this.setState({ isShareBarVisible: false }, () => {
+          this.props.navigation.dispatch(action.navigate.back());
+        });
+      });
   }
   render() {
     const { isShareModalVisible, currentOrder } = this.state;
@@ -203,7 +152,7 @@ export default class Fitnessrecord extends Component {
               resizeMode="stretch"
             />
             {this.renderList()}
-            {this.renderShareBar()}
+
             <View />
             <ShareModal
               isVisible={isShareModalVisible}
@@ -259,6 +208,13 @@ export default class Fitnessrecord extends Component {
             >
               <Text>12</Text>
             </ShareModal>
+            <ShareBar
+              isVisible={this.state.isShareBarVisible}
+              share={this.share}
+              close={() => {
+                this.setState({ isShareBarVisible: false });
+              }}
+            />
           </View>
         </View>
       </Page>
