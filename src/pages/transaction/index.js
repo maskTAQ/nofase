@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, Image, Platform } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  Platform,
+  ScrollView,
+  RefreshControl
+} from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import JPushModule from "jpush-react-native";
@@ -31,14 +39,28 @@ export default class Transacion extends Component {
     }
 
     this.getUserPaysToday();
+  }
+  getData = () => {
+    this.setState({
+      isRefreshing: true
+    });
     this.props.navigation.dispatch({
       type: "userInfo",
       api: () => {
-        return api.getUserInfo();
+        return api
+          .getUserInfo(false)
+          .then(res => {
+            this.setState({ isRefreshing: false });
+            return res;
+          })
+          .catch(e => {
+            this.setState({ isRefreshing: false });
+            return Promise.reject(e);
+          });
       },
       promise: true
     });
-  }
+  };
   back = () => {
     this.props.navigation.dispatch(action.navigate.back());
   };
@@ -70,12 +92,6 @@ export default class Transacion extends Component {
           );
         }
       },
-      // {
-      //   type: "退押金/提现 (秒到)",
-      //   onPress: () => {
-      //     //this.props.navigation.dispatch(action.go('Recharge'));
-      //   }
-      // },
       {
         type: " 钱包明细",
         onPress: () => {
@@ -128,13 +144,26 @@ export default class Transacion extends Component {
               </Text>
               <Text style={styles.balanceValue}>(余额)</Text>
             </View>
-            <View style={styles.list}>
-              <View style={styles.consume}>
-                <Text style={styles.consumeLabel}>今日消费</Text>
-                <Text style={styles.consumeValue}>{PaysMoney}元</Text>
+            <ScrollView
+              style={{ flex: 1 }}
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.isRefreshing}
+                  onRefresh={this.getData}
+                  tintColor="#bbb"
+                  //colors={["#ddd", "#0398ff"]}
+                  progressBackgroundColor="#fff"
+                />
+              }
+            >
+              <View style={styles.list}>
+                <View style={styles.consume}>
+                  <Text style={styles.consumeLabel}>今日消费</Text>
+                  <Text style={styles.consumeValue}>{PaysMoney}元</Text>
+                </View>
+                {this.renderList()}
               </View>
-              {this.renderList()}
-            </View>
+            </ScrollView>
           </View>
         </View>
       </Page>

@@ -50,7 +50,7 @@ export default class Fitnessrecord extends Component {
     return `${h}小时${m}分钟`;
   }
   renderItem(row) {
-    const { StoreName, Amont = 0, SDate } = row;
+    const { StoreName, SaleAmont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
     return (
       <Button
@@ -67,7 +67,7 @@ export default class Fitnessrecord extends Component {
             {moment(new Date(timestamp)).format("YYYY/MM/DD HH:mm")}
           </Text>
           <Text style={styles.itemDetail}>
-            {StoreName} | {" " + Amont}元
+            {StoreName} | {" " + SaleAmont}元
           </Text>
         </View>
         <View style={styles.itemRight}>

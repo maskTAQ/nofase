@@ -495,6 +495,7 @@ export default class Pay extends Component {
       Charge,
       Money
     } = this.state;
+
     switch (String(OrderType)) {
       case "0":
         return (
@@ -508,6 +509,7 @@ export default class Pay extends Component {
           </ScrollView>
         );
       case "1":
+        console.log(discountLabel, "discountLabel");
         return (
           <ScrollView style={styles.content}>
             {this.renderStoreInfo()}

@@ -60,13 +60,24 @@ export default class Recharge extends Component {
           }
         })
       );
-      this.props.navigation.dispatch({
-        type: "userInfo",
-        api: () => {
-          return api.getUserInfo();
-        },
-        promise: true
-      });
+      setTimeout(() => {
+        this.props.navigation.dispatch({
+          type: "userInfo",
+          api: () => {
+            return api.getUserInfo();
+          },
+          promise: true
+        });
+      }, 1000);
+      setTimeout(() => {
+        this.props.navigation.dispatch({
+          type: "userInfo",
+          api: () => {
+            return api.getUserInfo();
+          },
+          promise: true
+        });
+      }, 3000);
     }
   };
   appStatusQueue = [];

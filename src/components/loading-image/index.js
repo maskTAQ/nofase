@@ -42,6 +42,7 @@ export default class LoadingImage extends Component {
           source={status === "error" ? require("./img/error.png") : source}
           style={[styles.imageIcon, style]}
           resizeMode="stretch"
+          key={JSON.stringify(source) + JSON.stringify(this.store)}
           onError={() => {
             this.store.errorTimes = this.store.errorTimes + 1;
             this.setState({
