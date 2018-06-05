@@ -22,7 +22,7 @@ export default class A1 extends Component {
     isShareBarVisible: false
   };
 
-  share(platform) {
+  share = platform => {
     const { UserId } = this.props;
     share({
       title: "没脸拼团运动—没脸在一起 拼团好身材",
@@ -39,7 +39,7 @@ export default class A1 extends Component {
           this.props.navigation.dispatch(action.navigate.back());
         });
       });
-  }
+  };
   render() {
     const { isShareBarVisible } = this.state;
     return (

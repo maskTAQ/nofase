@@ -22,7 +22,7 @@ export default class A2 extends Component {
     isShareBarVisible: false
   };
 
-  share(platform) {
+  share = platform => {
     const { UserId } = this.props;
     share({
       title: "NoFace没脸运动 记录好身材！",
@@ -39,7 +39,7 @@ export default class A2 extends Component {
           this.props.navigation.dispatch(action.navigate.back());
         });
       });
-  }
+  };
   render() {
     const { isShareBarVisible } = this.state;
     return (

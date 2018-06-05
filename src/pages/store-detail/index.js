@@ -260,7 +260,7 @@ export default class StoreDetail extends Component {
       })
     );
   };
-  share(platform) {
+  share = platform => {
     const { UserId } = this.props;
     share({
       title: "好友邀请你来一起没脸共享运动吧！",
@@ -275,7 +275,7 @@ export default class StoreDetail extends Component {
       .catch(e => {
         this.setState({ isShareBarVisible: false });
       });
-  }
+  };
   renderHeader() {
     const {
       StoreName,

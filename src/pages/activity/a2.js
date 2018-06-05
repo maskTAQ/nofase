@@ -22,7 +22,7 @@ export default class A2 extends Component {
     isShareBarVisible: false
   };
 
-  share(platform) {
+  share = platform => {
     const { UserId } = this.props;
     share({
       title: "好友邀请你一起来深圳百余家共享运动场所！",
@@ -40,7 +40,7 @@ export default class A2 extends Component {
           this.props.navigation.dispatch(action.navigate.back());
         });
       });
-  }
+  };
   render() {
     const { isShareBarVisible } = this.state;
     return (

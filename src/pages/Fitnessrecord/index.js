@@ -50,6 +50,7 @@ export default class Fitnessrecord extends Component {
     return `${h}小时${m}分钟`;
   }
   renderItem(row) {
+    console.log(row);
     const { StoreName, SaleAmont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
     return (
@@ -97,7 +98,7 @@ export default class Fitnessrecord extends Component {
       />
     );
   }
-  share(platform) {
+  share = platform => {
     const { UserName } = this.state.currentOrder;
     const { StoreName, TimeLong, StoreImg } = this.state.currentOrder;
     share({
@@ -117,7 +118,7 @@ export default class Fitnessrecord extends Component {
           this.props.navigation.dispatch(action.navigate.back());
         });
       });
-  }
+  };
   render() {
     const { isShareModalVisible, currentOrder } = this.state;
     const {
