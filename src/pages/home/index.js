@@ -133,21 +133,37 @@ export default class Home extends Component {
     const res = c.join("");
     return res;
   }
+  isValidLocation(location) {
+    return location.userLat > 0 && location.userLat < 200;
+  }
+  saveLocation = location => {
+    this.location = location;
+    this.props.navigation.dispatch({
+      type: "location",
+      payload: location
+    });
+  };
+  intervalGetLocation() {
+    return this.getCurrentPosition().then(l => {
+      if (this.isValidLocation(l)) {
+        this.saveLocation(l);
+        return Promise.reject();
+      } else {
+        return new Promise(resolve => {
+          //递归频率为 1500ms
+          setTimeout(resolve(this.intervalGetLocation()), 1500);
+        });
+      }
+    });
+  }
   search = async PageIndex => {
     const location = await this.getCurrentPosition();
-    if (location.userLat > 0 && location.userLat < 200 && !this.location) {
-      this.location = location;
-      this.props.navigation.dispatch({
-        type: "location",
-        payload: location
-      });
-    } else {
-      this.getCurrentPosition().then(l => {
-        this.location = l;
-        this.props.navigation.dispatch({
-          type: "location",
-          payload: l
-        });
+
+    if (this.isValidLocation(location)) {
+      this.saveLocation(location);
+    } else if (!this.location) {
+      this.intervalGetLocation().catch(e => {
+        console.log("获取成功");
       });
     }
 
@@ -158,34 +174,29 @@ export default class Home extends Component {
       StoreName,
       cityValue
     } = this.state;
-    const params = {};
+
+    const params = {
+      SeachValue: StoreName,
+      Range: distanceValue,
+      StoreOrder: chooseTypeValue,
+      PageIndex,
+      PageNum: 20,
+      ...this.location
+    };
     if (tabActiveIndex === 0) {
       Object.assign(params, {
         SeachType: 1, //按店铺搜索
-        SeachValue: StoreName,
-        UserArea: cityValue === 0 ? "" : this.store.city[cityValue].label,
-        Range: distanceValue,
-        PageIndex,
-        PageNum: 20,
-        StoreOrder: chooseTypeValue,
-        ...this.location
+        UserArea: cityValue === 0 ? "" : this.store.city[cityValue].label
       });
     } else {
       const { startDay, endDay } = this.store.daysInfo;
       Object.assign(params, {
         SeachType: 2, //按课程搜索
-        SeachValue: StoreName,
         SDay: startDay,
         EDay: endDay,
-        UserArea: "",
-        Range: distanceValue,
-        PageIndex: 1,
-        PageNum: 20,
-        StoreOrder: chooseTypeValue,
-        ...location
+        UserArea: ""
       });
     }
-    console.log(params);
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
@@ -316,7 +327,9 @@ export default class Home extends Component {
   changeTab(NextTabActiveIndex) {
     const { tabActiveIndex } = this.state;
     if (NextTabActiveIndex !== tabActiveIndex) {
-      this.setState({ tabActiveIndex: NextTabActiveIndex });
+      this.setState({ tabActiveIndex: NextTabActiveIndex }, () => {
+        this.storeListRef.triggerRefresh();
+      });
     }
   }
   renderChooseModal() {
