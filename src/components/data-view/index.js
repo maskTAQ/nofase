@@ -38,6 +38,7 @@ export default class DataView extends Component {
     renderItem: PropTypes.func,
     pulldownLoadMoreInterval: PropTypes.number,
     ListEmptyComponent: PropTypes.any,
+    ListEmptyComponentText: PropTypes.string,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
   state = {
@@ -232,7 +233,8 @@ export default class DataView extends Component {
       renderItem,
       isPulldownLoadMore,
       isPullupRefresh,
-      ListEmptyComponent
+      ListEmptyComponent,
+      ListEmptyComponentText
     } = this.props;
     const hint = [];
     isPulldownLoadMore && hint.push("下拉");
@@ -263,9 +265,11 @@ export default class DataView extends Component {
                 return (
                   <View style={styles.ListEmptyComponent}>
                     <Text style={styles.ListEmptyComponentText}>
-                      没有数据哦{hint.length
-                        ? `尝试${hint.join("或者")}试试吧~`
-                        : "!"}
+                      {ListEmptyComponentText
+                        ? ListEmptyComponentText
+                        : hint.length
+                          ? `没有数据哦,尝试${hint.join("或者")}试试吧~`
+                          : "没有数据哦!"}
                     </Text>
                   </View>
                 );

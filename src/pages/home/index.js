@@ -662,6 +662,7 @@ export default class Home extends Component {
           ref={e => (this.storeListRef = e)}
           getData={this.search}
           ItemSeparatorComponent={Height}
+          ListEmptyComponentText="更多目标商家正在洽谈合作中"
           renderItem={({ item, index }) => this.renderItem(item, index)}
         />
         <ToggleButton />

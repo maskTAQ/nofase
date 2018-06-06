@@ -38,6 +38,10 @@ export default {
   getUserInfo(loading = true) {
     return post("/User/GetUserInfo", {}, { loading });
   },
+  //店铺首次是否免费
+  getIsFristFree(StoreId) {
+    return post("/User/GetIsFristFree", { StoreId }, { loading: false });
+  },
   //设置用户信息
   setUserInfo(params) {
     return post("/User/EditUserInfo", params);

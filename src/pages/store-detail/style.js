@@ -128,10 +128,22 @@ export default {
   remarksLabelWrapper: {
     height: computeSize(40),
     paddingLeft: computeSize(6),
-
+    position: "relative",
     justifyContent: "center"
+    //alignItems:'space-between',
     // borderBottomWidth: 0.computeSize(6),
     // borderColor: "#bfbfbf"
+  },
+  freeBox: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    padding: 4,
+    backgroundColor: "#fc6621"
+  },
+  freeBoxText: {
+    color: "#fff",
+    fontSize: computeSize(12)
   },
   remarksLabel: {
     //marginBottom: computeSize(6),

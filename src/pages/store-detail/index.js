@@ -58,7 +58,8 @@ export default class StoreDetail extends Component {
 
     timetable: [],
 
-    isShareBarVisible: false
+    isShareBarVisible: false,
+    IsFristFree: false
   };
   componentWillMount() {
     Tip.loading();
@@ -70,7 +71,19 @@ export default class StoreDetail extends Component {
       this.getStoreScore(Id),
       this.getStoreNowPeople(Id),
       this.getDeviceInfo(Id),
-      this.getCurriculum(Id)
+      this.getCurriculum(Id),
+      () => {
+        return api
+          .getIsFristFree(Id)
+          .then(res => {
+            return res;
+          })
+          .catch(e => {
+            return {
+              IsFristFree: false
+            };
+          });
+      }
     ])
       .then(res => {
         res.forEach((item, i) => {
@@ -503,11 +516,16 @@ export default class StoreDetail extends Component {
     );
   }
   renderRemarks() {
-    const { StoreRemarks } = this.state;
+    const { StoreRemarks, IsFristFree } = this.state;
     return (
       <View style={styles.remarksWrapper}>
         <View style={styles.remarksLabelWrapper}>
           <Text style={styles.remarksLabel}>商家留言：</Text>
+          {IsFristFree && (
+            <View style={styles.freeBox}>
+              <Text style={styles.freeBoxText}>首次免费一小时</Text>
+            </View>
+          )}
         </View>
         <Text style={styles.remarksValue}>{StoreRemarks}</Text>
       </View>
