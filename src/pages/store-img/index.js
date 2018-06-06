@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, FlatList, Platform } from "react-native";
+import { View, FlatList, Platform, WebView } from "react-native";
 import PropTypes from "prop-types";
 
 import { Page, LoadingImage } from "src/components";
@@ -47,6 +47,15 @@ export default class StoreImg extends Component {
                 style={{ flex: 1 }}
                 keyExtractor={(row, i) => row.Id}
                 renderItem={this.renderItem}
+              />
+            ),
+            android: (
+              <WebView
+                source={{
+                  url: `https://vmslq.cn/webview/imgs/index.html?imgs=${JSON.stringify(
+                    StoreImgList.map(item => item.ImgUrl)
+                  )}`
+                }}
               />
             )
           })}
