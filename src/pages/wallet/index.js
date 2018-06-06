@@ -36,7 +36,7 @@ export default class Wallet extends Component {
   }
   renderItem(row) {
     const { activeIndex } = this.state;
-    const { Amont, RechargeValue, ApplyDate, SDate } = row;
+    const { SaleAmont, RechargeValue, ApplyDate, SDate } = row;
     const getTimestamp = s => {
       if (s) {
         return +/\/Date\(([0-9]+)\)/.exec(s)[1];
@@ -59,7 +59,7 @@ export default class Wallet extends Component {
         >
           <Text style={{ color: "#333" }}>{time}</Text>
           <Text style={styles.itemSum}>
-            {activeIndex === 0 ? Amont : RechargeValue}元
+            {activeIndex === 0 ? SaleAmont : RechargeValue}元
           </Text>
         </View>
       </View>
