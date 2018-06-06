@@ -18,6 +18,7 @@ export default {
     alignItems: "center"
   },
   ListEmptyComponentText: {
+    paddingTop: 10,
     fontSize: computeSize(14),
     color: "#333"
   }
