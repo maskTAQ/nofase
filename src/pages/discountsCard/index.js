@@ -79,7 +79,7 @@ export default class Transacion extends Component {
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <Text style={styles.headerLeftText}>比比享优惠</Text>
-          <Text style={styles.headerLeftText}>没脸考身材</Text>
+          <Text style={styles.headerLeftText}>没脸靠身材</Text>
         </View>
         <View style={styles.headerRight}>
           <Text style={styles.headerRightText}>即点即送</Text>
@@ -100,8 +100,7 @@ export default class Transacion extends Component {
       "separator",
       {
         label: "抵现卷",
-        value: discountList.filter(item => item.CardName.includes("优惠"))
-          .length
+        value: discountList.filter(item => !item.CardName.includes("折")).length
       }
     ];
     return (
