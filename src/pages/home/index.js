@@ -590,7 +590,8 @@ export default class Home extends Component {
       Charge,
       Id,
       StoreImg,
-      PeopleNum
+      PeopleNum,
+      IsFristFree
     } = row;
     const icon = (StoreImg || "").includes("https") ? (
       <Icon size={computeSize(82)} source={{ uri: StoreImg }} />
@@ -602,7 +603,11 @@ export default class Home extends Component {
       <View style={styles.item}>
         <Button onPress={() => this.goStoreDetail(Id)} style={styles.itemTop}>
           {icon}
-
+          {IsFristFree && (
+            <View style={styles.freeBox}>
+              <Text style={styles.freeBoxText}>首次免费一小时</Text>
+            </View>
+          )}
           <View style={styles.itemDetail}>
             <View style={styles.itemDetailTop}>
               <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
