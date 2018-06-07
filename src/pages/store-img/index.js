@@ -52,7 +52,7 @@ export default class StoreImg extends Component {
             android: (
               <WebView
                 source={{
-                  url: `https://vmslq.cn/webview/imgs/index.html?imgs=${JSON.stringify(
+                  uri: `https://vmslq.cn/webview/imgs/index.html?imgs=${JSON.stringify(
                     StoreImgList.map(item => item.ImgUrl)
                   )}`
                 }}

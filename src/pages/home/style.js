@@ -136,7 +136,19 @@ export default {
     flexDirection: "row",
     padding: computeSize(4),
     borderRadius: computeSize(6),
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    position: "relative"
+  },
+  freeBox: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    padding: 2,
+    backgroundColor: "#fc6621"
+  },
+  freeBoxText: {
+    color: "#fff",
+    fontSize: computeSize(10)
   },
   itemBottom: {
     flexDirection: "row",

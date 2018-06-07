@@ -72,18 +72,7 @@ export default class StoreDetail extends Component {
       this.getStoreNowPeople(Id),
       this.getDeviceInfo(Id),
       this.getCurriculum(Id),
-      () => {
-        return api
-          .getIsFristFree(Id)
-          .then(res => {
-            return res;
-          })
-          .catch(e => {
-            return {
-              IsFristFree: false
-            };
-          });
-      }
+      this.getIsFristFree(Id)
     ])
       .then(res => {
         res.forEach((item, i) => {
@@ -157,7 +146,18 @@ export default class StoreDetail extends Component {
       { title: "周日", dataIndex: "Week0" }
     ]
   };
-
+  getIsFristFree(Id) {
+    return api
+      .getIsFristFree(Id)
+      .then(res => {
+        return res;
+      })
+      .catch(e => {
+        return {
+          IsFristFree: false
+        };
+      });
+  }
   getStoreInfo(Id) {
     return api
       .getStoreInfo({
