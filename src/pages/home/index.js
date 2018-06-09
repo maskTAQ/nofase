@@ -45,7 +45,7 @@ export default class Home extends Component {
     chooseTypeValue: 1,
     cityValue: 0,
     distanceValue: 0,
-    StoreName: "",
+    StoreName: "名道",
 
     startDay: 0,
     endDay: 4,
@@ -605,7 +605,7 @@ export default class Home extends Component {
           {icon}
           {IsFristFree && (
             <View style={styles.freeBox}>
-              <Text style={styles.freeBoxText}>首次免费一小时</Text>
+              <Text style={styles.freeBoxText}>首次免费1小时</Text>
             </View>
           )}
           <View style={styles.itemDetail}>

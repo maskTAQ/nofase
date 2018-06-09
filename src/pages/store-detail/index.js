@@ -521,11 +521,11 @@ export default class StoreDetail extends Component {
       <View style={styles.remarksWrapper}>
         <View style={styles.remarksLabelWrapper}>
           <Text style={styles.remarksLabel}>商家留言：</Text>
-          {IsFristFree && (
+          {IsFristFree ? (
             <View style={styles.freeBox}>
               <Text style={styles.freeBoxText}>首次免费一小时</Text>
             </View>
-          )}
+          ) : null}
         </View>
         <Text style={styles.remarksValue}>{StoreRemarks}</Text>
       </View>
