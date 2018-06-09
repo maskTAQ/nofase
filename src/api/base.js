@@ -117,9 +117,9 @@ const post = (
   return new Promise((resolve, reject) => {
     requestWrapper(url, params)
       .then(res => {
-        console.log;
         const { data: Data } = res;
         const { code, message, data } = Data;
+
         loading && Tip.dismiss();
         if (code > 0) {
           const d = data || message;

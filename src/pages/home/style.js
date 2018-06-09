@@ -140,10 +140,13 @@ export default {
     position: "relative"
   },
   freeBox: {
+    width: computeSize(82),
+    height: computeSize(16),
     position: "absolute",
-    bottom: 0,
-    left: 0,
-    padding: 2,
+    bottom: computeSize(4),
+    left: computeSize(4),
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#fc6621"
   },
   freeBoxText: {

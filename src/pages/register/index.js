@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image } from "react-native";
+import { View, Image, AsyncStorage } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -34,6 +34,7 @@ export default class Register extends Component {
         this.props.navigation.dispatch(
           action.navigate.go({ routeName: "Home" })
         );
+        AsyncStorage.setItem("mobile", Tel);
       })
       .catch(e => {
         console.log(e, 1);
