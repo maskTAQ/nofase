@@ -45,7 +45,7 @@ export default class Home extends Component {
     chooseTypeValue: 1,
     cityValue: 0,
     distanceValue: 0,
-    StoreName: "名道",
+    StoreName: "",
 
     startDay: 0,
     endDay: 4,
