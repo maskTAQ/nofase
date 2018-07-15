@@ -50,8 +50,8 @@
 		5C715E17208DA9EA00340B20 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */; };
 		5C7478D8208DACDF002666A0 /* WxpayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7478D7208DACDF002666A0 /* WxpayModule.m */; };
 		5C7478DC208DADA3002666A0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C7478DB208DADA3002666A0 /* libWeChatSDK.a */; };
-		5C9AF94A20C827CB00D50C52 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5C9AF94920C827CB00D50C52 /* assets */; };
-		5C9AF94C20C827D500D50C52 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C9AF94B20C827D500D50C52 /* index.ios.jsbundle */; };
+		5C895DBC20ED0BF0000D2ED9 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 5C895DBB20ED0BF0000D2ED9 /* assets */; };
+		5C895DBE20ED0BF7000D2ED9 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C895DBD20ED0BF7000D2ED9 /* index.ios.jsbundle */; };
 		5CB2737820A08D5200E076EB /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5CB2737720A08D5200E076EB /* AlipaySDK.bundle */; };
 		5CB4B838206D1E6400245B9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B837206D1E6400245B9A /* QuartzCore.framework */; };
 		5CB4B83A206D1E6C00245B9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B839206D1E6B00245B9A /* CoreText.framework */; };
@@ -61,6 +61,14 @@
 		5CB4B842206D1E8F00245B9A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B841206D1E8F00245B9A /* CoreMotion.framework */; };
 		5CB4B87B206D279F00245B9A /* AlipayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4B87A206D279F00245B9A /* AlipayModule.m */; };
 		5CB4B8B0206D2AC900245B9A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB4B8AF206D2AC800245B9A /* AlipaySDK.framework */; };
+		5CEDCCB920FAFC5F002BBA2B /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCC8E20FAFC5F002BBA2B /* AMapLocationKit.framework */; };
+		5CEDCCBB20FAFCE6002BBA2B /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCCBA20FAFCE6002BBA2B /* AMapLocationKit.framework */; };
+		5CEDCCBD20FAFD00002BBA2B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCCBC20FAFD00002BBA2B /* JavaScriptCore.framework */; };
+		5CEDCCBF20FAFD1C002BBA2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCCBE20FAFD1C002BBA2B /* CoreLocation.framework */; };
+		5CEDCCC120FAFD4C002BBA2B /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCCC020FAFD4C002BBA2B /* libstdc++.6.0.9.tbd */; };
+		5CEDCCC320FAFDE4002BBA2B /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCCC220FAFDE4002BBA2B /* AMapFoundationKit.framework */; };
+		5CEDCCC520FAFDFC002BBA2B /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CEDCCC420FAFDFC002BBA2B /* AMapFoundationKit.framework */; };
+		5CEDCCC720FAFED3002BBA2B /* GeolocationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDCCC620FAFED3002BBA2B /* GeolocationModule.m */; };
 		5CF5564B206BEB9300BC2461 /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5CF5562D206BEB9300BC2461 /* UMSocialSDKResources.bundle */; };
 		5CF5564C206BEB9300BC2461 /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF5562E206BEB9300BC2461 /* UShareUI.framework */; };
 		5CF5564D206BEB9300BC2461 /* UMSocialNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF55630206BEB9300BC2461 /* UMSocialNetwork.framework */; };
@@ -449,8 +457,8 @@
 		5C7478D6208DACDF002666A0 /* WxpayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WxpayModule.h; path = Wxpay/WxpayModule.h; sourceTree = "<group>"; };
 		5C7478D7208DACDF002666A0 /* WxpayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WxpayModule.m; path = Wxpay/WxpayModule.m; sourceTree = "<group>"; };
 		5C7478DB208DADA3002666A0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = Wxpay/libWeChatSDK.a; sourceTree = "<group>"; };
-		5C9AF94920C827CB00D50C52 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
-		5C9AF94B20C827D500D50C52 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
+		5C895DBB20ED0BF0000D2ED9 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		5C895DBD20ED0BF7000D2ED9 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		5CB2737720A08D5200E076EB /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AlipaySDK.bundle; path = Alipay/AlipaySDK.bundle; sourceTree = "<group>"; };
 		5CB4B837206D1E6400245B9A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5CB4B839206D1E6B00245B9A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -462,6 +470,14 @@
 		5CB4B879206D279800245B9A /* AlipayModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlipayModule.h; sourceTree = "<group>"; };
 		5CB4B87A206D279F00245B9A /* AlipayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayModule.m; sourceTree = "<group>"; };
 		5CB4B8AF206D2AC800245B9A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		5CEDCC8E20FAFC5F002BBA2B /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
+		5CEDCCBA20FAFCE6002BBA2B /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapLocationKit.framework; path = ../../Downloads/AMapLocationKit.framework; sourceTree = "<group>"; };
+		5CEDCCBC20FAFD00002BBA2B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		5CEDCCBE20FAFD1C002BBA2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5CEDCCC020FAFD4C002BBA2B /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		5CEDCCC220FAFDE4002BBA2B /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
+		5CEDCCC420FAFDFC002BBA2B /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = ../../Downloads/AMapFoundationKit.framework; sourceTree = "<group>"; };
+		5CEDCCC620FAFED3002BBA2B /* GeolocationModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeolocationModule.m; sourceTree = "<group>"; };
 		5CF5562D206BEB9300BC2461 /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
 		5CF5562E206BEB9300BC2461 /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
 		5CF55630206BEB9300BC2461 /* UMSocialNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMSocialNetwork.framework; sourceTree = "<group>"; };
@@ -510,6 +526,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CEDCCC520FAFDFC002BBA2B /* AMapFoundationKit.framework in Frameworks */,
+				6B7ED8C929854B41BCC9057B /* Security.framework in Frameworks */,
+				5CEDCCC120FAFD4C002BBA2B /* libstdc++.6.0.9.tbd in Frameworks */,
+				5C3E1BA0206BE9AF0066A573 /* libc++.tbd in Frameworks */,
+				5C3E1BA2206BE9BD0066A573 /* libz.tbd in Frameworks */,
+				5CEDCCBF20FAFD1C002BBA2B /* CoreLocation.framework in Frameworks */,
+				5C3E1B9A206BE9980066A573 /* CoreTelephony.framework in Frameworks */,
+				5C3E1B96206BE97E0066A573 /* SystemConfiguration.framework in Frameworks */,
+				5CEDCCBD20FAFD00002BBA2B /* JavaScriptCore.framework in Frameworks */,
+				5CEDCCBB20FAFCE6002BBA2B /* AMapLocationKit.framework in Frameworks */,
 				5C3C2B58208CBF340055BA88 /* UserNotifications.framework in Frameworks */,
 				5CB4B842206D1E8F00245B9A /* CoreMotion.framework in Frameworks */,
 				5CB4B840206D1E8900245B9A /* CFNetwork.framework in Frameworks */,
@@ -518,20 +544,18 @@
 				5C3E1B98206BE98D0066A573 /* CoreGraphics.framework in Frameworks */,
 				5CB4B83A206D1E6C00245B9A /* CoreText.framework in Frameworks */,
 				5CB4B838206D1E6400245B9A /* QuartzCore.framework in Frameworks */,
-				5C3E1B9A206BE9980066A573 /* CoreTelephony.framework in Frameworks */,
-				5C3E1BA2206BE9BD0066A573 /* libz.tbd in Frameworks */,
-				5C3E1BA0206BE9AF0066A573 /* libc++.tbd in Frameworks */,
 				5C3E1B9E206BE9A80066A573 /* libsqlite3.tbd in Frameworks */,
 				5CF55657206BEB9300BC2461 /* Bolts.framework in Frameworks */,
+				5CEDCCB920FAFC5F002BBA2B /* AMapLocationKit.framework in Frameworks */,
 				5C3E1B9C206BE9A00066A573 /* ImageIO.framework in Frameworks */,
 				5CF5565A206BEB9300BC2461 /* libUMSocialLog.a in Frameworks */,
 				5C3C2B45208CB8660055BA88 /* UMPush.framework in Frameworks */,
 				5CF55653206BEB9300BC2461 /* FBSDKShareKit.framework in Frameworks */,
-				5C3E1B96206BE97E0066A573 /* SystemConfiguration.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				5CF5564F206BEB9300BC2461 /* UMSocialCore.framework in Frameworks */,
 				5C3C2B50208CBBDF0055BA88 /* UMCommon.framework in Frameworks */,
+				5CEDCCC320FAFDE4002BBA2B /* AMapFoundationKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -560,7 +584,6 @@
 				5C3C2B52208CBC9B0055BA88 /* UMAnalytics.framework in Frameworks */,
 				0D79C14DE822459E88ABC419 /* libRCTJCoreModule.a in Frameworks */,
 				6F2FE02BCFF44F90BAD891B6 /* libRCTJPushModule.a in Frameworks */,
-				6B7ED8C929854B41BCC9057B /* Security.framework in Frameworks */,
 				7057D0AEAFD34F94A279D482 /* CoreFoundation.framework in Frameworks */,
 				F585BA5CF93F4CD7B5B3CDE1 /* libresolv.tbd in Frameworks */,
 				62CBF129C41842DA8142BD07 /* libRNFS.a in Frameworks */,
@@ -675,8 +698,8 @@
 		13B07FAE1A68108700A75B9A /* nofase */ = {
 			isa = PBXGroup;
 			children = (
-				5C9AF94B20C827D500D50C52 /* index.ios.jsbundle */,
-				5C9AF94920C827CB00D50C52 /* assets */,
+				5C895DBD20ED0BF7000D2ED9 /* index.ios.jsbundle */,
+				5C895DBB20ED0BF0000D2ED9 /* assets */,
 				5CB2737720A08D5200E076EB /* AlipaySDK.bundle */,
 				5C7478AB208DACBA002666A0 /* Wxapi */,
 				5C3C2B59208CBF3E0055BA88 /* nofase.entitlements */,
@@ -690,6 +713,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				5CEDCCC620FAFED3002BBA2B /* GeolocationModule.m */,
 			);
 			name = nofase;
 			sourceTree = "<group>";
@@ -720,6 +744,13 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CEDCCC220FAFDE4002BBA2B /* AMapFoundationKit.framework */,
+				5CEDCCC420FAFDFC002BBA2B /* AMapFoundationKit.framework */,
+				5CEDCCC020FAFD4C002BBA2B /* libstdc++.6.0.9.tbd */,
+				5CEDCCBE20FAFD1C002BBA2B /* CoreLocation.framework */,
+				5CEDCCBC20FAFD00002BBA2B /* JavaScriptCore.framework */,
+				5CEDCC8E20FAFC5F002BBA2B /* AMapLocationKit.framework */,
+				5CEDCCBA20FAFCE6002BBA2B /* AMapLocationKit.framework */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				5C715DEF208DA9EA00340B20 /* libWeChatSDK.a */,
 				5C3C2B57208CBF340055BA88 /* UserNotifications.framework */,
@@ -1092,7 +1123,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B9X9R8AKSM;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1512,9 +1543,9 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				5CB2737820A08D5200E076EB /* AlipaySDK.bundle in Resources */,
-				5C9AF94A20C827CB00D50C52 /* assets in Resources */,
+				5C895DBC20ED0BF0000D2ED9 /* assets in Resources */,
 				5CF5564B206BEB9300BC2461 /* UMSocialSDKResources.bundle in Resources */,
-				5C9AF94C20C827D500D50C52 /* index.ios.jsbundle in Resources */,
+				5C895DBE20ED0BF7000D2ED9 /* index.ios.jsbundle in Resources */,
 				5CF5564E206BEB9300BC2461 /* UMSocialSDKPromptResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1580,6 +1611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CEDCCC720FAFED3002BBA2B /* GeolocationModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				5C7478D8208DACDF002666A0 /* WxpayModule.m in Sources */,
 				5CF5565D206BEC6800BC2461 /* sharemodule.m in Sources */,
@@ -1705,7 +1737,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = nofase/nofase.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = B9X9R8AKSM;
@@ -1742,9 +1774,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.nofase;
 				PRODUCT_NAME = nofase;
-				PROVISIONING_PROFILE = "f3096762-127d-454b-80a0-5d0f103f3b9e";
-				PROVISIONING_PROFILE_SPECIFIER = nofase_develop;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1755,8 +1788,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = nofase/nofase.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9X9R8AKSM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1792,9 +1825,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.nofase;
 				PRODUCT_NAME = nofase;
-				PROVISIONING_PROFILE = "4d7841d1-49d2-437d-889f-d35c87a963e2";
-				PROVISIONING_PROFILE_SPECIFIER = nofase;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

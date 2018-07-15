@@ -40,8 +40,9 @@ const asyncDispetch = store => next => action => {
   }
   return next(action);
 };
-export default createStore(
+const store = createStore(
   AppReducer,
   initStore,
   applyMiddleware(thunk, asyncDispetch)
 );
+export default store;

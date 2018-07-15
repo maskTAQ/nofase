@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { Text, View, Platform, Linking } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Geolocation } from "react-native-baidu-map";
 
 import api from "src/api";
 import action from "src/action";
 import { version } from "src/config";
-import { computeSize, Tip } from "src/common";
+import { computeSize } from "src/common";
 import { UpdateModal } from "src/components";
 import styles from "./style";
 
@@ -30,13 +29,14 @@ const StoreImgIcon = (
   <Icon size={computeSize(82)} source={require("./img/logo.png")} />
 );
 @connect(state => {
-  const { auth: { UserId } } = state;
-  return { UserId };
+  const { auth: { UserId }, location } = state;
+  return { UserId, location };
 })
 export default class Home extends Component {
   static propTypes = {
     navigation: PropTypes.object,
-    UserId: PropTypes.number
+    UserId: PropTypes.number,
+    location: PropTypes.object
   };
   state = {
     pattern: "list", //['map','list']
@@ -45,7 +45,7 @@ export default class Home extends Component {
     chooseTypeValue: 1,
     cityValue: 0,
     distanceValue: 0,
-    StoreName: "名道",
+    StoreName: "",
 
     startDay: 0,
     endDay: 4,
@@ -54,11 +54,8 @@ export default class Home extends Component {
     appUpdateInfo: {}
   };
   componentWillMount() {
-    //this.getLocation();
     this.getNewApp();
-    //this.configPush();
   }
-  location = {};
   getNewApp() {
     api
       .getNewApp({
@@ -133,40 +130,9 @@ export default class Home extends Component {
     const res = c.join("");
     return res;
   }
-  isValidLocation(location) {
-    return location.userLat > 0 && location.userLat < 200;
-  }
-  saveLocation = location => {
-    this.location = location;
-    this.props.navigation.dispatch({
-      type: "location",
-      payload: location
-    });
-  };
-  intervalGetLocation() {
-    return this.getCurrentPosition().then(l => {
-      if (this.isValidLocation(l)) {
-        this.saveLocation(l);
-        return Promise.reject();
-      } else {
-        return new Promise(resolve => {
-          //递归频率为 1500ms
-          setTimeout(resolve(this.intervalGetLocation()), 1500);
-        });
-      }
-    });
-  }
-  search = async PageIndex => {
-    const location = await this.getCurrentPosition();
 
-    if (this.isValidLocation(location)) {
-      this.saveLocation(location);
-    } else if (!this.location) {
-      this.intervalGetLocation().catch(e => {
-        console.log("获取成功");
-      });
-    }
-
+  search = PageIndex => {
+    const { location } = this.props;
     const {
       distanceValue,
       tabActiveIndex,
@@ -181,7 +147,7 @@ export default class Home extends Component {
       StoreOrder: chooseTypeValue,
       PageIndex,
       PageNum: 20,
-      ...this.location
+      ...location
     };
     if (tabActiveIndex === 0) {
       Object.assign(params, {
@@ -197,6 +163,7 @@ export default class Home extends Component {
         UserArea: ""
       });
     }
+    console.log(params);
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
@@ -216,48 +183,7 @@ export default class Home extends Component {
       });
     });
   };
-  getCurrentPosition() {
-    this.getCurrentPositionStatus = "loading";
-    if (Platform.OS === "ios") {
-      return new Promise(resolve => {
-        navigator.geolocation.getCurrentPosition(
-          location => {
-            resolve({
-              userLat: location.coords.latitude,
-              userLng: location.coords.longitude
-            });
-            this.getCurrentPositionStatus = "success";
-          },
-          error => {
-            this.getCurrentPositionStatus === "loading" &&
-              (this.getCurrentPositionStatus = "error");
-            resolve({
-              userLat: "",
-              userLng: ""
-            });
-          },
-          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000000 }
-        );
-      });
-    } else {
-      return Geolocation.getCurrentPosition()
-        .then(({ latitude, longitude }) => {
-          this.getCurrentPositionStatus = "success";
-          return Promise.resolve({
-            userLat: latitude,
-            userLng: longitude
-          });
-        })
-        .catch(e => {
-          this.getCurrentPositionStatus === "loading" &&
-            (this.getCurrentPositionStatus = "error");
-          return Promise.resolve({
-            userLat: "",
-            userLng: ""
-          });
-        });
-    }
-  }
+
   togglePattern(nextPattern) {
     const { pattern } = this.state;
     if (pattern !== nextPattern) {
@@ -278,12 +204,8 @@ export default class Home extends Component {
   };
   navgation = data => {
     const { Lat, Lng } = data;
-    const { userLat, userLng } = this.location;
-    // Linking.openURL(
-    //   `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-    // ).catch(e => {
+    const { latitude: userLat, longitude: userLng } = this.props.location;
 
-    // });
     this.props.navigation.dispatch(
       action.navigate.go({
         routeName: "Navigation",
@@ -318,7 +240,6 @@ export default class Home extends Component {
           onStoreTap={id => {
             this.goStoreDetail(id);
           }}
-          location={this.location}
         />
         <ToggleButton />
       </Page>
@@ -683,15 +604,7 @@ export default class Home extends Component {
         LeftComponent={
           <Button
             onPress={() => {
-              if (this.getCurrentPositionStatus === "success") {
-                this.togglePattern("map");
-              } else {
-                const m =
-                  this.getCurrentPositionStatus === "error"
-                    ? "正在获取位置,请稍后"
-                    : "获取定位失败,请确保给予权限并重启app";
-                Tip.fail(m);
-              }
+              this.togglePattern("map");
             }}
           >
             <Icon size={computeSize(20)} source={require("./img/map.png")} />

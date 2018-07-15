@@ -4,7 +4,7 @@ export { default as CreateReduxField } from "./CreateReduxField";
 export { default as WebSocket } from "./websocket";
 export { share } from "./share";
 export { default as push } from "./push";
-//export { default as localPush } from "./localPush";
+export { default as Geolocation } from "./geolocation";
 export { default as Wxpay } from "./wxpay";
 export { default as Alipay } from "./alipay";
 export { default as computeSize } from "./size";

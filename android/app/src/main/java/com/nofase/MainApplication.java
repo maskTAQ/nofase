@@ -15,19 +15,7 @@ import com.facebook.soloader.SoLoader;
 import com.nofase.alipay.AlipayPackage;
 import com.nofase.wxapi.WxpayPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
-//import com.umeng.socialize.Config;
-//import com.umeng.socialize.PlatformConfig;
-//import com.umeng.socialize.UMShareAPI;
 
-// import com.umeng.commonsdk.UMConfigure;
-// import com.umeng.message.IUmengRegisterCallback;
-// import com.umeng.message.MsgConstant;
-// import com.umeng.message.PushAgent;
-// import com.umeng.message.UTrack;
-// import com.umeng.message.UmengMessageHandler;
-// import com.umeng.message.UmengNotificationClickHandler;
-// import com.umeng.message.common.UmLog;
-// import com.umeng.message.entity.UMessage;
 import com.umeng.socialize.PlatformConfig;
 import com.nofase.invokenative.SharePackage;
 import com.nofase.invokenative.RNUMConfigure;
@@ -37,6 +25,8 @@ import java.util.List;
 
 import com.burnweb.rnwebview.RNWebViewPackage;
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
+
+import com.nofase.geolocation.AMapGeolocationPackage;
 public class MainApplication extends Application implements ReactApplication {
   // 设置为 true 将不会弹出 toast
   private boolean SHUTDOWN_TOAST = true;
@@ -54,7 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
             new ImagePickerPackage(),
             new RNFSPackage(), new SharePackage(), new AlipayPackage(),
-          new RNWebViewPackage(), new WxpayPackage(), new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),new BaiduMapPackage(getApplicationContext()));
+          new RNWebViewPackage(), new WxpayPackage(), new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),new BaiduMapPackage(getApplicationContext()),new AMapGeolocationPackage());
     }
 
     @Override
