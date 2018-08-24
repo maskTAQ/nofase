@@ -4254,6 +4254,10 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-amap-geolocation@^0.3.1:
+  version "0.3.1"
+  resolved "http://npm.hengxifintech.com/react-native-amap-geolocation/-/react-native-amap-geolocation-0.3.1.tgz#e33a46eb72f73af1a46624ed443c2083f0141c54"
+
 react-native-baidu-map@^0.6.0:
   version "0.6.0"
   resolved "http://npm.hengxifintech.com/react-native-baidu-map/-/react-native-baidu-map-0.6.0.tgz#cb4937181e8e0cd2125d347a5b87ca13971647dd"

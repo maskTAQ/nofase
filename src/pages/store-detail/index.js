@@ -257,15 +257,7 @@ export default class StoreDetail extends Component {
   };
   navgation = () => {
     const { Lat, Lng } = this.state;
-    const { userLat, userLng } = this.props.location;
-    console.log(
-      `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-    );
-    // Linking.openURL(
-    //   `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-    // ).catch(e => {
-
-    // });
+    const { latitude: userLat, longitude: userLng } = this.props.location;
     this.props.navigation.dispatch(
       action.navigate.go({
         routeName: "Navigation",

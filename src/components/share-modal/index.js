@@ -13,7 +13,6 @@ const ShareModal = ({
   portraitSource = require("./img/u196.png"),
   username,
   time,
-  sum,
   discount,
   storeName,
   onlinePeople,
@@ -29,8 +28,7 @@ const ShareModal = ({
   goStoreDetail,
   Lat,
   Lng,
-  people,
-  location
+  people
 }) => {
   return (
     <Alert style={{ flex: 1 }} isVisible={isVisible} close={close}>
@@ -129,12 +127,10 @@ const ShareModal = ({
                   {Lat && (
                     <Button
                       onPress={() => {
-                        const { userLat, userLng } = this.props.location;
-                        // Linking.openURL(
-                        //   `baidumap://map/direction?origin=${userLat},${userLng}&destination=${Lat},${Lng}&mode=driving`
-                        // ).catch(e => {
-
-                        // });
+                        const {
+                          latitude: userLat,
+                          longitude: userLng
+                        } = this.props.location;
                         this.props.navigation.dispatch(
                           action.navigate.go({
                             routeName: "Navigation",

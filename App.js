@@ -16,7 +16,7 @@ import store from 'src/store';
 import { Tip ,LogoutModal} from 'src/components';
 import action from "src/action";
 import api from "src/api";
-import {WebSocket} from 'src/common';
+import {WebSocket,Geolocation} from 'src/common';
 
 
 class App extends Component {
@@ -32,6 +32,7 @@ class App extends Component {
   componentWillMount() {
     this.autoLogin();
     this.verifyToken();
+    this.geolocation();
   }
 
   componentDidMount() {
@@ -44,7 +45,6 @@ class App extends Component {
     const { isLogin } = this.props.auth;
     const { isLogin: nextIsLogin, UserId } = nextProps.auth;
     if (!isLogin && nextIsLogin) {
-      console.log(UserId,'UserId')
       this.addReceiveNotificationListener(UserId);
       this.linkSocket(UserId)
     }
@@ -56,6 +56,25 @@ class App extends Component {
     if (Platform.OS === "android") {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
+  }
+  async geolocation(){
+    await Geolocation.init({
+      ios: "9bd6c82e77583020a73ef1af59d0c759",
+      android: "043b24fe18785f33c491705ffe5b6935"
+    })
+    
+    Geolocation.setOptions({
+      interval: 8000,
+      distanceFilter: 20
+    })
+    
+    Geolocation.addLocationListener(location => {
+      store.dispatch({
+        type:'location',
+        payload:location
+      })
+    })
+    Geolocation.start();
   }
   linkSocket = async (UserId) => {
     this.ws = await WebSocket.uniqueLoginWebsocket(UserId, () => {

@@ -35,22 +35,13 @@ export default class Fitnessrecord extends Component {
   }
 
   getDateByMinute(minute) {
-    // const pad = s => {
-    //   if (String(s).length === 1) {
-    //     return "0" + s;
-    //   } else {
-    //     return s;
-    //   }
-    // };
     const t = minute * 60;
     const d = Math.floor(t / (24 * 3600));
     const h = Math.floor((t - 24 * 3600 * d) / 3600);
     const m = Math.floor((t - 24 * 3600 * d - h * 3600) / 60);
-    //const s = Math.floor(t - 24 * 3600 * d - h * 3600 - m * 60);
     return `${h}小时${m}分钟`;
   }
   renderItem(row) {
-    console.log(row);
     const { StoreName, SaleAmont = 0, SDate } = row;
     const timestamp = +/\/Date\(([0-9]+)\)/.exec(SDate)[1];
     return (
@@ -206,9 +197,7 @@ export default class Fitnessrecord extends Component {
                   }
                 );
               }}
-            >
-              <Text>12</Text>
-            </ShareModal>
+            />
             <ShareBar
               isVisible={this.state.isShareBarVisible}
               share={this.share}
