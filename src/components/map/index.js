@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { WebView, Platform, Dimensions } from "react-native";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const { width } = Dimensions.get("window");
 
@@ -9,7 +10,13 @@ const { width } = Dimensions.get("window");
   return { location };
 })
 export default class Map extends Component {
+  static propTypes = {
+    location: PropTypes.object
+  };
   state = {};
+  shouldComponentUpdate(nextProps) {
+    return nextProps.location.latitude && !this.props.location.latitude;
+  }
   render() {
     //发送消息给 html
     // setTimeout(()=>{

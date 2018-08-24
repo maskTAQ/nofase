@@ -59,20 +59,34 @@ class App extends Component {
   }
   async geolocation(){
     await Geolocation.init({
-      ios: "9bd6c82e77583020a73ef1af59d0c759",
+      ios: "43486760b696ca29d8bb2f6f3699485a",
       android: "043b24fe18785f33c491705ffe5b6935"
     })
     
     Geolocation.setOptions({
       interval: 8000,
-      distanceFilter: 20
+      distanceFilter: 1
     })
+    function bd_encrypt({longitude, latitude}) {
+      const X_PI = Math.PI * 3000.0 / 180.0;
+      const x = longitude, y = latitude;
+      const z = Math.sqrt(x * x + y * y) + 0.00001 * Math.sin(y * X_PI);
+      const theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * X_PI);
+     // const bd_lng = z * Math.cos(theta) + 0.001;
+     const bd_lng = z * Math.cos(theta) + 0.0065;
+      const bd_lat = z * Math.sin(theta) + 0.006;
+      return {
+        latitude: bd_lat,
+          longitude: bd_lng
+      };
+  }
     
     Geolocation.addLocationListener(location => {
       store.dispatch({
         type:'location',
-        payload:location
+        payload:Object.assign(location,bd_encrypt(location))
       })
+      
     })
     Geolocation.start();
   }
