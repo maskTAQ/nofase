@@ -30,7 +30,7 @@ class App extends Component {
     logoutModalVisible: false
   }
   componentWillMount() {
-    //this.autoLogin();
+    this.autoLogin();
     this.verifyToken();
     this.geolocation();
   }

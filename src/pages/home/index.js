@@ -20,7 +20,8 @@ import {
   Input,
   StarScore,
   TimeSlideChoose,
-  CheckBox
+  CheckBox,
+  Picker
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
@@ -56,7 +57,8 @@ export default class Home extends Component {
     isUpdateModalVisible: false,
     appUpdateInfo: {},
 
-    bannerData: []
+    bannerData: [],
+    pickerVisible: false
   };
   componentWillMount() {
     this.getNewApp();
@@ -192,6 +194,7 @@ export default class Home extends Component {
         UserArea: ""
       });
     }
+    console.log(params, "params");
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
@@ -267,7 +270,14 @@ export default class Home extends Component {
           }}
         />
         <View style={styles.searchContainer}>
-          <Button style={styles.searchTypeBox}>
+          <Button
+            style={styles.searchTypeBox}
+            onPress={() => {
+              this.setState({
+                pickerVisible: true
+              });
+            }}
+          >
             <Text style={styles.searchTypeValue}>
               {searchType[searchTypeIndex]}
             </Text>
@@ -689,10 +699,25 @@ export default class Home extends Component {
     );
   }
   render() {
-    const { isUpdateModalVisible, appUpdateInfo } = this.state;
+    const { isUpdateModalVisible, appUpdateInfo, pickerVisible } = this.state;
     return (
       <View style={{ flex: 1 }}>
         {this.renderHome()}
+        <Picker
+          data={[{ label: "店铺", value: "0" }, { label: "课程", value: "1" }]}
+          visible={pickerVisible}
+          onValueSelect={v => {
+            this.setState({
+              searchTypeIndex: v,
+              pickerVisible: false
+            });
+          }}
+          onRequestClose={() => {
+            this.setState({
+              pickerVisible: false
+            });
+          }}
+        />
         <UpdateModal
           ok={this.update}
           appUpdateInfo={appUpdateInfo}
