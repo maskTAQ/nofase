@@ -5,7 +5,7 @@ import AppNavigator from "../Navigation";
 import AppReducer from "src/reducers";
 
 const initialNav = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams("Login")
+  AppNavigator.router.getActionForPathAndParams("Home")
 );
 
 const initStore = {

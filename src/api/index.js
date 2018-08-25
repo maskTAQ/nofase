@@ -9,6 +9,9 @@ export default {
       timeout: 60000
     });
   },
+  getBanner(params) {
+    return post("/Admin/GetAdvTop8", params);
+  },
   //获取二维码地址
   getQrCodeUrl(UserId, CardId) {
     return Axios.request({

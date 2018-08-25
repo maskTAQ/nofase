@@ -1,90 +1,87 @@
 import { computeSize } from "src/common";
 
 export default {
-  header: {
-    height: computeSize(70),
-    paddingLeft: computeSize(10),
-    paddingRight: computeSize(10),
+  container: {
+    flex: 1,
     backgroundColor: "#1b9de6"
   },
-  tabContainer: {
+  header: {
+    height: computeSize(80),
+    paddingLeft: computeSize(12),
+    paddingRight: computeSize(12),
+    paddingTop: 20,
+    backgroundColor: "#1b9de6",
+    width: "100%",
     flexDirection: "row"
   },
-  tab: {
-    flex: 1,
-    height: computeSize(26),
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopLeftRadius: computeSize(8),
-    borderTopRightRadius: computeSize(8),
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    overflow: "hidden",
-    borderColor: "#f8b94a",
-    backgroundColor: "#f8b94a"
-  },
-  tabActive: {
-    borderColor: "#fff",
-    backgroundColor: "#fff"
-  },
-  tabLabel: {
-    color: "#fff",
-    fontSize: computeSize(14)
-  },
-  tabLabelActive: {
-    color: "#f8b94a"
+  mapPatternButton: {
+    width: computeSize(30),
+    height: computeSize(30),
+    marginTop: computeSize(5),
+    marginRight: computeSize(19),
+    borderRadius: computeSize(30)
   },
   searchContainer: {
+    flex: 1,
     flexDirection: "row",
-    height: computeSize(30),
+    height: computeSize(40),
     borderRadius: computeSize(8),
-    borderTopLeftRadius: 0,
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#fff",
     overflow: "hidden"
+  },
+  searchTypeBox: {
+    width: computeSize(70),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  searchTypeValue: {
+    fontSize: 12,
+    color: "#1b9de6"
+  },
+  searchTypeIcon: {
+    //width: computeSize(10),
   },
   searchInputWrapper: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center"
   },
-  searchInputIcon: {
-    paddingLeft: computeSize(10)
-  },
   searchInput: {
     flex: 1,
     fontSize: computeSize(14),
     paddingLeft: computeSize(4)
   },
-  search: {
-    width: computeSize(90),
+  searchButton: {
+    marginRight: computeSize(10),
+    width: computeSize(40),
     height: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "#fff",
-    backgroundColor: "#f8b94a",
-    borderTopRightRadius: computeSize(8),
-    borderBottomRightRadius: computeSize(8)
+    justifyContent: "center"
   },
-  searchLabel: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: computeSize(14)
+  swiperBox: {
+    height: computeSize(90)
+  },
+  swiperItemBox: {
+    flex: 1
+  },
+  swiperItemImg: {
+    flex: 1
   },
   chooseWrapper: {
     flexDirection: "row",
-    height: computeSize(24),
+    height: computeSize(30),
     backgroundColor: "#1b9de6",
-    borderBottomLeftRadius: computeSize(8),
-    borderBottomRightRadius: computeSize(8)
+    borderBottomWidth: 1,
+    borderColor: "#747474"
   },
   chooseModal: {
     position: "absolute",
     left: 0,
     right: 0,
+    zIndex: 99,
     backgroundColor: "#fff"
   },
   checkboxItem: {
@@ -114,7 +111,7 @@ export default {
   chooseItemBorder: {
     width: 1,
     height: "100%",
-    backgroundColor: "#ccc"
+    backgroundColor: "#747474"
   },
   chooseItemText: {
     marginRight: computeSize(4),
@@ -123,127 +120,131 @@ export default {
   },
   list: {
     flex: 1,
-    paddingTop: computeSize(2),
+    paddingTop: computeSize(6),
     paddingLeft: computeSize(10),
     paddingRight: computeSize(10),
     paddingBottom: computeSize(30),
-    backgroundColor: "#a9daef"
+    backgroundColor: "#fff"
   },
   item: {
-    position: "relative"
+    position: "relative",
+    height: computeSize(250)
   },
-  itemTop: {
-    flexDirection: "row",
-    padding: computeSize(4),
-    borderRadius: computeSize(6),
-    backgroundColor: "#fff",
-    position: "relative"
-  },
-  freeBox: {
-    width: computeSize(82),
-    height: computeSize(16),
+  itemBg: {
     position: "absolute",
-    bottom: computeSize(4),
-    left: computeSize(4),
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fc6621"
+    top: 2,
+    left: 2,
+    width: "100%",
+    height: "100%",
+    borderRadius: computeSize(10),
+    overflow: "hidden"
   },
-  freeBoxText: {
-    color: "#fff",
-    fontSize: computeSize(10)
-  },
-  itemBottom: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: computeSize(6),
-    paddingLeft: computeSize(4),
-    paddingRight: computeSize(10),
-    backgroundColor: "#fff",
-    borderRadius: computeSize(6),
-    height: computeSize(30)
-  },
-  tagWrapper: {
+
+  free: {
     position: "absolute",
-    top: computeSize(4),
-    left: computeSize(4),
-    paddingLeft: computeSize(4),
-    paddingRight: computeSize(4),
-    backgroundColor: "#f8b94a"
+    top: 0,
+    left: 0
   },
-  tagText: {
-    fontSize: computeSize(12),
-    fontWeight: "bold",
-    color: "#fff"
+  itemContent: {
+    position: "absolute",
+    top: 2,
+    left: 2,
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "flex-end"
   },
-  itemDetail: {
-    flex: 1,
-    padding: computeSize(4)
+  storeContentBg: {
+    position: "absolute",
+    bottom: 0,
+    left: 2,
+    height: computeSize(140)
   },
-  itemDetailTop: {
-    height: computeSize(24),
-    justifyContent: "center"
-  },
-  itemName: {
-    fontSize: computeSize(14),
-    fontWeight: "bold",
-    color: "#666"
-  },
-  itemDetailCenter: {
-    flex: 1,
+  storeDetail: {
+    height: computeSize(90),
+    //backgroundColor: 'rgba(255,255,255,0.3)',
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
+  },
+  storeImg: {
+    marginLeft: computeSize(10),
+    marginRight: computeSize(10),
+    width: computeSize(80),
+    height: computeSize(80)
+  },
+
+  storeContent: {
+    flex: 1,
+    flexDirection: "column",
+    paddingRight: computeSize(10)
+  },
+  storeName: {
+    height: computeSize(30),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  storeNameText: {
+    fontSize: computeSize(15),
+    color: "#000"
+  },
+  priceText: {
+    fontSize: computeSize(17),
+    color: "#1b9de6"
+  },
+  storeCenter: {
+    height: computeSize(30),
+    flexDirection: "row",
     justifyContent: "space-between"
   },
-  itemDetailBottom: {
-    flexDirection: "row",
-
+  storeDistance: {
+    height: "100%",
+    justifyContent: "center",
     alignItems: "center"
   },
-  lessionButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingLeft: computeSize(10),
-    height: computeSize(20),
-    backgroundColor: "#f8b94a",
-    borderRadius: computeSize(20)
-  },
-  lessionText: {
+  storeDistanceText: {
     fontSize: computeSize(12),
+    color: "#747474"
+  },
+  storeScoreBox: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  storeScoreText: {
+    fontSize: computeSize(12),
+    color: "#1b9de6"
+  },
+  storeBottom: {
+    height: computeSize(25),
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  storeAddr: {
+    flex: 1
+  },
+  storeAddrText: {
+    fontSize: computeSize(12),
+    color: "#747474"
+  },
+  capsule: {
+    position: "absolute",
+    right: computeSize(10),
+    height: computeSize(25),
+    borderRadius: computeSize(10),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
+    backgroundColor: "#1b9de6",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  capsuleText: {
+    fontSize: computeSize(14),
     color: "#fff"
   },
-
-  itemDistance: {
-    lineHeight: computeSize(20),
-    fontSize: computeSize(12),
-    color: "#999"
+  capsuleO: {
+    top: computeSize(10)
   },
-
-  itemAddr: {
-    flex: 1,
-    fontSize: computeSize(12),
-    color: "#999"
-  },
-  navgationButton: {
-    alignItems: "center"
-  },
-  navgationText: {
-    fontSize: computeSize(10),
-    //fontWeight: "bold",
-    color: "#1296DB"
-  },
-  evaluateLabel: {
-    fontSize: computeSize(12),
-    color: "#666"
-  },
-  evaluateValue: {
-    fontSize: computeSize(12),
-    fontWeight: "bold",
-    color: "#1296DB"
-  },
-  price: {
-    fontSize: computeSize(14),
-    fontWeight: "bold",
-    color: "#1296DB"
+  capsuleT: {
+    top: computeSize(40)
   }
 };

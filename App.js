@@ -13,10 +13,10 @@ import PropTypes from 'prop-types';
 
 import Navigation from "src/Navigation";
 import store from 'src/store';
-import { Tip ,LogoutModal} from 'src/components';
+import { Tip, LogoutModal } from 'src/components';
 import action from "src/action";
 import api from "src/api";
-import {WebSocket,Geolocation} from 'src/common';
+import { WebSocket, Geolocation } from 'src/common';
 
 
 class App extends Component {
@@ -26,11 +26,11 @@ class App extends Component {
     nav: PropTypes.object.isRequired,
     auth: PropTypes.object
   };
-  state={
+  state = {
     logoutModalVisible: false
   }
   componentWillMount() {
-    this.autoLogin();
+    //this.autoLogin();
     this.verifyToken();
     this.geolocation();
   }
@@ -51,42 +51,43 @@ class App extends Component {
     if (isLogin && !nextIsLogin) {
       JPushModule.stopPush();
     }
+    console.log(nextProps)
   }
   componentWillUnmount() {
     if (Platform.OS === "android") {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
   }
-  async geolocation(){
+  async geolocation() {
     await Geolocation.init({
       ios: "43486760b696ca29d8bb2f6f3699485a",
       android: "043b24fe18785f33c491705ffe5b6935"
     })
-    
+
     Geolocation.setOptions({
       interval: 8000,
-      distanceFilter: 1
+      distanceFilter: 100
     })
-    function bd_encrypt({longitude, latitude}) {
+    function bd_encrypt({ longitude, latitude }) {
       const X_PI = Math.PI * 3000.0 / 180.0;
       const x = longitude, y = latitude;
       const z = Math.sqrt(x * x + y * y) + 0.00001 * Math.sin(y * X_PI);
       const theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * X_PI);
-     // const bd_lng = z * Math.cos(theta) + 0.001;
-     const bd_lng = z * Math.cos(theta) + 0.0065;
+      // const bd_lng = z * Math.cos(theta) + 0.001;
+      const bd_lng = z * Math.cos(theta) + 0.0065;
       const bd_lat = z * Math.sin(theta) + 0.006;
       return {
         latitude: bd_lat,
-          longitude: bd_lng
+        longitude: bd_lng
       };
-  }
-    
+    }
+
     Geolocation.addLocationListener(location => {
       store.dispatch({
-        type:'location',
-        payload:Object.assign(location,bd_encrypt(location))
+        type: 'location',
+        payload: Object.assign(location, bd_encrypt(location))
       })
-      
+
     })
     Geolocation.start();
   }
@@ -97,7 +98,7 @@ class App extends Component {
       });
     })
       .catch(e => ({ close: () => { } }));
-      WebSocket.QRWebsocket(UserId)
+    WebSocket.QRWebsocket(UserId)
       .then(res => {
         // this.props.navigation.dispatch(
         //   action.navigate.go({ routeName: "Pay" })
@@ -107,7 +108,7 @@ class App extends Component {
         Tip.fail("连接商家失败");
       });
   }
-  
+
   logout = () => {
     this.setState(
       {
@@ -169,7 +170,7 @@ class App extends Component {
       })
     } else {
       JPushModule.setupPush();
-      
+
     }
     /**
        * 请注意这个接口要传一个数组过去，这里只是个简单的示范
@@ -212,7 +213,7 @@ class App extends Component {
   };
   render() {
     const { dispatch, nav } = this.props;
-    const {logoutModalVisible} = this.state;
+    const { logoutModalVisible } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <Navigation navigation={addNavigationHelpers({ dispatch, state: nav })} />

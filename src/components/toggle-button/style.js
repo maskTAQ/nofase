@@ -5,7 +5,7 @@ export default {
     left: 0,
     right: 0,
     bottom: 0,
-    height: computeSize(88),
+    height: computeSize(60),
     paddingTop: 0
   },
   bg: {
@@ -18,6 +18,7 @@ export default {
     paddingBottom: 0
   },
   toggleButton: {
+    height: 0,
     alignItems: "center"
   },
   buttonGroup: {
@@ -25,7 +26,7 @@ export default {
     flexDirection: "row"
   },
   buttonLeft: {
-    width: computeSize(56),
+    width: computeSize(66),
     justifyContent: "center",
     alignItems: "center"
   },
@@ -35,7 +36,7 @@ export default {
     alignItems: "center"
   },
   buttonRight: {
-    width: computeSize(56),
+    width: computeSize(66),
     justifyContent: "center",
     alignItems: "center"
   }

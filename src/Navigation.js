@@ -27,7 +27,7 @@ import {
   WxBind
 } from "src/pages";
 
-import { Map } from "src/components";
+import { Map, Web } from "src/components";
 
 import { TimeSlideChoose } from "src/components";
 export const RouteConfigs = {
@@ -108,6 +108,9 @@ export const RouteConfigs = {
   },
   WxBind: {
     screen: WxBind
+  },
+  Web: {
+    screen: Web
   }
 };
 
