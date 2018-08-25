@@ -20,8 +20,7 @@ import {
   Input,
   StarScore,
   TimeSlideChoose,
-  CheckBox,
-  Map
+  CheckBox
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
@@ -242,38 +241,7 @@ export default class Home extends Component {
       })
     );
   };
-  renderMapPattern = () => {
-    return (
-      <Page
-        title="地图模式"
-        LeftComponent={
-          <Button
-            onPress={() => {
-              this.togglePattern("list");
-            }}
-          >
-            <Icon size={computeSize(20)} source={require("./img/list.png")} />
-          </Button>
-        }
-        RightComponent={
-          <Button
-            onPress={() => {
-              this.togglePattern("list");
-            }}
-          >
-            <Icon size={computeSize(16)} source={require("./img/search.png")} />
-          </Button>
-        }
-      >
-        <Map
-          onStoreTap={id => {
-            this.goStoreDetail(id);
-          }}
-        />
-        <ToggleButton />
-      </Page>
-    );
-  };
+
   changeTab(NextTabActiveIndex) {
     const { searchTypeIndex } = this.state;
     if (NextTabActiveIndex !== searchTypeIndex) {
@@ -288,7 +256,16 @@ export default class Home extends Component {
     const searchType = ["店铺", "课程"];
     return (
       <View style={styles.header}>
-        <View style={styles.mapPatternButton} />
+        <Button
+          style={styles.mapPatternButton}
+          onPress={() => {
+            this.props.navigation.dispatch(
+              action.navigate.go({
+                routeName: "MapPattern"
+              })
+            );
+          }}
+        />
         <View style={styles.searchContainer}>
           <Button style={styles.searchTypeBox}>
             <Text style={styles.searchTypeValue}>

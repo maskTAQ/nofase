@@ -24,7 +24,8 @@ import {
   A2,
   A3,
   PayResult,
-  WxBind
+  WxBind,
+  MapPattern
 } from "src/pages";
 
 import { Map, Web } from "src/components";
@@ -111,6 +112,9 @@ export const RouteConfigs = {
   },
   Web: {
     screen: Web
+  },
+  MapPattern: {
+    screen: MapPattern
   }
 };
 
