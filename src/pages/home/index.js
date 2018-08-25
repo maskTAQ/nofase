@@ -56,6 +56,14 @@ export default class Home extends Component {
   componentWillMount() {
     this.getNewApp();
   }
+  componentWillReceiveProps(nextProps) {
+    const { location: nextLoadtion } = nextProps;
+    const { location: preLoadtion } = this.props;
+
+    if (!preLoadtion.longitude && nextLoadtion.longitude) {
+      this.search(1);
+    }
+  }
   getNewApp() {
     api
       .getNewApp({
@@ -147,7 +155,8 @@ export default class Home extends Component {
       StoreOrder: chooseTypeValue,
       PageIndex,
       PageNum: 20,
-      ...location
+      userLat: location.latitude,
+      userLng: location.longitude
     };
     if (tabActiveIndex === 0) {
       Object.assign(params, {
@@ -163,7 +172,6 @@ export default class Home extends Component {
         UserArea: ""
       });
     }
-    console.log(params);
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
