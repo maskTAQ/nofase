@@ -5,7 +5,8 @@ import {
   RefreshControl,
   ScrollView,
   AppState,
-  Alert
+  Alert,
+  Image
 } from "react-native";
 import PropTypes from "prop-types";
 
@@ -219,7 +220,28 @@ export default class Recharge extends Component {
               当前余额：{Number(Money).toFixed(2)}
             </Text>
           </View>
-          <Text style={styles.checklabel}>选择支付方式：</Text>
+          <View style={styles.checklabelBox}>
+            <Text style={styles.checklabel}>选择支付方式：</Text>
+            <Button
+              style={styles.imgBox}
+              onPress={() => {
+                this.props.navigation.dispatch(
+                  action.navigate.go({
+                    routeName: "Web",
+                    params: {
+                      AdvUrl: "https://vmslq.cn/499gmy",
+                      AdvStoreName: "充值活动"
+                    }
+                  })
+                );
+              }}
+            >
+              <Image
+                style={{ flex: 1 }}
+                source={require("./img/huodong.png")}
+              />
+            </Button>
+          </View>
         </View>
         <CheckBox
           data={payWayMap}

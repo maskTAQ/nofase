@@ -104,5 +104,13 @@ export default {
     backgroundColor: "#1b9de6",
     justifyContent: "center",
     alignItems: "center"
+  },
+  checklabelBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end"
+  },
+  checklabel: {
+    color: "#666"
   }
 };

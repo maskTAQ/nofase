@@ -62,7 +62,7 @@ export default {
     justifyContent: "center"
   },
   swiperBox: {
-    height: computeSize(90)
+    height: computeSize(130)
   },
   swiperItemBox: {
     flex: 1

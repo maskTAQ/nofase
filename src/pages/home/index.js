@@ -115,15 +115,16 @@ export default class Home extends Component {
     ],
     city: [
       { label: "全部", value: 0 },
-      { label: "福田", value: 1 },
-      { label: "罗湖", value: 2 },
-      { label: "南山", value: 3 },
-      { label: "宝安", value: 4 },
-      { label: "龙岗", value: 5 },
-      { label: "龙岗新区", value: 6 },
-      { label: "盐田", value: 7 },
-      { label: "南澳大鹏新区", value: 8 },
-      { label: "坪山新区", value: 9 }
+      { label: "罗湖区", value: 2 },
+      { label: "福田区", value: 1 },
+      { label: "盐田区", value: 7 },
+      { label: "南山区", value: 3 },
+      { label: "宝安区", value: 4 },
+      { label: "龙岗区", value: 5 },
+      { label: "龙华区", value: 6 },
+
+      { label: "坪山区", value: 9 },
+      { label: "南澳大鹏新区", value: 8 }
     ],
     distance: [
       { label: "1km", value: 1 },
@@ -268,7 +269,9 @@ export default class Home extends Component {
               })
             );
           }}
-        />
+        >
+          <Icon size={26} source={require("./img/switch.gif")} />
+        </Button>
         <View style={styles.searchContainer}>
           <Button
             style={styles.searchTypeBox}
@@ -318,11 +321,11 @@ export default class Home extends Component {
     //const data = ['https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/baidu_jgylogo3.gif'];
     return (
       <View style={styles.swiperBox}>
-        <Swiper autoplay>
+        <Swiper>
           {bannerData.map((item, i) => {
             const { ImgUrl } = item;
             return (
-              <Button
+              <View
                 onPress={() => {
                   this.props.navigation.dispatch(
                     action.navigate.go({
@@ -335,7 +338,7 @@ export default class Home extends Component {
                 key={ImgUrl}
               >
                 <Image style={styles.swiperItemImg} source={{ uri: ImgUrl }} />
-              </Button>
+              </View>
             );
           })}
         </Swiper>
@@ -546,7 +549,6 @@ export default class Home extends Component {
   }
   renderItem(row, i) {
     const {
-      Contract,
       StoreName,
       NowCurriculum,
       NowPeopleNum,
@@ -563,7 +565,7 @@ export default class Home extends Component {
     return (
       <Button onPress={() => this.goStoreDetail(Id)} style={styles.item}>
         <View style={styles.itemBg}>
-          <Image style={{ flex: 1 }} source={{ uri: Contract }} />
+          <Image style={{ flex: 1 }} source={{ uri: StoreImg }} />
           <View style={styles.storeContentBg}>{storeContentBg}</View>
         </View>
         <View style={styles.itemContent}>
