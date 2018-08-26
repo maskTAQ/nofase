@@ -281,7 +281,7 @@ export default class Home extends Component {
         >
           <Icon
             size={styles.mapPatternButton.width}
-            source={require("./img/switch.gif")}
+            source={require("./img/switch.png")}
           />
         </Button>
         <View style={styles.searchContainer}>

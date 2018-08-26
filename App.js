@@ -62,10 +62,16 @@ class App extends Component {
   intervalGetLocation() {
     GeolocationBaiDu.getCurrentPosition()
       .then((location) => {
-        store.dispatch({
-          type: 'location',
-          payload: Object.assign(location)
-        })
+        if(!location.latitude){
+            setTimeout(this.intervalGetLocation, 1500);
+        }else{
+          console.log(location,'weiz')
+          store.dispatch({
+            type: 'location',
+            payload: Object.assign(location)
+          })
+        }
+        
         // return Promise.resolve({
         //   userLat: latitude,
         //   userLng: longitude
