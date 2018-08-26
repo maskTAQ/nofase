@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>nofase.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>bitcode</key>
+			<true/>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>B858F9CADD515CB827B771F45B46DE6378B6D941</string>
+				<key>dateExpires</key>
+				<string>2019/6/9</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>B9X9R8AKSM.org.reactjs.native.example.nofase</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>B9X9R8AKSM</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>nofase.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>90f1ecda-9975-4790-95a5-55240cf56bd2</string>
+				<key>name</key>
+				<string>iOS Team Store Provisioning Profile: org.reactjs.native.example.nofase</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>B9X9R8AKSM</string>
+				<key>name</key>
+				<string>long feng</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

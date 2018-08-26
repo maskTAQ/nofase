@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Text, View, Platform, Linking, StatusBar, Image } from "react-native";
+import {
+  Dimensions,
+  Text,
+  View,
+  Platform,
+  Linking,
+  StatusBar,
+  Image,
+  ScrollView
+} from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Swiper from "react-native-swiper";
@@ -13,7 +22,6 @@ import styles from "./style";
 
 import {
   DataView,
-  Page,
   Button,
   Icon,
   ToggleButton,
@@ -25,6 +33,7 @@ import {
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
+const { height: screenHeight } = Dimensions.get("window");
 
 const storeContentBg = (
   <Image style={{ flex: 1 }} source={require("./img/bg.png")} />
@@ -115,16 +124,16 @@ export default class Home extends Component {
     ],
     city: [
       { label: "全部", value: 0 },
-      { label: "罗湖区", value: 2 },
-      { label: "福田区", value: 1 },
-      { label: "盐田区", value: 7 },
-      { label: "南山区", value: 3 },
-      { label: "宝安区", value: 4 },
-      { label: "龙岗区", value: 5 },
-      { label: "龙华区", value: 6 },
+      { label: "罗湖区", value: 1 },
+      { label: "福田区", value: 2 },
+      { label: "盐田区", value: 3 },
+      { label: "南山区", value: 4 },
+      { label: "宝安区", value: 5 },
+      { label: "龙岗区", value: 6 },
+      { label: "龙华区", value: 7 },
 
-      { label: "坪山区", value: 9 },
-      { label: "南澳大鹏新区", value: 8 }
+      { label: "坪山区", value: 8 },
+      { label: "南澳大鹏新区", value: 9 }
     ],
     distance: [
       { label: "1km", value: 1 },
@@ -270,7 +279,7 @@ export default class Home extends Component {
             );
           }}
         >
-          <Icon size={26} source={require("./img/switch.gif")} />
+          <Icon size={30} source={require("./img/switch.gif")} />
         </Button>
         <View style={styles.searchContainer}>
           <Button
@@ -316,16 +325,58 @@ export default class Home extends Component {
       </View>
     );
   }
+  renderPagination = (index, total, context) => {
+    const { bannerData } = this.state;
+    console.log(1, index);
+    return (
+      <View
+        style={{
+          height: 10,
+          flexDirection: "row",
+          position: "absolute",
+          bottom: 10,
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {bannerData.map((item, i) => {
+          const isAcitve = i === index;
+
+          return (
+            <View
+              style={{
+                marginLeft: 4,
+                marginRight: 4,
+                width: 10,
+                height: 10,
+                backgroundColor: isAcitve ? "#1b9de6" : "#fff",
+                borderRadius: 10
+              }}
+              key={i}
+            />
+          );
+        })}
+      </View>
+    );
+  };
   renderSwiper() {
     const { bannerData } = this.state;
     //const data = ['https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/baidu_jgylogo3.gif'];
     return (
       <View style={styles.swiperBox}>
-        <Swiper>
+        <Swiper
+          autoplay
+          autoplayTimeout={3}
+          renderPagination={this.renderPagination}
+          onIndexChanged={i => {
+            console.log(`ii:${i}`);
+          }}
+        >
           {bannerData.map((item, i) => {
             const { ImgUrl } = item;
             return (
-              <View
+              <Button
                 onPress={() => {
                   this.props.navigation.dispatch(
                     action.navigate.go({
@@ -338,7 +389,7 @@ export default class Home extends Component {
                 key={ImgUrl}
               >
                 <Image style={styles.swiperItemImg} source={{ uri: ImgUrl }} />
-              </View>
+              </Button>
             );
           })}
         </Swiper>
@@ -627,49 +678,6 @@ export default class Home extends Component {
     );
   }
 
-  renderListPattern() {
-    const { searchTypeIndex } = this.state;
-    const { startDay, endDay } = this.store.daysInfo;
-    return (
-      <Page
-        title="列表模式"
-        LeftComponent={
-          <Button
-            onPress={() => {
-              this.togglePattern("map");
-            }}
-          >
-            <Icon size={computeSize(20)} source={require("./img/map.png")} />
-          </Button>
-        }
-        // RightComponent={
-        //   <Button
-        //     style={{ flexDirection: "row", alignItems: "center" }}
-        //   >
-        //     <Text style={{ color: "#fff" }}>{city[cityValue].label}</Text>
-        //     <Icon size={20} source={require("./img/u305.png")} />
-        //   </Button>
-        // }
-      >
-        {this.renderHeader()}
-        {!!searchTypeIndex && (
-          <TimeSlideChoose
-            startIndex={startDay}
-            endIndex={endDay}
-            onDayChange={({ startIndex, endIndex }) => {
-              Object.assign(this.store.daysInfo, {
-                startDay: startIndex,
-                endDay: endIndex
-              });
-            }}
-          />
-        )}
-        {this.renderChoose()}
-        {this.renderList()}
-        {this.renderChooseModal()}
-      </Page>
-    );
-  }
   renderHome() {
     const { searchTypeIndex } = this.state;
     const { startDay, endDay } = this.store.daysInfo;
@@ -682,7 +690,7 @@ export default class Home extends Component {
         />
         {this.renderHeader()}
         {this.renderSwiper()}
-        {!!searchTypeIndex && (
+        {searchTypeIndex === "1" && (
           <TimeSlideChoose
             startIndex={startDay}
             endIndex={endDay}
@@ -703,34 +711,39 @@ export default class Home extends Component {
   render() {
     const { isUpdateModalVisible, appUpdateInfo, pickerVisible } = this.state;
     return (
-      <View style={{ flex: 1 }}>
-        {this.renderHome()}
-        <Picker
-          data={[{ label: "店铺", value: "0" }, { label: "课程", value: "1" }]}
-          visible={pickerVisible}
-          onValueSelect={v => {
-            this.setState({
-              searchTypeIndex: v,
-              pickerVisible: false
-            });
-          }}
-          onRequestClose={() => {
-            this.setState({
-              pickerVisible: false
-            });
-          }}
-        />
-        <UpdateModal
-          ok={this.update}
-          appUpdateInfo={appUpdateInfo}
-          close={() => {
-            this.setState({
-              isUpdateModalVisible: false
-            });
-          }}
-          isVisible={isUpdateModalVisible}
-        />
-      </View>
+      <ScrollView style={{ height: screenHeight }}>
+        <View style={{ height: screenHeight }}>
+          {this.renderHome()}
+          <Picker
+            data={[
+              { label: "店铺", value: "0" },
+              { label: "课程", value: "1" }
+            ]}
+            visible={pickerVisible}
+            onValueSelect={v => {
+              this.setState({
+                searchTypeIndex: v,
+                pickerVisible: false
+              });
+            }}
+            onRequestClose={() => {
+              this.setState({
+                pickerVisible: false
+              });
+            }}
+          />
+          <UpdateModal
+            ok={this.update}
+            appUpdateInfo={appUpdateInfo}
+            close={() => {
+              this.setState({
+                isUpdateModalVisible: false
+              });
+            }}
+            isVisible={isUpdateModalVisible}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }

@@ -19,16 +19,24 @@ export default class Activity extends Component {
   };
   list = [
     {
-      bg: require("./img/3.png"),
+      bg: require("./img/a1.png"),
       routeName: "A1"
     },
     {
-      bg: require("./img/4.png"),
+      bg: require("./img/a2.png"),
       routeName: "A2"
     },
     {
-      bg: require("./img/13.png"),
+      bg: require("./img/a3.png"),
       routeName: "A3"
+    },
+    {
+      bg: require("./img/a4.png"),
+      routeName: "Web",
+      web: {
+        AdvUrl: "http://vmslq.com/499gmy/",
+        AdvStoreName: "1对1线上vip私教"
+      }
     }
   ];
   renderShareBar() {
@@ -111,13 +119,19 @@ export default class Activity extends Component {
             <View style={styles.bgBottom} />
           </View>
           <View style={styles.content}>
-            {list.map(({ bg, routeName }) => {
+            {list.map(({ bg, routeName, web }) => {
               return (
                 <Button
                   onPress={() => {
-                    this.props.navigation.dispatch(
-                      action.navigate.go({ routeName })
-                    );
+                    if (web) {
+                      this.props.navigation.dispatch(
+                        action.navigate.go({ routeName: "Web", params: web })
+                      );
+                    } else {
+                      this.props.navigation.dispatch(
+                        action.navigate.go({ routeName })
+                      );
+                    }
                   }}
                   style={styles.item}
                   key={bg}

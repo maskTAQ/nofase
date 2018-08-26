@@ -3,6 +3,7 @@ package com.nofase;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import cn.qiuxiang.react.geolocation.AMapGeolocationPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.rnfs.RNFSPackage;
 
@@ -26,7 +27,7 @@ import java.util.List;
 import com.burnweb.rnwebview.RNWebViewPackage;
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
 
-import com.nofase.geolocation.AMapGeolocationPackage;
+//import com.nofase.geolocation.AMapGeolocationPackage;
 public class MainApplication extends Application implements ReactApplication {
   // 设置为 true 将不会弹出 toast
   private boolean SHUTDOWN_TOAST = true;
@@ -42,9 +43,10 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new AMapGeolocationPackage(),
             new ImagePickerPackage(),
             new RNFSPackage(), new SharePackage(), new AlipayPackage(),
-          new RNWebViewPackage(), new WxpayPackage(), new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),new BaiduMapPackage(getApplicationContext()),new AMapGeolocationPackage());
+          new RNWebViewPackage(), new WxpayPackage(), new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),new BaiduMapPackage(getApplicationContext()));
     }
 
     @Override

@@ -6,9 +6,9 @@ export default {
     backgroundColor: "#1b9de6"
   },
   header: {
-    height: computeSize(80),
-    paddingLeft: computeSize(12),
-    paddingRight: computeSize(12),
+    height: computeSize(70),
+    paddingLeft: computeSize(6),
+    paddingRight: computeSize(6),
     paddingTop: 20,
     backgroundColor: "#1b9de6",
     width: "100%",
@@ -17,14 +17,14 @@ export default {
   mapPatternButton: {
     width: computeSize(30),
     height: computeSize(30),
-    marginTop: computeSize(5),
+    marginTop: computeSize(0),
     marginRight: computeSize(19),
     borderRadius: computeSize(30)
   },
   searchContainer: {
     flex: 1,
     flexDirection: "row",
-    height: computeSize(40),
+    height: computeSize(36),
     borderRadius: computeSize(8),
     backgroundColor: "#fff",
     overflow: "hidden"
@@ -62,7 +62,7 @@ export default {
     justifyContent: "center"
   },
   swiperBox: {
-    height: computeSize(130)
+    height: computeSize(90)
   },
   swiperItemBox: {
     flex: 1
@@ -75,7 +75,7 @@ export default {
     height: computeSize(30),
     backgroundColor: "#1b9de6",
     borderBottomWidth: 1,
-    borderColor: "#747474"
+    borderColor: "#ccc"
   },
   chooseModal: {
     position: "absolute",
@@ -128,7 +128,7 @@ export default {
   },
   item: {
     position: "relative",
-    height: computeSize(250)
+    height: computeSize(180)
   },
   itemBg: {
     position: "absolute",
@@ -157,8 +157,9 @@ export default {
   storeContentBg: {
     position: "absolute",
     bottom: 0,
-    left: 2,
-    height: computeSize(140)
+    left: 0,
+    right: 0,
+    height: computeSize(100)
   },
   storeDetail: {
     height: computeSize(90),
@@ -169,8 +170,8 @@ export default {
   storeImg: {
     marginLeft: computeSize(10),
     marginRight: computeSize(10),
-    width: computeSize(80),
-    height: computeSize(80)
+    width: computeSize(60),
+    height: computeSize(60)
   },
 
   storeContent: {
@@ -179,7 +180,7 @@ export default {
     paddingRight: computeSize(10)
   },
   storeName: {
-    height: computeSize(30),
+    height: computeSize(20),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center"
@@ -193,7 +194,7 @@ export default {
     color: "#1b9de6"
   },
   storeCenter: {
-    height: computeSize(30),
+    height: computeSize(20),
     flexDirection: "row",
     justifyContent: "space-between"
   },
@@ -215,7 +216,7 @@ export default {
     color: "#1b9de6"
   },
   storeBottom: {
-    height: computeSize(25),
+    height: computeSize(20),
     flexDirection: "row",
     justifyContent: "space-between"
   },

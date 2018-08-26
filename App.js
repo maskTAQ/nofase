@@ -65,8 +65,8 @@ class App extends Component {
     })
 
     Geolocation.setOptions({
-      interval: 8000,
-      distanceFilter: 100
+      interval: 1000,
+      distanceFilter: 1000
     })
     function bd_encrypt({ longitude, latitude }) {
       const X_PI = Math.PI * 3000.0 / 180.0;
