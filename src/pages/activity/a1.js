@@ -70,7 +70,7 @@ export default class A1 extends Component {
                 <Image
                   style={styles.topImg}
                   resizeMode="stretch"
-                  source={require("./img/f.png")}
+                  source={require("./img/a1.png")}
                 />
                 <Image
                   style={styles.descTextImg}

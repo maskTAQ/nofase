@@ -21,3 +21,4 @@ export { default as LoadingImage } from "./loading-image";
 export { default as LogoutModal } from "./logout-modal";
 export { default as UpdateModal } from "./update-modal";
 export { default as ShareBar } from "./share-bar";
+export { default as Web } from "./web";

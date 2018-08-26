@@ -152,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-amap-geolocation')
     compile project(':react-native-image-picker')
     compile project(':react-native-fs')
     compile project(':jcore-react-native')

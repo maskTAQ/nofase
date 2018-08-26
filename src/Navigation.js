@@ -24,10 +24,11 @@ import {
   A2,
   A3,
   PayResult,
-  WxBind
+  WxBind,
+  MapPattern
 } from "src/pages";
 
-import { Map } from "src/components";
+import { Map, Web } from "src/components";
 
 import { TimeSlideChoose } from "src/components";
 export const RouteConfigs = {
@@ -108,6 +109,12 @@ export const RouteConfigs = {
   },
   WxBind: {
     screen: WxBind
+  },
+  Web: {
+    screen: Web
+  },
+  MapPattern: {
+    screen: MapPattern
   }
 };
 

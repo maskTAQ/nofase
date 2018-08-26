@@ -1,7 +1,17 @@
 import React, { Component } from "react";
-import { Text, View, Platform, Linking } from "react-native";
+import {
+  Dimensions,
+  Text,
+  View,
+  Platform,
+  Linking,
+  StatusBar,
+  Image,
+  ScrollView
+} from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Swiper from "react-native-swiper";
 
 import api from "src/api";
 import action from "src/action";
@@ -12,7 +22,6 @@ import styles from "./style";
 
 import {
   DataView,
-  Page,
   Button,
   Icon,
   ToggleButton,
@@ -20,13 +29,17 @@ import {
   StarScore,
   TimeSlideChoose,
   CheckBox,
-  Map
+  Picker
 } from "src/components";
 
 const Height = () => <View style={{ height: 10 }} />;
+const { height: screenHeight } = Dimensions.get("window");
 
-const StoreImgIcon = (
-  <Icon size={computeSize(82)} source={require("./img/logo.png")} />
+const storeContentBg = (
+  <Image style={{ flex: 1 }} source={require("./img/bg.png")} />
+);
+const freeIcon = (
+  <Image style={styles.free} source={require("./img/free.png")} />
 );
 @connect(state => {
   const { auth: { UserId }, location } = state;
@@ -40,7 +53,7 @@ export default class Home extends Component {
   };
   state = {
     pattern: "list", //['map','list']
-    tabActiveIndex: 0,
+    searchTypeIndex: 0,
     chooseTabActiveIndex: NaN,
     chooseTypeValue: 1,
     cityValue: 0,
@@ -51,10 +64,22 @@ export default class Home extends Component {
     endDay: 4,
 
     isUpdateModalVisible: false,
-    appUpdateInfo: {}
+    appUpdateInfo: {},
+
+    bannerData: [],
+    pickerVisible: false
   };
   componentWillMount() {
     this.getNewApp();
+    this.getBanner();
+  }
+  componentWillReceiveProps(nextProps) {
+    const { location: nextLoadtion } = nextProps;
+    const { location: preLoadtion } = this.props;
+
+    if (!preLoadtion.longitude && nextLoadtion.longitude) {
+      this.search(1);
+    }
   }
   getNewApp() {
     api
@@ -74,6 +99,20 @@ export default class Home extends Component {
         }
       });
   }
+  getBanner() {
+    const { location } = this.props;
+    api
+      .getBanner({
+        userLat: location.latitude || 0,
+        userLng: location.longitude || 0
+      })
+      .then(res => {
+        this.setState({
+          bannerData: res
+        });
+        //console.log(res);
+      });
+  }
   store = {
     chooseType: [
       //{ label: "默认", value: 0 },
@@ -85,15 +124,16 @@ export default class Home extends Component {
     ],
     city: [
       { label: "全部", value: 0 },
-      { label: "福田", value: 1 },
-      { label: "罗湖", value: 2 },
-      { label: "南山", value: 3 },
-      { label: "宝安", value: 4 },
-      { label: "龙岗", value: 5 },
-      { label: "龙岗新区", value: 6 },
-      { label: "盐田", value: 7 },
-      { label: "南澳大鹏新区", value: 8 },
-      { label: "坪山新区", value: 9 }
+      { label: "罗湖区", value: 1 },
+      { label: "福田区", value: 2 },
+      { label: "盐田区", value: 3 },
+      { label: "南山区", value: 4 },
+      { label: "宝安区", value: 5 },
+      { label: "龙岗区", value: 6 },
+      { label: "龙华区", value: 7 },
+
+      { label: "坪山区", value: 8 },
+      { label: "南澳大鹏新区", value: 9 }
     ],
     distance: [
       { label: "1km", value: 1 },
@@ -135,7 +175,7 @@ export default class Home extends Component {
     const { location } = this.props;
     const {
       distanceValue,
-      tabActiveIndex,
+      searchTypeIndex,
       chooseTypeValue,
       StoreName,
       cityValue
@@ -147,9 +187,10 @@ export default class Home extends Component {
       StoreOrder: chooseTypeValue,
       PageIndex,
       PageNum: 20,
-      ...location
+      userLat: location.latitude,
+      userLng: location.longitude
     };
-    if (tabActiveIndex === 0) {
+    if (searchTypeIndex === 0) {
       Object.assign(params, {
         SeachType: 1, //按店铺搜索
         UserArea: cityValue === 0 ? "" : this.store.city[cityValue].label
@@ -163,7 +204,7 @@ export default class Home extends Component {
         UserArea: ""
       });
     }
-    console.log(params);
+    console.log(params, "params");
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
@@ -213,50 +254,209 @@ export default class Home extends Component {
       })
     );
   };
-  renderMapPattern = () => {
-    return (
-      <Page
-        title="地图模式"
-        LeftComponent={
-          <Button
-            onPress={() => {
-              this.togglePattern("list");
-            }}
-          >
-            <Icon size={computeSize(20)} source={require("./img/list.png")} />
-          </Button>
-        }
-        RightComponent={
-          <Button
-            onPress={() => {
-              this.togglePattern("list");
-            }}
-          >
-            <Icon size={computeSize(16)} source={require("./img/search.png")} />
-          </Button>
-        }
-      >
-        <Map
-          onStoreTap={id => {
-            this.goStoreDetail(id);
-          }}
-        />
-        <ToggleButton />
-      </Page>
-    );
-  };
+
   changeTab(NextTabActiveIndex) {
-    const { tabActiveIndex } = this.state;
-    if (NextTabActiveIndex !== tabActiveIndex) {
-      this.setState({ tabActiveIndex: NextTabActiveIndex }, () => {
+    const { searchTypeIndex } = this.state;
+    if (NextTabActiveIndex !== searchTypeIndex) {
+      this.setState({ searchTypeIndex: NextTabActiveIndex }, () => {
         this.storeListRef.triggerRefresh();
       });
     }
   }
+
+  renderHeader() {
+    const { searchTypeIndex, StoreName } = this.state;
+    const searchType = ["店铺", "课程"];
+    return (
+      <View style={styles.header}>
+        <Button
+          style={styles.mapPatternButton}
+          onPress={() => {
+            this.props.navigation.dispatch(
+              action.navigate.go({
+                routeName: "MapPattern"
+              })
+            );
+          }}
+        >
+          <Icon size={30} source={require("./img/switch.gif")} />
+        </Button>
+        <View style={styles.searchContainer}>
+          <Button
+            style={styles.searchTypeBox}
+            onPress={() => {
+              this.setState({
+                pickerVisible: true
+              });
+            }}
+          >
+            <Text style={styles.searchTypeValue}>
+              {searchType[searchTypeIndex]}
+            </Text>
+            <Image
+              style={styles.searchTypeIcon}
+              source={require("./img/dropdown.png")}
+            />
+          </Button>
+          <View style={styles.searchInputWrapper}>
+            <Input
+              value={StoreName}
+              onChangeText={v => this.setState({ StoreName: v })}
+              style={styles.searchInput}
+              placeholder="通过课程/店铺名称搜索"
+            />
+          </View>
+          <Button
+            onPress={() => {
+              this.storeListRef.triggerRefresh();
+            }}
+            style={styles.searchButton}
+          >
+            <Icon
+              size={computeSize(30)}
+              source={require("./img/search.png")}
+              style={[
+                styles.searchInputIcon
+                //Platform.OS === "android" && { paddingTop: 4 }
+              ]}
+            />
+          </Button>
+        </View>
+      </View>
+    );
+  }
+  renderPagination = (index, total, context) => {
+    const { bannerData } = this.state;
+    console.log(1, index);
+    return (
+      <View
+        style={{
+          height: 10,
+          flexDirection: "row",
+          position: "absolute",
+          bottom: 10,
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {bannerData.map((item, i) => {
+          const isAcitve = i === index;
+
+          return (
+            <View
+              style={{
+                marginLeft: 4,
+                marginRight: 4,
+                width: 10,
+                height: 10,
+                backgroundColor: isAcitve ? "#1b9de6" : "#fff",
+                borderRadius: 10
+              }}
+              key={i}
+            />
+          );
+        })}
+      </View>
+    );
+  };
+  renderSwiper() {
+    const { bannerData } = this.state;
+    //const data = ['https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/baidu_jgylogo3.gif'];
+    return (
+      <View style={styles.swiperBox}>
+        <Swiper
+          autoplay
+          autoplayTimeout={3}
+          renderPagination={this.renderPagination}
+          onIndexChanged={i => {
+            console.log(`ii:${i}`);
+          }}
+        >
+          {bannerData.map((item, i) => {
+            const { ImgUrl } = item;
+            return (
+              <Button
+                onPress={() => {
+                  this.props.navigation.dispatch(
+                    action.navigate.go({
+                      routeName: "Web",
+                      params: item
+                    })
+                  );
+                }}
+                style={styles.swiperItemBox}
+                key={ImgUrl}
+              >
+                <Image style={styles.swiperItemImg} source={{ uri: ImgUrl }} />
+              </Button>
+            );
+          })}
+        </Swiper>
+      </View>
+    );
+  }
+  renderChoose() {
+    const { chooseTabActiveIndex, cityValue, chooseTypeValue } = this.state;
+    const { city, chooseType } = this.store;
+
+    const changeChooseTabActiveIndex = i => {
+      if (i === chooseTabActiveIndex) {
+        return this.setState({
+          chooseTabActiveIndex: NaN
+        });
+      }
+      return this.setState({
+        chooseTabActiveIndex: i
+      });
+    };
+    const buttonMap = [
+      {
+        label: city[cityValue].label,
+        onPress: changeChooseTabActiveIndex
+      },
+      //"border",
+      {
+        label: chooseType[chooseTypeValue - 1].label,
+        onPress: changeChooseTabActiveIndex
+      }
+    ];
+    const iconSource = require("./img/arrow_bottom.png");
+    return (
+      <View style={styles.chooseWrapper}>
+        {buttonMap.map((item, i) => {
+          if (item === "border") {
+            return <View style={styles.chooseItemBorder} key="border" />;
+          }
+          const { label, onPress } = item;
+          i = i ? 1 : 0;
+          const isActive = chooseTabActiveIndex === i;
+          return (
+            <Button
+              onPress={() => {
+                onPress(i);
+              }}
+              key={label}
+              style={styles.chooseItemButton}
+            >
+              <Text style={styles.chooseItemText}>{label}</Text>
+              <Icon
+                size={computeSize(10)}
+                source={iconSource}
+                iconStyle={{
+                  transform: [{ rotate: isActive ? "90deg" : "270deg" }]
+                }}
+              />
+            </Button>
+          );
+        })}
+      </View>
+    );
+  }
   renderChooseModal() {
     const {
       chooseTabActiveIndex,
-      tabActiveIndex,
+      searchTypeIndex,
       chooseTypeValue,
       cityValue,
       distanceValue
@@ -266,11 +466,14 @@ export default class Home extends Component {
     if (isNaN(chooseTabActiveIndex)) {
       return null;
     }
-    const { header, chooseWrapper } = styles;
+    const { header, swiperBox, chooseWrapper } = styles;
     const TimeSlideChooseHeight = 44;
     const modalLocationTop = [
-      header.height + chooseWrapper.height,
-      header.height + chooseWrapper.height + TimeSlideChooseHeight
+      header.height + swiperBox.height + chooseWrapper.height,
+      header.height +
+        swiperBox.height +
+        chooseWrapper.height +
+        TimeSlideChooseHeight
     ];
 
     switch (String(chooseTabActiveIndex)) {
@@ -279,7 +482,7 @@ export default class Home extends Component {
           <View
             style={[
               styles.chooseModal,
-              { top: modalLocationTop[tabActiveIndex], flexDirection: "row" }
+              { top: modalLocationTop[searchTypeIndex], flexDirection: "row" }
             ]}
           >
             <View
@@ -349,7 +552,7 @@ export default class Home extends Component {
           <View
             style={[
               styles.chooseModal,
-              { top: modalLocationTop[tabActiveIndex] }
+              { top: modalLocationTop[searchTypeIndex] }
             ]}
           >
             <CheckBox
@@ -381,206 +584,6 @@ export default class Home extends Component {
         );
     }
   }
-  renderChoose() {
-    const { chooseTabActiveIndex, cityValue, chooseTypeValue } = this.state;
-    const { city, chooseType } = this.store;
-
-    const changeChooseTabActiveIndex = i => {
-      if (i === chooseTabActiveIndex) {
-        return this.setState({
-          chooseTabActiveIndex: NaN
-        });
-      }
-      return this.setState({
-        chooseTabActiveIndex: i
-      });
-    };
-    const buttonMap = [
-      {
-        label: city[cityValue].label,
-        onPress: changeChooseTabActiveIndex
-      },
-      "border",
-      {
-        label: chooseType[chooseTypeValue - 1].label,
-        onPress: changeChooseTabActiveIndex
-      }
-    ];
-    const iconSource = require("./img/arrow_bottom.png");
-    return (
-      <View style={styles.chooseWrapper}>
-        {buttonMap.map((item, i) => {
-          if (item === "border") {
-            return <View style={styles.chooseItemBorder} key="border" />;
-          }
-          const { label, onPress } = item;
-          i = i ? 1 : 0;
-          const isActive = chooseTabActiveIndex === i;
-          return (
-            <Button
-              onPress={() => {
-                onPress(i);
-              }}
-              key={label}
-              style={[
-                styles.chooseItemButton,
-                isActive
-                  ? { borderBottomWidth: 1, borderColor: "#2fc2d9" }
-                  : null
-              ]}
-            >
-              <Text style={styles.chooseItemText}>{label}</Text>
-              <Icon
-                size={computeSize(10)}
-                source={iconSource}
-                iconStyle={{
-                  transform: [{ rotate: isActive ? "90deg" : "270deg" }]
-                }}
-              />
-            </Button>
-          );
-        })}
-      </View>
-    );
-  }
-  renderHeader() {
-    const { tabActiveIndex, StoreName } = this.state;
-    const tabMap = ["按店铺搜索", "按课程搜索"];
-    return (
-      <View style={styles.header}>
-        <View style={styles.tabContainer}>
-          {tabMap.map((tab, i) => (
-            <Button
-              onPress={() => {
-                this.changeTab(i);
-              }}
-              style={[
-                styles.tab,
-                tabActiveIndex === i ? styles.tabActive : null
-              ]}
-              textStyle={[
-                styles.tabLabel,
-                tabActiveIndex === i ? styles.tabLabelActive : null
-              ]}
-              key={tab}
-            >
-              {tab}
-            </Button>
-          ))}
-          <View style={{ width: styles.search.width }} />
-        </View>
-        <View style={styles.searchContainer}>
-          <View style={styles.searchInputWrapper}>
-            <Icon
-              size={computeSize(20)}
-              source={require("./img/search_list.png")}
-              style={[
-                styles.searchInputIcon,
-                Platform.OS === "android" && { paddingTop: 4 }
-              ]}
-            />
-            <Input
-              value={StoreName}
-              onChangeText={v => this.setState({ StoreName: v })}
-              style={styles.searchInput}
-              placeholder="输入店铺/街道名称"
-            />
-          </View>
-          <Button
-            onPress={() => {
-              this.storeListRef.triggerRefresh();
-            }}
-            style={styles.search}
-            textStyle={styles.searchLabel}
-          >
-            搜索
-          </Button>
-        </View>
-      </View>
-    );
-  }
-  renderItem(row, i) {
-    const {
-      StoreName,
-      NowPeopleNum,
-      Distance,
-      StoreScore,
-      NowCurriculum,
-      Address,
-      storeAddrDes,
-      Charge,
-      Id,
-      StoreImg,
-      PeopleNum,
-      IsFristFree
-    } = row;
-    const icon = (StoreImg || "").includes("https") ? (
-      <Icon size={computeSize(82)} source={{ uri: StoreImg }} />
-    ) : (
-      StoreImgIcon
-    );
-
-    return (
-      <View style={styles.item}>
-        <Button onPress={() => this.goStoreDetail(Id)} style={styles.itemTop}>
-          {icon}
-          {IsFristFree && (
-            <View style={styles.freeBox}>
-              <Text style={styles.freeBoxText}>首次免费1小时</Text>
-            </View>
-          )}
-          <View style={styles.itemDetail}>
-            <View style={styles.itemDetailTop}>
-              <Text style={styles.itemName}>{StoreName || "暂无店铺名"}</Text>
-            </View>
-            <View style={[styles.itemDetailCenter]}>
-              <Text style={styles.itemDistance}>
-                距离{Distance.toFixed(2)}Km
-              </Text>
-              <View style={styles.lessionButton}>
-                <Text style={styles.lessionText}>
-                  课程:{NowCurriculum || "暂无"}
-                </Text>
-                <Icon
-                  size={computeSize(20)}
-                  source={require("./img/right.png")}
-                />
-              </View>
-            </View>
-            <View style={[styles.itemDetailBottom]}>
-              <Text style={styles.itemAddr} numberOfLines={2}>
-                {String(Address || "") + String(storeAddrDes || "") ||
-                  "暂无地址"}
-              </Text>
-              <Button
-                onPress={() => this.navgation(row)}
-                style={styles.navgationButton}
-              >
-                <Icon
-                  size={computeSize(16)}
-                  source={require("./img/natvgation.png")}
-                />
-                <Text style={styles.navgationText}>导航</Text>
-              </Button>
-            </View>
-          </View>
-        </Button>
-        <View style={styles.itemBottom}>
-          <Text style={styles.evaluateLabel}>评价:</Text>
-          <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-            <StarScore operable={false} currentScore={StoreScore} />
-            <Text style={styles.evaluateValue}>{StoreScore.toFixed(2)}</Text>
-          </View>
-          <Text style={styles.price}>{Charge || "0"}元/小时</Text>
-        </View>
-        <View style={styles.tagWrapper}>
-          <Text style={styles.tagText}>
-            {Number(PeopleNum) - NowPeopleNum}人
-          </Text>
-        </View>
-      </View>
-    );
-  }
   renderList() {
     return (
       <View style={styles.list}>
@@ -595,32 +598,99 @@ export default class Home extends Component {
       </View>
     );
   }
-  renderListPattern() {
-    const { tabActiveIndex } = this.state;
+  renderItem(row, i) {
+    const {
+      StoreName,
+      NowCurriculum,
+      NowPeopleNum,
+      Distance,
+      StoreScore,
+      Address,
+      storeAddrDes,
+      Charge,
+      Id,
+      StoreImg,
+      PeopleNum,
+      IsFristFree
+    } = row;
+    return (
+      <Button onPress={() => this.goStoreDetail(Id)} style={styles.item}>
+        <View style={styles.itemBg}>
+          <Image style={{ flex: 1 }} source={{ uri: StoreImg }} />
+          <View style={styles.storeContentBg}>{storeContentBg}</View>
+        </View>
+        <View style={styles.itemContent}>
+          <View style={[styles.capsule, styles.capsuleO]}>
+            <Text style={styles.capsuleText}>{NowCurriculum}</Text>
+          </View>
+          <View style={[styles.capsule, styles.capsuleT]}>
+            <Text style={styles.capsuleText}>
+              当前可容纳{Number(PeopleNum) - NowPeopleNum}人
+            </Text>
+          </View>
+          <View style={styles.storeDetail}>
+            <View style={styles.storeImg}>
+              <Image
+                style={{ flex: 1 }}
+                source={{
+                  uri: StoreImg
+                }}
+              />
+            </View>
+            <View style={styles.storeContent}>
+              <View style={styles.storeName}>
+                <Text style={styles.storeNameText}>{StoreName}</Text>
+                <Text style={styles.priceText}>{Charge || "0"}元/小时</Text>
+              </View>
+              <View style={styles.storeCenter}>
+                <View style={styles.storeDistance}>
+                  <Text style={styles.storeDistanceText}>
+                    距离{Distance.toFixed(2)}Km
+                  </Text>
+                </View>
+                <View style={styles.storeScoreBox}>
+                  <StarScore operable={false} currentScore={StoreScore} />
+                  <Text style={styles.storeScoreText}>{StoreScore}分</Text>
+                </View>
+              </View>
+              <View style={styles.storeBottom}>
+                <View style={styles.storeAddr}>
+                  <Text style={styles.storeAddrText} numberOfLines={1}>
+                    {String(Address || "") + String(storeAddrDes || "") ||
+                      "暂无地址"}
+                  </Text>
+                </View>
+                <Button
+                  onPress={() => this.navgation(row)}
+                  style={styles.navgationButton}
+                >
+                  <Icon
+                    size={computeSize(16)}
+                    source={require("./img/natvgation.png")}
+                  />
+                </Button>
+              </View>
+            </View>
+          </View>
+        </View>
+        {IsFristFree && freeIcon}
+      </Button>
+    );
+  }
+
+  renderHome() {
+    const { searchTypeIndex } = this.state;
     const { startDay, endDay } = this.store.daysInfo;
     return (
-      <Page
-        title="列表模式"
-        LeftComponent={
-          <Button
-            onPress={() => {
-              this.togglePattern("map");
-            }}
-          >
-            <Icon size={computeSize(20)} source={require("./img/map.png")} />
-          </Button>
-        }
-        // RightComponent={
-        //   <Button
-        //     style={{ flexDirection: "row", alignItems: "center" }}
-        //   >
-        //     <Text style={{ color: "#fff" }}>{city[cityValue].label}</Text>
-        //     <Icon size={20} source={require("./img/u305.png")} />
-        //   </Button>
-        // }
-      >
+      <View style={styles.container}>
+        <StatusBar
+          backgroundColor={styles.header.backgroundColor}
+          translucent={true}
+          barStyle="light-content"
+        />
         {this.renderHeader()}
-        {!!tabActiveIndex && (
+        {this.renderSwiper()}
+        {searchTypeIndex === "1" && (
           <TimeSlideChoose
             startIndex={startDay}
             endIndex={endDay}
@@ -633,27 +703,47 @@ export default class Home extends Component {
           />
         )}
         {this.renderChoose()}
-        {this.renderList()}
         {this.renderChooseModal()}
-      </Page>
+        {this.renderList()}
+      </View>
     );
   }
   render() {
-    const { pattern, isUpdateModalVisible, appUpdateInfo } = this.state;
+    const { isUpdateModalVisible, appUpdateInfo, pickerVisible } = this.state;
     return (
-      <View style={{ flex: 1 }}>
-        {pattern === "map" ? this.renderMapPattern() : this.renderListPattern()}
-        <UpdateModal
-          ok={this.update}
-          appUpdateInfo={appUpdateInfo}
-          close={() => {
-            this.setState({
-              isUpdateModalVisible: false
-            });
-          }}
-          isVisible={isUpdateModalVisible}
-        />
-      </View>
+      <ScrollView style={{ height: screenHeight }}>
+        <View style={{ height: screenHeight }}>
+          {this.renderHome()}
+          <Picker
+            data={[
+              { label: "店铺", value: "0" },
+              { label: "课程", value: "1" }
+            ]}
+            visible={pickerVisible}
+            onValueSelect={v => {
+              this.setState({
+                searchTypeIndex: v,
+                pickerVisible: false
+              });
+            }}
+            onRequestClose={() => {
+              this.setState({
+                pickerVisible: false
+              });
+            }}
+          />
+          <UpdateModal
+            ok={this.update}
+            appUpdateInfo={appUpdateInfo}
+            close={() => {
+              this.setState({
+                isUpdateModalVisible: false
+              });
+            }}
+            isVisible={isUpdateModalVisible}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }

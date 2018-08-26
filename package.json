@@ -23,6 +23,7 @@
     "react-native-baidu-map": "^0.6.0",
     "react-native-fs": "^2.9.12",
     "react-native-image-picker": "^0.26.10",
+    "react-native-swiper": "^1.5.13",
     "react-native-webview-android": "^1.1.15",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",

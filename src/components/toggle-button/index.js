@@ -30,7 +30,7 @@ export default class ToggleButton extends Component {
       packUp: "180deg"
     };
     const bottom = {
-      unfold: 0,
+      unfold: -3,
       packUp: computeSize(-58)
     };
     const { status } = this.state;
