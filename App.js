@@ -59,6 +59,33 @@ class App extends Component {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
   }
+  intervalGetLocation() {
+    GeolocationBaiDu.getCurrentPosition()
+      .then((location) => {
+        store.dispatch({
+          type: 'location',
+          payload: Object.assign(location)
+        })
+        // return Promise.resolve({
+        //   userLat: latitude,
+        //   userLng: longitude
+        // });
+      })
+      .catch(e => {
+        setTimeout(this.intervalGetLocation, 1500);
+      })
+    // return this.getCurrentPosition().then(l => {
+    //   if (this.isValidLocation(l)) {
+    //     this.saveLocation(l);
+    //     return Promise.reject();
+    //   } else {
+    //     return new Promise(resolve => {
+    //       //递归频率为 1500ms
+    //       setTimeout(resolve(this.intervalGetLocation()), 1500);
+    //     });
+    //   }
+    // });
+  }
   async geolocation() {
     if (Platform.OS === 'ios') {
       await Geolocation.init({
@@ -93,25 +120,16 @@ class App extends Component {
       })
       Geolocation.start();
     } else {
-       GeolocationBaiDu.getCurrentPosition()
-        .then((location) => {
-          store.dispatch({
-            type: 'location',
-            payload: Object.assign(location)
-          })
-          // return Promise.resolve({
-          //   userLat: latitude,
-          //   userLng: longitude
-          // });
-        })
-        // .catch(e => {
-        //   this.getCurrentPositionStatus === "loading" &&
-        //     (this.getCurrentPositionStatus = "error");
-        //   return Promise.resolve({
-        //     userLat: "",
-        //     userLng: ""
-        //   });
-        // });
+      this.intervalGetLocation();
+
+      // .catch(e => {
+      //   this.getCurrentPositionStatus === "loading" &&
+      //     (this.getCurrentPositionStatus = "error");
+      //   return Promise.resolve({
+      //     userLat: "",
+      //     userLng: ""
+      //   });
+      // });
     }
 
   }
