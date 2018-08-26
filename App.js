@@ -10,6 +10,7 @@ import { Provider, connect } from "react-redux";
 import { addNavigationHelpers } from "react-navigation";
 import JPushModule from 'jpush-react-native'
 import PropTypes from 'prop-types';
+import { Geolocation as GeolocationBaiDu } from "react-native-baidu-map";
 
 import Navigation from "src/Navigation";
 import store from 'src/store';
@@ -59,37 +60,60 @@ class App extends Component {
     }
   }
   async geolocation() {
-    await Geolocation.init({
-      ios: "43486760b696ca29d8bb2f6f3699485a",
-      android: "043b24fe18785f33c491705ffe5b6935"
-    })
-
-    Geolocation.setOptions({
-      interval: 1000,
-      distanceFilter: 1000
-    })
-    function bd_encrypt({ longitude, latitude }) {
-      const X_PI = Math.PI * 3000.0 / 180.0;
-      const x = longitude, y = latitude;
-      const z = Math.sqrt(x * x + y * y) + 0.00001 * Math.sin(y * X_PI);
-      const theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * X_PI);
-      // const bd_lng = z * Math.cos(theta) + 0.001;
-      const bd_lng = z * Math.cos(theta) + 0.0065;
-      const bd_lat = z * Math.sin(theta) + 0.006;
-      return {
-        latitude: bd_lat,
-        longitude: bd_lng
-      };
-    }
-
-    Geolocation.addLocationListener(location => {
-      store.dispatch({
-        type: 'location',
-        payload: Object.assign(location, bd_encrypt(location))
+    if (Platform.OS === 'ios') {
+      await Geolocation.init({
+        ios: "43486760b696ca29d8bb2f6f3699485a",
+        android: "043b24fe18785f33c491705ffe5b6935"
       })
 
-    })
-    Geolocation.start();
+      Geolocation.setOptions({
+        interval: 1000,
+        distanceFilter: 1000
+      })
+      const bd_encrypt = ({ longitude, latitude }) => {
+        const X_PI = Math.PI * 3000.0 / 180.0;
+        const x = longitude, y = latitude;
+        const z = Math.sqrt(x * x + y * y) + 0.00001 * Math.sin(y * X_PI);
+        const theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * X_PI);
+        // const bd_lng = z * Math.cos(theta) + 0.001;
+        const bd_lng = z * Math.cos(theta) + 0.0065;
+        const bd_lat = z * Math.sin(theta) + 0.006;
+        return {
+          latitude: bd_lat,
+          longitude: bd_lng
+        };
+      }
+
+      Geolocation.addLocationListener(location => {
+        store.dispatch({
+          type: 'location',
+          payload: Object.assign(location, bd_encrypt(location))
+        })
+
+      })
+      Geolocation.start();
+    } else {
+       GeolocationBaiDu.getCurrentPosition()
+        .then((location) => {
+          store.dispatch({
+            type: 'location',
+            payload: Object.assign(location)
+          })
+          // return Promise.resolve({
+          //   userLat: latitude,
+          //   userLng: longitude
+          // });
+        })
+        // .catch(e => {
+        //   this.getCurrentPositionStatus === "loading" &&
+        //     (this.getCurrentPositionStatus = "error");
+        //   return Promise.resolve({
+        //     userLat: "",
+        //     userLng: ""
+        //   });
+        // });
+    }
+
   }
   linkSocket = async (UserId) => {
     this.ws = await WebSocket.uniqueLoginWebsocket(UserId, () => {
