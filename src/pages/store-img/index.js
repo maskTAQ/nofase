@@ -51,10 +51,11 @@ export default class StoreImg extends Component {
             ),
             android: (
               <WebView
+                style={{ flex: 1 }}
                 source={{
                   uri: `https://vmslq.cn/webview/imgs/index.html?imgs=${JSON.stringify(
                     StoreImgList.map(item => item.ImgUrl)
-                  )}`
+                  )}&t=${Date.now()}`
                 }}
               />
             )
