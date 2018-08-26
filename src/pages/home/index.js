@@ -279,7 +279,10 @@ export default class Home extends Component {
             );
           }}
         >
-          <Icon size={30} source={require("./img/switch.gif")} />
+          <Icon
+            size={styles.mapPatternButton.width}
+            source={require("./img/switch.gif")}
+          />
         </Button>
         <View style={styles.searchContainer}>
           <Button
@@ -327,7 +330,6 @@ export default class Home extends Component {
   }
   renderPagination = (index, total, context) => {
     const { bannerData } = this.state;
-    console.log(1, index);
     return (
       <View
         style={{
@@ -679,7 +681,7 @@ export default class Home extends Component {
   }
 
   renderHome() {
-    const { searchTypeIndex } = this.state;
+    const { searchTypeIndex, bannerData } = this.state;
     const { startDay, endDay } = this.store.daysInfo;
     return (
       <View style={styles.container}>
@@ -689,7 +691,7 @@ export default class Home extends Component {
           barStyle="light-content"
         />
         {this.renderHeader()}
-        {this.renderSwiper()}
+        {bannerData.length ? this.renderSwiper() : null}
         {searchTypeIndex === "1" && (
           <TimeSlideChoose
             startIndex={startDay}

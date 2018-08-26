@@ -15,10 +15,11 @@ export default {
     flexDirection: "row"
   },
   mapPatternButton: {
-    width: computeSize(30),
-    height: computeSize(30),
+    width: computeSize(40),
+    height: computeSize(40),
     marginTop: computeSize(0),
     marginRight: computeSize(19),
+
     borderRadius: computeSize(30)
   },
   searchContainer: {
