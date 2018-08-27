@@ -76,7 +76,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="043b24fe18785f33c491705ffe5b6935">//开发者申请的key       
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="6c9d70476a7f5dd843b382379daacd97">//开发者申请的key       
             
         </meta-data>
     </application>

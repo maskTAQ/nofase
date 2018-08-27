@@ -35,7 +35,10 @@ export default class Activity extends Component {
       routeName: "Web",
       web: {
         AdvUrl: "https://vmslq.cn/499gmy/",
-        AdvStoreName: "1对1线上vip私教"
+        AdvStoreName: "1对1线上vip私教",
+        content:
+          "制定健身计划-提醒运动-运动指导-餐食搭配-监督鼓励，全方位为您的健康提供服务。",
+        ImgUrl: "https://vmslq.cn/499gmy/08271035.jpg"
       }
     }
   ];

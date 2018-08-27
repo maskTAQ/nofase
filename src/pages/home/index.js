@@ -208,7 +208,6 @@ export default class Home extends Component {
         UserArea: ""
       });
     }
-    console.log(params, "params");
     return api.getStoreList(params).then(res => {
       return res.sort((prev, next) => {
         switch (this.state.chooseTypeValue) {
@@ -368,6 +367,7 @@ export default class Home extends Component {
   };
   renderSwiper() {
     const { bannerData } = this.state;
+    console.log(bannerData, "bannerData");
     //const data = ['https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/bd_logo1.png', 'https://www.baidu.com/img/baidu_jgylogo3.gif'];
     return (
       <View style={styles.swiperBox}>
@@ -617,12 +617,16 @@ export default class Home extends Component {
       Id,
       StoreImg,
       PeopleNum,
-      IsFristFree
+      IsFristFree,
+      StoreMainImg
     } = row;
     return (
       <Button onPress={() => this.goStoreDetail(Id)} style={styles.item}>
         <View style={styles.itemBg}>
-          <Image style={{ flex: 1 }} source={{ uri: StoreImg }} />
+          <Image
+            style={{ flex: 1 }}
+            source={{ uri: StoreMainImg || StoreImg }}
+          />
           <View style={styles.storeContentBg}>{storeContentBg}</View>
         </View>
         <View style={styles.itemContent}>

@@ -87,13 +87,17 @@ export default class RechargeWebview extends Component {
     //this.props.dispatch(navigate.pop());
   };
   share = platform => {
-    //const { UserId } = this.props;
+    const {
+      AdvUrl,
+      ImgUrl,
+      AdvStoreName,
+      content
+    } = this.props.navigation.state.params;
     share({
-      title: "[没脸运动APP]邀请领取3个月一对一线上健身VIP私教，快来查看..",
-      content:
-        "制定健身计划-提醒运动-运动指导-餐食搭配-监督鼓励，全方位为您的健康提供服务。",
-      url: `https://vmslq.cn/499gmy/`,
-      imgSrc: "https://vmslq.cn/499gmy/08271035.jpg",
+      title: AdvStoreName,
+      content: content,
+      url: AdvUrl,
+      imgSrc: ImgUrl,
       platform
     })
       .then(res => {

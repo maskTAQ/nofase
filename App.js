@@ -97,7 +97,7 @@ class App extends Component {
     //if (Platform.OS === 'ios') {
       await Geolocation.init({
         ios: "43486760b696ca29d8bb2f6f3699485a",
-        android: "043b24fe18785f33c491705ffe5b6935"
+        android: "6c9d70476a7f5dd843b382379daacd97"
       })
 
       Geolocation.setOptions({

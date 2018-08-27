@@ -17,7 +17,7 @@ export default {
   mapPatternButton: {
     width: computeSize(36),
     height: computeSize(36),
-    marginTop: computeSize(-2),
+    //marginTop: computeSize(-2),
     marginRight: computeSize(12),
 
     borderRadius: computeSize(30)
@@ -133,8 +133,10 @@ export default {
   },
   itemBg: {
     position: "absolute",
-    top: 2,
-    left: 2,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     width: "100%",
     height: "100%",
     borderRadius: computeSize(10),
