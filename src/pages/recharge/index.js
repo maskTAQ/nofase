@@ -229,7 +229,7 @@ export default class Recharge extends Component {
                   action.navigate.go({
                     routeName: "Web",
                     params: {
-                      AdvUrl: "https://vmslq.cn/499gmy",
+                      AdvUrl: "https://vmslq.cn/499gmy/",
                       AdvStoreName: "充值活动"
                     }
                   })

@@ -36,7 +36,11 @@ const Height = () => <View style={{ height: 10 }} />;
 const { height: screenHeight } = Dimensions.get("window");
 
 const storeContentBg = (
-  <Image style={{ flex: 1 }} source={require("./img/bg.png")} />
+  <Image
+    style={{ flex: 1 }}
+    source={require("./img/bg.png")}
+    resizeMode="stretch"
+  />
 );
 const freeIcon = (
   <Image style={styles.free} source={require("./img/free.png")} />
@@ -691,7 +695,6 @@ export default class Home extends Component {
           barStyle="light-content"
         />
         {this.renderHeader()}
-        {bannerData.length ? this.renderSwiper() : null}
         {searchTypeIndex === "1" && (
           <TimeSlideChoose
             startIndex={startDay}
@@ -704,6 +707,8 @@ export default class Home extends Component {
             }}
           />
         )}
+        {bannerData.length ? this.renderSwiper() : null}
+
         {this.renderChoose()}
         {this.renderChooseModal()}
         {this.renderList()}

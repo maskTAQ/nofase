@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { BackHandler, Platform, ToastAndroid, View, AsyncStorage } from "react-native";
+import { BackHandler, Platform, ToastAndroid, View, AsyncStorage, Alert } from "react-native";
 import { Provider, connect } from "react-redux";
 import { addNavigationHelpers } from "react-navigation";
 import JPushModule from 'jpush-react-native'
@@ -59,27 +59,28 @@ class App extends Component {
       BackHandler.removeEventListener("hardwareBackPress", this.handleBack);
     }
   }
-  intervalGetLocation() {
-    GeolocationBaiDu.getCurrentPosition()
-      .then((location) => {
-        if(!location.latitude){
-            setTimeout(this.intervalGetLocation, 1500);
-        }else{
-          console.log(location,'weiz')
+  getAndroidLocation = () => {
+    return GeolocationBaiDu.getCurrentPosition()
+       .catch(e => {
+        return {};
+      })
+  }
+  intervalGetLocation = () => {
+    this.getAndroidLocation()
+      .then(location => {
+        if (location.city && location.city !== 'null') {
+          Alert.alert(JSON.stringify(location));
           store.dispatch({
             type: 'location',
             payload: Object.assign(location)
           })
+
+        } else {
+          Alert.alert(JSON.stringify(location));
+          setTimeout(this.intervalGetLocation, 1500);
         }
-        
-        // return Promise.resolve({
-        //   userLat: latitude,
-        //   userLng: longitude
-        // });
       })
-      .catch(e => {
-        setTimeout(this.intervalGetLocation, 1500);
-      })
+
     // return this.getCurrentPosition().then(l => {
     //   if (this.isValidLocation(l)) {
     //     this.saveLocation(l);
@@ -93,7 +94,7 @@ class App extends Component {
     // });
   }
   async geolocation() {
-    if (Platform.OS === 'ios') {
+    //if (Platform.OS === 'ios') {
       await Geolocation.init({
         ios: "43486760b696ca29d8bb2f6f3699485a",
         android: "043b24fe18785f33c491705ffe5b6935"
@@ -125,18 +126,20 @@ class App extends Component {
 
       })
       Geolocation.start();
-    } else {
-      this.intervalGetLocation();
+    // } else {
+    //   setTimeout(() => {
+    //     this.intervalGetLocation();
+    //   }, 3000)
 
-      // .catch(e => {
-      //   this.getCurrentPositionStatus === "loading" &&
-      //     (this.getCurrentPositionStatus = "error");
-      //   return Promise.resolve({
-      //     userLat: "",
-      //     userLng: ""
-      //   });
-      // });
-    }
+    //   // .catch(e => {
+    //   //   this.getCurrentPositionStatus === "loading" &&
+    //   //     (this.getCurrentPositionStatus = "error");
+    //   //   return Promise.resolve({
+    //   //     userLat: "",
+    //   //     userLng: ""
+    //   //   });
+    //   // });
+    // }
 
   }
   linkSocket = async (UserId) => {

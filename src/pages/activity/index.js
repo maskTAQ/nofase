@@ -34,7 +34,7 @@ export default class Activity extends Component {
       bg: require("./img/a4.png"),
       routeName: "Web",
       web: {
-        AdvUrl: "http://vmslq.com/499gmy/",
+        AdvUrl: "https://vmslq.cn/499gmy/",
         AdvStoreName: "1对1线上vip私教"
       }
     }

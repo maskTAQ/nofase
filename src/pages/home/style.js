@@ -2,30 +2,30 @@ import { computeSize } from "src/common";
 
 export default {
   container: {
-    flex: 1,
-    backgroundColor: "#1b9de6"
+    flex: 1
+    //backgroundColor: "#1b9de6"
   },
   header: {
     height: computeSize(70),
-    paddingLeft: computeSize(6),
-    paddingRight: computeSize(6),
+    paddingLeft: computeSize(10),
+    paddingRight: computeSize(10),
     paddingTop: 20,
     backgroundColor: "#1b9de6",
     width: "100%",
     flexDirection: "row"
   },
   mapPatternButton: {
-    width: computeSize(40),
-    height: computeSize(40),
-    marginTop: computeSize(0),
-    marginRight: computeSize(19),
+    width: computeSize(36),
+    height: computeSize(36),
+    marginTop: computeSize(-2),
+    marginRight: computeSize(12),
 
     borderRadius: computeSize(30)
   },
   searchContainer: {
     flex: 1,
     flexDirection: "row",
-    height: computeSize(36),
+    height: computeSize(32),
     borderRadius: computeSize(8),
     backgroundColor: "#fff",
     overflow: "hidden"
@@ -74,9 +74,9 @@ export default {
   chooseWrapper: {
     flexDirection: "row",
     height: computeSize(30),
-    backgroundColor: "#1b9de6",
+    //backgroundColor: "#1b9de6",
     borderBottomWidth: 1,
-    borderColor: "#ccc"
+    borderColor: "#f5f5f5"
   },
   chooseModal: {
     position: "absolute",
@@ -231,22 +231,22 @@ export default {
   capsule: {
     position: "absolute",
     right: computeSize(10),
-    height: computeSize(25),
+    height: computeSize(20),
     borderRadius: computeSize(10),
     paddingLeft: computeSize(10),
     paddingRight: computeSize(10),
-    backgroundColor: "#1b9de6",
+    backgroundColor: "rgba(27, 157, 230,0.7)",
     justifyContent: "center",
     alignItems: "center"
   },
   capsuleText: {
-    fontSize: computeSize(14),
+    fontSize: computeSize(12),
     color: "#fff"
   },
   capsuleO: {
     top: computeSize(10)
   },
   capsuleT: {
-    top: computeSize(40)
+    top: computeSize(36)
   }
 };
